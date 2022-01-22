@@ -1,0 +1,166 @@
+# Packages
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+## Functionality
+
+### `kableExtra`
+
+The goal of kableExtra is to help you build common complex tables and manipulate table styles. Plots nice tables, basically. It imports the pipe %>% symbol from magrittr and verbalize all the functions, so basically you can add "layers" to a kable output in a way that is similar with ggplot2 and plotly.
+
+### `gridExtra`
+
+: Used to arrange plots next to each other.
+
+### `kableExtra`
+
+: The goal of kableExtra is to help you build common complex tables and manipulate table styles. Plots nice tables, basically. It imports the pipe %>% symbol from magrittr and verbalize all the functions, so basically you can add "layers" to a kable output in a way that is similar with ggplot2 and plotly.
+
+### `unpivotr`
+
+Tools for converting data from complex or irregular layouts to a columnar structure. For example, tables with multilevel column or row headers, or spreadsheets.
+
+### `tibble`
+
+tible provides a 'tbl\\\_df' class (the 'tibble') that provides stricter checking and better formatting than the traditional data frame.
+
+### `dslabs`
+
+26 Datasets and some functions for data analysis. Used to practice data visualization, statistical inference, modeling, linear regression, data wrangling and machine learning.
+
+### `knitr`
+
+Engine for dynamic report generation with R. Enables integration of R code into LaTeX, LyX, HTML, Markdown, AsciiDoc, and reStructuredText documents. The purpose of knitr is to allow reproducible research in R through the means of Literate Programming.
+
+### `readr`
+
+The goal of 'readr' is to provide a fast and friendly way to read rectangular data (like 'csv', 'tsv', and 'fwf')
+
+### `readxl`
+
+The readxl package makes it easy to get data out of Excel and into R.
+
+### `tidyxl`
+
+Imports non-tabular data from Excel files into R. It exposes cell content, position, formatting and comments in a tidy structure for further manipulation, especially by the unpivotr package.
+
+### `corrgram`
+
+Create correlograms from data frames directly.
+
+### `corrplot`
+
+Create correlograms from preprocessed data frames. Needs a matrix with correlations between each variable.
+
+### `rtweet`
+
+Collect and organize Twitter data.
+
+### `caTools`
+
+Contains several basic utility functions including: moving (rolling, running) window statistic functions, read/write for GIF and ENVI binary files, fast calculation of AUC, LogitBoost classifier, base64 encoder/decoder, round-off-error-free sum and cumsum, etc.
+
+## Data
+
+### `ggplot2movies`
+
+IMDB movies data set useful to experiment with ggplot2 visualizations.
+
+### `WDI`
+
+Search and download data from over 40 databases hosted by the World Bank, including the World Development Indicators ('WDI'), International Debt Statistics, Doing Business, Human Capital Index, and Sub-national Poverty indicators, GDP, Population.
+
+### `essurvey`
+
+Package used to easily download specific European Social Survey data.
+
+### `wbstats`
+
+This package allows to download data from the world bank database.
+
+```{r cache=TRUE}
+library(wbstats)
+wb_cachelist$indicators
+wb_cachelist$topics
+
+# result = wb_search("")
+# result$indicator_desc
+
+# Takes a long time to download
+data = wb_data("SP.POP.TOTL", start_date = 1960, end_date = 2020)
+head(data)
+
+# Example visualization
+data %>%
+  filter(country == "Germany") %>%
+  ggplot(aes(date, SP.POP.TOTL/1000000)) +
+  geom_line()
+```
+
+## Visualization
+
+### `igraph`
+
+Creating and manipulating graphs and analyzing networks. It is written in C and also exists as Python and R packages.
+
+### `ggthemes`
+
+### `ggrepel`
+
+This geometry adds "smart" labels to each data point, meaining labels that "repel" each other automaticaly to not overlap each other. Sometimes the data points are to close to each other. In these cases one solution might be to use a log scale to stretch those clustered observation away from each other.
+
+```{r}
+data(murders)
+
+murders %>% 
+  ggplot(aes(population,total)) + 
+  geom_point() + 
+  scale_x_log10() + 
+  scale_y_log10() + 
+  geom_text(aes(label = abb))
+
+murders %>% 
+  ggplot(aes(population,total)) + 
+  geom_point() + 
+  scale_x_log10() + 
+  scale_y_log10() + 
+  ggrepel::geom_text_repel(aes(label = abb))
+
+```
+
+### `ggridges`
+
+**Density Ridges**
+
+In cases in which we are concerned that the boxplot summary is too simplistic, we can show stacked smooth densities or histograms. We refer to these as ridge plots. Because we are used to visualizing densities with values in the x-axis, we stack them vertically. Also, because more space is needed in this approach, it is convenient to overlay them. The package ggridges provides a convenient function for doing this. Here is the income data shown above with boxplots but with a ridge plot.
+
+```{r}
+gapminder %>% 
+  filter(year == 2015) %>%
+  ggplot(aes(life_expectancy,continent, fill = continent)) + 
+  ggridges::geom_density_ridges(show.legend = F)
+```
+
+### `kableExtra`
+
+Plots the most simple table.
+
+```{r}
+mtcars[1:10,] %>% 
+  kbl()
+```
+
+### `?gridExtra`
+
+<https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html>
+
+There are often reasons to graph plots next to each other. The gridExtra package permits us to do that with grid.arrange():
+
+```{r}
+library(gridExtra)
+p1 <- plot(mtcars$mpg)
+p2 <- plot(mtcars$cyl)
+# grid.arrange(p1, p2, ncol = 2)
+```

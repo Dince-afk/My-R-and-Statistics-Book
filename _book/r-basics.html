@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 R Basics | My R and Statistics Book</title>
+  <meta name="description" content="This is …" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 R Basics | My R and Statistics Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is …" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 R Basics | My R and Statistics Book" />
+  
+  <meta name="twitter:description" content="This is …" />
+  
+
+<meta name="author" content="Dino Curic" />
+
+
+<meta name="date" content="2022-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-playgrounds.html"/>
+<link rel="next" href="packages.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>1</b> Glossary</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="glossary.html"><a href="glossary.html#shortcuts"><i class="fa fa-check"></i><b>1.1</b> Shortcuts</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="glossary.html"><a href="glossary.html#rstudio-environment"><i class="fa fa-check"></i><b>1.1.1</b> RStudio Environment</a></li>
+<li class="chapter" data-level="1.1.2" data-path="glossary.html"><a href="glossary.html#navigating-and-sections"><i class="fa fa-check"></i><b>1.1.2</b> Navigating and Sections</a></li>
+<li class="chapter" data-level="1.1.3" data-path="glossary.html"><a href="glossary.html#code-execution"><i class="fa fa-check"></i><b>1.1.3</b> Code Execution</a></li>
+<li class="chapter" data-level="1.1.4" data-path="glossary.html"><a href="glossary.html#special-characters"><i class="fa fa-check"></i><b>1.1.4</b> Special Characters</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="glossary.html"><a href="glossary.html#statistical-symbols"><i class="fa fa-check"></i><b>1.2</b> Statistical Symbols</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="glossary.html"><a href="glossary.html#special-symbols"><i class="fa fa-check"></i><b>1.2.1</b> Special Symbols</a></li>
+<li class="chapter" data-level="1.2.2" data-path="glossary.html"><a href="glossary.html#sample-and-population-symbols"><i class="fa fa-check"></i><b>1.2.2</b> Sample and Population Symbols</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-playgrounds.html"><a href="r-playgrounds.html"><i class="fa fa-check"></i><b>2</b> R Playgrounds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-playgrounds.html"><a href="r-playgrounds.html#expected-value-and-standard-deviation"><i class="fa fa-check"></i><b>2.1</b> Expected Value and Standard Deviation</a></li>
+<li class="chapter" data-level="2.2" data-path="r-playgrounds.html"><a href="r-playgrounds.html#theoretical-and-experimental-standard-error"><i class="fa fa-check"></i><b>2.2</b> Theoretical and Experimental Standard Error</a></li>
+<li class="chapter" data-level="2.3" data-path="r-playgrounds.html"><a href="r-playgrounds.html#sample-size-resulting-in-0.01-se"><i class="fa fa-check"></i><b>2.3</b> Sample Size Resulting in 0.01 SE</a></li>
+<li class="chapter" data-level="2.4" data-path="r-playgrounds.html"><a href="r-playgrounds.html#bank-and-loans"><i class="fa fa-check"></i><b>2.4</b> Bank and Loans</a></li>
+<li class="chapter" data-level="2.5" data-path="r-playgrounds.html"><a href="r-playgrounds.html#real-polling-data"><i class="fa fa-check"></i><b>2.5</b> Real Polling Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#read-and-write-data"><i class="fa fa-check"></i><b>3.1</b> Read and Write Data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basics.html"><a href="r-basics.html#csv-files"><i class="fa fa-check"></i><b>3.1.1</b> CSV Files</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basics.html"><a href="r-basics.html#dat-files"><i class="fa fa-check"></i><b>3.1.2</b> DAT Files</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-basics.html"><a href="r-basics.html#excel-files"><i class="fa fa-check"></i><b>3.1.3</b> Excel Files</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basics.html"><a href="r-basics.html#data-types"><i class="fa fa-check"></i><b>3.2</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basics.html"><a href="r-basics.html#convert-data-types"><i class="fa fa-check"></i><b>3.2.1</b> Convert data types</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basics.html"><a href="r-basics.html#numeric"><i class="fa fa-check"></i><b>3.2.2</b> Numeric</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basics.html"><a href="r-basics.html#logical"><i class="fa fa-check"></i><b>3.2.3</b> Logical</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basics.html"><a href="r-basics.html#characters"><i class="fa fa-check"></i><b>3.2.4</b> Characters</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basics.html"><a href="r-basics.html#nas"><i class="fa fa-check"></i><b>3.2.5</b> <code>NA</code>s</a></li>
+<li class="chapter" data-level="3.2.6" data-path="r-basics.html"><a href="r-basics.html#dates"><i class="fa fa-check"></i><b>3.2.6</b> Dates</a></li>
+<li class="chapter" data-level="3.2.7" data-path="r-basics.html"><a href="r-basics.html#posix-time"><i class="fa fa-check"></i><b>3.2.7</b> POSIX Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basics.html"><a href="r-basics.html#vectors"><i class="fa fa-check"></i><b>3.3</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-vectors"><i class="fa fa-check"></i><b>3.3.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basics.html"><a href="r-basics.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.2</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basics.html"><a href="r-basics.html#naming-vectors"><i class="fa fa-check"></i><b>3.3.3</b> Naming vectors</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basics.html"><a href="r-basics.html#filtering-vectors"><i class="fa fa-check"></i><b>3.3.4</b> Filtering vectors</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basics.html"><a href="r-basics.html#special-concepts"><i class="fa fa-check"></i><b>3.3.5</b> Special Concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basics.html"><a href="r-basics.html#factors"><i class="fa fa-check"></i><b>3.4</b> Factors</a></li>
+<li class="chapter" data-level="3.5" data-path="r-basics.html"><a href="r-basics.html#matrices-and-data-frames"><i class="fa fa-check"></i><b>3.5</b> Matrices and Data Frames</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="r-basics.html"><a href="r-basics.html#creating-matrices"><i class="fa fa-check"></i><b>3.5.1</b> Creating matrices</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-basics.html"><a href="r-basics.html#creating-data-frames"><i class="fa fa-check"></i><b>3.5.2</b> Creating data frames</a></li>
+<li class="chapter" data-level="3.5.3" data-path="r-basics.html"><a href="r-basics.html#adding-row-or-columns"><i class="fa fa-check"></i><b>3.5.3</b> Adding row or columns</a></li>
+<li class="chapter" data-level="3.5.4" data-path="r-basics.html"><a href="r-basics.html#naming-tables"><i class="fa fa-check"></i><b>3.5.4</b> Naming tables</a></li>
+<li class="chapter" data-level="3.5.5" data-path="r-basics.html"><a href="r-basics.html#deleting-rows-or-columns"><i class="fa fa-check"></i><b>3.5.5</b> Deleting rows or columns</a></li>
+<li class="chapter" data-level="3.5.6" data-path="r-basics.html"><a href="r-basics.html#rearranging-columns"><i class="fa fa-check"></i><b>3.5.6</b> Rearranging columns</a></li>
+<li class="chapter" data-level="3.5.7" data-path="r-basics.html"><a href="r-basics.html#merging-data-frames"><i class="fa fa-check"></i><b>3.5.7</b> Merging data frames</a></li>
+<li class="chapter" data-level="3.5.8" data-path="r-basics.html"><a href="r-basics.html#subsetting-matrices"><i class="fa fa-check"></i><b>3.5.8</b> Subsetting matrices</a></li>
+<li class="chapter" data-level="3.5.9" data-path="r-basics.html"><a href="r-basics.html#subsetting-data-frames"><i class="fa fa-check"></i><b>3.5.9</b> Subsetting data frames</a></li>
+<li class="chapter" data-level="3.5.10" data-path="r-basics.html"><a href="r-basics.html#data-frame-returns"><i class="fa fa-check"></i><b>3.5.10</b> Data frame returns</a></li>
+<li class="chapter" data-level="3.5.11" data-path="r-basics.html"><a href="r-basics.html#filtering-tables"><i class="fa fa-check"></i><b>3.5.11</b> Filtering tables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-basics.html"><a href="r-basics.html#lists"><i class="fa fa-check"></i><b>3.6</b> Lists</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="r-basics.html"><a href="r-basics.html#creating-lists"><i class="fa fa-check"></i><b>3.6.1</b> Creating lists</a></li>
+<li class="chapter" data-level="3.6.2" data-path="r-basics.html"><a href="r-basics.html#adding-components"><i class="fa fa-check"></i><b>3.6.2</b> Adding components</a></li>
+<li class="chapter" data-level="3.6.3" data-path="r-basics.html"><a href="r-basics.html#deleting-components"><i class="fa fa-check"></i><b>3.6.3</b> Deleting components</a></li>
+<li class="chapter" data-level="3.6.4" data-path="r-basics.html"><a href="r-basics.html#renaming-components"><i class="fa fa-check"></i><b>3.6.4</b> Renaming components</a></li>
+<li class="chapter" data-level="3.6.5" data-path="r-basics.html"><a href="r-basics.html#naming-inside-components"><i class="fa fa-check"></i><b>3.6.5</b> Naming inside components</a></li>
+<li class="chapter" data-level="3.6.6" data-path="r-basics.html"><a href="r-basics.html#subsetting-list-components"><i class="fa fa-check"></i><b>3.6.6</b> Subsetting list components</a></li>
+<li class="chapter" data-level="3.6.7" data-path="r-basics.html"><a href="r-basics.html#filtering-lists"><i class="fa fa-check"></i><b>3.6.7</b> Filtering lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#functionality"><i class="fa fa-check"></i><b>4.1</b> Functionality</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>4.1.1</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="packages.html"><a href="packages.html#gridextra"><i class="fa fa-check"></i><b>4.1.2</b> <code>gridExtra</code></a></li>
+<li class="chapter" data-level="4.1.3" data-path="packages.html"><a href="packages.html#kableextra-1"><i class="fa fa-check"></i><b>4.1.3</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.4" data-path="packages.html"><a href="packages.html#unpivotr"><i class="fa fa-check"></i><b>4.1.4</b> <code>unpivotr</code></a></li>
+<li class="chapter" data-level="4.1.5" data-path="packages.html"><a href="packages.html#tibble"><i class="fa fa-check"></i><b>4.1.5</b> <code>tibble</code></a></li>
+<li class="chapter" data-level="4.1.6" data-path="packages.html"><a href="packages.html#dslabs"><i class="fa fa-check"></i><b>4.1.6</b> <code>dslabs</code></a></li>
+<li class="chapter" data-level="4.1.7" data-path="packages.html"><a href="packages.html#knitr"><i class="fa fa-check"></i><b>4.1.7</b> <code>knitr</code></a></li>
+<li class="chapter" data-level="4.1.8" data-path="packages.html"><a href="packages.html#readr"><i class="fa fa-check"></i><b>4.1.8</b> <code>readr</code></a></li>
+<li class="chapter" data-level="4.1.9" data-path="packages.html"><a href="packages.html#readxl"><i class="fa fa-check"></i><b>4.1.9</b> <code>readxl</code></a></li>
+<li class="chapter" data-level="4.1.10" data-path="packages.html"><a href="packages.html#tidyxl"><i class="fa fa-check"></i><b>4.1.10</b> <code>tidyxl</code></a></li>
+<li class="chapter" data-level="4.1.11" data-path="packages.html"><a href="packages.html#corrgram"><i class="fa fa-check"></i><b>4.1.11</b> <code>corrgram</code></a></li>
+<li class="chapter" data-level="4.1.12" data-path="packages.html"><a href="packages.html#corrplot"><i class="fa fa-check"></i><b>4.1.12</b> <code>corrplot</code></a></li>
+<li class="chapter" data-level="4.1.13" data-path="packages.html"><a href="packages.html#rtweet"><i class="fa fa-check"></i><b>4.1.13</b> <code>rtweet</code></a></li>
+<li class="chapter" data-level="4.1.14" data-path="packages.html"><a href="packages.html#catools"><i class="fa fa-check"></i><b>4.1.14</b> <code>caTools</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="packages.html"><a href="packages.html#data"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="packages.html"><a href="packages.html#ggplot2movies"><i class="fa fa-check"></i><b>4.2.1</b> <code>ggplot2movies</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="packages.html"><a href="packages.html#wdi"><i class="fa fa-check"></i><b>4.2.2</b> <code>WDI</code></a></li>
+<li class="chapter" data-level="4.2.3" data-path="packages.html"><a href="packages.html#essurvey"><i class="fa fa-check"></i><b>4.2.3</b> <code>essurvey</code></a></li>
+<li class="chapter" data-level="4.2.4" data-path="packages.html"><a href="packages.html#wbstats"><i class="fa fa-check"></i><b>4.2.4</b> <code>wbstats</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="packages.html"><a href="packages.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="packages.html"><a href="packages.html#igraph"><i class="fa fa-check"></i><b>4.3.1</b> <code>igraph</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="packages.html"><a href="packages.html#ggthemes"><i class="fa fa-check"></i><b>4.3.2</b> <code>ggthemes</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="packages.html"><a href="packages.html#ggrepel"><i class="fa fa-check"></i><b>4.3.3</b> <code>ggrepel</code></a></li>
+<li class="chapter" data-level="4.3.4" data-path="packages.html"><a href="packages.html#ggridges"><i class="fa fa-check"></i><b>4.3.4</b> <code>ggridges</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="packages.html"><a href="packages.html#kableextra-2"><i class="fa fa-check"></i><b>4.3.5</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="packages.html"><a href="packages.html#gridextra-1"><i class="fa fa-check"></i><b>4.3.6</b> <code>?gridExtra</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>5</b> Rmarkdown</a></li>
+<li class="chapter" data-level="6" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>6</b> Tidyverse</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tidyverse.html"><a href="tidyverse.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>6.1.1</b> Pipe</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>6.1.2</b> Select</a></li>
+<li class="chapter" data-level="6.1.3" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>6.1.3</b> Rename</a></li>
+<li class="chapter" data-level="6.1.4" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>6.1.4</b> Filter</a></li>
+<li class="chapter" data-level="6.1.5" data-path="tidyverse.html"><a href="tidyverse.html#arrange"><i class="fa fa-check"></i><b>6.1.5</b> Arrange</a></li>
+<li class="chapter" data-level="6.1.6" data-path="tidyverse.html"><a href="tidyverse.html#slice"><i class="fa fa-check"></i><b>6.1.6</b> Slice</a></li>
+<li class="chapter" data-level="6.1.7" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>6.1.7</b> Mutate</a></li>
+<li class="chapter" data-level="6.1.8" data-path="tidyverse.html"><a href="tidyverse.html#relocate"><i class="fa fa-check"></i><b>6.1.8</b> Relocate</a></li>
+<li class="chapter" data-level="6.1.9" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>6.1.9</b> Summarise</a></li>
+<li class="chapter" data-level="6.1.10" data-path="tidyverse.html"><a href="tidyverse.html#pull"><i class="fa fa-check"></i><b>6.1.10</b> Pull</a></li>
+<li class="chapter" data-level="6.1.11" data-path="tidyverse.html"><a href="tidyverse.html#distinct-values"><i class="fa fa-check"></i><b>6.1.11</b> Distinct values</a></li>
+<li class="chapter" data-level="6.1.12" data-path="tidyverse.html"><a href="tidyverse.html#counts-and-proportions"><i class="fa fa-check"></i><b>6.1.12</b> Counts and proportions</a></li>
+<li class="chapter" data-level="6.1.13" data-path="tidyverse.html"><a href="tidyverse.html#case-when"><i class="fa fa-check"></i><b>6.1.13</b> Case when</a></li>
+<li class="chapter" data-level="6.1.14" data-path="tidyverse.html"><a href="tidyverse.html#between"><i class="fa fa-check"></i><b>6.1.14</b> Between</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="tidyverse.html"><a href="tidyverse.html#forcats"><i class="fa fa-check"></i><b>6.2</b> forcats</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyverse.html"><a href="tidyverse.html#count-factors"><i class="fa fa-check"></i><b>6.2.1</b> Count factors</a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyverse.html"><a href="tidyverse.html#reorder-levels"><i class="fa fa-check"></i><b>6.2.2</b> Reorder levels</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="tidyverse.html"><a href="tidyverse.html#purrr"><i class="fa fa-check"></i><b>6.3</b> purrr</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyverse.html"><a href="tidyverse.html#map"><i class="fa fa-check"></i><b>6.3.1</b> Map</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tidyverse.html"><a href="tidyverse.html#map-doubles"><i class="fa fa-check"></i><b>6.3.2</b> Map doubles</a></li>
+<li class="chapter" data-level="6.3.3" data-path="tidyverse.html"><a href="tidyverse.html#map-dataframes"><i class="fa fa-check"></i><b>6.3.3</b> Map dataframes</a></li>
+<li class="chapter" data-level="6.3.4" data-path="tidyverse.html"><a href="tidyverse.html#map-functionsclosures"><i class="fa fa-check"></i><b>6.3.4</b> Map functions/closures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html"><i class="fa fa-check"></i><b>7</b> Visualization/<code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#gg-object"><i class="fa fa-check"></i><b>7.1</b> gg object</a></li>
+<li class="chapter" data-level="7.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#aesthetics"><i class="fa fa-check"></i><b>7.2</b> Aesthetics</a></li>
+<li class="chapter" data-level="7.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#geometries"><i class="fa fa-check"></i><b>7.3</b> Geometries</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#points"><i class="fa fa-check"></i><b>7.3.1</b> Points</a></li>
+<li class="chapter" data-level="7.3.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#text"><i class="fa fa-check"></i><b>7.3.2</b> Text</a></li>
+<li class="chapter" data-level="7.3.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#bars"><i class="fa fa-check"></i><b>7.3.3</b> Bars</a></li>
+<li class="chapter" data-level="7.3.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#density"><i class="fa fa-check"></i><b>7.3.4</b> Density</a></li>
+<li class="chapter" data-level="7.3.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#boxplots"><i class="fa fa-check"></i><b>7.3.5</b> Boxplots</a></li>
+<li class="chapter" data-level="7.3.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#lines"><i class="fa fa-check"></i><b>7.3.6</b> Lines</a></li>
+<li class="chapter" data-level="7.3.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#vertical-lines"><i class="fa fa-check"></i><b>7.3.7</b> Vertical Lines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#coordinates"><i class="fa fa-check"></i><b>7.4</b> Coordinates</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#limits"><i class="fa fa-check"></i><b>7.4.1</b> Limits</a></li>
+<li class="chapter" data-level="7.4.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#flipping"><i class="fa fa-check"></i><b>7.4.2</b> Flipping</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#tiles"><i class="fa fa-check"></i><b>7.5</b> Tiles</a></li>
+<li class="chapter" data-level="7.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scales"><i class="fa fa-check"></i><b>7.6</b> Scales</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#logarithmic-scales"><i class="fa fa-check"></i><b>7.6.1</b> Logarithmic scales</a></li>
+<li class="chapter" data-level="7.6.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scale-label-format"><i class="fa fa-check"></i><b>7.6.2</b> Scale label format</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#labels"><i class="fa fa-check"></i><b>7.7</b> Labels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>8</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="statistics.html"><a href="statistics.html#about-statistics"><i class="fa fa-check"></i><b>8.1</b> About Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="statistics.html"><a href="statistics.html#centrality"><i class="fa fa-check"></i><b>8.2</b> Centrality</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="statistics.html"><a href="statistics.html#mean"><i class="fa fa-check"></i><b>8.2.1</b> Mean</a></li>
+<li class="chapter" data-level="8.2.2" data-path="statistics.html"><a href="statistics.html#reproduction-mean-and-standard-deviation-reproduction"><i class="fa fa-check"></i><b>8.2.2</b> Reproduction Mean and Standard Deviation Reproduction</a></li>
+<li class="chapter" data-level="8.2.3" data-path="statistics.html"><a href="statistics.html#median"><i class="fa fa-check"></i><b>8.2.3</b> Median</a></li>
+<li class="chapter" data-level="8.2.4" data-path="statistics.html"><a href="statistics.html#mode"><i class="fa fa-check"></i><b>8.2.4</b> Mode</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="statistics.html"><a href="statistics.html#variability"><i class="fa fa-check"></i><b>8.3</b> Variability</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="statistics.html"><a href="statistics.html#range"><i class="fa fa-check"></i><b>8.3.1</b> Range</a></li>
+<li class="chapter" data-level="8.3.2" data-path="statistics.html"><a href="statistics.html#range-iqr-and-sd"><i class="fa fa-check"></i><b>8.3.2</b> Range, IQR and SD</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="statistics.html"><a href="statistics.html#sampling"><i class="fa fa-check"></i><b>8.4</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="statistics.html"><a href="statistics.html#weights"><i class="fa fa-check"></i><b>8.4.1</b> Weights</a></li>
+<li class="chapter" data-level="8.4.2" data-path="statistics.html"><a href="statistics.html#population"><i class="fa fa-check"></i><b>8.4.2</b> Population</a></li>
+<li class="chapter" data-level="8.4.3" data-path="statistics.html"><a href="statistics.html#sampling-1"><i class="fa fa-check"></i><b>8.4.3</b> Sampling</a></li>
+<li class="chapter" data-level="8.4.4" data-path="statistics.html"><a href="statistics.html#non-probability-sampling"><i class="fa fa-check"></i><b>8.4.4</b> Non-probability Sampling</a></li>
+<li class="chapter" data-level="8.4.5" data-path="statistics.html"><a href="statistics.html#sampling-methods"><i class="fa fa-check"></i><b>8.4.5</b> Sampling Methods</a>
+<ul>
+<li class="chapter" data-level="8.4.5.1" data-path="statistics.html"><a href="statistics.html#simple-random-sampling"><i class="fa fa-check"></i><b>8.4.5.1</b> Simple random sampling</a></li>
+<li class="chapter" data-level="8.4.5.2" data-path="statistics.html"><a href="statistics.html#systematic-sampling"><i class="fa fa-check"></i><b>8.4.5.2</b> Systematic sampling</a></li>
+<li class="chapter" data-level="8.4.5.3" data-path="statistics.html"><a href="statistics.html#stratified-sampling"><i class="fa fa-check"></i><b>8.4.5.3</b> Stratified sampling</a></li>
+<li class="chapter" data-level="8.4.5.4" data-path="statistics.html"><a href="statistics.html#cluster-sampling"><i class="fa fa-check"></i><b>8.4.5.4</b> Cluster sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4.6" data-path="statistics.html"><a href="statistics.html#errors-and-biases"><i class="fa fa-check"></i><b>8.4.6</b> Errors and biases</a>
+<ul>
+<li class="chapter" data-level="8.4.6.1" data-path="statistics.html"><a href="statistics.html#sampling-errors-and-biases"><i class="fa fa-check"></i><b>8.4.6.1</b> Sampling errors and biases</a></li>
+<li class="chapter" data-level="8.4.6.2" data-path="statistics.html"><a href="statistics.html#non-sampling-error"><i class="fa fa-check"></i><b>8.4.6.2</b> Non-sampling error</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="probability-thoery.html"><a href="probability-thoery.html"><i class="fa fa-check"></i><b>9</b> Probability Thoery</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="probability-thoery.html"><a href="probability-thoery.html#conditional-probability"><i class="fa fa-check"></i><b>9.1</b> Conditional Probability</a></li>
+<li class="chapter" data-level="9.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations"><i class="fa fa-check"></i><b>9.2</b> Permutations</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-with-repetition"><i class="fa fa-check"></i><b>9.2.1</b> Permutations with repetition</a></li>
+<li class="chapter" data-level="9.2.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-without-repetition"><i class="fa fa-check"></i><b>9.2.2</b> Permutations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations"><i class="fa fa-check"></i><b>9.3</b> Combinations</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-with-repetitions"><i class="fa fa-check"></i><b>9.3.1</b> Combinations with repetitions</a></li>
+<li class="chapter" data-level="9.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-without-repetition"><i class="fa fa-check"></i><b>9.3.2</b> Combinations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="probability-thoery.html"><a href="probability-thoery.html#random-variables"><i class="fa fa-check"></i><b>9.4</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#discrete-random-variables"><i class="fa fa-check"></i><b>9.4.1</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="9.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#continuous-random-variables"><i class="fa fa-check"></i><b>9.4.2</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="9.4.3" data-path="probability-thoery.html"><a href="probability-thoery.html#transforming-random-variables-shift-or-scale"><i class="fa fa-check"></i><b>9.4.3</b> Transforming Random Variables (Shift or Scale)</a></li>
+<li class="chapter" data-level="9.4.4" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean"><i class="fa fa-check"></i><b>9.4.4</b> Expected Value (Mean)</a></li>
+<li class="chapter" data-level="9.4.5" data-path="probability-thoery.html"><a href="probability-thoery.html#standard-deviation"><i class="fa fa-check"></i><b>9.4.5</b> Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="probability-thoery.html"><a href="probability-thoery.html#normal-distribution"><i class="fa fa-check"></i><b>9.5</b> Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties"><i class="fa fa-check"></i><b>9.5.1</b> Properties</a></li>
+<li class="chapter" data-level="9.5.2" data-path="probability-thoery.html"><a href="probability-thoery.html#z-scores"><i class="fa fa-check"></i><b>9.5.2</b> Z-Scores</a></li>
+<li class="chapter" data-level="9.5.3" data-path="probability-thoery.html"><a href="probability-thoery.html#examples"><i class="fa fa-check"></i><b>9.5.3</b> Examples</a>
+<ul>
+<li class="chapter" data-level="9.5.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#finding-percentages"><i class="fa fa-check"></i><b>9.5.3.1</b> Finding Percentages</a></li>
+<li class="chapter" data-level="9.5.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value"><i class="fa fa-check"></i><b>9.5.3.2</b> Expected Value</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r"><i class="fa fa-check"></i><b>9.5.4</b> In R</a>
+<ul>
+<li class="chapter" data-level="9.5.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-probability-from-z-value"><i class="fa fa-check"></i><b>9.5.4.1</b> Calculate Probability From Z-Value</a></li>
+<li class="chapter" data-level="9.5.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-z-value-from-probability"><i class="fa fa-check"></i><b>9.5.4.2</b> Calculate Z-Value From Probability</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="probability-thoery.html"><a href="probability-thoery.html#binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Binomial Distribution</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean-and-variance"><i class="fa fa-check"></i><b>9.6.1</b> Expected Value (Mean) and Variance</a></li>
+<li class="chapter" data-level="9.6.2" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-1"><i class="fa fa-check"></i><b>9.6.2</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="probability-thoery.html"><a href="probability-thoery.html#bernoulli-distribution"><i class="fa fa-check"></i><b>9.7</b> Bernoulli Distribution</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties-1"><i class="fa fa-check"></i><b>9.7.1</b> Properties</a></li>
+<li class="chapter" data-level="9.7.2" data-path="probability-thoery.html"><a href="probability-thoery.html#mean-1"><i class="fa fa-check"></i><b>9.7.2</b> Mean</a></li>
+<li class="chapter" data-level="9.7.3" data-path="probability-thoery.html"><a href="probability-thoery.html#variance"><i class="fa fa-check"></i><b>9.7.3</b> Variance</a></li>
+<li class="chapter" data-level="9.7.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-2"><i class="fa fa-check"></i><b>9.7.4</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="probability-thoery.html"><a href="probability-thoery.html#geometric-distribution"><i class="fa fa-check"></i><b>9.8</b> Geometric Distribution</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-3"><i class="fa fa-check"></i><b>9.8.1</b> In R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>10</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#sampling-distributions"><i class="fa fa-check"></i><b>10.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="10.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>10.2</b> Central Limit Theorem</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#what-is-large-enough-for-the-ctl"><i class="fa fa-check"></i><b>10.2.1</b> What is Large Enough for the CTL?</a></li>
+<li class="chapter" data-level="10.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-of-central-limit-theorem"><i class="fa fa-check"></i><b>10.2.2</b> Proof of Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#confidence-intervals"><i class="fa fa-check"></i><b>10.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#why-confidence-intervals-work"><i class="fa fa-check"></i><b>10.3.1</b> Why Confidence Intervals Work</a></li>
+<li class="chapter" data-level="10.3.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-for-confidence-intervals"><i class="fa fa-check"></i><b>10.3.2</b> Proof for Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-proportion"><i class="fa fa-check"></i><b>10.3.2.1</b> CI for Population Proportion</a></li>
+<li class="chapter" data-level="10.3.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-mean"><i class="fa fa-check"></i><b>10.3.2.2</b> CI for Population Mean</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>10.4</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#p-value"><i class="fa fa-check"></i><b>10.4.1</b> P-Value</a></li>
+<li class="chapter" data-level="10.4.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#z-test"><i class="fa fa-check"></i><b>10.4.2</b> Z-Test</a></li>
+<li class="chapter" data-level="10.4.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-z-test-statistic"><i class="fa fa-check"></i><b>10.4.3</b> Formula: z test statistic</a></li>
+<li class="chapter" data-level="10.4.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-z-score"><i class="fa fa-check"></i><b>10.4.4</b> R: P-value from z-score</a></li>
+<li class="chapter" data-level="10.4.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conditions-for-mean-inference"><i class="fa fa-check"></i><b>10.4.5</b> Conditions for mean inference</a></li>
+<li class="chapter" data-level="10.4.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-t-test-statistic"><i class="fa fa-check"></i><b>10.4.6</b> Formula: t test statistic</a></li>
+<li class="chapter" data-level="10.4.7" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-t-statistic"><i class="fa fa-check"></i><b>10.4.7</b> R: P-value from t statistic</a></li>
+<li class="chapter" data-level="10.4.8" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-t-tests"><i class="fa fa-check"></i><b>10.4.8</b> R: t-tests</a></li>
+<li class="chapter" data-level="10.4.9" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-or-z-statistic"><i class="fa fa-check"></i><b>10.4.9</b> t or z Statistic?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation"><i class="fa fa-check"></i><b>10.5</b> Correlation</a></li>
+<li class="chapter" data-level="10.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#regression"><i class="fa fa-check"></i><b>10.6</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>11</b> Causal Inference</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="causal-inference.html"><a href="causal-inference.html#potential-outcome-framework"><i class="fa fa-check"></i><b>11.1</b> Potential outcome framework</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>12</b> Functions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="functions.html"><a href="functions.html#read-and-write"><i class="fa fa-check"></i><b>12.1</b> Read and Write</a></li>
+<li class="chapter" data-level="12.2" data-path="functions.html"><a href="functions.html#random"><i class="fa fa-check"></i><b>12.2</b> Random</a></li>
+<li class="chapter" data-level="12.3" data-path="functions.html"><a href="functions.html#order"><i class="fa fa-check"></i><b>12.3</b> Order</a></li>
+<li class="chapter" data-level="12.4" data-path="functions.html"><a href="functions.html#visualization-1"><i class="fa fa-check"></i><b>12.4</b> Visualization</a></li>
+<li class="chapter" data-level="12.5" data-path="functions.html"><a href="functions.html#conditionals"><i class="fa fa-check"></i><b>12.5</b> Conditionals</a></li>
+<li class="chapter" data-level="12.6" data-path="functions.html"><a href="functions.html#numbers"><i class="fa fa-check"></i><b>12.6</b> Numbers</a></li>
+<li class="chapter" data-level="12.7" data-path="functions.html"><a href="functions.html#apply-functions"><i class="fa fa-check"></i><b>12.7</b> Apply Functions</a></li>
+<li class="chapter" data-level="12.8" data-path="functions.html"><a href="functions.html#string-functions"><i class="fa fa-check"></i><b>12.8</b> String Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="frequent-problems.html"><a href="frequent-problems.html"><i class="fa fa-check"></i><b>13</b> Frequent Problems</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="frequent-problems.html"><a href="frequent-problems.html#first-exploration-of-new-dataset"><i class="fa fa-check"></i><b>13.1</b> First exploration of new dataset</a></li>
+<li class="chapter" data-level="13.2" data-path="frequent-problems.html"><a href="frequent-problems.html#a-count-and-prop-table"><i class="fa fa-check"></i><b>13.2</b> A Count and prop table</a></li>
+<li class="chapter" data-level="13.3" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-count-data"><i class="fa fa-check"></i><b>13.3</b> Bar graph with count data</a></li>
+<li class="chapter" data-level="13.4" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-percentage-labels"><i class="fa fa-check"></i><b>13.4</b> Bar graph with percentage labels</a></li>
+<li class="chapter" data-level="13.5" data-path="frequent-problems.html"><a href="frequent-problems.html#collapse-factors-to-other"><i class="fa fa-check"></i><b>13.5</b> Collapse factors to „Other”</a></li>
+<li class="chapter" data-level="13.6" data-path="frequent-problems.html"><a href="frequent-problems.html#filter-for-specific-values"><i class="fa fa-check"></i><b>13.6</b> Filter for specific values</a></li>
+<li class="chapter" data-level="13.7" data-path="frequent-problems.html"><a href="frequent-problems.html#change-bar-colors-in-barplot"><i class="fa fa-check"></i><b>13.7</b> Change bar colors in barplot</a></li>
+<li class="chapter" data-level="13.8" data-path="frequent-problems.html"><a href="frequent-problems.html#hide-aescolor-mapping-legend"><i class="fa fa-check"></i><b>13.8</b> Hide aes(color) mapping legend</a></li>
+<li class="chapter" data-level="13.9" data-path="frequent-problems.html"><a href="frequent-problems.html#re-code-values-of-categorical-variables"><i class="fa fa-check"></i><b>13.9</b> Re-code values of categorical variables</a></li>
+<li class="chapter" data-level="13.10" data-path="frequent-problems.html"><a href="frequent-problems.html#order-color-legend"><i class="fa fa-check"></i><b>13.10</b> Order color legend</a></li>
+<li class="chapter" data-level="13.11" data-path="frequent-problems.html"><a href="frequent-problems.html#show-unique-values"><i class="fa fa-check"></i><b>13.11</b> Show unique values</a></li>
+<li class="chapter" data-level="13.12" data-path="frequent-problems.html"><a href="frequent-problems.html#slice-rows-by-maximum-or-minimum-values"><i class="fa fa-check"></i><b>13.12</b> Slice rows by maximum or minimum values</a></li>
+<li class="chapter" data-level="13.13" data-path="frequent-problems.html"><a href="frequent-problems.html#show-number-of-nas"><i class="fa fa-check"></i><b>13.13</b> Show Number of <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.14" data-path="frequent-problems.html"><a href="frequent-problems.html#drop-rows-with-missing-values"><i class="fa fa-check"></i><b>13.14</b> Drop rows with missing values</a></li>
+<li class="chapter" data-level="13.15" data-path="frequent-problems.html"><a href="frequent-problems.html#replace-nas"><i class="fa fa-check"></i><b>13.15</b> Replace <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.16" data-path="frequent-problems.html"><a href="frequent-problems.html#the-factor-variable-trap"><i class="fa fa-check"></i><b>13.16</b> The factor variable trap</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">My R and Statistics Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-basics" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> R Basics</h1>
+<div id="read-and-write-data" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Read and Write Data</h2>
+<p><strong>RStudio UI</strong> 1. From Text (base): Standard text based data import <strong>(.csv, .txt)</strong> 2. From Text (readr): tidyverse version <strong>(.csv, .txt)</strong> 3. From Excel: tidyxl package used for excel files <strong>(.xlsx, etc.)</strong> 4. From SPSS: haven package for SPSS files <strong>(.sav)</strong><br />
+5. From SAS: also haven package for SAS files <strong>(.sas)</strong> 6. From Stata: also haven package for Stata files <strong>(.dta)</strong></p>
+<p><code>load()</code> To load or list the available data sets in your system or working directory just write: <code>data()</code>.<br />
+To then load a dataset, add its name inside: <code>data(data_name)</code>.<br />
+Or you can also load them directly with these functions: <code>as.data.frame()</code> or <code>as.matrix()</code></p>
+<p><code>file.choose()</code> You can also use this function to manually pick out the file from your OS.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="r-basics.html#cb47-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="fu">file.choose</span>())</span></code></pre></div>
+<p><code>help()</code> How to show information for a specific library dataset.</p>
+<div id="csv-files" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> CSV Files</h3>
+<p>A CSV is a simple text based file which has information, line by line: * The first line often contains a <code>header</code>, i.e. names for each column. * Every value is separated by some sort of symbol, like a <code>,</code>, a <code>;</code> or “blank spaces” <code>""</code>. * Each line represents one row/case in the table afterwards.</p>
+<p>Suppose you have the following CSV file:</p>
+<pre><code>mydata.csv
+
+name,age,job,city
+Bob,25,Manager,Seattle
+Sam,30,Developer,New York</code></pre>
+<p><code>read.csv()</code> You can open a file and read its contents by using the <code>read.csv()</code> function specifying its name. It reads the data into a data frame.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="r-basics.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read entire CSV file into a data frame</span></span>
+<span id="cb49-2"><a href="r-basics.html#cb49-2" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;mydata.csv&quot;</span>)</span>
+<span id="cb49-3"><a href="r-basics.html#cb49-3" aria-hidden="true" tabindex="-1"></a>mydata</span></code></pre></div>
+<p>name age job city 1 Bob 25 Manager Seattle 2 Sam 30 Developer New York</p>
+<p><strong>File Path</strong> When you specify the filename only, it is assumed that the file is located in the current folder. If it is somewhere else, you can specify the exact path that the file is located at.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="r-basics.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify absolute path like this</span></span>
+<span id="cb50-2"><a href="r-basics.html#cb50-2" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Users/user/data/mydata.csv&quot;</span>)</span>
+<span id="cb50-3"><a href="r-basics.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="r-basics.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span></code></pre></div>
+<p><strong>Web</strong> If you want to read CSV Data from the Web, substitute a URL for a file name. The <code>read.csv()</code> functions will read directly from the remote server.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="r-basics.html#cb51-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://www.example.com/download/mydata.csv&quot;</span>)</span></code></pre></div>
+<p>The read.csv() function automatically coerces non-numeric data into a factor (categorical variable).</p>
+</div>
+<div id="dat-files" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> DAT Files</h3>
+<p>A file with the .dat file extension is a generic data file that stores specific information relating to the program that created the file. You can open them in R with the <code>read.table()</code> function.</p>
+</div>
+<div id="excel-files" class="section level3" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Excel Files</h3>
+<p>Reading excel files in R is done with the <code>readxl</code> package and these functions. Note that excel files often have different sheets. This can be addressed via the <code>sheet</code> parameter in <code>read_excel()</code>.</p>
+</div>
+</div>
+<div id="data-types" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Data Types</h2>
+<div id="convert-data-types" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Convert data types</h3>
+<p>Convert to a specific data type.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="r-basics.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(object)</span>
+<span id="cb52-2"><a href="r-basics.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(object)</span>
+<span id="cb52-3"><a href="r-basics.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(object)</span>
+<span id="cb52-4"><a href="r-basics.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.logical</span>(object)</span></code></pre></div>
+</div>
+<div id="numeric" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Numeric</h3>
+<p><strong>Doubles</strong> Decimal (floating point values) are part of the numeric class in R.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="r-basics.html#cb53-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fl">2.2</span></span>
+<span id="cb53-2"><a href="r-basics.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(n)</span>
+<span id="cb53-3"><a href="r-basics.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(n)</span>
+<span id="cb53-4"><a href="r-basics.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(n)</span>
+<span id="cb53-5"><a href="r-basics.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.double</span>(n)</span></code></pre></div>
+<p><strong>Integers</strong> Natural (whole) numbers are known as integers and are also part of the numeric class. Add an L at the end of each integer.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="r-basics.html#cb54-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> 5L</span>
+<span id="cb54-2"><a href="r-basics.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(i)</span>
+<span id="cb54-3"><a href="r-basics.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(i)</span>
+<span id="cb54-4"><a href="r-basics.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(i)</span>
+<span id="cb54-5"><a href="r-basics.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(i)</span></code></pre></div>
+</div>
+<div id="logical" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Logical</h3>
+<p>Boolean values (True and False) are part of the logical class. In R these are written in All Caps.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="r-basics.html#cb55-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb55-2"><a href="r-basics.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(t)</span>
+<span id="cb55-3"><a href="r-basics.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(t)</span>
+<span id="cb55-4"><a href="r-basics.html#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(t)</span></code></pre></div>
+</div>
+<div id="characters" class="section level3" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Characters</h3>
+<p>Text/string values are known as characters in R. You use quotation marks to create a text character string:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="r-basics.html#cb56-1" aria-hidden="true" tabindex="-1"></a>char <span class="ot">&lt;-</span> <span class="st">&quot;Hello World!&quot;</span></span>
+<span id="cb56-2"><a href="r-basics.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(char)</span>
+<span id="cb56-3"><a href="r-basics.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(char)</span>
+<span id="cb56-4"><a href="r-basics.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(char)</span></code></pre></div>
+</div>
+<div id="nas" class="section level3" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> <code>NA</code>s</h3>
+<p>The most important note on <code>NA</code>s is that if you compare anything to them, the result is <code>NA</code>. Here is an example.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="r-basics.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">==</span> <span class="cn">FALSE</span> <span class="co"># TRUE is not equal to FALSE</span></span>
+<span id="cb57-2"><a href="r-basics.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="co"># 5 is bigger than 1</span></span>
+<span id="cb57-3"><a href="r-basics.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># But note here: comparing TRUE to NA doesn&#39;t result in FALSE, but in NA</span></span>
+<span id="cb57-4"><a href="r-basics.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">==</span> <span class="cn">NA</span></span></code></pre></div>
+<p>So what does that mean when dealing with <code>NA</code> values? What happens if we use a filter in a column that contains <code>NA</code> values ?</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="r-basics.html#cb58-1" aria-hidden="true" tabindex="-1"></a>rev_exp[rev_exp<span class="sc">$</span>Expenses <span class="sc">==</span> <span class="dv">1130700</span>,]</span></code></pre></div>
+<p>We get our filtered value - but also a whole line of <code>NA</code>s. This happened because, as we have noted, when R checked with the filter the cell containing the <code>NA</code> value, it resulted in an <code>NA.</code> Basically R doesn’t know what to do - does the row pass the filter, or not? R than tells you about it by supplying these <code>NA</code> filled rows. But why doesn’t R just show the whole row and keeps the checked as <code>NA</code>? Because this would imply that the row passed the test, and might be easily mistaken.</p>
+<p><strong>Note</strong>: Blank cells in a row are being processed as complete/filled (““)! When reading/opening the data be sure to set the <code>na.string</code> parameter to”“. Then they are <code>NA</code>s and processed as incomplete, as they in fact are.</p>
+<p>To show only missing values, we cannot use this solution, because comparing a value to <code>NA</code> only returns <code>NA</code>s and not <code>TRUE</code> or <code>FALSE</code>.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="r-basics.html#cb59-1" aria-hidden="true" tabindex="-1"></a>rev_exp[rev_exp<span class="sc">$</span>Expenses <span class="sc">==</span> <span class="cn">NA</span>,]</span></code></pre></div>
+<p><strong>Solution</strong> You cannot compare anything to <code>NA</code>. So what is the other way? There are two ways - either with <code>!complete.cases()</code> or <code>is.na()</code>. The results are exactly the same. <code>is.na()</code> is just like any other is.() function, such as <code>is.numeric()</code>, it ask what elements in a vector are <code>NA</code>.</p>
+<p>So either this way with <strong>complete.cases()</strong>.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="r-basics.html#cb60-1" aria-hidden="true" tabindex="-1"></a>rev_exp[<span class="sc">!</span><span class="fu">complete.cases</span>(rev_exp),] <span class="co"># Shows all rows, regardless of columns, that have NAs</span></span>
+<span id="cb60-2"><a href="r-basics.html#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="r-basics.html#cb60-3" aria-hidden="true" tabindex="-1"></a>rev_exp[<span class="sc">!</span><span class="fu">complete.cases</span>(rev_exp<span class="sc">$</span>Revenue),] <span class="co"># Shows only rows, in which the Revenue column contain NAs</span></span></code></pre></div>
+<p>Or this way with <strong>is.na()</strong>.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="r-basics.html#cb61-1" aria-hidden="true" tabindex="-1"></a>rev_exp[<span class="fu">is.na</span>(rev_exp<span class="sc">$</span>Revenue),] <span class="co"># Shows only rows, in which the Revenue column contain NAs</span></span>
+<span id="cb61-2"><a href="r-basics.html#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="r-basics.html#cb61-3" aria-hidden="true" tabindex="-1"></a>rev_exp[<span class="sc">!</span><span class="fu">is.na</span>(rev_exp<span class="sc">$</span>Revenue),] <span class="co"># Shows only rows, in which the Revenue column contain NAs</span></span></code></pre></div>
+<p>But this way on the other hand doesn’t work. Not sure why, though…</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="r-basics.html#cb62-1" aria-hidden="true" tabindex="-1"></a>rev_exp[<span class="fu">is.na</span>(rev_exp),] </span></code></pre></div>
+</div>
+<div id="dates" class="section level3" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Dates</h3>
+<p>There is a date format in R which can be useful when receiving unformatted date values.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="r-basics.html#cb63-1" aria-hidden="true" tabindex="-1"></a>today <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>() <span class="co"># Function for getting today&#39;s date. </span></span>
+<span id="cb63-2"><a href="r-basics.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(today)</span></code></pre></div>
+<p>When receiving character type dates we can format them by using the as.Date() function and its format parameter.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="r-basics.html#cb64-1" aria-hidden="true" tabindex="-1"></a>date <span class="ot">&lt;-</span> <span class="st">&quot;13.10.86&quot;</span></span>
+<span id="cb64-2"><a href="r-basics.html#cb64-2" aria-hidden="true" tabindex="-1"></a>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(date, <span class="at">format =</span> <span class="st">&quot;%d.%m.%y&quot;</span>)</span>
+<span id="cb64-3"><a href="r-basics.html#cb64-3" aria-hidden="true" tabindex="-1"></a>date</span>
+<span id="cb64-4"><a href="r-basics.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(date)</span>
+<span id="cb64-5"><a href="r-basics.html#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(date) <span class="co"># Interesting.</span></span></code></pre></div>
+</div>
+<div id="posix-time" class="section level3" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> POSIX Time</h3>
+<p>POSIX is an international and inter operating system time and date format which is very useful in R. The format parameter works like this: in front of every element (day, month etc.) put a %. Then simply write the “time formula” as it is. d = day, m = month, Y = year with four digits, y = year with two digits, H = hour, M = minute.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="r-basics.html#cb65-1" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;17.09.1991 03:30&quot;</span>, <span class="st">&quot;13.10.1986 05:05&quot;</span>, <span class="st">&quot;16.05.1960 06:06&quot;</span>, <span class="st">&quot;7.07.1961 07:07&quot;</span>)</span>
+<span id="cb65-2"><a href="r-basics.html#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="r-basics.html#cb65-3" aria-hidden="true" tabindex="-1"></a>POSIX.Times <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(times, <span class="at">format =</span> <span class="st">&quot;%d.%m.%Y %H:%M&quot;</span>)</span>
+<span id="cb65-4"><a href="r-basics.html#cb65-4" aria-hidden="true" tabindex="-1"></a>POSIX.Times</span></code></pre></div>
+<p>To get help with the format coding.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="r-basics.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;strptime&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="vectors" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Vectors</h2>
+<p>Vectors are the basic unit in R. Elements in a vector always have the same data type (just like matrices).</p>
+<div id="creating-vectors" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Creating vectors</h3>
+<p>Create a vector (array) from a certain number to another number.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="r-basics.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
+<p>Even a single element in R is processed as a vector.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="r-basics.html#cb68-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb68-2"><a href="r-basics.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(a) <span class="co"># TRUE</span></span></code></pre></div>
+</div>
+<div id="subsetting-vectors" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Subsetting vectors</h3>
+<p>Indexing works by using brackets and passing the index position of the element as a number. Keep in mind index starts at 1 (in some other programming languages indexing starts at 0). Example of a vector:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="r-basics.html#cb69-1" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code></pre></div>
+<p>Access <strong>one specific</strong> element.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="r-basics.html#cb70-1" aria-hidden="true" tabindex="-1"></a>vector[<span class="dv">3</span>]</span></code></pre></div>
+<p>Access <strong>all but one specific</strong> element.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="r-basics.html#cb71-1" aria-hidden="true" tabindex="-1"></a>vector[<span class="sc">-</span><span class="dv">3</span>]</span></code></pre></div>
+<p>Access <strong>all values but this coherent slice</strong>.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="r-basics.html#cb72-1" aria-hidden="true" tabindex="-1"></a>vector[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]</span></code></pre></div>
+<p>Access <strong>one coherent slice</strong>.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="r-basics.html#cb73-1" aria-hidden="true" tabindex="-1"></a>vector[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<p>Access <strong>specific non-coherent</strong> elements.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="r-basics.html#cb74-1" aria-hidden="true" tabindex="-1"></a>vector[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</span></code></pre></div>
+<p>Access elements <strong>by name</strong>.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="r-basics.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vector) <span class="ot">&lt;-</span> <span class="st">&quot;One&quot;</span></span>
+<span id="cb75-2"><a href="r-basics.html#cb75-2" aria-hidden="true" tabindex="-1"></a>vector[<span class="st">&quot;One&quot;</span>] <span class="co"># returns first value.</span></span></code></pre></div>
+</div>
+<div id="naming-vectors" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Naming vectors</h3>
+<p>In R every vector has an accompanying “name vector” which stores the names for each values. To access the name vector you have to use the <code>name()</code> function. By default the names vector is filled with NULL. Then it takes the default 1:n indexing principle.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="r-basics.html#cb76-1" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb76-2"><a href="r-basics.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vector)</span></code></pre></div>
+<p>To add custom names to the vector (which will then additionally serve a indices), you just have to “fill” the names vector up with your custom name vector.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="r-basics.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vector) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;One&quot;</span>, <span class="st">&quot;Two&quot;</span>, <span class="st">&quot;Three&quot;</span>, <span class="st">&quot;Four&quot;</span>, <span class="st">&quot;Five&quot;</span>)</span>
+<span id="cb77-2"><a href="r-basics.html#cb77-2" aria-hidden="true" tabindex="-1"></a>vector</span></code></pre></div>
+<p>To delete/default the names vector simply set it to NULL.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="r-basics.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vector) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb78-2"><a href="r-basics.html#cb78-2" aria-hidden="true" tabindex="-1"></a>vector</span></code></pre></div>
+</div>
+<div id="filtering-vectors" class="section level3" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Filtering vectors</h3>
+<p>Access elements <strong>greater or smaller</strong> than a specific value. Another way this might be called, is using a filter.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="r-basics.html#cb79-1" aria-hidden="true" tabindex="-1"></a>vector[vector <span class="sc">&gt;</span> <span class="dv">2</span>]</span></code></pre></div>
+<p><strong>Note:</strong> It is important to wrap your head around this concept. The filter we add into the indexing brackets consists of the to be filtered vector and an operation with a value. Inside the square brackets a boolean vector is being created. Another way to illustrate goes like this.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="r-basics.html#cb80-1" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> vector <span class="sc">&gt;</span> <span class="dv">2</span></span>
+<span id="cb80-2"><a href="r-basics.html#cb80-2" aria-hidden="true" tabindex="-1"></a>filter <span class="co"># a vector with boolean values.</span></span></code></pre></div>
+<p>Once this boolean vector (i.e. our filter) gets put into the indexing brackets R, it only returns the elements in the “vector” which are TRUE. It is like the boolean filter consists of a vector which has the specific numbers, for example c(3,4,5), to access the to be filtered vector.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="r-basics.html#cb81-1" aria-hidden="true" tabindex="-1"></a>vector[filter]</span></code></pre></div>
+<p>Another important concept in filtering vectors in R is that you can add several operations.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="r-basics.html#cb82-1" aria-hidden="true" tabindex="-1"></a>vector[vector <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">&amp;</span> vector <span class="sc">&lt;</span> <span class="dv">4</span>] <span class="co"># Get me all the elements which are bigger than two AND smaller than 4, i.e. 3.</span></span></code></pre></div>
+</div>
+<div id="special-concepts" class="section level3" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Special Concepts</h3>
+<p><strong>Operations on uneven long vector</strong> You can easily calculate vectors with another. This is unlike other languages, where you need loops.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="r-basics.html#cb83-1" aria-hidden="true" tabindex="-1"></a>vector_one <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb83-2"><a href="r-basics.html#cb83-2" aria-hidden="true" tabindex="-1"></a>vector_two <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span></code></pre></div>
+<p><strong>Note:</strong> With uneven vectors the smaller one gets refilled. Here element 9 of the first vector gets multiplied by the first element of the second vector.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="r-basics.html#cb84-1" aria-hidden="true" tabindex="-1"></a>vector_one <span class="sc">*</span> vector_two <span class="co"># ... 9 x 1, 10 x 2. </span></span></code></pre></div>
+</div>
+</div>
+<div id="factors" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Factors</h2>
+<p><a href="https://r4ds.had.co.nz/factors.html" title="Factors">Further Information</a> In R, factors are used to work with categorical variables, variables that have a fixed and known set of possible values. They are also useful when you want to display character vectors in a non-alphabetical order.</p>
+<p>Historically, factors were much easier to work with than characters. As a result, many of the functions in base R automatically convert characters to factors. This means that factors often crop up in places where they’re not actually helpful.</p>
+<p>Imagine that you have a variable that records month:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="r-basics.html#cb85-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Mar&quot;</span>)</span></code></pre></div>
+<p>Firstly, there are only twelve possible months, and there’s nothing saving you from typos:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="r-basics.html#cb86-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;Jam&quot;</span>, <span class="st">&quot;Mar&quot;</span>)</span></code></pre></div>
+<p>Secondly, it doesn’t sort in a useful way:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="r-basics.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(x1)</span>
+<span id="cb87-2"><a href="r-basics.html#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-3"><a href="r-basics.html#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Apr&quot; &quot;Dec&quot; &quot;Jan&quot; &quot;Mar&quot;</span></span></code></pre></div>
+<p>You can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid levels:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="r-basics.html#cb88-1" aria-hidden="true" tabindex="-1"></a>month_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb88-2"><a href="r-basics.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;Jun&quot;</span>, </span>
+<span id="cb88-3"><a href="r-basics.html#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Jul&quot;</span>, <span class="st">&quot;Aug&quot;</span>, <span class="st">&quot;Sep&quot;</span>, <span class="st">&quot;Oct&quot;</span>, <span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dec&quot;</span></span>
+<span id="cb88-4"><a href="r-basics.html#cb88-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Now you can create a factor:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="r-basics.html#cb89-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x1, <span class="at">levels =</span> month_levels)</span>
+<span id="cb89-2"><a href="r-basics.html#cb89-2" aria-hidden="true" tabindex="-1"></a>y1</span>
+<span id="cb89-3"><a href="r-basics.html#cb89-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-4"><a href="r-basics.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] Dec Apr Jan Mar</span></span>
+<span id="cb89-5"><a href="r-basics.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</span></span>
+<span id="cb89-6"><a href="r-basics.html#cb89-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-7"><a href="r-basics.html#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(y1)</span>
+<span id="cb89-8"><a href="r-basics.html#cb89-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-9"><a href="r-basics.html#cb89-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] Jan Mar Apr Dec</span></span>
+<span id="cb89-10"><a href="r-basics.html#cb89-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</span></span></code></pre></div>
+<p>And any values not in the set will be silently converted to NA:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="r-basics.html#cb90-1" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x2, <span class="at">levels =</span> month_levels)</span>
+<span id="cb90-2"><a href="r-basics.html#cb90-2" aria-hidden="true" tabindex="-1"></a>y2</span>
+<span id="cb90-3"><a href="r-basics.html#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="r-basics.html#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] Dec  Apr  &lt;NA&gt; Mar </span></span>
+<span id="cb90-5"><a href="r-basics.html#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</span></span></code></pre></div>
+<p>If you want a warning, you can use <code>readr::parse_factor()</code>:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="r-basics.html#cb91-1" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">parse_factor</span>(x2, <span class="at">levels =</span> month_levels)</span>
+<span id="cb91-2"><a href="r-basics.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="r-basics.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: 1 parsing failure.</span></span>
+<span id="cb91-4"><a href="r-basics.html#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; row col           expected actual</span></span>
+<span id="cb91-5"><a href="r-basics.html#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   3  -- value in level set    Jam</span></span></code></pre></div>
+<p>If you omit the levels, they’ll be taken from the data in alphabetical order:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="r-basics.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(x1)</span>
+<span id="cb92-2"><a href="r-basics.html#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="r-basics.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] Dec Apr Jan Mar</span></span>
+<span id="cb92-4"><a href="r-basics.html#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: Apr Dec Jan Mar</span></span></code></pre></div>
+<p>Sometimes you’d prefer that the order of the levels match the order of the first appearance in the data. You can do that when creating the factor by setting levels to <code>unique(x)</code>, or after the fact, with <code>fct_inorder()</code>:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="r-basics.html#cb93-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(x1, <span class="at">levels =</span> <span class="fu">unique</span>(x1))</span>
+<span id="cb93-2"><a href="r-basics.html#cb93-2" aria-hidden="true" tabindex="-1"></a>f1</span>
+<span id="cb93-3"><a href="r-basics.html#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-4"><a href="r-basics.html#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] Dec Apr Jan Mar</span></span>
+<span id="cb93-5"><a href="r-basics.html#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: Dec Apr Jan Mar</span></span>
+<span id="cb93-6"><a href="r-basics.html#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="r-basics.html#cb93-7" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> x1 <span class="sc">%&gt;%</span> <span class="fu">factor</span>() <span class="sc">%&gt;%</span> <span class="fu">fct_inorder</span>()</span>
+<span id="cb93-8"><a href="r-basics.html#cb93-8" aria-hidden="true" tabindex="-1"></a>f2</span>
+<span id="cb93-9"><a href="r-basics.html#cb93-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-10"><a href="r-basics.html#cb93-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] Dec Apr Jan Mar</span></span>
+<span id="cb93-11"><a href="r-basics.html#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: Dec Apr Jan Mar</span></span></code></pre></div>
+<p>If you ever need to access the set of valid levels directly, you can do so with levels():</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="r-basics.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(f2)</span>
+<span id="cb94-2"><a href="r-basics.html#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="r-basics.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Dec&quot; &quot;Apr&quot; &quot;Jan&quot; &quot;Mar&quot;</span></span></code></pre></div>
+</div>
+<div id="matrices-and-data-frames" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Matrices and Data Frames</h2>
+<p>A <em>matrix</em> is basically a table with only one data type stored in it (instead of several as in with <em>data frames</em>). Data frames are tables with different data types, unlike matrices with only one data type.</p>
+<div id="creating-matrices" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Creating matrices</h3>
+<p><strong>(1) Create with <code>matrix()</code></strong> Adjust the number of rows/columns. Decide if it should be filled up by rows (<code>FALSE</code> by default, i.e. fills it up by columns). Add names (<code>NULL</code> by default, i.e. none).</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="r-basics.html#cb95-1" aria-hidden="true" tabindex="-1"></a>matrix_object <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>, <span class="at">dimnames =</span> <span class="cn">NULL</span> )</span>
+<span id="cb95-2"><a href="r-basics.html#cb95-2" aria-hidden="true" tabindex="-1"></a>matrix_object</span></code></pre></div>
+<p><strong>(2) Bind by rows</strong>\ Create a matrix by binding vectors together, row by row.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="r-basics.html#cb96-1" aria-hidden="true" tabindex="-1"></a>matrix_object <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>), <span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">7</span>))</span>
+<span id="cb96-2"><a href="r-basics.html#cb96-2" aria-hidden="true" tabindex="-1"></a>matrix_object</span></code></pre></div>
+<p><strong>(3) Bind by columns</strong>\ Create a matrix by binding vectors together, column by column.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="r-basics.html#cb97-1" aria-hidden="true" tabindex="-1"></a>matrix_object <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>), <span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">7</span>))</span>
+<span id="cb97-2"><a href="r-basics.html#cb97-2" aria-hidden="true" tabindex="-1"></a>matrix_object</span></code></pre></div>
+<p><strong>Note</strong> Shorter vectors in <code>cbind()</code> and <code>rbind()</code> fill up according to the longest other vector by restarting from the beginning. E.g., a smaller vector (1:3) starts after 3 at 1 again.</p>
+</div>
+<div id="creating-data-frames" class="section level3" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Creating data frames</h3>
+<p><strong>Constructing data frames with <code>data.frame()</code></strong></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="r-basics.html#cb98-1" aria-hidden="true" tabindex="-1"></a>col_one <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Aruba&quot;</span>, <span class="st">&quot;Afghanistan&quot;</span>, <span class="st">&quot;Angola&quot;</span>, <span class="st">&quot;Albania&quot;</span>, <span class="st">&quot;United Arab Emirates&quot;</span>, <span class="st">&quot;Argentina&quot;</span>)</span>
+<span id="cb98-2"><a href="r-basics.html#cb98-2" aria-hidden="true" tabindex="-1"></a>col_two <span class="ot">&lt;-</span> (<span class="fu">c</span>(<span class="st">&quot;South America&quot;</span>, <span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;Africa&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Middle East&quot;</span>, <span class="st">&quot;South America&quot;</span>))</span>
+<span id="cb98-3"><a href="r-basics.html#cb98-3" aria-hidden="true" tabindex="-1"></a>col_three <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.244</span>, <span class="fl">35.253</span>, <span class="fl">45.958</span>, <span class="fl">12.877</span>, <span class="fl">7.044</span>, <span class="fl">17.716</span>)</span>
+<span id="cb98-4"><a href="r-basics.html#cb98-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-5"><a href="r-basics.html#cb98-5" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">country =</span> col_one, <span class="at">region =</span> col_two, <span class="at">birth.rate =</span> col_three)</span>
+<span id="cb98-6"><a href="r-basics.html#cb98-6" aria-hidden="true" tabindex="-1"></a>countries</span></code></pre></div>
+</div>
+<div id="adding-row-or-columns" class="section level3" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Adding row or columns</h3>
+<p><strong>Adding a new row</strong>\ This isn’t as usual in practice, but it works like this.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="r-basics.html#cb99-1" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">rbind</span>(countries, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</span>
+<span id="cb99-2"><a href="r-basics.html#cb99-2" aria-hidden="true" tabindex="-1"></a>countries</span></code></pre></div>
+<p><strong>Adding a new column</strong>\ Add a new column by just writing as if it already exists and than filling it up with a vector.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="r-basics.html#cb100-1" aria-hidden="true" tabindex="-1"></a>countries<span class="sc">$</span>new.column <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)</span>
+<span id="cb100-2"><a href="r-basics.html#cb100-2" aria-hidden="true" tabindex="-1"></a>countries</span></code></pre></div>
+<p><strong>Note</strong>: Adding a vector which is shorter than the other columns results in replicating the vector until it fills up. But (!), it has to be able to fill it up completely. Otherwise you get an error.</p>
+</div>
+<div id="naming-tables" class="section level3" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> Naming tables</h3>
+<p>Renaming tables works in principle exactly the same as with vectors - by breaking tables down in vectors. There are two name vectors: the row name vector and the column name vector.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="r-basics.html#cb101-1" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>),<span class="fu">c</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb101-2"><a href="r-basics.html#cb101-2" aria-hidden="true" tabindex="-1"></a>table</span>
+<span id="cb101-3"><a href="r-basics.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(table) <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;One&quot;</span>, <span class="dv">10</span>)</span>
+<span id="cb101-4"><a href="r-basics.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Var1&quot;</span>, <span class="st">&quot;Var2&quot;</span>)</span></code></pre></div>
+<p>Change a specific column name.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="r-basics.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(starwars)[<span class="dv">10</span>] <span class="ot">=</span> <span class="st">&quot;planet&quot;</span> <span class="co"># You&#39;d have to find out the column number. </span></span></code></pre></div>
+<p>It is also possible to name tables columns or rows in rbind(), cbind() and data.frame().</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="r-basics.html#cb103-1" aria-hidden="true" tabindex="-1"></a>vector_one <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb103-2"><a href="r-basics.html#cb103-2" aria-hidden="true" tabindex="-1"></a>vector_two <span class="ot">&lt;-</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">1</span></span>
+<span id="cb103-3"><a href="r-basics.html#cb103-3" aria-hidden="true" tabindex="-1"></a>data_frame <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">v1 =</span> vector_one, <span class="at">v2 =</span> vector_two)</span>
+<span id="cb103-4"><a href="r-basics.html#cb103-4" aria-hidden="true" tabindex="-1"></a>data_frame</span>
+<span id="cb103-5"><a href="r-basics.html#cb103-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-6"><a href="r-basics.html#cb103-6" aria-hidden="true" tabindex="-1"></a>data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">country =</span> vector_one, <span class="at">continent =</span> vector_two) <span class="co"># Bind together by columns.  </span></span>
+<span id="cb103-7"><a href="r-basics.html#cb103-7" aria-hidden="true" tabindex="-1"></a>data_frame</span></code></pre></div>
+</div>
+<div id="deleting-rows-or-columns" class="section level3" number="3.5.5">
+<h3><span class="header-section-number">3.5.5</span> Deleting rows or columns</h3>
+<p><strong>Delete a column</strong>\ Fill the column up with <code>NULL</code>.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="r-basics.html#cb104-1" aria-hidden="true" tabindex="-1"></a>countries<span class="sc">$</span>new.column <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb104-2"><a href="r-basics.html#cb104-2" aria-hidden="true" tabindex="-1"></a>countries</span></code></pre></div>
+</div>
+<div id="rearranging-columns" class="section level3" number="3.5.6">
+<h3><span class="header-section-number">3.5.6</span> Rearranging columns</h3>
+<p><strong>Rearrange columns</strong> Simple way to rearrange columns in a table. Just overwrite/create a new object by subsetting the columns in a different order by passing in a numerical vector.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="r-basics.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Crime)</span>
+<span id="cb105-2"><a href="r-basics.html#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="r-basics.html#cb105-3" aria-hidden="true" tabindex="-1"></a>Crime.Rearranged <span class="ot">&lt;-</span> Crime[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>)]</span>
+<span id="cb105-4"><a href="r-basics.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Crime.Rearranged)</span></code></pre></div>
+</div>
+<div id="merging-data-frames" class="section level3" number="3.5.7">
+<h3><span class="header-section-number">3.5.7</span> Merging data frames</h3>
+<p><strong>Merging data frames</strong></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="r-basics.html#cb106-1" aria-hidden="true" tabindex="-1"></a>countriesNew <span class="ot">&lt;-</span> <span class="fu">merge</span>(countries, countries)</span>
+<span id="cb106-2"><a href="r-basics.html#cb106-2" aria-hidden="true" tabindex="-1"></a>countriesNew</span></code></pre></div>
+</div>
+<div id="subsetting-matrices" class="section level3" number="3.5.8">
+<h3><span class="header-section-number">3.5.8</span> Subsetting matrices</h3>
+<p>Because tables are two dimensional, they have rows and columns, you have to specify two indices.The first index in the square brackets relates to which row should be targeted. The second index relates to the column.</p>
+<p><strong>Note</strong>: A very important concept in subsetting tables in R is that, if you leave the row or the column index empty, you access the whole row or the whole column.</p>
+<p>Access <strong>several columns</strong> in a matrix.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="r-basics.html#cb107-1" aria-hidden="true" tabindex="-1"></a>matrix_object[ , ] <span class="co"># Shows the whole matrix.</span></span>
+<span id="cb107-2"><a href="r-basics.html#cb107-2" aria-hidden="true" tabindex="-1"></a>matrix_object <span class="co"># Same as above.</span></span>
+<span id="cb107-3"><a href="r-basics.html#cb107-3" aria-hidden="true" tabindex="-1"></a>matrix_object[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="co"># Shows all rows and only the first and second column.</span></span>
+<span id="cb107-4"><a href="r-basics.html#cb107-4" aria-hidden="true" tabindex="-1"></a>matrix_object[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,] <span class="co"># Shows rows 1 to 10 and all columns.</span></span>
+<span id="cb107-5"><a href="r-basics.html#cb107-5" aria-hidden="true" tabindex="-1"></a>matrix_object[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)] <span class="co"># Shows all rows and only the first and third column.</span></span></code></pre></div>
+</div>
+<div id="subsetting-data-frames" class="section level3" number="3.5.9">
+<h3><span class="header-section-number">3.5.9</span> Subsetting data frames</h3>
+<p>Data frames can be accessed just like their “cousins” the matrices. They only have one addition: <code>$</code>.</p>
+<p>Because of the focus on the column names, data frames have a special key symbol to access them: the <code>$</code> sign. This is how you access it.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="r-basics.html#cb108-1" aria-hidden="true" tabindex="-1"></a>countries</span>
+<span id="cb108-2"><a href="r-basics.html#cb108-2" aria-hidden="true" tabindex="-1"></a>countries<span class="sc">$</span>country</span></code></pre></div>
+<p>It is pretty much the same as this, regular, subsetting:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="r-basics.html#cb109-1" aria-hidden="true" tabindex="-1"></a>countries[,<span class="st">&quot;country&quot;</span>]</span></code></pre></div>
+<p>It just saves time and improves readability.</p>
+<p>The last thing to understand, when subsetting data frames with <code>$</code>, is if you want to access a <strong>certain row</strong> you just write the index/name into square brackets by themselves.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="r-basics.html#cb110-1" aria-hidden="true" tabindex="-1"></a>countries<span class="sc">$</span>country[<span class="dv">2</span>]</span></code></pre></div>
+<p>The syntax in English therefore would read: “access the country_data_frame object, access its country column, show only the row with the index 2.”</p>
+</div>
+<div id="data-frame-returns" class="section level3" number="3.5.10">
+<h3><span class="header-section-number">3.5.10</span> Data frame returns</h3>
+<p>When subsetting rows in a data frame it returns, as might be expected, a data frame. But (<strong>!</strong>) when subsetting a column, it returns a vector.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="r-basics.html#cb111-1" aria-hidden="true" tabindex="-1"></a>countries[<span class="dv">1</span>,]</span>
+<span id="cb111-2"><a href="r-basics.html#cb111-2" aria-hidden="true" tabindex="-1"></a>countries[,<span class="dv">1</span>]</span></code></pre></div>
+<p>If you actually to want a data frame returned when subsetting a whole column change the <code>drop</code> property to <code>FALSE</code>.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="r-basics.html#cb112-1" aria-hidden="true" tabindex="-1"></a>countries[,<span class="dv">1</span>, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span></code></pre></div>
+</div>
+<div id="filtering-tables" class="section level3" number="3.5.11">
+<h3><span class="header-section-number">3.5.11</span> Filtering tables</h3>
+<p>Advanced filtering in data frames can become a bit challenging to read. It is important to keep in mind, that a filter, e.g. this <code>[vector &gt; 1]</code>, is basically a boolean vector which picks out all <code>TRUE</code> elements.</p>
+<p><strong>The no-filters-for-columns logic</strong><br />
+In data frames you have an additional dimension, therefore, just as in basic subsetting, you must address both the row and column index <code>[row_index, column_index]</code>.\ <strong>Important</strong>: filters are only used on rows indices! Using a filter on which columns to select doesn’t make sense, because columns have often mixed data types/structures and represent logically different concepts, which cannot be filtered by one singular mathematical operation.</p>
+<p>This experiment helps to explain the problem.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="r-basics.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(countries, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="r-basics.html#cb114-1" aria-hidden="true" tabindex="-1"></a>countries[<span class="dv">1</span>,] <span class="co"># Show me the first row and all columns, i.e. all of Aruba&#39;s column. </span></span>
+<span id="cb114-2"><a href="r-basics.html#cb114-2" aria-hidden="true" tabindex="-1"></a>countries[<span class="dv">1</span>,] <span class="sc">&gt;</span> <span class="dv">5</span> <span class="co"># Show me the first row and only the columns which are higher than 5.</span></span></code></pre></div>
+<p>You can see that it checks the cells of row one, column by column, and returns logical values. It only makes sense in the numeric value of birth.rate. If we use this filter to access certain values will get an error.</p>
+<p><strong>To filter for rows on the other hand works logically and practically fine</strong>\ Filter for rows which have a higher birth rate value than 20 in their Birth.Rate column.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="r-basics.html#cb115-1" aria-hidden="true" tabindex="-1"></a>countries[countries<span class="sc">$</span>birth.rate <span class="sc">&gt;</span> <span class="dv">20</span>,]</span></code></pre></div>
+<p>The syntax in English therefore would read: “access the country_data_frame object, filter the rows by those which have a higher value than 20 in their Birth.Rate column, show all columns.”\ This is the same filter as those two. Just written differently.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="r-basics.html#cb116-1" aria-hidden="true" tabindex="-1"></a>countries[countries[,<span class="st">&quot;birth.rate&quot;</span>] <span class="sc">&gt;</span> <span class="dv">20</span>,]</span>
+<span id="cb116-2"><a href="r-basics.html#cb116-2" aria-hidden="true" tabindex="-1"></a>countries[countries[,<span class="dv">3</span>] <span class="sc">&gt;</span> <span class="dv">20</span>,] </span></code></pre></div>
+<p>Access rows which have a specific column factor.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="r-basics.html#cb117-1" aria-hidden="true" tabindex="-1"></a>countries[countries<span class="sc">$</span>region <span class="sc">==</span> <span class="st">&quot;South America&quot;</span>,]</span>
+<span id="cb117-2"><a href="r-basics.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plain English: show me the rows and all their columns, which have &quot;South America&quot; in their Region column.</span></span></code></pre></div>
+<p>Access rows with several specific column factors.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="r-basics.html#cb118-1" aria-hidden="true" tabindex="-1"></a>countries[countries<span class="sc">$</span>region <span class="sc">==</span> <span class="st">&quot;South America&quot;</span> <span class="sc">|</span> countries<span class="sc">$</span>region <span class="sc">==</span> <span class="st">&quot;Africa&quot;</span>,] <span class="co"># Plain English: show me the rows and all their columns, which have &quot;South America&quot; OR &quot;Africa&quot; in their Region column.</span></span></code></pre></div>
+</div>
+</div>
+<div id="lists" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Lists</h2>
+<p>List are kind of like a storage box in which you can put all types of object inside. Data frames columns and rows are much more limited that way, because vectors are sensitive to the overall length of the data frame and are only limited to vectors. In lists you can put several different data frames inside, a vector with a single element and even plots (and even other lists). This makes it a nice way to organize your data and pass on many different aspects.</p>
+<div id="creating-lists" class="section level3" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Creating lists</h3>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="r-basics.html#cb119-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb119-2"><a href="r-basics.html#cb119-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Letters =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>),</span>
+<span id="cb119-3"><a href="r-basics.html#cb119-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">RandomNumbers =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">20</span>), </span>
+<span id="cb119-4"><a href="r-basics.html#cb119-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">TodaysDate =</span> <span class="fu">Sys.Date</span>()) <span class="co"># Today&#39;s date.</span></span></code></pre></div>
+</div>
+<div id="adding-components" class="section level3" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Adding components</h3>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="r-basics.html#cb120-1" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>Prices <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">10</span>)</span></code></pre></div>
+</div>
+<div id="deleting-components" class="section level3" number="3.6.3">
+<h3><span class="header-section-number">3.6.3</span> Deleting components</h3>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="r-basics.html#cb121-1" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>Prices <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<p><strong>Note</strong>: In list the numeration gets automatically updated and changed if you delete objects in between two components. They react when changing components.</p>
+</div>
+<div id="renaming-components" class="section level3" number="3.6.4">
+<h3><span class="header-section-number">3.6.4</span> Renaming components</h3>
+<p>Names can be given while constructing a list with <code>list()</code>. But also via <code>names()</code>.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="r-basics.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(my_list)[<span class="dv">2</span>] <span class="ot">=</span> <span class="st">&quot;NonRandomNumbers&quot;</span> <span class="co"># instead of &quot;RandomNumbers&quot;.</span></span>
+<span id="cb122-2"><a href="r-basics.html#cb122-2" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>NonRandomNumbers <span class="co"># works!</span></span>
+<span id="cb122-3"><a href="r-basics.html#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="r-basics.html#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Not these: </span></span>
+<span id="cb122-5"><a href="r-basics.html#cb122-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(my_list<span class="sc">$</span>RandomNumbers) <span class="ot">=</span> <span class="st">&quot;NonRandomNumbers&quot;</span> <span class="co"># changes the components values names.</span></span>
+<span id="cb122-6"><a href="r-basics.html#cb122-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Example_list[<span class="dv">2</span>]) <span class="ot">&lt;-</span> <span class="st">&quot;States&quot;</span> <span class="co"># Same.</span></span></code></pre></div>
+</div>
+<div id="naming-inside-components" class="section level3" number="3.6.5">
+<h3><span class="header-section-number">3.6.5</span> Naming inside components</h3>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="r-basics.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(my_list<span class="sc">$</span>TodaysDate) <span class="ot">=</span> <span class="st">&quot;Date&quot;</span></span>
+<span id="cb123-2"><a href="r-basics.html#cb123-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-3"><a href="r-basics.html#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Date</span></span>
+<span id="cb123-4"><a href="r-basics.html#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;2021-07-30&quot;</span></span></code></pre></div>
+</div>
+<div id="subsetting-list-components" class="section level3" number="3.6.6">
+<h3><span class="header-section-number">3.6.6</span> Subsetting list components</h3>
+<p>There are three ways to extract components.</p>
+<p><strong>First by <span class="math display">\[ \]</span></strong><br />
+Returns the component, but as part of a seperate list. Similar to data frames, when using <code>dataFrame(,1)</code>, which also returns a data frame, instead of a vector.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="r-basics.html#cb124-1" aria-hidden="true" tabindex="-1"></a>my_list[<span class="dv">2</span>]</span>
+<span id="cb124-2"><a href="r-basics.html#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(my_list[<span class="dv">2</span>]) <span class="co"># list</span></span>
+<span id="cb124-3"><a href="r-basics.html#cb124-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-4"><a href="r-basics.html#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; $NonRandomNumbers</span></span>
+<span id="cb124-5"><a href="r-basics.html#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</span></span></code></pre></div>
+<p><strong>Second by <span class="math display">\[ \[ \]</span> ]</strong><br />
+Returns the object in the component, e.g. the vector, data frame, plot etc.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="r-basics.html#cb125-1" aria-hidden="true" tabindex="-1"></a>my_list[[<span class="dv">2</span>]]</span>
+<span id="cb125-2"><a href="r-basics.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(my_list[[<span class="dv">2</span>]]) <span class="co"># Integer vector of NonRandomNumbers.</span></span>
+<span id="cb125-3"><a href="r-basics.html#cb125-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-4"><a href="r-basics.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; my_list[[2]]</span></span>
+<span id="cb125-5"><a href="r-basics.html#cb125-5" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 44 88 68 69 30 16 83  2 62 38 15 79  4 52 70 39 98  9 74 86</span></span></code></pre></div>
+<p><strong>Third by $</strong><br />
+This is exactly the same as the second version, but prettier.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="r-basics.html#cb126-1" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>NonRandomNumbers</span>
+<span id="cb126-2"><a href="r-basics.html#cb126-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-3"><a href="r-basics.html#cb126-3" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>NonRandomNumbers</span>
+<span id="cb126-4"><a href="r-basics.html#cb126-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">67</span> <span class="dv">88</span>  <span class="dv">4</span> <span class="dv">15</span> <span class="dv">70</span> <span class="dv">27</span> <span class="dv">92</span> <span class="dv">29</span> <span class="dv">66</span> <span class="dv">91</span> <span class="dv">22</span> <span class="dv">68</span> <span class="dv">13</span> <span class="dv">40</span> <span class="dv">52</span> <span class="dv">24</span>  <span class="dv">1</span> <span class="dv">37</span> <span class="dv">64</span> <span class="dv">54</span></span></code></pre></div>
+<p><strong>Extracting values in a component</strong><br />
+Accessing the second element in the first component (“States”).</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="r-basics.html#cb127-1" aria-hidden="true" tabindex="-1"></a>Example_list[[<span class="dv">1</span>]][<span class="dv">2</span>]</span>
+<span id="cb127-2"><a href="r-basics.html#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Or even like this. </span></span>
+<span id="cb127-3"><a href="r-basics.html#cb127-3" aria-hidden="true" tabindex="-1"></a>Example_list<span class="sc">$</span>States[<span class="dv">2</span>]</span></code></pre></div>
+</div>
+<div id="filtering-lists" class="section level3" number="3.6.7">
+<h3><span class="header-section-number">3.6.7</span> Filtering lists</h3>
+<p>Once you’ve accessed a component’s object by <code>$</code> or <code>[ [ ] ]</code> it’s the same as without lists. For example, “Return all values inside NonRandomNumbers that are bigger than 50”:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="r-basics.html#cb128-1" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>NonRandomNumbers[my_list<span class="sc">$</span>NonRandomNumbers <span class="sc">&gt;</span> <span class="dv">50</span>]</span>
+<span id="cb128-2"><a href="r-basics.html#cb128-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-3"><a href="r-basics.html#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; my_list$NonRandomNumbers[my_list$NonRandomNumbers &gt; 50]</span></span>
+<span id="cb128-4"><a href="r-basics.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 67 88 70 92 66 91 68 52 64 54</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-playgrounds.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

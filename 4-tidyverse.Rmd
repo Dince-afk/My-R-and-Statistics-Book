@@ -1,0 +1,689 @@
+# Tidyverse
+
+## dplyr
+
+`dplyr` is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
+
+-   `select()` picks variables based on their names.
+-   `rename()` renames variables names.
+-   `filter()` picks cases based on their values.
+-   `arrange()` changes the ordering of the rows.\
+-   `slice()` picks cases based on their indices.
+-   `mutate()` adds new variables that are functions of existing variables.
+-   `relocate()` changes variable positions.\
+-   `summarise()` reduces multiple values down to a single summary.
+-   `group_by()` groups tibble in order to calculate grouped statistics with `summarise()`.
+-   `pull()` pulls the vector value from a summarize tibble.
+
+### Pipe
+
+With dplyr we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: `%>%`. In dplyr we can write code that looks more like a description of what we want to do without intermediate objects.
+
+``` r
+starwars %>%  # Pass on starwars dataset...
+ select(name, height, mass) %>% # ... select name, height, mass variables and pass on...
+  rename(kilograms = mass) %>% # ... rename mass to kilograms and pass on...
+  filter(kilograms > 50) # filter cases bigger than 50 kilograms.
+```
+
+In general, the pipe sends the result of the left side of the pipe to be the first argument of the function on the right side of the pipe. Here is a very simple example:
+
+``` r
+16 %>% sqrt()
+#> [1] 4
+```
+
+We can continue to pipe values along:
+
+``` r
+16 %>% sqrt() %>% log2()
+#> [1] 2
+```
+
+The above statement is equivalent to `log2(sqrt(16))`.
+
+Remember that the pipe sends values to the first argument, so we can define other arguments as if the first argument is already defined:
+
+``` r
+16 %>% sqrt() %>% log(base = 2)
+#> [1] 2
+```
+
+Therefore, when using the pipe with data frames and dplyr, we no longer need to specify the required first argument since the dplyr functions we have described all take the data as the first argument.
+
+### Select
+
+<https://dplyr.tidyverse.org/reference/select.html>
+
+Often you work with large datasets with many columns but only a few are actually of interest to you. select() allows you to rapidly zoom in on a useful subset.
+
+``` r
+starwars %>% select(name, birth_year, homeworld)
+# A tibble: 3 x 3
+#   name           birth_year homeworld
+#   <chr>               <dbl> <chr>    
+# 1 Luke Skywalker       19   Tatooine 
+# 2 C-3PO               112   Tatooine 
+# 3 R2-D2                33   Naboo    
+```
+
+Equivalent to:
+
+``` r
+starwars[,c("name","birth_year","homeworld")]
+```
+
+### Rename
+
+<https://dplyr.tidyverse.org/reference/rename.html>
+
+You could also rename variables in `select()`, but because it drops all the variables not explicitly mentioned, it's not that useful. Instead, use `rename()`:
+
+``` r
+starwars %>% rename(planet = homeworld) # new_name = variable_name
+# A tibble: 3 x 3
+#   name               birth_year planet  
+#   <chr>                   <dbl> <chr>   
+# 1 Luke Skywalker           19   Tatooine
+# 2 C-3PO                   112   Tatooine
+# 3 R2-D2                    33   Naboo   
+```
+
+Equivalent to:
+
+``` r
+colnames(starwars)[10] = "planet" # You'd have to find out the column number.
+```
+
+### Filter
+
+<https://dplyr.tidyverse.org/reference/filter.html>
+
+``` r
+starwars %>%  filter(eye_color == "blue", mass < 77)
+# A tibble: 3 x 3
+#  name      height  mass hair_color skin_color eye_color
+#  <chr>      <int> <dbl> <chr>      <chr>      <chr>     
+# 1 Beru Whi…    165  75   brown      light      blue
+# 2 Adi Gall…    184  50   none       dark       blue
+# 3 Luminara…    170  56.2 black      yellow     blue
+```
+
+Roughly the equivalent to:
+
+``` r
+starwars[starwars$eye_color == "blue" & starwars$mass < 77, ]
+```
+
+### Arrange
+
+<https://dplyr.tidyverse.org/reference/arrange.html>
+
+This function arranges tables by variables. It takes a data frame, and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
+
+``` r
+starwars %>% arrange(mass)
+# A tibble: 3 x 3
+#   name   height  mass 
+#   <chr>   <int> <dbl> 
+# 1 Ratts…     79    15 
+# 2 Yoda       66    17
+# 3 Wicke…     88    20
+```
+
+Use `desc()`to order a column in descending order:
+
+``` r
+starwars %>% arrange(desc(mass))
+# A tibble: 3 x 3
+#   name   height  mass
+#   <chr>   <int> <dbl>
+# 1 Jabba…    175  1358
+# 2 Griev…    216   159
+# 3 IG-88     200   140
+```
+
+### Slice
+
+<https://dplyr.tidyverse.org/reference/slice.html>
+
+`slice()` lets you index rows by their (integer) locations. It allows you to select, remove, and duplicate rows.
+
+``` r
+starwars %>% slice(1:3)
+# A tibble: 3 x 5
+#  name   height  mass hair_color skin_color  
+#  <chr>   <int> <dbl> <chr>      <chr>       
+# 1 Luke …    172    77 blond      fair        
+# 2 C-3PO     167    75 NA         gold        
+# 3 R2-D2      96    32 NA         white, blue
+```
+
+**Other Slices**\
+Slice is accompanied by a number of helpers for common use cases: \* slice_head() and slice_tail() select the first or last rows. \* slice_sample() randomly selects rows. \* slice_min() and slice_max() select rows with highest or lowest values of a variable.
+
+If .data is a grouped_df, the operation will be performed on each group, so that (e.g.) slice_head(df, n = 5) will select the first five rows in each group.\
+Examples: [ https://dplyr.tidyverse.org/reference/slice.html ](https://dplyr.tidyverse.org/reference/slice.html "Examples")
+
+### Mutate
+
+<https://dplyr.tidyverse.org/reference/mutate.html>
+
+Besides selecting sets of existing columns, it's often useful to add new columns that are functions of existing columns.
+
+This creates a new column with height in meters instead of centimeters:
+
+``` r
+starwars %>% 
+  mutate(height_m = height / 100) %>%
+  relocate(height_m, .before = height) # Move it before variable height, to the beginning.
+  
+# A tibble: 87 x 15
+#   name      height_m height
+#   <chr>        <dbl>  <int>
+# 1 Luke Sky…     1.72    172
+# 2 C-3PO         1.67    167
+# 3 R2-D2         0.96     96
+```
+
+If you only want to keep the new variables, use `transmute()`.
+
+### Relocate
+
+<https://dplyr.tidyverse.org/reference/relocate.html>
+
+Use a similar syntax as `select()` to move blocks of columns at once.
+
+``` r
+starwars %>% relocate(sex:gender, .before = height) # Move all variables between sex and gender before variable height.
+# A tibble: 3 x 4
+#   name   sex   gender height
+#   <chr>  <chr> <chr>   <int>
+# 1 Luke … male  mascu…    172
+# 2 C-3PO  none  mascu…    167
+# 3 R2-D2  none  mascu…     96
+```
+
+Another syntax that relocates the new variable up front would be:
+
+``` r
+starwars %>% 
+  mutate(height_m = height / 100) %>% 
+  select(height_m, everything()) # everything() return all other variables.
+```
+
+### Summarise
+
+<https://dplyr.tidyverse.org/reference/summarise.html>
+
+It collapses a data frame to a single row. It's not that useful until we learn the group_by() verb below. This summarise syntax returns the mean and standard deviation for all cases, across species, genders, sex etc. :
+
+``` r
+starwars %>% 
+ summarise(mean_height = mean(height, na.rm = T),
+            mean_mass = mean(mass, na.rm = T))
+            
+# A tibble: 1 x 2
+#  mean_height mean_mass
+#         <dbl>     <dbl>
+# 1        174.      97.3
+```
+
+**Summarize with group by**\
+Most data operations are done on groups defined by variables. `group_by()` takes an existing tbl and converts it into a grouped tbl where operations are performed "by group". `ungroup()` removes grouping.
+
+``` r
+starwars %>%
+ group_by(sex) %>% # Creates a tibble with a group: sex [5] - 5 levels
+  summarise( # Create summary statistics for height and mass, grouped by sex variable.
+    height = mean(height, na.rm = TRUE),
+    mass = mean(mass, na.rm = TRUE))
+
+# A tibble: 5 x 3
+#  sex            height   mass
+#  <chr>           <dbl>  <dbl>
+# 1 female           169.   54.7
+# 2 hermaphroditic   175  1358  
+# 3 male             179.   81.0
+# 4 none             131.   69.8
+# 5 NA               181.   48  
+```
+
+More examples of grouped summary statistics:
+
+``` r
+starwars %>% 
+group_by(sex) %>% 
+  summarise(
+    n = n(),
+    min_mass = min(mass, na.rm = T),
+    mean_mass = mean(mass, na.rm = T),
+    sd_mass = sd(mass, na.rm = T),
+    max_mass = max(mass, na.rm = T)
+  )
+
+# A tibble: 5 x 6
+#  sex                n min_mass mean_mass sd_mass max_mass
+#    <chr>          <int>    <dbl>     <dbl>   <dbl>    <dbl>
+# 1 male              60       15      81.0   28.2       159
+# 2 female            16       45      54.7    8.59       75
+# 3 none               6       32      69.8   51.0       140
+# 4 NA                 4       48      48     NA          48
+# 5 hermaphroditic     1     1358    1358     NA        1358 
+```
+
+### Pull
+
+<https://dplyr.tidyverse.org/reference/pull.html>
+
+A useful trick for accessing values stored in data when using pipes: when a data object is piped that object and its columns can be accessed using the pull function.
+
+``` r
+starwars %>%
+  group_by(sex) %>% 
+  summarise(height = mean(height, na.rm = TRUE)) %>% 
+  pull(height)
+  
+# [1] 169.2667 175.0000 179.1053 131.2000 181.3333
+```
+
+### Distinct values
+
+<https://dplyr.tidyverse.org/reference/n_distinct.html>
+
+Function returns the number of distinct values in a column. Similar to levels in factors.
+
+``` r
+n_distinct(starwars$sex)
+#[1] 5
+```
+
+### Counts and proportions
+
+<https://dplyr.tidyverse.org/reference/count.html>
+
+Function lets you quickly count the unique values of one or more variables.
+
+``` r
+starwars %>% 
+  count(eye_color, sort = T)
+  
+# A tibble: 15 × 2
+#   eye_color         n
+#   <chr>         <int>
+# 1 brown            21
+# 2 blue             19
+# 3 yellow           11
+# 4 black            10
+# 5 orange            8
+```
+
+With two variables, `count` returns the number of times each combination of possible values has happened.
+
+``` r
+starwars %>% 
+count(eye_color, hair_color, sort = T, name = "count")
+  
+# A tibble: 35 × 3
+#   eye_color hair_color count
+#   <chr>     <chr>      <int>
+# 1 black     none           9
+# 2 brown     black          9
+# 3 brown     brown          9
+# 4 blue      brown          7
+# 5 orange    none           7
+# 6 yellow    none           6
+# 7 blue      blond          3
+# 8 blue      none           3
+# 9 red       none           3
+# 10 blue      black          2
+# … with 25 more rows
+```
+
+**Count and Prop Tables**\
+Simply mutate a frequency and percentage column on a counted table.
+
+``` r
+starwars %>% 
+ count(sex) %>% 
+  mutate(freq = n / sum(n)) %>% 
+  mutate(perc = freq * 100)
+
+# A tibble: 5 × 4
+#  sex                n   freq  perc
+#  <chr>          <int>  <dbl> <dbl>
+# 1 female            16 0.184  18.4 
+# 2 hermaphroditic     1 0.0115  1.15
+# 3 male              60 0.690  69.0 
+# 4 none               6 0.0690  6.90
+# 5 NA                 4 0.0460  4.60
+```
+
+### Case when
+
+<https://dplyr.tidyverse.org/reference/case_when.html>
+
+The `case_when` function is useful for vectorizing conditional statements. It is similar to `ifelse` but can output any number of values, as opposed to just `TRUE` or `FALSE`. Here is an example splitting numbers into negative, positive, and 0:
+
+``` r
+x <- c(-2, -1, 0, 1, 2)
+case_when(x < 0 ~ "Negative", 
+          x > 0 ~ "Positive", 
+          TRUE  ~ "Zero")
+#> [1] "Negative" "Negative" "Zero"     "Positive" "Positive"
+```
+
+A common use for this function is to define categorical variables based on existing variables. For example, suppose we want to compare the murder rates in four groups of states: New England, West Coast, South, and other. For each state, we need to ask if it is in New England, if it is not we ask if it is in the West Coast, if not we ask if it is in the South, and if not we assign other. Here is how we use case_when to do this:
+
+``` r
+murders %>% 
+ mutate(group = case_when(
+    abb %in% c("ME", "NH", "VT", "MA", "RI", "CT") ~ "New England",
+    abb %in% c("WA", "OR", "CA") ~ "West Coast",
+    region == "South" ~ "South",
+    TRUE ~ "Other")) %>%
+  group_by(group) %>%
+  summarize(rate = sum(total) / sum(population) * 10^5) 
+#> # A tibble: 4 x 2
+#>   group        rate
+#>   <chr>       <dbl>
+#> 1 New England  1.72
+#> 2 Other        2.71
+#> 3 South        3.63
+#> 4 West Coast   2.90
+```
+
+### Between
+
+<https://dplyr.tidyverse.org/reference/between.html>
+
+A common operation in data analysis is to determine if a value falls inside an interval. We can check this using conditionals. For example, to check if the elements of a vector x are between a and b we can type
+
+``` r
+x >= a & x <= b
+```
+
+However, this can become cumbersome, especially within the tidyverse approach. The between function performs the same operation.
+
+``` r
+between(x, a, b)
+```
+
+Or on a tibble using filter.
+
+``` r
+filter(starwars, between(height, 100, 150))
+#> # A tibble: 5 x 14
+#>   name     height  mass hair_color skin_color eye_color birth_year sex   gender 
+#>   <chr>     <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr>  
+#> 1 Leia Or…    150    49 brown      light      brown             19 fema… femini…
+#> 2 Mon Mot…    150    NA auburn     fair       blue              48 fema… femini…
+#> 3 Watto       137    NA black      blue, grey yellow            NA male  mascul…
+#> 4 Sebulba     112    40 none       grey, red  orange            NA male  mascul…
+#> 5 Gasgano     122    NA none       white, bl… black             NA male  mascul…
+#> # … with 5 more variables: homeworld <chr>, species <chr>, films <list>,
+#> #   vehicles <list>, starships <list>
+```
+
+## forcats
+
+<https://forcats.tidyverse.org>
+
+The goal of the forcats package is to provide a suite of useful tools that solve common problems with factors. Factors are useful when you have categorical data, variables that have a fixed and known set of values, and when you want to display character vectors in non-alphabetical order.
+
+### Count factors
+
+`fct_count()` <https://forcats.tidyverse.org/reference/fct_count.html>\
+Calculates a count and prop table.
+
+``` r
+starwars$sex %>% 
+ factor() %>% 
+  fct_count(sort = T, prop = T)
+
+#  A tibble: 5 × 3
+#  f                  n      p
+#  <fct>          <int>  <dbl>
+# 1 male              60 0.690 
+# 2 female            16 0.184 
+# 3 none               6 0.0690
+# 4 NA                 4 0.0460
+# 5 hermaphroditic     1 0.0115
+```
+
+`fct_match()` <https://forcats.tidyverse.org/reference/fct_match.html>
+
+Test for presence of levels in a factor. Do any of lvls occur in f?
+
+``` r
+table(fct_match(gss_cat$marital, c("Married", "Divorced"))) # Do those levels exist in marital column? Return cases where it's TRUE and where it's FALSE.
+```
+
+FALSE TRUE 7983 13500
+
+### Reorder levels
+
+**`fct_inorder()`**\
+When using `factor()`, by default, it returns levels in ascending order.
+
+``` r
+f <- factor(c("b", "b", "a", "c", "c", "c"))
+f
+```
+
+\[1\] b b a c c c Levels: a b c Explicitly order levels in the order the **observations appear**.
+
+``` r
+fct_inorder(f)
+
+#> [1] b b a c c c
+#> Levels: b a c
+```
+
+**`fct_infreq()`**\
+Order the levels by their **number** of observations.
+
+``` r
+fct_infreq(f)
+
+#> [1] b b a c c c
+#> Levels: c b a
+```
+
+**`fct_inseq()`**\
+Changes the levels to be in **order**, meaning in ascending sequence. Useful if you have a factor with unordered levels.
+
+``` r
+f = factor(1:3, levels = c(3,2,1))
+
+f
+# [1] 1 2 3
+# Levels: 3 2 1
+
+fct_inseq(f)
+# [1] 1 2 3
+# Levels: 1 2 3
+```
+
+**`fct_relevel()`**\
+<https://forcats.tidyverse.org/reference/fct_relevel.html>\
+**Move** any number of levels to any location. In its simplest form, it pushes each consecutive level entered to the front.
+
+``` r
+f <- factor(c("a", "b", "c", "d"), levels = c("b", "c", "d", "a"))
+
+fct_relevel(f, "a") # Push "a" to the first place
+
+#> [1] a b c d
+```
+
+Move level to a specific position.
+
+``` r
+fct_relevel(f, "a", after = 2)
+
+#> [1] a b c d
+#> Levels: b c a d
+```
+
+Move level to the end.
+
+``` r
+fct_relevel(f, "a", after = Inf)
+
+#> [1] a b c d
+#> Levels: b c d a
+```
+
+**`fct_rev()`**\
+<https://forcats.tidyverse.org/reference/fct_rev.html>\
+**Reverse** order of levels. Often useful when plotting.
+
+``` r
+f <- factor(c("a", "b", "c"))
+fct_rev(f)
+
+#> [1] a b c
+#> Levels: c b a
+```
+
+**`fct_shift()`**\
+**Shift** factor levels to left or right, wrapping around at end.
+
+``` r
+x <- factor(
+ c("Mon", "Tue", "Wed"),
+  levels = c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"))
+
+fct_shift(x,1) # Shift levels 1 to the left, i.e. Sun is at last position.
+
+# [1] Mon Tue Wed
+# Levels: Mon Tue Wed Thu Fri Sat Sun
+
+fct_shift(x,-2) # Shift levels 2 to the right, i.e. Fri comes out at first position.
+
+# [1] Mon Tue Wed
+# Levels: Fri Sat Sun Mon Tue Wed Thu
+```
+
+**`fct_shuffle()`**\
+Randomly **shuffle** order of levels.
+
+``` r
+f <- factor(c("a", "b", "c"))
+fct_shuffle(f)
+
+#> [1] a b c
+#> Levels: b c a
+```
+
+**`fct_reorder`**\
+<https://forcats.tidyverse.org/reference/fct_reorder.html>\
+Reorder factor levels by sorting along another variable.
+
+    df <- tibble::tribble(
+     ~color,     ~a, ~b,
+      "blue",      1,  2,
+      "green",     6,  2,
+      "purple",    3,  3,
+      "red",       2,  3,
+      "yellow",    5,  1
+    )
+
+Reorders the first by the second argument.
+
+``` r
+df$color <- factor(df$color) # color is our example factor
+fct_reorder(df$color, df$a, min)
+```
+
+\[1\] blue green purple red yellow Levels: blue red purple yellow green
+
+`fct_reorder2()` Reorders the factor by the y values associated with the largest x values. This makes the plot easier to read because the line colours line up with the legend.
+
+``` r
+fct_reorder2(df$color, df$a, df$b)
+
+#> [1] blue   green  purple red    yellow
+#> Levels: purple red blue green yellow
+```
+
+This is very useful when plotting.
+
+``` r
+boxplot(Sepal.Width ~ fct_reorder(Species, Sepal.Width), data = iris)
+# Descending order:
+boxplot(Sepal.Width ~ fct_reorder(Species, Sepal.Width, .desc = TRUE), data = iris)
+```
+
+## purrr
+
+<https://purrr.tidyverse.org>\
+Applying the same function or procedure to elements of an object, is quite common in data analysis. The purrr package includes functions similar to sapply but that better interact with other tidyverse functions.
+
+### Map
+
+<https://purrr.tidyverse.org/reference/map.html>\
+The first purrr function we will learn is map, which works very similar to sapply but always, without exception, returns a list:
+
+``` r
+x = 1:5
+
+add_one = function(value) {
+  value + 1
+} 
+
+map(x, add_one)
+
+# [[1]]
+# [1] 2
+
+# [[2]]
+# [1] 3
+
+# [[3]]
+# [1] 4
+
+# [[4]] 
+# [1] 5
+
+# [[5]]
+# [1] 6
+```
+
+### Map doubles
+
+If we want a numeric vector, we can instead use `map_dbl` which always returns a vector of numeric values.
+
+``` r
+x = 1:5
+
+map_dbl(x, add_one)
+
+# [1] 2 3 4 5 6
+```
+
+### Map dataframes
+
+### Map functions/closures
+
+Instead of creating and storing a separate function which we'll apply via `map`in the next step like this:
+
+``` r
+x = 1:5
+
+add_one = function(value) {
+  value + 1
+} 
+
+map_dbl(x, add_one)
+
+# [1] 2 3 4 5 6
+`
+
+We can simply create an "anonymous function" inside the `map` function.
+`r
+map_dbl(x, function(x) x + 1)
+
+# [1] 2 3 4 5 6
+```

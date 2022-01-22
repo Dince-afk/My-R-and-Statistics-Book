@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 Inferential Statistics | My R and Statistics Book</title>
+  <meta name="description" content="This is …" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 Inferential Statistics | My R and Statistics Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is …" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 Inferential Statistics | My R and Statistics Book" />
+  
+  <meta name="twitter:description" content="This is …" />
+  
+
+<meta name="author" content="Dino Curic" />
+
+
+<meta name="date" content="2022-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="probability-thoery.html"/>
+<link rel="next" href="causal-inference.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>1</b> Glossary</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="glossary.html"><a href="glossary.html#shortcuts"><i class="fa fa-check"></i><b>1.1</b> Shortcuts</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="glossary.html"><a href="glossary.html#rstudio-environment"><i class="fa fa-check"></i><b>1.1.1</b> RStudio Environment</a></li>
+<li class="chapter" data-level="1.1.2" data-path="glossary.html"><a href="glossary.html#navigating-and-sections"><i class="fa fa-check"></i><b>1.1.2</b> Navigating and Sections</a></li>
+<li class="chapter" data-level="1.1.3" data-path="glossary.html"><a href="glossary.html#code-execution"><i class="fa fa-check"></i><b>1.1.3</b> Code Execution</a></li>
+<li class="chapter" data-level="1.1.4" data-path="glossary.html"><a href="glossary.html#special-characters"><i class="fa fa-check"></i><b>1.1.4</b> Special Characters</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="glossary.html"><a href="glossary.html#statistical-symbols"><i class="fa fa-check"></i><b>1.2</b> Statistical Symbols</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="glossary.html"><a href="glossary.html#special-symbols"><i class="fa fa-check"></i><b>1.2.1</b> Special Symbols</a></li>
+<li class="chapter" data-level="1.2.2" data-path="glossary.html"><a href="glossary.html#sample-and-population-symbols"><i class="fa fa-check"></i><b>1.2.2</b> Sample and Population Symbols</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-playgrounds.html"><a href="r-playgrounds.html"><i class="fa fa-check"></i><b>2</b> R Playgrounds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-playgrounds.html"><a href="r-playgrounds.html#expected-value-and-standard-deviation"><i class="fa fa-check"></i><b>2.1</b> Expected Value and Standard Deviation</a></li>
+<li class="chapter" data-level="2.2" data-path="r-playgrounds.html"><a href="r-playgrounds.html#theoretical-and-experimental-standard-error"><i class="fa fa-check"></i><b>2.2</b> Theoretical and Experimental Standard Error</a></li>
+<li class="chapter" data-level="2.3" data-path="r-playgrounds.html"><a href="r-playgrounds.html#sample-size-resulting-in-0.01-se"><i class="fa fa-check"></i><b>2.3</b> Sample Size Resulting in 0.01 SE</a></li>
+<li class="chapter" data-level="2.4" data-path="r-playgrounds.html"><a href="r-playgrounds.html#bank-and-loans"><i class="fa fa-check"></i><b>2.4</b> Bank and Loans</a></li>
+<li class="chapter" data-level="2.5" data-path="r-playgrounds.html"><a href="r-playgrounds.html#real-polling-data"><i class="fa fa-check"></i><b>2.5</b> Real Polling Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#read-and-write-data"><i class="fa fa-check"></i><b>3.1</b> Read and Write Data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basics.html"><a href="r-basics.html#csv-files"><i class="fa fa-check"></i><b>3.1.1</b> CSV Files</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basics.html"><a href="r-basics.html#dat-files"><i class="fa fa-check"></i><b>3.1.2</b> DAT Files</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-basics.html"><a href="r-basics.html#excel-files"><i class="fa fa-check"></i><b>3.1.3</b> Excel Files</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basics.html"><a href="r-basics.html#data-types"><i class="fa fa-check"></i><b>3.2</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basics.html"><a href="r-basics.html#convert-data-types"><i class="fa fa-check"></i><b>3.2.1</b> Convert data types</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basics.html"><a href="r-basics.html#numeric"><i class="fa fa-check"></i><b>3.2.2</b> Numeric</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basics.html"><a href="r-basics.html#logical"><i class="fa fa-check"></i><b>3.2.3</b> Logical</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basics.html"><a href="r-basics.html#characters"><i class="fa fa-check"></i><b>3.2.4</b> Characters</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basics.html"><a href="r-basics.html#nas"><i class="fa fa-check"></i><b>3.2.5</b> <code>NA</code>s</a></li>
+<li class="chapter" data-level="3.2.6" data-path="r-basics.html"><a href="r-basics.html#dates"><i class="fa fa-check"></i><b>3.2.6</b> Dates</a></li>
+<li class="chapter" data-level="3.2.7" data-path="r-basics.html"><a href="r-basics.html#posix-time"><i class="fa fa-check"></i><b>3.2.7</b> POSIX Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basics.html"><a href="r-basics.html#vectors"><i class="fa fa-check"></i><b>3.3</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-vectors"><i class="fa fa-check"></i><b>3.3.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basics.html"><a href="r-basics.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.2</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basics.html"><a href="r-basics.html#naming-vectors"><i class="fa fa-check"></i><b>3.3.3</b> Naming vectors</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basics.html"><a href="r-basics.html#filtering-vectors"><i class="fa fa-check"></i><b>3.3.4</b> Filtering vectors</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basics.html"><a href="r-basics.html#special-concepts"><i class="fa fa-check"></i><b>3.3.5</b> Special Concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basics.html"><a href="r-basics.html#factors"><i class="fa fa-check"></i><b>3.4</b> Factors</a></li>
+<li class="chapter" data-level="3.5" data-path="r-basics.html"><a href="r-basics.html#matrices-and-data-frames"><i class="fa fa-check"></i><b>3.5</b> Matrices and Data Frames</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="r-basics.html"><a href="r-basics.html#creating-matrices"><i class="fa fa-check"></i><b>3.5.1</b> Creating matrices</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-basics.html"><a href="r-basics.html#creating-data-frames"><i class="fa fa-check"></i><b>3.5.2</b> Creating data frames</a></li>
+<li class="chapter" data-level="3.5.3" data-path="r-basics.html"><a href="r-basics.html#adding-row-or-columns"><i class="fa fa-check"></i><b>3.5.3</b> Adding row or columns</a></li>
+<li class="chapter" data-level="3.5.4" data-path="r-basics.html"><a href="r-basics.html#naming-tables"><i class="fa fa-check"></i><b>3.5.4</b> Naming tables</a></li>
+<li class="chapter" data-level="3.5.5" data-path="r-basics.html"><a href="r-basics.html#deleting-rows-or-columns"><i class="fa fa-check"></i><b>3.5.5</b> Deleting rows or columns</a></li>
+<li class="chapter" data-level="3.5.6" data-path="r-basics.html"><a href="r-basics.html#rearranging-columns"><i class="fa fa-check"></i><b>3.5.6</b> Rearranging columns</a></li>
+<li class="chapter" data-level="3.5.7" data-path="r-basics.html"><a href="r-basics.html#merging-data-frames"><i class="fa fa-check"></i><b>3.5.7</b> Merging data frames</a></li>
+<li class="chapter" data-level="3.5.8" data-path="r-basics.html"><a href="r-basics.html#subsetting-matrices"><i class="fa fa-check"></i><b>3.5.8</b> Subsetting matrices</a></li>
+<li class="chapter" data-level="3.5.9" data-path="r-basics.html"><a href="r-basics.html#subsetting-data-frames"><i class="fa fa-check"></i><b>3.5.9</b> Subsetting data frames</a></li>
+<li class="chapter" data-level="3.5.10" data-path="r-basics.html"><a href="r-basics.html#data-frame-returns"><i class="fa fa-check"></i><b>3.5.10</b> Data frame returns</a></li>
+<li class="chapter" data-level="3.5.11" data-path="r-basics.html"><a href="r-basics.html#filtering-tables"><i class="fa fa-check"></i><b>3.5.11</b> Filtering tables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-basics.html"><a href="r-basics.html#lists"><i class="fa fa-check"></i><b>3.6</b> Lists</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="r-basics.html"><a href="r-basics.html#creating-lists"><i class="fa fa-check"></i><b>3.6.1</b> Creating lists</a></li>
+<li class="chapter" data-level="3.6.2" data-path="r-basics.html"><a href="r-basics.html#adding-components"><i class="fa fa-check"></i><b>3.6.2</b> Adding components</a></li>
+<li class="chapter" data-level="3.6.3" data-path="r-basics.html"><a href="r-basics.html#deleting-components"><i class="fa fa-check"></i><b>3.6.3</b> Deleting components</a></li>
+<li class="chapter" data-level="3.6.4" data-path="r-basics.html"><a href="r-basics.html#renaming-components"><i class="fa fa-check"></i><b>3.6.4</b> Renaming components</a></li>
+<li class="chapter" data-level="3.6.5" data-path="r-basics.html"><a href="r-basics.html#naming-inside-components"><i class="fa fa-check"></i><b>3.6.5</b> Naming inside components</a></li>
+<li class="chapter" data-level="3.6.6" data-path="r-basics.html"><a href="r-basics.html#subsetting-list-components"><i class="fa fa-check"></i><b>3.6.6</b> Subsetting list components</a></li>
+<li class="chapter" data-level="3.6.7" data-path="r-basics.html"><a href="r-basics.html#filtering-lists"><i class="fa fa-check"></i><b>3.6.7</b> Filtering lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#functionality"><i class="fa fa-check"></i><b>4.1</b> Functionality</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>4.1.1</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="packages.html"><a href="packages.html#gridextra"><i class="fa fa-check"></i><b>4.1.2</b> <code>gridExtra</code></a></li>
+<li class="chapter" data-level="4.1.3" data-path="packages.html"><a href="packages.html#kableextra-1"><i class="fa fa-check"></i><b>4.1.3</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.4" data-path="packages.html"><a href="packages.html#unpivotr"><i class="fa fa-check"></i><b>4.1.4</b> <code>unpivotr</code></a></li>
+<li class="chapter" data-level="4.1.5" data-path="packages.html"><a href="packages.html#tibble"><i class="fa fa-check"></i><b>4.1.5</b> <code>tibble</code></a></li>
+<li class="chapter" data-level="4.1.6" data-path="packages.html"><a href="packages.html#dslabs"><i class="fa fa-check"></i><b>4.1.6</b> <code>dslabs</code></a></li>
+<li class="chapter" data-level="4.1.7" data-path="packages.html"><a href="packages.html#knitr"><i class="fa fa-check"></i><b>4.1.7</b> <code>knitr</code></a></li>
+<li class="chapter" data-level="4.1.8" data-path="packages.html"><a href="packages.html#readr"><i class="fa fa-check"></i><b>4.1.8</b> <code>readr</code></a></li>
+<li class="chapter" data-level="4.1.9" data-path="packages.html"><a href="packages.html#readxl"><i class="fa fa-check"></i><b>4.1.9</b> <code>readxl</code></a></li>
+<li class="chapter" data-level="4.1.10" data-path="packages.html"><a href="packages.html#tidyxl"><i class="fa fa-check"></i><b>4.1.10</b> <code>tidyxl</code></a></li>
+<li class="chapter" data-level="4.1.11" data-path="packages.html"><a href="packages.html#corrgram"><i class="fa fa-check"></i><b>4.1.11</b> <code>corrgram</code></a></li>
+<li class="chapter" data-level="4.1.12" data-path="packages.html"><a href="packages.html#corrplot"><i class="fa fa-check"></i><b>4.1.12</b> <code>corrplot</code></a></li>
+<li class="chapter" data-level="4.1.13" data-path="packages.html"><a href="packages.html#rtweet"><i class="fa fa-check"></i><b>4.1.13</b> <code>rtweet</code></a></li>
+<li class="chapter" data-level="4.1.14" data-path="packages.html"><a href="packages.html#catools"><i class="fa fa-check"></i><b>4.1.14</b> <code>caTools</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="packages.html"><a href="packages.html#data"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="packages.html"><a href="packages.html#ggplot2movies"><i class="fa fa-check"></i><b>4.2.1</b> <code>ggplot2movies</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="packages.html"><a href="packages.html#wdi"><i class="fa fa-check"></i><b>4.2.2</b> <code>WDI</code></a></li>
+<li class="chapter" data-level="4.2.3" data-path="packages.html"><a href="packages.html#essurvey"><i class="fa fa-check"></i><b>4.2.3</b> <code>essurvey</code></a></li>
+<li class="chapter" data-level="4.2.4" data-path="packages.html"><a href="packages.html#wbstats"><i class="fa fa-check"></i><b>4.2.4</b> <code>wbstats</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="packages.html"><a href="packages.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="packages.html"><a href="packages.html#igraph"><i class="fa fa-check"></i><b>4.3.1</b> <code>igraph</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="packages.html"><a href="packages.html#ggthemes"><i class="fa fa-check"></i><b>4.3.2</b> <code>ggthemes</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="packages.html"><a href="packages.html#ggrepel"><i class="fa fa-check"></i><b>4.3.3</b> <code>ggrepel</code></a></li>
+<li class="chapter" data-level="4.3.4" data-path="packages.html"><a href="packages.html#ggridges"><i class="fa fa-check"></i><b>4.3.4</b> <code>ggridges</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="packages.html"><a href="packages.html#kableextra-2"><i class="fa fa-check"></i><b>4.3.5</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="packages.html"><a href="packages.html#gridextra-1"><i class="fa fa-check"></i><b>4.3.6</b> <code>?gridExtra</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>5</b> Rmarkdown</a></li>
+<li class="chapter" data-level="6" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>6</b> Tidyverse</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tidyverse.html"><a href="tidyverse.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>6.1.1</b> Pipe</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>6.1.2</b> Select</a></li>
+<li class="chapter" data-level="6.1.3" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>6.1.3</b> Rename</a></li>
+<li class="chapter" data-level="6.1.4" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>6.1.4</b> Filter</a></li>
+<li class="chapter" data-level="6.1.5" data-path="tidyverse.html"><a href="tidyverse.html#arrange"><i class="fa fa-check"></i><b>6.1.5</b> Arrange</a></li>
+<li class="chapter" data-level="6.1.6" data-path="tidyverse.html"><a href="tidyverse.html#slice"><i class="fa fa-check"></i><b>6.1.6</b> Slice</a></li>
+<li class="chapter" data-level="6.1.7" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>6.1.7</b> Mutate</a></li>
+<li class="chapter" data-level="6.1.8" data-path="tidyverse.html"><a href="tidyverse.html#relocate"><i class="fa fa-check"></i><b>6.1.8</b> Relocate</a></li>
+<li class="chapter" data-level="6.1.9" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>6.1.9</b> Summarise</a></li>
+<li class="chapter" data-level="6.1.10" data-path="tidyverse.html"><a href="tidyverse.html#pull"><i class="fa fa-check"></i><b>6.1.10</b> Pull</a></li>
+<li class="chapter" data-level="6.1.11" data-path="tidyverse.html"><a href="tidyverse.html#distinct-values"><i class="fa fa-check"></i><b>6.1.11</b> Distinct values</a></li>
+<li class="chapter" data-level="6.1.12" data-path="tidyverse.html"><a href="tidyverse.html#counts-and-proportions"><i class="fa fa-check"></i><b>6.1.12</b> Counts and proportions</a></li>
+<li class="chapter" data-level="6.1.13" data-path="tidyverse.html"><a href="tidyverse.html#case-when"><i class="fa fa-check"></i><b>6.1.13</b> Case when</a></li>
+<li class="chapter" data-level="6.1.14" data-path="tidyverse.html"><a href="tidyverse.html#between"><i class="fa fa-check"></i><b>6.1.14</b> Between</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="tidyverse.html"><a href="tidyverse.html#forcats"><i class="fa fa-check"></i><b>6.2</b> forcats</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyverse.html"><a href="tidyverse.html#count-factors"><i class="fa fa-check"></i><b>6.2.1</b> Count factors</a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyverse.html"><a href="tidyverse.html#reorder-levels"><i class="fa fa-check"></i><b>6.2.2</b> Reorder levels</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="tidyverse.html"><a href="tidyverse.html#purrr"><i class="fa fa-check"></i><b>6.3</b> purrr</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyverse.html"><a href="tidyverse.html#map"><i class="fa fa-check"></i><b>6.3.1</b> Map</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tidyverse.html"><a href="tidyverse.html#map-doubles"><i class="fa fa-check"></i><b>6.3.2</b> Map doubles</a></li>
+<li class="chapter" data-level="6.3.3" data-path="tidyverse.html"><a href="tidyverse.html#map-dataframes"><i class="fa fa-check"></i><b>6.3.3</b> Map dataframes</a></li>
+<li class="chapter" data-level="6.3.4" data-path="tidyverse.html"><a href="tidyverse.html#map-functionsclosures"><i class="fa fa-check"></i><b>6.3.4</b> Map functions/closures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html"><i class="fa fa-check"></i><b>7</b> Visualization/<code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#gg-object"><i class="fa fa-check"></i><b>7.1</b> gg object</a></li>
+<li class="chapter" data-level="7.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#aesthetics"><i class="fa fa-check"></i><b>7.2</b> Aesthetics</a></li>
+<li class="chapter" data-level="7.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#geometries"><i class="fa fa-check"></i><b>7.3</b> Geometries</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#points"><i class="fa fa-check"></i><b>7.3.1</b> Points</a></li>
+<li class="chapter" data-level="7.3.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#text"><i class="fa fa-check"></i><b>7.3.2</b> Text</a></li>
+<li class="chapter" data-level="7.3.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#bars"><i class="fa fa-check"></i><b>7.3.3</b> Bars</a></li>
+<li class="chapter" data-level="7.3.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#density"><i class="fa fa-check"></i><b>7.3.4</b> Density</a></li>
+<li class="chapter" data-level="7.3.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#boxplots"><i class="fa fa-check"></i><b>7.3.5</b> Boxplots</a></li>
+<li class="chapter" data-level="7.3.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#lines"><i class="fa fa-check"></i><b>7.3.6</b> Lines</a></li>
+<li class="chapter" data-level="7.3.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#vertical-lines"><i class="fa fa-check"></i><b>7.3.7</b> Vertical Lines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#coordinates"><i class="fa fa-check"></i><b>7.4</b> Coordinates</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#limits"><i class="fa fa-check"></i><b>7.4.1</b> Limits</a></li>
+<li class="chapter" data-level="7.4.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#flipping"><i class="fa fa-check"></i><b>7.4.2</b> Flipping</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#tiles"><i class="fa fa-check"></i><b>7.5</b> Tiles</a></li>
+<li class="chapter" data-level="7.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scales"><i class="fa fa-check"></i><b>7.6</b> Scales</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#logarithmic-scales"><i class="fa fa-check"></i><b>7.6.1</b> Logarithmic scales</a></li>
+<li class="chapter" data-level="7.6.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scale-label-format"><i class="fa fa-check"></i><b>7.6.2</b> Scale label format</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#labels"><i class="fa fa-check"></i><b>7.7</b> Labels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>8</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="statistics.html"><a href="statistics.html#about-statistics"><i class="fa fa-check"></i><b>8.1</b> About Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="statistics.html"><a href="statistics.html#centrality"><i class="fa fa-check"></i><b>8.2</b> Centrality</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="statistics.html"><a href="statistics.html#mean"><i class="fa fa-check"></i><b>8.2.1</b> Mean</a></li>
+<li class="chapter" data-level="8.2.2" data-path="statistics.html"><a href="statistics.html#reproduction-mean-and-standard-deviation-reproduction"><i class="fa fa-check"></i><b>8.2.2</b> Reproduction Mean and Standard Deviation Reproduction</a></li>
+<li class="chapter" data-level="8.2.3" data-path="statistics.html"><a href="statistics.html#median"><i class="fa fa-check"></i><b>8.2.3</b> Median</a></li>
+<li class="chapter" data-level="8.2.4" data-path="statistics.html"><a href="statistics.html#mode"><i class="fa fa-check"></i><b>8.2.4</b> Mode</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="statistics.html"><a href="statistics.html#variability"><i class="fa fa-check"></i><b>8.3</b> Variability</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="statistics.html"><a href="statistics.html#range"><i class="fa fa-check"></i><b>8.3.1</b> Range</a></li>
+<li class="chapter" data-level="8.3.2" data-path="statistics.html"><a href="statistics.html#range-iqr-and-sd"><i class="fa fa-check"></i><b>8.3.2</b> Range, IQR and SD</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="statistics.html"><a href="statistics.html#sampling"><i class="fa fa-check"></i><b>8.4</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="statistics.html"><a href="statistics.html#weights"><i class="fa fa-check"></i><b>8.4.1</b> Weights</a></li>
+<li class="chapter" data-level="8.4.2" data-path="statistics.html"><a href="statistics.html#population"><i class="fa fa-check"></i><b>8.4.2</b> Population</a></li>
+<li class="chapter" data-level="8.4.3" data-path="statistics.html"><a href="statistics.html#sampling-1"><i class="fa fa-check"></i><b>8.4.3</b> Sampling</a></li>
+<li class="chapter" data-level="8.4.4" data-path="statistics.html"><a href="statistics.html#non-probability-sampling"><i class="fa fa-check"></i><b>8.4.4</b> Non-probability Sampling</a></li>
+<li class="chapter" data-level="8.4.5" data-path="statistics.html"><a href="statistics.html#sampling-methods"><i class="fa fa-check"></i><b>8.4.5</b> Sampling Methods</a>
+<ul>
+<li class="chapter" data-level="8.4.5.1" data-path="statistics.html"><a href="statistics.html#simple-random-sampling"><i class="fa fa-check"></i><b>8.4.5.1</b> Simple random sampling</a></li>
+<li class="chapter" data-level="8.4.5.2" data-path="statistics.html"><a href="statistics.html#systematic-sampling"><i class="fa fa-check"></i><b>8.4.5.2</b> Systematic sampling</a></li>
+<li class="chapter" data-level="8.4.5.3" data-path="statistics.html"><a href="statistics.html#stratified-sampling"><i class="fa fa-check"></i><b>8.4.5.3</b> Stratified sampling</a></li>
+<li class="chapter" data-level="8.4.5.4" data-path="statistics.html"><a href="statistics.html#cluster-sampling"><i class="fa fa-check"></i><b>8.4.5.4</b> Cluster sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4.6" data-path="statistics.html"><a href="statistics.html#errors-and-biases"><i class="fa fa-check"></i><b>8.4.6</b> Errors and biases</a>
+<ul>
+<li class="chapter" data-level="8.4.6.1" data-path="statistics.html"><a href="statistics.html#sampling-errors-and-biases"><i class="fa fa-check"></i><b>8.4.6.1</b> Sampling errors and biases</a></li>
+<li class="chapter" data-level="8.4.6.2" data-path="statistics.html"><a href="statistics.html#non-sampling-error"><i class="fa fa-check"></i><b>8.4.6.2</b> Non-sampling error</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="probability-thoery.html"><a href="probability-thoery.html"><i class="fa fa-check"></i><b>9</b> Probability Thoery</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="probability-thoery.html"><a href="probability-thoery.html#conditional-probability"><i class="fa fa-check"></i><b>9.1</b> Conditional Probability</a></li>
+<li class="chapter" data-level="9.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations"><i class="fa fa-check"></i><b>9.2</b> Permutations</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-with-repetition"><i class="fa fa-check"></i><b>9.2.1</b> Permutations with repetition</a></li>
+<li class="chapter" data-level="9.2.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-without-repetition"><i class="fa fa-check"></i><b>9.2.2</b> Permutations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations"><i class="fa fa-check"></i><b>9.3</b> Combinations</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-with-repetitions"><i class="fa fa-check"></i><b>9.3.1</b> Combinations with repetitions</a></li>
+<li class="chapter" data-level="9.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-without-repetition"><i class="fa fa-check"></i><b>9.3.2</b> Combinations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="probability-thoery.html"><a href="probability-thoery.html#random-variables"><i class="fa fa-check"></i><b>9.4</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#discrete-random-variables"><i class="fa fa-check"></i><b>9.4.1</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="9.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#continuous-random-variables"><i class="fa fa-check"></i><b>9.4.2</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="9.4.3" data-path="probability-thoery.html"><a href="probability-thoery.html#transforming-random-variables-shift-or-scale"><i class="fa fa-check"></i><b>9.4.3</b> Transforming Random Variables (Shift or Scale)</a></li>
+<li class="chapter" data-level="9.4.4" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean"><i class="fa fa-check"></i><b>9.4.4</b> Expected Value (Mean)</a></li>
+<li class="chapter" data-level="9.4.5" data-path="probability-thoery.html"><a href="probability-thoery.html#standard-deviation"><i class="fa fa-check"></i><b>9.4.5</b> Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="probability-thoery.html"><a href="probability-thoery.html#normal-distribution"><i class="fa fa-check"></i><b>9.5</b> Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties"><i class="fa fa-check"></i><b>9.5.1</b> Properties</a></li>
+<li class="chapter" data-level="9.5.2" data-path="probability-thoery.html"><a href="probability-thoery.html#z-scores"><i class="fa fa-check"></i><b>9.5.2</b> Z-Scores</a></li>
+<li class="chapter" data-level="9.5.3" data-path="probability-thoery.html"><a href="probability-thoery.html#examples"><i class="fa fa-check"></i><b>9.5.3</b> Examples</a>
+<ul>
+<li class="chapter" data-level="9.5.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#finding-percentages"><i class="fa fa-check"></i><b>9.5.3.1</b> Finding Percentages</a></li>
+<li class="chapter" data-level="9.5.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value"><i class="fa fa-check"></i><b>9.5.3.2</b> Expected Value</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r"><i class="fa fa-check"></i><b>9.5.4</b> In R</a>
+<ul>
+<li class="chapter" data-level="9.5.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-probability-from-z-value"><i class="fa fa-check"></i><b>9.5.4.1</b> Calculate Probability From Z-Value</a></li>
+<li class="chapter" data-level="9.5.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-z-value-from-probability"><i class="fa fa-check"></i><b>9.5.4.2</b> Calculate Z-Value From Probability</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="probability-thoery.html"><a href="probability-thoery.html#binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Binomial Distribution</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean-and-variance"><i class="fa fa-check"></i><b>9.6.1</b> Expected Value (Mean) and Variance</a></li>
+<li class="chapter" data-level="9.6.2" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-1"><i class="fa fa-check"></i><b>9.6.2</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="probability-thoery.html"><a href="probability-thoery.html#bernoulli-distribution"><i class="fa fa-check"></i><b>9.7</b> Bernoulli Distribution</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties-1"><i class="fa fa-check"></i><b>9.7.1</b> Properties</a></li>
+<li class="chapter" data-level="9.7.2" data-path="probability-thoery.html"><a href="probability-thoery.html#mean-1"><i class="fa fa-check"></i><b>9.7.2</b> Mean</a></li>
+<li class="chapter" data-level="9.7.3" data-path="probability-thoery.html"><a href="probability-thoery.html#variance"><i class="fa fa-check"></i><b>9.7.3</b> Variance</a></li>
+<li class="chapter" data-level="9.7.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-2"><i class="fa fa-check"></i><b>9.7.4</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="probability-thoery.html"><a href="probability-thoery.html#geometric-distribution"><i class="fa fa-check"></i><b>9.8</b> Geometric Distribution</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-3"><i class="fa fa-check"></i><b>9.8.1</b> In R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>10</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#sampling-distributions"><i class="fa fa-check"></i><b>10.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="10.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>10.2</b> Central Limit Theorem</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#what-is-large-enough-for-the-ctl"><i class="fa fa-check"></i><b>10.2.1</b> What is Large Enough for the CTL?</a></li>
+<li class="chapter" data-level="10.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-of-central-limit-theorem"><i class="fa fa-check"></i><b>10.2.2</b> Proof of Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#confidence-intervals"><i class="fa fa-check"></i><b>10.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#why-confidence-intervals-work"><i class="fa fa-check"></i><b>10.3.1</b> Why Confidence Intervals Work</a></li>
+<li class="chapter" data-level="10.3.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-for-confidence-intervals"><i class="fa fa-check"></i><b>10.3.2</b> Proof for Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-proportion"><i class="fa fa-check"></i><b>10.3.2.1</b> CI for Population Proportion</a></li>
+<li class="chapter" data-level="10.3.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-mean"><i class="fa fa-check"></i><b>10.3.2.2</b> CI for Population Mean</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>10.4</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#p-value"><i class="fa fa-check"></i><b>10.4.1</b> P-Value</a></li>
+<li class="chapter" data-level="10.4.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#z-test"><i class="fa fa-check"></i><b>10.4.2</b> Z-Test</a></li>
+<li class="chapter" data-level="10.4.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-z-test-statistic"><i class="fa fa-check"></i><b>10.4.3</b> Formula: z test statistic</a></li>
+<li class="chapter" data-level="10.4.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-z-score"><i class="fa fa-check"></i><b>10.4.4</b> R: P-value from z-score</a></li>
+<li class="chapter" data-level="10.4.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conditions-for-mean-inference"><i class="fa fa-check"></i><b>10.4.5</b> Conditions for mean inference</a></li>
+<li class="chapter" data-level="10.4.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-t-test-statistic"><i class="fa fa-check"></i><b>10.4.6</b> Formula: t test statistic</a></li>
+<li class="chapter" data-level="10.4.7" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-t-statistic"><i class="fa fa-check"></i><b>10.4.7</b> R: P-value from t statistic</a></li>
+<li class="chapter" data-level="10.4.8" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-t-tests"><i class="fa fa-check"></i><b>10.4.8</b> R: t-tests</a></li>
+<li class="chapter" data-level="10.4.9" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-or-z-statistic"><i class="fa fa-check"></i><b>10.4.9</b> t or z Statistic?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation"><i class="fa fa-check"></i><b>10.5</b> Correlation</a></li>
+<li class="chapter" data-level="10.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#regression"><i class="fa fa-check"></i><b>10.6</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>11</b> Causal Inference</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="causal-inference.html"><a href="causal-inference.html#potential-outcome-framework"><i class="fa fa-check"></i><b>11.1</b> Potential outcome framework</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>12</b> Functions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="functions.html"><a href="functions.html#read-and-write"><i class="fa fa-check"></i><b>12.1</b> Read and Write</a></li>
+<li class="chapter" data-level="12.2" data-path="functions.html"><a href="functions.html#random"><i class="fa fa-check"></i><b>12.2</b> Random</a></li>
+<li class="chapter" data-level="12.3" data-path="functions.html"><a href="functions.html#order"><i class="fa fa-check"></i><b>12.3</b> Order</a></li>
+<li class="chapter" data-level="12.4" data-path="functions.html"><a href="functions.html#visualization-1"><i class="fa fa-check"></i><b>12.4</b> Visualization</a></li>
+<li class="chapter" data-level="12.5" data-path="functions.html"><a href="functions.html#conditionals"><i class="fa fa-check"></i><b>12.5</b> Conditionals</a></li>
+<li class="chapter" data-level="12.6" data-path="functions.html"><a href="functions.html#numbers"><i class="fa fa-check"></i><b>12.6</b> Numbers</a></li>
+<li class="chapter" data-level="12.7" data-path="functions.html"><a href="functions.html#apply-functions"><i class="fa fa-check"></i><b>12.7</b> Apply Functions</a></li>
+<li class="chapter" data-level="12.8" data-path="functions.html"><a href="functions.html#string-functions"><i class="fa fa-check"></i><b>12.8</b> String Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="frequent-problems.html"><a href="frequent-problems.html"><i class="fa fa-check"></i><b>13</b> Frequent Problems</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="frequent-problems.html"><a href="frequent-problems.html#first-exploration-of-new-dataset"><i class="fa fa-check"></i><b>13.1</b> First exploration of new dataset</a></li>
+<li class="chapter" data-level="13.2" data-path="frequent-problems.html"><a href="frequent-problems.html#a-count-and-prop-table"><i class="fa fa-check"></i><b>13.2</b> A Count and prop table</a></li>
+<li class="chapter" data-level="13.3" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-count-data"><i class="fa fa-check"></i><b>13.3</b> Bar graph with count data</a></li>
+<li class="chapter" data-level="13.4" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-percentage-labels"><i class="fa fa-check"></i><b>13.4</b> Bar graph with percentage labels</a></li>
+<li class="chapter" data-level="13.5" data-path="frequent-problems.html"><a href="frequent-problems.html#collapse-factors-to-other"><i class="fa fa-check"></i><b>13.5</b> Collapse factors to „Other”</a></li>
+<li class="chapter" data-level="13.6" data-path="frequent-problems.html"><a href="frequent-problems.html#filter-for-specific-values"><i class="fa fa-check"></i><b>13.6</b> Filter for specific values</a></li>
+<li class="chapter" data-level="13.7" data-path="frequent-problems.html"><a href="frequent-problems.html#change-bar-colors-in-barplot"><i class="fa fa-check"></i><b>13.7</b> Change bar colors in barplot</a></li>
+<li class="chapter" data-level="13.8" data-path="frequent-problems.html"><a href="frequent-problems.html#hide-aescolor-mapping-legend"><i class="fa fa-check"></i><b>13.8</b> Hide aes(color) mapping legend</a></li>
+<li class="chapter" data-level="13.9" data-path="frequent-problems.html"><a href="frequent-problems.html#re-code-values-of-categorical-variables"><i class="fa fa-check"></i><b>13.9</b> Re-code values of categorical variables</a></li>
+<li class="chapter" data-level="13.10" data-path="frequent-problems.html"><a href="frequent-problems.html#order-color-legend"><i class="fa fa-check"></i><b>13.10</b> Order color legend</a></li>
+<li class="chapter" data-level="13.11" data-path="frequent-problems.html"><a href="frequent-problems.html#show-unique-values"><i class="fa fa-check"></i><b>13.11</b> Show unique values</a></li>
+<li class="chapter" data-level="13.12" data-path="frequent-problems.html"><a href="frequent-problems.html#slice-rows-by-maximum-or-minimum-values"><i class="fa fa-check"></i><b>13.12</b> Slice rows by maximum or minimum values</a></li>
+<li class="chapter" data-level="13.13" data-path="frequent-problems.html"><a href="frequent-problems.html#show-number-of-nas"><i class="fa fa-check"></i><b>13.13</b> Show Number of <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.14" data-path="frequent-problems.html"><a href="frequent-problems.html#drop-rows-with-missing-values"><i class="fa fa-check"></i><b>13.14</b> Drop rows with missing values</a></li>
+<li class="chapter" data-level="13.15" data-path="frequent-problems.html"><a href="frequent-problems.html#replace-nas"><i class="fa fa-check"></i><b>13.15</b> Replace <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.16" data-path="frequent-problems.html"><a href="frequent-problems.html#the-factor-variable-trap"><i class="fa fa-check"></i><b>13.16</b> The factor variable trap</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">My R and Statistics Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="inferential-statistics" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> Inferential Statistics</h1>
+<p>To draw meaningful conclusions about the entire population, <strong>inferential statistics</strong> is needed. It uses patterns in the sample data to draw <strong>inferences about the population</strong> represented while <strong>accounting for randomness.</strong> These inferences may take the form of answering yes/no questions about the data (<strong>hypothesis testing</strong>), estimating numerical characteristics of the data (<strong>estimation</strong>), describing associations within the data (<strong>correlation</strong>), and modeling relationships within the data (for example, using <strong>regression analysis</strong>). Inference can extend to <strong>forecasting</strong>, <strong>prediction</strong>, and <strong>estimation</strong> of unobserved values either in or associated with the population being studied. It can include extrapolation and interpolation of time series or spatial data, and data mining.</p>
+<div id="sampling-distributions" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Sampling Distributions</h2>
+<p>A sampling distribution refers to a probability distribution of a statistic that comes from choosing random samples of a given population. Also known as a finite-sample distribution, it represents the distribution of frequencies on how spread apart various outcomes will be for a specific population.</p>
+<p><img src="images/The-effect-of-sample-size-on-the-sampling-distribution-As-the-size-of-the-sample-drawn.png" width="802" /></p>
+<p><strong>1. Sampling distribution of mean</strong></p>
+<p>As shown from the example above, you can calculate the mean of every sample group chosen from the population and plot out all the data points. The graph will show a normal distribution, and the center will be the mean of the sampling distribution, which is the mean of the entire population.</p>
+<p><strong>2. Sampling distribution of proportion</strong></p>
+<p>It gives you information about proportions in a population. You would select samples from the population and get the sample proportion. The mean of all the sample proportions that you calculate from each sample group would become the proportion of the entire population.</p>
+<p><strong>3. T-distribution</strong></p>
+<p>T-distribution is used when the sample size is very small or not much is known about the population. It is used to estimate the mean of the population, confidence intervals, statistical differences, and linear regression.</p>
+</div>
+<div id="central-limit-theorem" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Central Limit Theorem</h2>
+<p><img src="images/Bildschirmfoto%202022-01-18%20um%2023.07.41.png" /></p>
+<p>The Central Limit Theorem (CLT) tells us that when the number of draws, also called the <em>sample size</em>, is large, the probability distribution of the sum of the independent draws is approximately normal. Because sampling models are used for so many data generation processes, the CLT is considered one of the most important mathematical insights in history.</p>
+<div id="what-is-large-enough-for-the-ctl" class="section level3" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> What is Large Enough for the CTL?</h3>
+<p>The CLT works when the number of draws is large. But large is a relative term. In many circumstances as few as 30 draws is enough to make the CLT useful. In some specific instances, as few as 10 is enough. However, these should not be considered general rules. Note, for example, that when the probability of success is very small, we need much larger sample sizes.</p>
+<p>By way of illustration, let’s consider the lottery. In the lottery, the chances of winning are less than 1 in a million. Thousands of people play so the number of draws is very large. Yet the number of winners, the sum of the draws, range between 0 and 4. This sum is certainly not well approximated by a normal distribution, so the CLT does not apply, even with the very large sample size. This is generally true when the probability of a success is very low. In these cases, the Poisson distribution is more appropriate.</p>
+</div>
+<div id="proof-of-central-limit-theorem" class="section level3" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Proof of Central Limit Theorem</h3>
+<p>Let’s create a sampling model and calculate a random statistic for the proportion p.</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="inferential-statistics.html#cb327-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb327-2"><a href="inferential-statistics.html#cb327-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fl">0.4</span></span>
+<span id="cb327-3"><a href="inferential-statistics.html#cb327-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-4"><a href="inferential-statistics.html#cb327-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">size =</span> n, <span class="at">replace =</span> T, <span class="at">prob =</span> <span class="fu">c</span>(p, (<span class="dv">1</span><span class="sc">-</span>p)))</span>
+<span id="cb327-5"><a href="inferential-statistics.html#cb327-5" aria-hidden="true" tabindex="-1"></a>x_bar<span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb327-6"><a href="inferential-statistics.html#cb327-6" aria-hidden="true" tabindex="-1"></a>x_bar</span></code></pre></div>
+<pre><code>## [1] 0.38</code></pre>
+<p>Now let’s create a Monte Carlo simulation in which we calculate the sample statistic p 10,000 times.</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="inferential-statistics.html#cb329-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">=</span> <span class="dv">10000</span></span>
+<span id="cb329-2"><a href="inferential-statistics.html#cb329-2" aria-hidden="true" tabindex="-1"></a>x_bar_distribution <span class="ot">=</span> <span class="fu">replicate</span>(B, {</span>
+<span id="cb329-3"><a href="inferential-statistics.html#cb329-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">size =</span> n, <span class="at">replace =</span> T, <span class="at">prob =</span> <span class="fu">c</span>(p, (<span class="dv">1</span><span class="sc">-</span>p)))</span>
+<span id="cb329-4"><a href="inferential-statistics.html#cb329-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(x)</span>
+<span id="cb329-5"><a href="inferential-statistics.html#cb329-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb329-6"><a href="inferential-statistics.html#cb329-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x_bar_distribution)</span></code></pre></div>
+<pre><code>## [1] 0.34 0.37 0.41 0.44 0.42 0.38</code></pre>
+<p>The Central Limit Theorem tells us that when the number of draws, also called the <em>sample size</em>, is large, the probability distribution of the sum (or mean/proportion) of the independent draws is approximately normal. Let’s test that by plotting a histogram and checking with <code>qqnorm()</code>.</p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="inferential-statistics.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x_bar_distribution) <span class="co">#  Looks good</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="inferential-statistics.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(x_bar_distribution);<span class="fu">qqline</span>(x_bar_distribution) <span class="co"># Looks good enoguh.</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-70-2.png" width="672" /></p>
+<p>What’s the practical use of this proof? Because of it we can now use the normal distribution function to calculate probabilities. What is the probability that we get a proportion that is smaller than ? We first need the calculate the standard error of our sample.</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="inferential-statistics.html#cb333-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">=</span> <span class="fu">sqrt</span>(p <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p) <span class="sc">/</span> n)</span>
+<span id="cb333-2"><a href="inferential-statistics.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">*</span> SE</span></code></pre></div>
+<pre><code>## [1] 0.1469694</code></pre>
+<p>The sampling distribution of the sample proportion is approximately normal and normal distributions encompass almost all possible values within 3 standard deviations from the mean. We can therefore say that 99.7 % of all samples proportion statistics for n = 100 and p = 0.4 fall within +- 0.147 of 0.4. Here is the proof. We can compare the results from Monte Carlo simulation sampling distribution with standard normal distribution function. I.e. what’s the proportions/probability of falling outside of 3 standard deviations from the mean?</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="inferential-statistics.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x_bar_distribution <span class="sc">&lt;</span> p <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> SE) <span class="sc">+</span> <span class="fu">mean</span>(x_bar_distribution <span class="sc">&gt;</span> p <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> SE)</span></code></pre></div>
+<pre><code>## [1] 0.0029</code></pre>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="inferential-statistics.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">3</span>) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 0.002699796</code></pre>
+<p>This does in fact check out! The proportions from the Monte Carlo simulation and the probabilities from the normal distribution function do approximate each other very well. The applications based on these insights alone are somewhat limited.</p>
+<p>In real life we rarely have the probabilities for the population parameters. The power does show itself however when making inferences from one single sample, its proportion statistic and its standard deviation, about the population parameter. This is because we now know (experimentally proven) that the sampling distribution of the sample proportion is normally distributed.</p>
+</div>
+</div>
+<div id="confidence-intervals" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Confidence Intervals</h2>
+<p>A confidence interval (abbreviated CI) is used for the purpose of estimating a population parameter (a single number that describes a population) by using statistics (numbers that describe a sample of data). For example, you might estimate the average household income (parameter) based on the average household income from a random sample of 1,000 homes (statistic). However, because sample results will vary, you need to add a measure of that variability to your estimate. This measure of variability is called the margin of error, the heart of a confidence interval. Your sample statistic, plus or minus your margin of error, gives you a range of likely values for the parameter — in other words, a confidence interval.</p>
+<p><strong>How do we do it?</strong></p>
+<p>To estimate a parameter with a confidence interval:</p>
+<ol style="list-style-type: decimal">
+<li><p>Choose your confidence level and your sample size.</p></li>
+<li><p>Select a random sample of individuals from the population.</p></li>
+<li><p>Collect reliable and relevant data from the individuals in the sample.</p></li>
+<li><p>Summarize the data into a statistic (for example, a sample mean or proportion).</p></li>
+<li><p>Calculate the margin of error. <span class="math inline">\(\pm z^{*} \frac{\sigma}{\sqrt{n}}\)</span></p></li>
+<li><p>Take the statistic plus or minus the margin of error to get your final estimate of the parameter: <span class="math inline">\(\bar{x} \pm z^{*} \frac{\sigma}{\sqrt{n}}\)</span></p></li>
+</ol>
+<div id="why-confidence-intervals-work" class="section level3" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Why Confidence Intervals Work</h3>
+<p>What do we know so far and how does it help with confidence intervals?</p>
+<ul>
+<li><p>CLT: If <span class="math inline">\(n\)</span> is large enough, the sampling distribution of sample statistics (mean, proportion) approximates a normal distribution -&gt; we can use Z-Scores or T-Scores to calculate probabilities.</p></li>
+<li><p>The mean/proportion of the sampling distribution of the sample means/proportions is equal to the true population mean/proportion <span class="math inline">\(\mu_\hat{x} = \mu\)</span> or <span class="math inline">\(p_\hat{x} = p\)</span> -&gt;</p></li>
+<li></li>
+</ul>
+<p><span class="math display">\[
+\sigma_{\bar{x}}=\frac{\sigma}{\sqrt{n}}
+\]</span></p>
+<p><img src="images/Interval-Estimate.jpg" /></p>
+<p>Since the sample proportion <span class="math inline">\(\hat{\pi}\)</span> is a sample mean, the Central Limit Theorem applies: For large random samples, the sampling distribution of <span class="math inline">\(\hat{\pi}\)</span> is approximately normal about the parameter <span class="math inline">\(\pi\)</span> it estimates.</p>
+<p>This means that each sample proportion, in the graphic below annotated with <span class="math inline">\(\hat{\pi}\)</span>, has a</p>
+<p><img src="images/Bildschirmfoto%202022-01-18%20um%2022.30.27.png" /></p>
+<p>The confidence interval is the range of values that you expect your estimate to fall between a certain percentage of the time if you run your experiment again or re-sample the population in the same way. </p>
+<p>The confidence level is the percentage of times you expect to reproduce an estimate between the upper and lower bounds of the confidence interval, and is set by the alpha value.</p>
+<p><img src="images/Confidence%20Intervals.png" /></p>
+<p><strong>Confidence</strong>, in statistics, is another way to describe probability. For example, if you construct a confidence interval with a 95% confidence level, you are confident that 95 out of 100 times the estimate will fall between the upper and lower values specified by the confidence interval.</p>
+<p>Your desired confidence level is usually one minus the alpha ( <em>a</em> ) value you used in your statistical test:</p>
+<p><strong>Confidence level</strong> = 1 − <em>a</em></p>
+<p>So if you use an alpha value of <em>p</em> &lt; 0.05 for statistical significance, then your confidence level would be 1 − 0.05 = 0.95, or 95%.</p>
+</div>
+<div id="proof-for-confidence-intervals" class="section level3" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Proof for Confidence Intervals</h3>
+<div id="ci-for-population-proportion" class="section level4" number="10.3.2.1">
+<h4><span class="header-section-number">10.3.2.1</span> CI for Population Proportion</h4>
+<p>Let’s say we want to estimate the population proportion (the mean of a categorical variable) e.g., the proportion of votes a Democratic candidate gets in an election. In our example, the true population proportion p = 0.45. In real life we actually don’t know this parameter.</p>
+<p>In R we can create a Monte Carlo Simulation (creating confidence intervals 10,000 times) in order to prove the validity of confidence intervals in general.</p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="inferential-statistics.html#cb339-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fl">0.45</span></span>
+<span id="cb339-2"><a href="inferential-statistics.html#cb339-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb339-3"><a href="inferential-statistics.html#cb339-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">=</span> <span class="dv">10000</span></span>
+<span id="cb339-4"><a href="inferential-statistics.html#cb339-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-5"><a href="inferential-statistics.html#cb339-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb339-6"><a href="inferential-statistics.html#cb339-6" aria-hidden="true" tabindex="-1"></a>correct_list <span class="ot">=</span> <span class="fu">replicate</span>(B, {</span>
+<span id="cb339-7"><a href="inferential-statistics.html#cb339-7" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">size =</span> n, <span class="at">replace =</span> T, <span class="at">prob =</span> <span class="fu">c</span>(p, (<span class="dv">1</span><span class="sc">-</span>p)))</span>
+<span id="cb339-8"><a href="inferential-statistics.html#cb339-8" aria-hidden="true" tabindex="-1"></a>  x_hat <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb339-9"><a href="inferential-statistics.html#cb339-9" aria-hidden="true" tabindex="-1"></a>  se_hat <span class="ot">=</span> <span class="fu">sqrt</span>(x_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> x_hat) <span class="sc">/</span> n)</span>
+<span id="cb339-10"><a href="inferential-statistics.html#cb339-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">between</span>(p, x_hat <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat, x_hat <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat)</span>
+<span id="cb339-11"><a href="inferential-statistics.html#cb339-11" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>And how often did we get a confidence interval that did in fact include the real population parameter p? The confidence interval did include the true parameter 0.9482 of the time. Pretty close to the theoretical goal of 0.95!</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="inferential-statistics.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(correct_list)</span></code></pre></div>
+<pre><code>## [1] 0.9482</code></pre>
+<p>Let’s visualize the validity of CIs with another 100 samples and ggplot2.</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="inferential-statistics.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Used to create the graph</span></span>
+<span id="cb342-2"><a href="inferential-statistics.html#cb342-2" aria-hidden="true" tabindex="-1"></a>lower_bounds <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb342-3"><a href="inferential-statistics.html#cb342-3" aria-hidden="true" tabindex="-1"></a>upper_bounds <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb342-4"><a href="inferential-statistics.html#cb342-4" aria-hidden="true" tabindex="-1"></a>x_hats <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb342-5"><a href="inferential-statistics.html#cb342-5" aria-hidden="true" tabindex="-1"></a>true <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb342-6"><a href="inferential-statistics.html#cb342-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb342-7"><a href="inferential-statistics.html#cb342-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Small Monte Carlo simulation</span></span>
+<span id="cb342-8"><a href="inferential-statistics.html#cb342-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb342-9"><a href="inferential-statistics.html#cb342-9" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">size =</span> n, <span class="at">replace =</span> T, <span class="at">prob =</span> <span class="fu">c</span>(p, (<span class="dv">1</span><span class="sc">-</span>p)))</span>
+<span id="cb342-10"><a href="inferential-statistics.html#cb342-10" aria-hidden="true" tabindex="-1"></a>  x_hat <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb342-11"><a href="inferential-statistics.html#cb342-11" aria-hidden="true" tabindex="-1"></a>  x_hats <span class="ot">=</span> <span class="fu">c</span>(x_hats, x_hat)</span>
+<span id="cb342-12"><a href="inferential-statistics.html#cb342-12" aria-hidden="true" tabindex="-1"></a>  se_hat <span class="ot">=</span> <span class="fu">sqrt</span>(x_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> x_hat) <span class="sc">/</span> n)</span>
+<span id="cb342-13"><a href="inferential-statistics.html#cb342-13" aria-hidden="true" tabindex="-1"></a>  lower_bounds <span class="ot">=</span> <span class="fu">c</span>(lower_bounds, (x_hat <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat))</span>
+<span id="cb342-14"><a href="inferential-statistics.html#cb342-14" aria-hidden="true" tabindex="-1"></a>  upper_bounds <span class="ot">=</span> <span class="fu">c</span>(upper_bounds, (x_hat <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat))</span>
+<span id="cb342-15"><a href="inferential-statistics.html#cb342-15" aria-hidden="true" tabindex="-1"></a>  true <span class="ot">=</span> <span class="fu">c</span>(true, <span class="fu">between</span>(p, x_hat <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat, x_hat <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat))</span>
+<span id="cb342-16"><a href="inferential-statistics.html#cb342-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb342-17"><a href="inferential-statistics.html#cb342-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb342-18"><a href="inferential-statistics.html#cb342-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot2 only accepts tables</span></span>
+<span id="cb342-19"><a href="inferential-statistics.html#cb342-19" aria-hidden="true" tabindex="-1"></a>table <span class="ot">=</span> <span class="fu">tibble</span>(x_hats, lower_bounds, upper_bounds, true)</span>
+<span id="cb342-20"><a href="inferential-statistics.html#cb342-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb342-21"><a href="inferential-statistics.html#cb342-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Graph highlighting the validity of a 95% CI</span></span>
+<span id="cb342-22"><a href="inferential-statistics.html#cb342-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table, <span class="fu">aes</span>(<span class="fu">seq_along</span>(x_hats), x_hats)) <span class="sc">+</span> </span>
+<span id="cb342-23"><a href="inferential-statistics.html#cb342-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower_bounds, <span class="at">ymax =</span> upper_bounds, <span class="at">color =</span> true)) <span class="sc">+</span></span>
+<span id="cb342-24"><a href="inferential-statistics.html#cb342-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.45</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p>The proof from our 10,000 confidence intervals above that did in fact capture the true population proportion <span class="math inline">\(p\)</span> (0.45) in approximately 95% of the time (0.943) tells us that we can create confidence intervals from a single sample “with confidence.” In other words, we can in fact be sure that a 95% confidence interval constructed from our sample <span class="math inline">\(\hat{x}\)</span> does include <span class="math inline">\(p\)</span> in 95% of the time.</p>
+<p>Here is a single sample from which we will create a 95% confidence interval to showcase a more real-life example.</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="inferential-statistics.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In real life this model is shrouded in unknowns</span></span>
+<span id="cb343-2"><a href="inferential-statistics.html#cb343-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">size =</span> <span class="dv">1000</span>, <span class="at">replace =</span> T, <span class="at">prob =</span> <span class="fu">c</span>(p, (<span class="dv">1</span><span class="sc">-</span>p)))</span>
+<span id="cb343-3"><a href="inferential-statistics.html#cb343-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-4"><a href="inferential-statistics.html#cb343-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample mean</span></span>
+<span id="cb343-5"><a href="inferential-statistics.html#cb343-5" aria-hidden="true" tabindex="-1"></a>x_hat <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb343-6"><a href="inferential-statistics.html#cb343-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-7"><a href="inferential-statistics.html#cb343-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard Error</span></span>
+<span id="cb343-8"><a href="inferential-statistics.html#cb343-8" aria-hidden="true" tabindex="-1"></a>se_hat <span class="ot">=</span> <span class="fu">sqrt</span>(x_hat <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> x_hat) <span class="sc">/</span> n)</span>
+<span id="cb343-9"><a href="inferential-statistics.html#cb343-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-10"><a href="inferential-statistics.html#cb343-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the bounds of the CI</span></span>
+<span id="cb343-11"><a href="inferential-statistics.html#cb343-11" aria-hidden="true" tabindex="-1"></a>lower_bounds <span class="ot">=</span> x_hat <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat</span>
+<span id="cb343-12"><a href="inferential-statistics.html#cb343-12" aria-hidden="true" tabindex="-1"></a>upper_bounds <span class="ot">=</span>x_hat <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat</span>
+<span id="cb343-13"><a href="inferential-statistics.html#cb343-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-14"><a href="inferential-statistics.html#cb343-14" aria-hidden="true" tabindex="-1"></a><span class="co"># The confidence interval is:</span></span>
+<span id="cb343-15"><a href="inferential-statistics.html#cb343-15" aria-hidden="true" tabindex="-1"></a>lower_bounds</span></code></pre></div>
+<pre><code>## [1] 0.4181713</code></pre>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="inferential-statistics.html#cb345-1" aria-hidden="true" tabindex="-1"></a>upper_bounds</span></code></pre></div>
+<pre><code>## [1] 0.4798287</code></pre>
+<p>The confidence interval did in fact capture the true population parameter, which is actually unknown. So the actual result would be expressed as follows:</p>
+<blockquote>
+<p>We are 95% confident that the true population proportion is between 0.404 and 0.465.</p>
+</blockquote>
+</div>
+<div id="ci-for-population-mean" class="section level4" number="10.3.2.2">
+<h4><span class="header-section-number">10.3.2.2</span> CI for Population Mean</h4>
+<p>Lets say we a population of monthly incomes that is totally random and non-normally distributed.</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="inferential-statistics.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb347-2"><a href="inferential-statistics.html#cb347-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-3"><a href="inferential-statistics.html#cb347-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create 10000 random &quot;incomes&quot;</span></span>
+<span id="cb347-4"><a href="inferential-statistics.html#cb347-4" aria-hidden="true" tabindex="-1"></a>incomes <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">10000</span>, <span class="at">min =</span> <span class="dv">800</span>, <span class="at">max =</span> <span class="dv">6000</span>)</span>
+<span id="cb347-5"><a href="inferential-statistics.html#cb347-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-6"><a href="inferential-statistics.html#cb347-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Peek at it</span></span>
+<span id="cb347-7"><a href="inferential-statistics.html#cb347-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(incomes, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1] 2180.645 2735.044 3778.837 5522.681 1848.746 5471.626 5712.311 4236.149
+##  [9] 4071.393 1121.289</code></pre>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="inferential-statistics.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create true population mean (unknown in real life)</span></span>
+<span id="cb349-2"><a href="inferential-statistics.html#cb349-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">=</span> <span class="fu">mean</span>(incomes)</span>
+<span id="cb349-3"><a href="inferential-statistics.html#cb349-3" aria-hidden="true" tabindex="-1"></a>mu</span></code></pre></div>
+<pre><code>## [1] 3400.873</code></pre>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="inferential-statistics.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reveals its very much unnormal</span></span>
+<span id="cb351-2"><a href="inferential-statistics.html#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(incomes))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p>Now comes the confidence interval. The parent population is very much non-normal, but because of the CTL and random sampling we can assume an approximately normal distribution of the sampling distribution of the sample means. Further, we do not replace picks when sampling (just like in real life), but can still assume independence because the sample size of 100 is only 1% from the total population of 10,000.</p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="inferential-statistics.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample</span></span>
+<span id="cb352-2"><a href="inferential-statistics.html#cb352-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">sample</span>(incomes, <span class="dv">100</span>)</span>
+<span id="cb352-3"><a href="inferential-statistics.html#cb352-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb352-4"><a href="inferential-statistics.html#cb352-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample mean</span></span>
+<span id="cb352-5"><a href="inferential-statistics.html#cb352-5" aria-hidden="true" tabindex="-1"></a>x_hat <span class="ot">=</span> <span class="fu">mean</span>(x)</span>
+<span id="cb352-6"><a href="inferential-statistics.html#cb352-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb352-7"><a href="inferential-statistics.html#cb352-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample standard error</span></span>
+<span id="cb352-8"><a href="inferential-statistics.html#cb352-8" aria-hidden="true" tabindex="-1"></a>se_hat <span class="ot">=</span> <span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">100</span>)</span>
+<span id="cb352-9"><a href="inferential-statistics.html#cb352-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb352-10"><a href="inferential-statistics.html#cb352-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the margin of error</span></span>
+<span id="cb352-11"><a href="inferential-statistics.html#cb352-11" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">=</span> x_hat <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat</span>
+<span id="cb352-12"><a href="inferential-statistics.html#cb352-12" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">=</span> x_hat <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se_hat</span>
+<span id="cb352-13"><a href="inferential-statistics.html#cb352-13" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">=</span> <span class="fu">c</span>(lower_bound, upper_bound)</span>
+<span id="cb352-14"><a href="inferential-statistics.html#cb352-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb352-15"><a href="inferential-statistics.html#cb352-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is our confidence interval</span></span>
+<span id="cb352-16"><a href="inferential-statistics.html#cb352-16" aria-hidden="true" tabindex="-1"></a>ci</span></code></pre></div>
+<pre><code>## [1] 3260.147 3864.235</code></pre>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="inferential-statistics.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is the real population mean (unknown in real life)</span></span>
+<span id="cb354-2"><a href="inferential-statistics.html#cb354-2" aria-hidden="true" tabindex="-1"></a>mu</span></code></pre></div>
+<pre><code>## [1] 3400.873</code></pre>
+<p>Result: The 95% confidence interval for the true population mean <span class="math inline">\(\mu\)</span> is 3212.27 to 3816.358 (sample mean is 3514.314).</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="inferential-statistics.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, <span class="at">conf.level =</span> <span class="fl">0.95</span>)<span class="sc">$</span>conf.int</span></code></pre></div>
+<pre><code>## [1] 3256.415 3867.967
+## attr(,&quot;conf.level&quot;)
+## [1] 0.95</code></pre>
+</div>
+</div>
+</div>
+<div id="hypothesis-testing" class="section level2" number="10.4">
+<h2><span class="header-section-number">10.4</span> Hypothesis Testing</h2>
+<p><img src="images/Hypothesis-testing-in-R1-2-2.jpg" /></p>
+<p>Hypothesis testing is a form of statistical inference that uses data from a sample to draw conclusions about a population parameter or a population probability distribution. First, a tentative assumption is made about the parameter or distribution. This assumption is called the null hypothesis and is denoted by <span class="math inline">\(H_0\)</span>. An alternative hypothesis (denoted <span class="math inline">\(H_a\)</span>), which is the opposite of what is stated in the null hypothesis, is then defined. The hypothesis-testing procedure involves using sample data to determine whether or not <span class="math inline">\(H_0\)</span> can be rejected. If <span class="math inline">\(H_0\)</span> is rejected, the statistical conclusion is that the alternative hypothesis <span class="math inline">\(H_a\)</span> is true.</p>
+<div id="p-value" class="section level3" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> P-Value</h3>
+<p>We can think of a P-value as a conditional probability: given the null hypothesis is true, what’s the probability of obtaining a sample statistic as extreme or more than the one observed by random chance alone. In this type of test, we use the alternative hypothesis <span class="math inline">\(H_{\mathrm{a}}\)</span> to decide if the P-value comes from the probability above the test statistic, below the test statistic, or comes from a two-sided probability.</p>
+<p><img src="images/p-value.png" width="600" /></p>
+</div>
+<div id="z-test" class="section level3" number="10.4.2">
+<h3><span class="header-section-number">10.4.2</span> Z-Test</h3>
+<p><img src="images/Null-hypothesis-reigon-eng.png" /></p>
+</div>
+<div id="formula-z-test-statistic" class="section level3" number="10.4.3">
+<h3><span class="header-section-number">10.4.3</span> Formula: z test statistic</h3>
+<p>We can calculate the test statistic corresponding to the sample result:</p>
+<p><span class="math display">\[
+z=\frac{\text { statistic - parameter }}{\text { standard deviation of statistic }}
+\]</span></p>
+<p><span class="math display">\[
+=\frac{\hat{p}-p_{0}}{\sqrt{\frac{p_{0}\left(1-p_{0}\right)}{n}}}
+\]</span></p>
+<p>(where <span class="math inline">\(\hat{p}\)</span> is the sample proportion, <span class="math inline">\(p_{0}\)</span> is the proportion from the null hypothesis, and <span class="math inline">\(n\)</span> is the sample size).</p>
+</div>
+<div id="r-p-value-from-z-score" class="section level3" number="10.4.4">
+<h3><span class="header-section-number">10.4.4</span> R: P-value from z-score</h3>
+<p><strong>R Function</strong></p>
+<p>To find the p-value associated with a z-score in R, we can use the pnorm() function, which uses the following syntax:</p>
+<p><strong><code>pnorm(q, mean = 0, sd = 1, lower.tail = TRUE)</code></strong></p>
+<p>where:</p>
+<ul>
+<li><p><strong>q:</strong> The z-score</p></li>
+<li><p><strong>mean:</strong> The mean of the normal distribution. Default is 0.</p></li>
+<li><p><strong>sd:</strong> The standard deviation of the normal distribution. Default is 1.</p></li>
+<li><p><strong>lower.tail:</strong> If TRUE, the probability to the left of <strong>q</strong> in the normal distribution is returned. If FALSE, the probability to the right is returned. Default is TRUE.</p></li>
+</ul>
+<p><strong>Example 1: one-sided</strong></p>
+<p>In 2011, <span class="math inline">\(51 \%\)</span> of cell phone owners in a country reported that their cell phone was a smartphone. The following year, the researchers wanted to test <span class="math inline">\(H_{0}: p=0.51\)</span> versus <span class="math inline">\(H_{\mathrm{a}}: p&gt;0.51\)</span>, where <span class="math inline">\(p\)</span> is the proportion of cell phone owners in that country who have a smartphone.</p>
+<p>They surveyed a random sample of 934 cell phone owners in that country and found that 501 of them had a smartphone. The test statistic for these results was <span class="math inline">\(z \approx 1.61\)</span>.</p>
+<p>What is the P-Value?</p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="inferential-statistics.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.61</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.05369893</code></pre>
+<p>P-Value Answer: 0.054</p>
+<p><strong>Example 2: two-sided</strong></p>
+<p>Amanda read a report saying that <span class="math inline">\(49 \%\)</span> of teachers in the United States were members of a labor union. She wanted to test whether this was true in her state, so she took a random sample of 300 teachers from her state to test <span class="math inline">\(H_{0}: p=0.49\)</span> versus <span class="math inline">\(H_{\mathrm{a}}: p \neq 0.49\)</span>, where <span class="math inline">\(p\)</span> is the proportion of teachers in her state who are members of a labor union.</p>
+<p>The sample results showed 134 teachers were members of a labor union, and the corresponding test statistic was <span class="math inline">\(z \approx-1.50\)</span>.</p>
+<p>What is the P-Value?</p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="inferential-statistics.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">1.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1336144</code></pre>
+<p>P-Value Answer: 0.133</p>
+</div>
+<div id="conditions-for-mean-inference" class="section level3" number="10.4.5">
+<h3><span class="header-section-number">10.4.5</span> Conditions for mean inference</h3>
+<p>When we want to carry out inference (build a confidence interval or do a significance test) on a mean, the accuracy of our methods depends on a few conditions. Before doing the actual computations of the interval or test, it’s important to check whether or not these conditions have been met. Otherwise the calculations and conclusions that follow may not be correct.</p>
+<p>The conditions we need for inference on a mean are:</p>
+<ul>
+<li><p><strong>Random</strong>: A random sample or randomized experiment should be used to obtain the data.</p></li>
+<li><p><strong>Normal</strong>: The sampling distribution of <span class="math inline">\(\overline{x}\)</span> (the sample mean) needs to be approximately normal. This is true if our parent population is normal or if our sample is reasonably large <span class="math inline">\((n\geq 30)\)</span>.</p></li>
+<li><p><strong>Independent</strong>: Individual observations need to be independent. If sampling without replacement, our sample size shouldn’t be more than <span class="math inline">\(10\%\)</span> of the population.</p></li>
+</ul>
+<p>Let’s look at each of these conditions a little more in-depth.</p>
+<p><strong>The random condition</strong></p>
+<p>Random samples give us unbiased data from a population. When we don’t use random selection, the resulting data usually has some form of bias, so using it to infer something about the population can be risky.</p>
+<blockquote>
+<p>For example, suppose a university wants to report the average starting salary of their graduates. How do they obtain the data? They can’t access the salaries of all graduates, and they can’t realistically get salaries from a random sample of graduates. The university could rely on graduates who are willing to share their salaries to calculate the average, but using voluntary response will likely lead to a biased estimate of the true average. Graduates with higher starting salaries will probably be more willing to report their salaries than graduates with low salaries (or graduates without salaries). Also, graduates who participate may claim their salary is higher than it really is, but they’d be unlikely to say it’s lower than it really is.</p>
+<p><em>The big idea is that data that came from a non-random sample may not be representative of its population.</em><br />
+</p>
+</blockquote>
+<p>More specifically, sample means are unbiased estimators of their population mean. For example, suppose we have a bag of ping pong balls individually numbered from 0 to 30, so the population mean of the bag is 15. We could take random samples of balls from the bag and calculate the mean from each sample. Some samples would have a mean higher than 15 and some would be lower. But on average, the mean of each sample will equal 15. We write this property as <span class="math inline">\(\mu_{\bar{x} } =\mu\)</span>, which holds true as long as we are taking random samples.</p>
+<p>This won’t necessarily happen if we use a non-random sample. Biased samples can lead to inaccurate results, so they shouldn’t be used to create confidence intervals or carry out significance tests.</p>
+<p><strong>The normal condition</strong></p>
+<p>The sampling distribution of <span class="math inline">\(\bar{x}\)</span> (a sample mean) is approximately normal in a few different cases. The shape of the sampling distribution of <span class="math inline">\(\bar{x}\)</span> mostly depends on the shape of the parent population and the sample size n.</p>
+<p><strong>Case 1: Parent population is normally distributed</strong></p>
+<p>If the parent population is normally distributed, then the sampling distribution of <span class="math inline">\(\bar{x}\)</span> is approximately normal regardless of sample size. So if we know that the parent population is normally distributed, we pass this condition even if the sample size is small. In practice, however, we usually don’t know if the parent population is normally distributed.</p>
+<p><strong>Case 2: Not normal or unknown parent population; sample size is large</strong> <span class="math inline">\((n \geq 30)\)</span></p>
+<p>The sampling distribution of <span class="math inline">\(\bar{x}\)</span> is approximately normal as long as the sample size is reasonably large. Because of the central limit theorem, when <span class="math inline">\(n \geq 30\)</span>, we can treat the sampling distribution of <span class="math inline">\(\bar{x}\)</span> as approximately normal regardless of the shape of the parent population.</p>
+<p>There are a few rare cases where the parent population has such an unusual shape that the sampling distribution of the sample mean <span class="math inline">\(\bar{x}\)</span> isn’t quite normal for sample sizes near 30. These cases are rare, so in practice, we are usually safe to assume approximately normality in the sampling distribution when <span class="math inline">\(n \geq 30\)</span>.</p>
+<p><strong>Case 3: Not normal or unknown parent population; sample size is small</strong> <span class="math inline">\(n&lt;30\)</span></p>
+<p>As long as the parent population doesn’t have outliers or strong skew, even smaller samples will produce a sampling distribution of <span class="math inline">\(\bar{x}\)</span> that is approximately normal. In practice, we can’t usually see the shape of the parent population, but we can try to infer shape based on the distribution of data in the sample. If the data in the sample shows skew or outliers, we should doubt that the parent is approximately normal, and so the sampling distribution of <span class="math inline">\(\bar{x}\)</span> may not be normal either. But if the sample data are roughly symmetric and don’t show outliers or strong skew, we can assume that the sampling distribution of <span class="math inline">\(\bar{x}\)</span> will be approximately normal.</p>
+<p><em>The big idea is that we need to graph our sample data when</em> <span class="math inline">\(n &lt; 30\)</span>, is less than, 30 and then make a decision about the normal condition based on the appearance of the sample data.</p>
+<p><strong>The independence condition</strong></p>
+<p>To use the formula for standard deviation of <span class="math inline">\(\bar{x}\)</span> we need individual observations to be independent. In an experiment, good design usually takes care of independence between subjects (control, different treatments, randomization).</p>
+<p>In an observational study that involves sampling without replacement, individual observations aren’t technically independent since removing each observation changes the population. However the 10% condition says that if we sample 10% or less of the population, we can treat individual observations as independent since removing each observation doesn’t change the population all that much as we sample. For instance, if our sample size is <span class="math inline">\(n=30\)</span> there should to be at least <span class="math inline">\(N = 300\)</span> members in the population for the sample to meet the independence condition.</p>
+<p>Assuming independence between observations allows us to use this formula for standard deviation of <span class="math inline">\(\bar{x}\)</span> when we’re making confidence intervals or doing significance tests:</p>
+<p><span class="math display">\[
+\sigma_{\bar{x}}=\frac{\sigma}{\sqrt{n}}
+\]</span></p>
+<p>We usually don’t know the population standard deviation <span class="math inline">\(\sigma\)</span>, so we substitute the sample standard deviation <span class="math inline">\(s_x\)</span> as an estimate for <span class="math inline">\(\sigma\)</span>. When we do this, we call it the <strong>standard error</strong> of <span class="math inline">\(\bar{x}\)</span> to distinguish it from the standard deviation.</p>
+<p>So our formula for standard error of <span class="math inline">\(\bar{x}\)</span> is:</p>
+<p><span class="math display">\[
+\sigma_{\bar{x}} \approx \frac{s_{x}}{\sqrt{n}}
+\]</span></p>
+<p><strong>Summary</strong></p>
+<p>If all three of these conditions are met, then we can we feel good about using <span class="math inline">\(t\)</span> distributions to make a confidence interval or do a significance test. Satisfying these conditions makes our calculations accurate and conclusions reliable.</p>
+<p>The random condition is perhaps the most important. If we break the random condition, there is probably bias in the data. The only reliable way to correct for a biased sample is to recollect the data in an unbiased way.</p>
+<p>The other two conditions are important, but if we don’t meet the normal or independence conditions, we may not need to start over. For example, there is a way to correct for the lack of independence when we sample more than 10% of a population, but it’s beyond the scope of what we’re learning right now.</p>
+<p>The main idea is that it’s important to verify certain conditions are met before we make these confidence intervals or do these significance tests.</p>
+</div>
+<div id="formula-t-test-statistic" class="section level3" number="10.4.6">
+<h3><span class="header-section-number">10.4.6</span> Formula: t test statistic</h3>
+<p>The test statistic gives us an idea of how far away our sample result is from our null hypothesis. For a one-sample t test for a mean, our test statistics is:</p>
+<p><span class="math display">\[
+\begin{aligned}t &amp;=\frac{\text { statistic }-\text { parameter }}{\text { standard error of statistic }} \\&amp;=\frac{\bar{x}-\mu_{0}}{\frac{s_{x}}{\sqrt{n}}}\end{aligned}
+\]</span></p>
+<p>The statistic <span class="math inline">\(\bar{x}\)</span> is the sample mean, and the parameter <span class="math inline">\(\mu_{0}\)</span> is the mean from the null hypothesis. The standard error of the sample mean is <span class="math inline">\(s_{x}\)</span> (the sample standard deviation) divided by the square root of <span class="math inline">\(n\)</span> (the sample size).</p>
+</div>
+<div id="r-p-value-from-t-statistic" class="section level3" number="10.4.7">
+<h3><span class="header-section-number">10.4.7</span> R: P-value from t statistic</h3>
+<p><strong>Degrees of freedom</strong></p>
+<p><span class="math inline">\(n - 1\)</span></p>
+<p><strong>The function in R:</strong> <code>pt()</code></p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="inferential-statistics.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="at">q =</span> <span class="dv">2</span>, <span class="co"># the t-statistic</span></span>
+<span id="cb362-2"><a href="inferential-statistics.html#cb362-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">df =</span> <span class="dv">5</span>, <span class="co"># the degrees of freedom</span></span>
+<span id="cb362-3"><a href="inferential-statistics.html#cb362-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">lower.tail =</span> T <span class="co"># probabilities for lower or upper tail? Default is True.</span></span>
+<span id="cb362-4"><a href="inferential-statistics.html#cb362-4" aria-hidden="true" tabindex="-1"></a>   )</span></code></pre></div>
+<pre><code>## [1] 0.9490303</code></pre>
+<p><strong>Example 1: one-sided</strong></p>
+<p>Daisy was testing <span class="math inline">\(H_{0}: \mu=33\)</span> versus <span class="math inline">\(H_{\mathrm{a}}: \mu&gt;33\)</span> with a sample of 11 observations. Her test statistic was <span class="math inline">\(t=1.368\)</span>. Assume that the conditions for inference were met.</p>
+<p>What is the P-value?</p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="inferential-statistics.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="at">q =</span> <span class="fl">1.368</span>, <span class="at">df =</span> <span class="dv">10</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.100632</code></pre>
+<p><strong>Example 2: two-sided</strong> Jasper was testing <span class="math inline">\(H_{0}: \mu=36\)</span> versus <span class="math inline">\(H_{\mathrm{a}}: \mu \neq 36\)</span> with a sample of 16 observations. His test statistic was <span class="math inline">\(t=2.4\)</span>. Assume that the conditions for inference were met.</p>
+<p>What is the P-value?</p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="inferential-statistics.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="at">q =</span> <span class="fl">2.4</span>, <span class="at">df =</span> <span class="dv">15</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.02982493</code></pre>
+</div>
+<div id="r-t-tests" class="section level3" number="10.4.8">
+<h3><span class="header-section-number">10.4.8</span> R: t-tests</h3>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="inferential-statistics.html#cb368-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb368-2"><a href="inferential-statistics.html#cb368-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb368-3"><a href="inferential-statistics.html#cb368-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x,y)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  x and y
+## t = -1.0676, df = 17.996, p-value = 0.2998
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.2896717  0.4205834
+## sample estimates:
+##  mean of x  mean of y 
+## -0.1968400  0.2377042</code></pre>
+</div>
+<div id="t-or-z-statistic" class="section level3" number="10.4.9">
+<h3><span class="header-section-number">10.4.9</span> t or z Statistic?</h3>
+<p>z-tests are a statistical way of testing a hypothesis when either:</p>
+<ul>
+<li><p>We know the population variance, or</p></li>
+<li><p>We do not know the population variance but our sample size is large n ≥ 30</p></li>
+<li><p>If we have a sample size of less than 30 and do not know the population variance, then we must use a t-test.</p></li>
+<li><p>The t-test is kind of a weaker statistic, but which helps us if we have less information available.</p></li>
+</ul>
+<p><img src="images/Screenshot-from-2020-03-04-15-29-37.webp" /></p>
+<p><img src="images/Bildschirmfoto%202021-12-16%20um%2018.43.27.png" /></p>
+<p>Proportion significance tests don’t need t-tests, because we can calculate the z-score without the sampling distribution or population standard deviation.</p>
+<p><img src="images/Bildschirmfoto%202021-12-16%20um%2015.26.56.png" /></p>
+</div>
+</div>
+<div id="correlation" class="section level2" number="10.5">
+<h2><span class="header-section-number">10.5</span> Correlation</h2>
+</div>
+<div id="regression" class="section level2" number="10.6">
+<h2><span class="header-section-number">10.6</span> Regression</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="probability-thoery.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="causal-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

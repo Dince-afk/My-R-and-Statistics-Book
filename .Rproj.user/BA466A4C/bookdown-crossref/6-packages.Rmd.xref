@@ -1,0 +1,29 @@
+h1:packages Packages
+h2:functionality Functionality
+h3:kableextra 
+h3:gridextra 
+h3:kableextra-1 
+h3:unpivotr 
+h3:tibble 
+h3:dslabs 
+h3:knitr 
+h3:readr 
+h3:readxl 
+h3:tidyxl 
+h3:corrgram 
+h3:corrplot 
+h3:rtweet 
+h3:catools 
+h2:data Data
+h3:ggplot2movies 
+h3:wdi 
+h3:essurvey 
+h3:wbstats 
+h2:visualization Visualization
+h3:igraph 
+h3:ggthemes 
+h3:ggrepel 
+h3:ggridges 
+h3:kableextra-2 
+h3:gridextra-1 
+

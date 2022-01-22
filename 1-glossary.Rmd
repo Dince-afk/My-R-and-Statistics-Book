@@ -1,0 +1,81 @@
+# Glossary
+
+## Shortcuts
+
+### RStudio Environment
+
+| Action                                   | Keyboard                |
+|------------------------------------------|-------------------------|
+| Show Keyboard Shortcuts Quick Reference  | `alt + shift + k`       |
+| (Un)comment code                         | `cmd + shift + c`       |
+| Reflow comment lines                     | `ctrl + shift + 7 or /` |
+| Restarting R session                     | `cmd + shift+ f10`      |
+| Rename several instances                 | `cmd + alt + shift + m` |
+| Tidy up code                             | `cmd + shift + a`       |
+| Help for function where cursor currently | `f1`                    |
+
+### Navigating and Sections
+
+| Action                        | Keyboard                     |
+|-------------------------------|------------------------------|
+| Insert Code Section (------)  | `ctrl + shift + r`           |
+| Jump to Specific Code Section | `cmd + alt + shift + j`      |
+| Fold All Sections             | `cmd + alt + o`              |
+| Expand All Sections           | `cmd + alt + shift + o`      |
+| Right/Left tab                | `ctrl + alt + left or right` |
+
+### Code Execution
+
+| Action                          | Keyboard        |
+|---------------------------------|-----------------|
+| Run Selected Lines(s)           | `cmd + enter`   |
+| Run Code Section                | `cmd + alt + t` |
+| Run Code from Beginning to Line | `cmd + alt + b` |
+| Run Code from Line to End       | `cmd + alt + e` |
+| Run all Code                    | `cmd + alt + r` |
+
+### Special Characters
+
+| Character                                      | Keyboard                     |
+|------------------------------------------------|------------------------------|
+| Square brackets                                | `alt + 5`                    |
+| Tilde \~ symbol                                | `alt + n`                    |
+| Pipe symbol                                    | `+ shift + m`                |
+| OR                                             | `alt + 7`                    |
+| and                                            | `&`                          |
+| Modulo/Remainder                               | `1 %% 1`                     |
+| equal sign                                     | `1 == 1`                     |
+| not equal sign                                 | `1 != 1`                     |
+| use variable names like numbers or with spaces | `’1999’` or `'Country Name’` |
+
+## Statistical Symbols
+
+### Special Symbols
+
+| Special Symbol    | Meaning                       |
+|-------------------|-------------------------------|
+| $A$ $\approx$ $B$ | A is approximately equal to B |
+|                   |                               |
+|                   |                               |
+|                   |                               |
+|                   |                               |
+|                   |                               |
+
+### Sample and Population Symbols
+
+| Description                      | Sample Statistic               | Population Parameter                 |
+|----------------------------------|--------------------------------|--------------------------------------|
+| Number of sample or population   | $n$                            | $N$                                  |
+| Mean                             | $\bar{x}$ *("x bar or x hat")* | $\mu$ *("mu")* or $\mu_x$ *("mu x")* |
+| Median                           | $\tilde{x}$ *("x tilde")*      | *none*                               |
+| Variance                         | $s^2$                          | $\sigma^2$ *("sigma squared")*       |
+| Standard Deviation               | $s$ or $sd$                    | $\sigma$ (*"sigma")*                 |
+| Proportion                       | $\hat{p}$ *("p hat")*          | $p$                                  |
+| Coefficient of Linear Regression | $r$                            | $\rho$ *("rho")*                     |
+|                                  |                                |                                      |
+|                                  |                                |                                      |
+|                                  |                                |                                      |
+|                                  |                                |                                      |
+
+$\mu$ and $\sigma$ can take subscripts to show what you are taking the mean or standard deviation of. For instance, $\sigma_{\bar{X}}$ ("sigma sub x-bar") is the standard deviation of sample means, or standard error of the mean.
+

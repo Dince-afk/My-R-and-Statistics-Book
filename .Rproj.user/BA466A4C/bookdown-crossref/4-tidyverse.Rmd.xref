@@ -1,0 +1,25 @@
+h1:tidyverse Tidyverse
+h2:dplyr dplyr
+h3:pipe Pipe
+h3:select Select
+h3:rename Rename
+h3:filter Filter
+h3:arrange Arrange
+h3:slice Slice
+h3:mutate Mutate
+h3:relocate Relocate
+h3:summarise Summarise
+h3:pull Pull
+h3:distinct-values Distinct values
+h3:counts-and-proportions Counts and proportions
+h3:case-when Case when
+h3:between Between
+h2:forcats forcats
+h3:count-factors Count factors
+h3:reorder-levels Reorder levels
+h2:purrr purrr
+h3:map Map
+h3:map-doubles Map doubles
+h3:map-dataframes Map dataframes
+h3:map-functionsclosures Map functions/closures
+

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Hypothesis Testing | A Minimal Book Example</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Hypothesis Testing | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Hypothesis Testing | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="John Doe" />
+
+
+<meta name="date" content="2022-01-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="inferential-statistics.html"/>
+<link rel="next" href="correlation-and-regression.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistics"><i class="fa fa-check"></i><b>1.1</b> Statistics</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#errors-and-bias"><i class="fa fa-check"></i><b>1.2</b> Errors and Bias</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#population-and-sampling"><i class="fa fa-check"></i><b>1.3</b> Population and Sampling</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#inference"><i class="fa fa-check"></i><b>1.4</b> Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>2</b> Glossary</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="glossary.html"><a href="glossary.html#shortcuts"><i class="fa fa-check"></i><b>2.1</b> Shortcuts</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="glossary.html"><a href="glossary.html#rstudio-environment"><i class="fa fa-check"></i><b>2.1.1</b> RStudio Environment</a></li>
+<li class="chapter" data-level="2.1.2" data-path="glossary.html"><a href="glossary.html#navigating-and-sections"><i class="fa fa-check"></i><b>2.1.2</b> Navigating and Sections</a></li>
+<li class="chapter" data-level="2.1.3" data-path="glossary.html"><a href="glossary.html#executing-code"><i class="fa fa-check"></i><b>2.1.3</b> Executing Code</a></li>
+<li class="chapter" data-level="2.1.4" data-path="glossary.html"><a href="glossary.html#special-characters"><i class="fa fa-check"></i><b>2.1.4</b> Special Characters</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="glossary.html"><a href="glossary.html#statistical-symbols"><i class="fa fa-check"></i><b>2.2</b> Statistical Symbols</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="glossary.html"><a href="glossary.html#special-symbols"><i class="fa fa-check"></i><b>2.2.1</b> Special Symbols</a></li>
+<li class="chapter" data-level="2.2.2" data-path="glossary.html"><a href="glossary.html#sample-and-population-symbols"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Sample and Population Symbols</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="playgrounds.html"><a href="playgrounds.html"><i class="fa fa-check"></i><b>3</b> Playgrounds</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="playgrounds.html"><a href="playgrounds.html#mean-and-standard-deviation"><i class="fa fa-check"></i><b>3.1</b> Mean and Standard Deviation</a></li>
+<li class="chapter" data-level="3.2" data-path="playgrounds.html"><a href="playgrounds.html#expected-value-and-standard-deviation"><i class="fa fa-check"></i><b>3.2</b> Expected Value and Standard Deviation</a></li>
+<li class="chapter" data-level="3.3" data-path="playgrounds.html"><a href="playgrounds.html#theoretical-and-experimental-standard-error"><i class="fa fa-check"></i><b>3.3</b> Theoretical and Experimental Standard Error</a></li>
+<li class="chapter" data-level="3.4" data-path="playgrounds.html"><a href="playgrounds.html#sample-size-resulting-in-0.01-se"><i class="fa fa-check"></i><b>3.4</b> Sample Size Resulting in 0.01 SE</a></li>
+<li class="chapter" data-level="3.5" data-path="playgrounds.html"><a href="playgrounds.html#confidence-interval-contains-parameter"><i class="fa fa-check"></i><b>3.5</b> Confidence Interval Contains Parameter?</a></li>
+<li class="chapter" data-level="3.6" data-path="playgrounds.html"><a href="playgrounds.html#bank-and-loans"><i class="fa fa-check"></i><b>3.6</b> Bank and Loans</a></li>
+<li class="chapter" data-level="3.7" data-path="playgrounds.html"><a href="playgrounds.html#real-polling-data"><i class="fa fa-check"></i><b>3.7</b> Real Polling Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>4</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-basics.html"><a href="r-basics.html#read-and-write-data"><i class="fa fa-check"></i><b>4.1</b> Read and Write Data</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="r-basics.html"><a href="r-basics.html#csv-files"><i class="fa fa-check"></i><b>4.1.1</b> CSV Files</a></li>
+<li class="chapter" data-level="4.1.2" data-path="r-basics.html"><a href="r-basics.html#dat-files"><i class="fa fa-check"></i><b>4.1.2</b> DAT Files</a></li>
+<li class="chapter" data-level="4.1.3" data-path="r-basics.html"><a href="r-basics.html#excel-files"><i class="fa fa-check"></i><b>4.1.3</b> Excel Files</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="r-basics.html"><a href="r-basics.html#data-types"><i class="fa fa-check"></i><b>4.2</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="r-basics.html"><a href="r-basics.html#convert-data-types"><i class="fa fa-check"></i><b>4.2.1</b> Convert data types</a></li>
+<li class="chapter" data-level="4.2.2" data-path="r-basics.html"><a href="r-basics.html#numeric"><i class="fa fa-check"></i><b>4.2.2</b> Numeric</a></li>
+<li class="chapter" data-level="4.2.3" data-path="r-basics.html"><a href="r-basics.html#logical"><i class="fa fa-check"></i><b>4.2.3</b> Logical</a></li>
+<li class="chapter" data-level="4.2.4" data-path="r-basics.html"><a href="r-basics.html#characters"><i class="fa fa-check"></i><b>4.2.4</b> Characters</a></li>
+<li class="chapter" data-level="4.2.5" data-path="r-basics.html"><a href="r-basics.html#nas"><i class="fa fa-check"></i><b>4.2.5</b> <code>NA</code>s</a></li>
+<li class="chapter" data-level="4.2.6" data-path="r-basics.html"><a href="r-basics.html#dates"><i class="fa fa-check"></i><b>4.2.6</b> Dates</a></li>
+<li class="chapter" data-level="4.2.7" data-path="r-basics.html"><a href="r-basics.html#posix-time"><i class="fa fa-check"></i><b>4.2.7</b> POSIX Time</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="r-basics.html"><a href="r-basics.html#vectors"><i class="fa fa-check"></i><b>4.3</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-vectors"><i class="fa fa-check"></i><b>4.3.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="4.3.2" data-path="r-basics.html"><a href="r-basics.html#subsetting-vectors"><i class="fa fa-check"></i><b>4.3.2</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="4.3.3" data-path="r-basics.html"><a href="r-basics.html#naming-vectors"><i class="fa fa-check"></i><b>4.3.3</b> Naming vectors</a></li>
+<li class="chapter" data-level="4.3.4" data-path="r-basics.html"><a href="r-basics.html#filtering-vectors"><i class="fa fa-check"></i><b>4.3.4</b> Filtering vectors</a></li>
+<li class="chapter" data-level="4.3.5" data-path="r-basics.html"><a href="r-basics.html#special-concepts"><i class="fa fa-check"></i><b>4.3.5</b> Special Concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="r-basics.html"><a href="r-basics.html#factors"><i class="fa fa-check"></i><b>4.4</b> Factors</a></li>
+<li class="chapter" data-level="4.5" data-path="r-basics.html"><a href="r-basics.html#matrices-and-data-frames"><i class="fa fa-check"></i><b>4.5</b> Matrices and Data Frames</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="r-basics.html"><a href="r-basics.html#creating-matrices"><i class="fa fa-check"></i><b>4.5.1</b> Creating matrices</a></li>
+<li class="chapter" data-level="4.5.2" data-path="r-basics.html"><a href="r-basics.html#creating-data-frames"><i class="fa fa-check"></i><b>4.5.2</b> Creating data frames</a></li>
+<li class="chapter" data-level="4.5.3" data-path="r-basics.html"><a href="r-basics.html#adding-row-or-columns"><i class="fa fa-check"></i><b>4.5.3</b> Adding row or columns</a></li>
+<li class="chapter" data-level="4.5.4" data-path="r-basics.html"><a href="r-basics.html#naming-tables"><i class="fa fa-check"></i><b>4.5.4</b> Naming tables</a></li>
+<li class="chapter" data-level="4.5.5" data-path="r-basics.html"><a href="r-basics.html#deleting-rows-or-columns"><i class="fa fa-check"></i><b>4.5.5</b> Deleting rows or columns</a></li>
+<li class="chapter" data-level="4.5.6" data-path="r-basics.html"><a href="r-basics.html#rearranging-columns"><i class="fa fa-check"></i><b>4.5.6</b> Rearranging columns</a></li>
+<li class="chapter" data-level="4.5.7" data-path="r-basics.html"><a href="r-basics.html#merging-data-frames"><i class="fa fa-check"></i><b>4.5.7</b> Merging data frames</a></li>
+<li class="chapter" data-level="4.5.8" data-path="r-basics.html"><a href="r-basics.html#subsetting-matrices"><i class="fa fa-check"></i><b>4.5.8</b> Subsetting matrices</a></li>
+<li class="chapter" data-level="4.5.9" data-path="r-basics.html"><a href="r-basics.html#subsetting-data-frames"><i class="fa fa-check"></i><b>4.5.9</b> Subsetting data frames</a></li>
+<li class="chapter" data-level="4.5.10" data-path="r-basics.html"><a href="r-basics.html#data-frame-returns"><i class="fa fa-check"></i><b>4.5.10</b> Data frame returns</a></li>
+<li class="chapter" data-level="4.5.11" data-path="r-basics.html"><a href="r-basics.html#filtering-tables"><i class="fa fa-check"></i><b>4.5.11</b> Filtering tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="r-basics.html"><a href="r-basics.html#lists"><i class="fa fa-check"></i><b>4.6</b> Lists</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="r-basics.html"><a href="r-basics.html#creating-lists"><i class="fa fa-check"></i><b>4.6.1</b> Creating lists</a></li>
+<li class="chapter" data-level="4.6.2" data-path="r-basics.html"><a href="r-basics.html#adding-components"><i class="fa fa-check"></i><b>4.6.2</b> Adding components</a></li>
+<li class="chapter" data-level="4.6.3" data-path="r-basics.html"><a href="r-basics.html#deleting-components"><i class="fa fa-check"></i><b>4.6.3</b> Deleting components</a></li>
+<li class="chapter" data-level="4.6.4" data-path="r-basics.html"><a href="r-basics.html#renaming-components"><i class="fa fa-check"></i><b>4.6.4</b> Renaming components</a></li>
+<li class="chapter" data-level="4.6.5" data-path="r-basics.html"><a href="r-basics.html#naming-inside-components"><i class="fa fa-check"></i><b>4.6.5</b> Naming inside components</a></li>
+<li class="chapter" data-level="4.6.6" data-path="r-basics.html"><a href="r-basics.html#subsetting-list-components"><i class="fa fa-check"></i><b>4.6.6</b> Subsetting list components</a></li>
+<li class="chapter" data-level="4.6.7" data-path="r-basics.html"><a href="r-basics.html#filtering-lists"><i class="fa fa-check"></i><b>4.6.7</b> Filtering lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>5</b> Tidyverse</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tidyverse.html"><a href="tidyverse.html#dplyr"><i class="fa fa-check"></i><b>5.1</b> dplyr</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>5.1.1</b> Pipe</a></li>
+<li class="chapter" data-level="5.1.2" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>5.1.2</b> Select</a></li>
+<li class="chapter" data-level="5.1.3" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>5.1.3</b> Rename</a></li>
+<li class="chapter" data-level="5.1.4" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>5.1.4</b> Filter</a></li>
+<li class="chapter" data-level="5.1.5" data-path="tidyverse.html"><a href="tidyverse.html#arrange"><i class="fa fa-check"></i><b>5.1.5</b> Arrange</a></li>
+<li class="chapter" data-level="5.1.6" data-path="tidyverse.html"><a href="tidyverse.html#slice"><i class="fa fa-check"></i><b>5.1.6</b> Slice</a></li>
+<li class="chapter" data-level="5.1.7" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>5.1.7</b> Mutate</a></li>
+<li class="chapter" data-level="5.1.8" data-path="tidyverse.html"><a href="tidyverse.html#relocate"><i class="fa fa-check"></i><b>5.1.8</b> Relocate</a></li>
+<li class="chapter" data-level="5.1.9" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>5.1.9</b> Summarise</a></li>
+<li class="chapter" data-level="5.1.10" data-path="tidyverse.html"><a href="tidyverse.html#pull"><i class="fa fa-check"></i><b>5.1.10</b> Pull</a></li>
+<li class="chapter" data-level="5.1.11" data-path="tidyverse.html"><a href="tidyverse.html#distinct-values"><i class="fa fa-check"></i><b>5.1.11</b> Distinct values</a></li>
+<li class="chapter" data-level="5.1.12" data-path="tidyverse.html"><a href="tidyverse.html#counts-and-proportions"><i class="fa fa-check"></i><b>5.1.12</b> Counts and proportions</a></li>
+<li class="chapter" data-level="5.1.13" data-path="tidyverse.html"><a href="tidyverse.html#case-when"><i class="fa fa-check"></i><b>5.1.13</b> Case when</a></li>
+<li class="chapter" data-level="5.1.14" data-path="tidyverse.html"><a href="tidyverse.html#between"><i class="fa fa-check"></i><b>5.1.14</b> Between</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="tidyverse.html"><a href="tidyverse.html#forcats"><i class="fa fa-check"></i><b>5.2</b> forcats</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tidyverse.html"><a href="tidyverse.html#count-factors"><i class="fa fa-check"></i><b>5.2.1</b> Count factors</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tidyverse.html"><a href="tidyverse.html#reorder-levels"><i class="fa fa-check"></i><b>5.2.2</b> Reorder levels</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tidyverse.html"><a href="tidyverse.html#purrr"><i class="fa fa-check"></i><b>5.3</b> purrr</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="tidyverse.html"><a href="tidyverse.html#map"><i class="fa fa-check"></i><b>5.3.1</b> Map</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tidyverse.html"><a href="tidyverse.html#map-doubles"><i class="fa fa-check"></i><b>5.3.2</b> Map doubles</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tidyverse.html"><a href="tidyverse.html#map-dataframes"><i class="fa fa-check"></i><b>5.3.3</b> Map dataframes</a></li>
+<li class="chapter" data-level="5.3.4" data-path="tidyverse.html"><a href="tidyverse.html#map-functionsclosures"><i class="fa fa-check"></i><b>5.3.4</b> Map functions/closures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>6</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="visualization.html"><a href="visualization.html#ggplot2"><i class="fa fa-check"></i><b>6.1</b> ggplot2</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="visualization.html"><a href="visualization.html#gg-object"><i class="fa fa-check"></i><b>6.1.1</b> gg object</a></li>
+<li class="chapter" data-level="6.1.2" data-path="visualization.html"><a href="visualization.html#aesthetics"><i class="fa fa-check"></i><b>6.1.2</b> Aesthetics</a></li>
+<li class="chapter" data-level="6.1.3" data-path="visualization.html"><a href="visualization.html#geometries"><i class="fa fa-check"></i><b>6.1.3</b> Geometries</a></li>
+<li class="chapter" data-level="6.1.4" data-path="visualization.html"><a href="visualization.html#coordinates"><i class="fa fa-check"></i><b>6.1.4</b> Coordinates</a></li>
+<li class="chapter" data-level="6.1.5" data-path="visualization.html"><a href="visualization.html#tiles"><i class="fa fa-check"></i><b>6.1.5</b> Tiles</a></li>
+<li class="chapter" data-level="6.1.6" data-path="visualization.html"><a href="visualization.html#scales"><i class="fa fa-check"></i><b>6.1.6</b> Scales</a></li>
+<li class="chapter" data-level="6.1.7" data-path="visualization.html"><a href="visualization.html#labels"><i class="fa fa-check"></i><b>6.1.7</b> Labels</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>7</b> Packages</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="packages.html"><a href="packages.html#functionality"><i class="fa fa-check"></i><b>7.1</b> Functionality</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>7.1.1</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="7.1.2" data-path="packages.html"><a href="packages.html#gridextra"><i class="fa fa-check"></i><b>7.1.2</b> <code>gridExtra</code></a></li>
+<li class="chapter" data-level="7.1.3" data-path="packages.html"><a href="packages.html#kableextra-1"><i class="fa fa-check"></i><b>7.1.3</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="packages.html"><a href="packages.html#unpivotr"><i class="fa fa-check"></i><b>7.1.4</b> <code>unpivotr</code></a></li>
+<li class="chapter" data-level="7.1.5" data-path="packages.html"><a href="packages.html#tibble"><i class="fa fa-check"></i><b>7.1.5</b> <code>tibble</code></a></li>
+<li class="chapter" data-level="7.1.6" data-path="packages.html"><a href="packages.html#dslabs"><i class="fa fa-check"></i><b>7.1.6</b> <code>dslabs</code></a></li>
+<li class="chapter" data-level="7.1.7" data-path="packages.html"><a href="packages.html#knitr"><i class="fa fa-check"></i><b>7.1.7</b> <code>knitr</code></a></li>
+<li class="chapter" data-level="7.1.8" data-path="packages.html"><a href="packages.html#readr"><i class="fa fa-check"></i><b>7.1.8</b> <code>readr</code></a></li>
+<li class="chapter" data-level="7.1.9" data-path="packages.html"><a href="packages.html#readxl"><i class="fa fa-check"></i><b>7.1.9</b> <code>readxl</code></a></li>
+<li class="chapter" data-level="7.1.10" data-path="packages.html"><a href="packages.html#tidyxl"><i class="fa fa-check"></i><b>7.1.10</b> <code>tidyxl</code></a></li>
+<li class="chapter" data-level="7.1.11" data-path="packages.html"><a href="packages.html#corrgram"><i class="fa fa-check"></i><b>7.1.11</b> <code>corrgram</code></a></li>
+<li class="chapter" data-level="7.1.12" data-path="packages.html"><a href="packages.html#corrplot"><i class="fa fa-check"></i><b>7.1.12</b> <code>corrplot</code></a></li>
+<li class="chapter" data-level="7.1.13" data-path="packages.html"><a href="packages.html#rtweet"><i class="fa fa-check"></i><b>7.1.13</b> <code>rtweet</code></a></li>
+<li class="chapter" data-level="7.1.14" data-path="packages.html"><a href="packages.html#catools"><i class="fa fa-check"></i><b>7.1.14</b> <code>caTools</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="packages.html"><a href="packages.html#data"><i class="fa fa-check"></i><b>7.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="packages.html"><a href="packages.html#ggplot2movies"><i class="fa fa-check"></i><b>7.2.1</b> <code>ggplot2movies</code></a></li>
+<li class="chapter" data-level="7.2.2" data-path="packages.html"><a href="packages.html#wdi"><i class="fa fa-check"></i><b>7.2.2</b> <code>WDI</code></a></li>
+<li class="chapter" data-level="7.2.3" data-path="packages.html"><a href="packages.html#essurvey"><i class="fa fa-check"></i><b>7.2.3</b> <code>essurvey</code></a></li>
+<li class="chapter" data-level="7.2.4" data-path="packages.html"><a href="packages.html#wbstats"><i class="fa fa-check"></i><b>7.2.4</b> <code>wbstats</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="packages.html"><a href="packages.html#visualization-1"><i class="fa fa-check"></i><b>7.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="packages.html"><a href="packages.html#igraph"><i class="fa fa-check"></i><b>7.3.1</b> <code>igraph</code></a></li>
+<li class="chapter" data-level="7.3.2" data-path="packages.html"><a href="packages.html#ggthemes"><i class="fa fa-check"></i><b>7.3.2</b> <code>ggthemes</code></a></li>
+<li class="chapter" data-level="7.3.3" data-path="packages.html"><a href="packages.html#ggrepel"><i class="fa fa-check"></i><b>7.3.3</b> <code>ggrepel</code></a></li>
+<li class="chapter" data-level="7.3.4" data-path="packages.html"><a href="packages.html#ggridges"><i class="fa fa-check"></i><b>7.3.4</b> <code>ggridges</code></a></li>
+<li class="chapter" data-level="7.3.5" data-path="packages.html"><a href="packages.html#kableextra-2"><i class="fa fa-check"></i><b>7.3.5</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="7.3.6" data-path="packages.html"><a href="packages.html#gridextra-1"><i class="fa fa-check"></i><b>7.3.6</b> <code>?gridExtra</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>8</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="sampling.html"><a href="sampling.html#weights"><i class="fa fa-check"></i><b>8.1</b> Weights</a></li>
+<li class="chapter" data-level="8.2" data-path="sampling.html"><a href="sampling.html#population"><i class="fa fa-check"></i><b>8.2</b> Population</a></li>
+<li class="chapter" data-level="8.3" data-path="sampling.html"><a href="sampling.html#sampling-1"><i class="fa fa-check"></i><b>8.3</b> Sampling</a></li>
+<li class="chapter" data-level="8.4" data-path="sampling.html"><a href="sampling.html#non-probability-sampling"><i class="fa fa-check"></i><b>8.4</b> Non-probability Sampling</a></li>
+<li class="chapter" data-level="8.5" data-path="sampling.html"><a href="sampling.html#sampling-methods"><i class="fa fa-check"></i><b>8.5</b> Sampling Methods</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="sampling.html"><a href="sampling.html#simple-random-sampling"><i class="fa fa-check"></i><b>8.5.1</b> Simple random sampling</a></li>
+<li class="chapter" data-level="8.5.2" data-path="sampling.html"><a href="sampling.html#systematic-sampling"><i class="fa fa-check"></i><b>8.5.2</b> Systematic sampling</a></li>
+<li class="chapter" data-level="8.5.3" data-path="sampling.html"><a href="sampling.html#stratified-sampling"><i class="fa fa-check"></i><b>8.5.3</b> Stratified sampling</a></li>
+<li class="chapter" data-level="8.5.4" data-path="sampling.html"><a href="sampling.html#cluster-sampling"><i class="fa fa-check"></i><b>8.5.4</b> Cluster sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="sampling.html"><a href="sampling.html#errors-and-biases"><i class="fa fa-check"></i><b>8.6</b> Errors and biases</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="sampling.html"><a href="sampling.html#sampling-errors-and-biases"><i class="fa fa-check"></i><b>8.6.1</b> Sampling errors and biases</a></li>
+<li class="chapter" data-level="8.6.2" data-path="sampling.html"><a href="sampling.html#non-sampling-error"><i class="fa fa-check"></i><b>8.6.2</b> Non-sampling error</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>9</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-centrality"><i class="fa fa-check"></i><b>9.1</b> R: Centrality</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#mean"><i class="fa fa-check"></i><b>9.1.1</b> <strong>Mean</strong></a></li>
+<li class="chapter" data-level="9.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#mode"><i class="fa fa-check"></i><b>9.1.2</b> <strong>Mode</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variability"><i class="fa fa-check"></i><b>9.2</b> Variability</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>10</b> Probability</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="probability.html"><a href="probability.html#what-is-a-probability"><i class="fa fa-check"></i><b>10.1</b> What is a Probability?</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="probability.html"><a href="probability.html#experimental-probability"><i class="fa fa-check"></i><b>10.1.1</b> <strong>Experimental Probability</strong></a></li>
+<li class="chapter" data-level="10.1.2" data-path="probability.html"><a href="probability.html#theoretical-probability"><i class="fa fa-check"></i><b>10.1.2</b> <strong>Theoretical Probability</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="probability.html"><a href="probability.html#bayes-theorem-conditional-probability"><i class="fa fa-check"></i><b>10.2</b> Bayes’ Theorem (Conditional Probability)</a></li>
+<li class="chapter" data-level="10.3" data-path="probability.html"><a href="probability.html#permutations"><i class="fa fa-check"></i><b>10.3</b> Permutations</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="probability.html"><a href="probability.html#permutations-with-repetition"><i class="fa fa-check"></i><b>10.3.1</b> Permutations with repetition</a></li>
+<li class="chapter" data-level="10.3.2" data-path="probability.html"><a href="probability.html#permutations-without-repetition"><i class="fa fa-check"></i><b>10.3.2</b> Permutations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="probability.html"><a href="probability.html#combinations"><i class="fa fa-check"></i><b>10.4</b> Combinations</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="probability.html"><a href="probability.html#combinations-with-repetitions"><i class="fa fa-check"></i><b>10.4.1</b> Combinations with repetitions</a></li>
+<li class="chapter" data-level="10.4.2" data-path="probability.html"><a href="probability.html#combinations-without-repetition"><i class="fa fa-check"></i><b>10.4.2</b> Combinations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="probability.html"><a href="probability.html#random-variables"><i class="fa fa-check"></i><b>10.5</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="probability.html"><a href="probability.html#discrete-random-variables"><i class="fa fa-check"></i><b>10.5.1</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="10.5.2" data-path="probability.html"><a href="probability.html#continuous-random-variables"><i class="fa fa-check"></i><b>10.5.2</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="10.5.3" data-path="probability.html"><a href="probability.html#transforming-random-variables-shift-or-scale"><i class="fa fa-check"></i><b>10.5.3</b> Transforming Random Variables (Shift or Scale)</a></li>
+<li class="chapter" data-level="10.5.4" data-path="probability.html"><a href="probability.html#expected-value-mean"><i class="fa fa-check"></i><b>10.5.4</b> Expected Value (Mean)</a></li>
+<li class="chapter" data-level="10.5.5" data-path="probability.html"><a href="probability.html#standard-deviation"><i class="fa fa-check"></i><b>10.5.5</b> Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="probability.html"><a href="probability.html#normal-distribution"><i class="fa fa-check"></i><b>10.6</b> Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="probability.html"><a href="probability.html#mean-and-standard-deviation-1"><i class="fa fa-check"></i><b>10.6.1</b> Mean and Standard Deviation</a></li>
+<li class="chapter" data-level="10.6.2" data-path="probability.html"><a href="probability.html#drawing-a-normal-distribution"><i class="fa fa-check"></i><b>10.6.2</b> Drawing a normal distribution</a></li>
+<li class="chapter" data-level="10.6.3" data-path="probability.html"><a href="probability.html#finding-percentages"><i class="fa fa-check"></i><b>10.6.3</b> Finding percentages</a></li>
+<li class="chapter" data-level="10.6.4" data-path="probability.html"><a href="probability.html#finding-whole-counts"><i class="fa fa-check"></i><b>10.6.4</b> Finding whole counts</a></li>
+<li class="chapter" data-level="10.6.5" data-path="probability.html"><a href="probability.html#standard-score-z-scores"><i class="fa fa-check"></i><b>10.6.5</b> Standard score (z-scores)</a></li>
+<li class="chapter" data-level="10.6.6" data-path="probability.html"><a href="probability.html#r-calculate-probability-from-z-value"><i class="fa fa-check"></i><b>10.6.6</b> R: Calculate probability from z-value</a></li>
+<li class="chapter" data-level="10.6.7" data-path="probability.html"><a href="probability.html#r-calculate-z-value-from-probability"><i class="fa fa-check"></i><b>10.6.7</b> R: Calculate z-value from probability</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="probability.html"><a href="probability.html#binomial-distribution"><i class="fa fa-check"></i><b>10.7</b> Binomial Distribution</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="probability.html"><a href="probability.html#expected-value-mean-and-variance"><i class="fa fa-check"></i><b>10.7.1</b> Expected Value (Mean) and Variance</a></li>
+<li class="chapter" data-level="10.7.2" data-path="probability.html"><a href="probability.html#r-calculate-probability"><i class="fa fa-check"></i><b>10.7.2</b> R: Calculate probability</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="probability.html"><a href="probability.html#bernoulli-distribution"><i class="fa fa-check"></i><b>10.8</b> Bernoulli Distribution</a>
+<ul>
+<li class="chapter" data-level="10.8.1" data-path="probability.html"><a href="probability.html#properties"><i class="fa fa-check"></i><b>10.8.1</b> Properties</a></li>
+<li class="chapter" data-level="10.8.2" data-path="probability.html"><a href="probability.html#mean-1"><i class="fa fa-check"></i><b>10.8.2</b> Mean</a></li>
+<li class="chapter" data-level="10.8.3" data-path="probability.html"><a href="probability.html#variance"><i class="fa fa-check"></i><b>10.8.3</b> Variance</a></li>
+<li class="chapter" data-level="10.8.4" data-path="probability.html"><a href="probability.html#r-calculate-probablity"><i class="fa fa-check"></i><b>10.8.4</b> R: Calculate probablity</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="probability.html"><a href="probability.html#geometric-distribution"><i class="fa fa-check"></i><b>10.9</b> Geometric Distribution</a>
+<ul>
+<li class="chapter" data-level="10.9.1" data-path="probability.html"><a href="probability.html#r-calculate-probability-1"><i class="fa fa-check"></i><b>10.9.1</b> R: Calculate probability</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>11</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#sampling-distributions"><i class="fa fa-check"></i><b>11.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="11.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>11.2</b> Central Limit Theorem</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#how-large-is-large-enough-for-clt"><i class="fa fa-check"></i><b>11.2.1</b> <strong>How large is large enough for CLT?</strong></a></li>
+<li class="chapter" data-level="11.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#experimental-simulation-proving-clt-httpsonlinestatbook.comstat_simsampling_dist"><i class="fa fa-check"></i><b>11.2.2</b> <strong>Experimental simulation proving CLT <span>https://onlinestatbook.com/stat_sim/sampling_dist/</span></strong></a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#confidence-intervals"><i class="fa fa-check"></i><b>11.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#what-exactly-is-the-confidence-interval"><i class="fa fa-check"></i><b>11.3.1</b> <strong>What exactly is the confidence interval?</strong></a></li>
+<li class="chapter" data-level="11.3.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#when-do-you-use-confidence-intervals"><i class="fa fa-check"></i><b>11.3.2</b> <strong>When do you use confidence intervals?</strong></a></li>
+<li class="chapter" data-level="11.3.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#what-is-the-difference-between-standard-errors-and-confidence-intervals"><i class="fa fa-check"></i><b>11.3.3</b> <strong>What is the difference between standard errors and confidence intervals?</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html"><i class="fa fa-check"></i><b>12</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#p-value"><i class="fa fa-check"></i><b>12.1</b> P-Value</a></li>
+<li class="chapter" data-level="12.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#z-test"><i class="fa fa-check"></i><b>12.2</b> Z-Test</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#conditions-for-proportion-inference"><i class="fa fa-check"></i><b>12.2.1</b> Conditions for proportion inference</a></li>
+<li class="chapter" data-level="12.2.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#formula-z-test-statistic"><i class="fa fa-check"></i><b>12.2.2</b> Formula: z test statistic</a></li>
+<li class="chapter" data-level="12.2.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#r-p-value-from-z-score"><i class="fa fa-check"></i><b>12.2.3</b> R: P-value from z-score</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#t-tests"><i class="fa fa-check"></i><b>12.3</b> t-Tests</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#conditions-for-mean-inference"><i class="fa fa-check"></i><b>12.3.1</b> Conditions for mean inference</a></li>
+<li class="chapter" data-level="12.3.2" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#formula-t-test-statistic"><i class="fa fa-check"></i><b>12.3.2</b> Formula: t test statistic</a></li>
+<li class="chapter" data-level="12.3.3" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#r-p-value-from-t-statistic"><i class="fa fa-check"></i><b>12.3.3</b> R: P-value from t statistic</a></li>
+<li class="chapter" data-level="12.3.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#r-t-tests"><i class="fa fa-check"></i><b>12.3.4</b> R: t-tests</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hypothesis-testing.html"><a href="hypothesis-testing.html#t-or-z-statistic"><i class="fa fa-check"></i><b>12.4</b> t or z Statistic?</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="correlation-and-regression.html"><a href="correlation-and-regression.html"><i class="fa fa-check"></i><b>13</b> Correlation and Regression</a></li>
+<li class="chapter" data-level="14" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>14</b> Causal Inference</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="causal-inference.html"><a href="causal-inference.html#potential-outcome-framework"><i class="fa fa-check"></i><b>14.1</b> <strong>Potential outcome framework</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>15</b> Functions</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="functions.html"><a href="functions.html#read-and-write"><i class="fa fa-check"></i><b>15.1</b> Read and Write</a></li>
+<li class="chapter" data-level="15.2" data-path="functions.html"><a href="functions.html#random"><i class="fa fa-check"></i><b>15.2</b> Random</a></li>
+<li class="chapter" data-level="15.3" data-path="functions.html"><a href="functions.html#order"><i class="fa fa-check"></i><b>15.3</b> Order</a></li>
+<li class="chapter" data-level="15.4" data-path="functions.html"><a href="functions.html#visualization-2"><i class="fa fa-check"></i><b>15.4</b> Visualization</a></li>
+<li class="chapter" data-level="15.5" data-path="functions.html"><a href="functions.html#conditionals"><i class="fa fa-check"></i><b>15.5</b> Conditionals</a></li>
+<li class="chapter" data-level="15.6" data-path="functions.html"><a href="functions.html#numbers"><i class="fa fa-check"></i><b>15.6</b> Numbers</a></li>
+<li class="chapter" data-level="15.7" data-path="functions.html"><a href="functions.html#apply-functions"><i class="fa fa-check"></i><b>15.7</b> Apply Functions</a></li>
+<li class="chapter" data-level="15.8" data-path="functions.html"><a href="functions.html#string-functions"><i class="fa fa-check"></i><b>15.8</b> String Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="frequent-problems.html"><a href="frequent-problems.html"><i class="fa fa-check"></i><b>16</b> Frequent Problems</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="frequent-problems.html"><a href="frequent-problems.html#first-exploration-of-new-dataset"><i class="fa fa-check"></i><b>16.1</b> First exploration of new dataset</a></li>
+<li class="chapter" data-level="16.2" data-path="frequent-problems.html"><a href="frequent-problems.html#a-count-and-prop-table"><i class="fa fa-check"></i><b>16.2</b> A Count and prop table</a></li>
+<li class="chapter" data-level="16.3" data-path="frequent-problems.html"><a href="frequent-problems.html#a-bar-graph-with-count-data"><i class="fa fa-check"></i><b>16.3</b> A Bar graph with count data</a></li>
+<li class="chapter" data-level="16.4" data-path="frequent-problems.html"><a href="frequent-problems.html#a-bar-graph-with-percentage-labels"><i class="fa fa-check"></i><b>16.4</b> ?A Bar graph with percentage labels</a></li>
+<li class="chapter" data-level="16.5" data-path="frequent-problems.html"><a href="frequent-problems.html#collapse-factors-to-other"><i class="fa fa-check"></i><b>16.5</b> Collapse factors to „Other”</a></li>
+<li class="chapter" data-level="16.6" data-path="frequent-problems.html"><a href="frequent-problems.html#filter-for-specific-values"><i class="fa fa-check"></i><b>16.6</b> ?Filter for specific values</a></li>
+<li class="chapter" data-level="16.7" data-path="frequent-problems.html"><a href="frequent-problems.html#change-bar-colors-in-barplot"><i class="fa fa-check"></i><b>16.7</b> Change bar colors in barplot</a></li>
+<li class="chapter" data-level="16.8" data-path="frequent-problems.html"><a href="frequent-problems.html#hide-aescolor-mapping-legend"><i class="fa fa-check"></i><b>16.8</b> Hide aes(color) mapping legend</a></li>
+<li class="chapter" data-level="16.9" data-path="frequent-problems.html"><a href="frequent-problems.html#re-code-values-of-categorical-variables"><i class="fa fa-check"></i><b>16.9</b> Re-code values of categorical variables</a></li>
+<li class="chapter" data-level="16.10" data-path="frequent-problems.html"><a href="frequent-problems.html#order-color-legend"><i class="fa fa-check"></i><b>16.10</b> Order color legend</a></li>
+<li class="chapter" data-level="16.11" data-path="frequent-problems.html"><a href="frequent-problems.html#show-unique-values"><i class="fa fa-check"></i><b>16.11</b> Show unique values</a></li>
+<li class="chapter" data-level="16.12" data-path="frequent-problems.html"><a href="frequent-problems.html#slice-rows-by-maximum-or-minimum-values"><i class="fa fa-check"></i><b>16.12</b> Slice rows by maximum or minimum values</a></li>
+<li class="chapter" data-level="16.13" data-path="frequent-problems.html"><a href="frequent-problems.html#show-number-of-nas"><i class="fa fa-check"></i><b>16.13</b> Show Number of <code>NA</code>s</a></li>
+<li class="chapter" data-level="16.14" data-path="frequent-problems.html"><a href="frequent-problems.html#drop-rows-with-missing-values"><i class="fa fa-check"></i><b>16.14</b> Drop rows with missing values</a></li>
+<li class="chapter" data-level="16.15" data-path="frequent-problems.html"><a href="frequent-problems.html#replace-nas"><i class="fa fa-check"></i><b>16.15</b> Replace <code>NA</code>s</a></li>
+<li class="chapter" data-level="16.16" data-path="frequent-problems.html"><a href="frequent-problems.html#the-factor-variable-trap"><i class="fa fa-check"></i><b>16.16</b> The factor variable trap</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>17</b> Hello bookdown</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>17.1</b> A section</a>
+<ul>
+<li class="chapter" data-level="" data-path="hello-bookdown.html"><a href="hello-bookdown.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="hello-bookdown.html"><a href="hello-bookdown.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>17.2</b> Chapters and sub-chapters</a></li>
+<li class="chapter" data-level="17.3" data-path="hello-bookdown.html"><a href="hello-bookdown.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>17.3</b> Captioned figures and tables</a></li>
+<li class="chapter" data-level="17.4" data-path="hello-bookdown.html"><a href="hello-bookdown.html#footnotes"><i class="fa fa-check"></i><b>17.4</b> Footnotes</a></li>
+<li class="chapter" data-level="17.5" data-path="hello-bookdown.html"><a href="hello-bookdown.html#citations"><i class="fa fa-check"></i><b>17.5</b> Citations</a></li>
+<li class="chapter" data-level="17.6" data-path="hello-bookdown.html"><a href="hello-bookdown.html#equations"><i class="fa fa-check"></i><b>17.6</b> Equations</a></li>
+<li class="chapter" data-level="17.7" data-path="hello-bookdown.html"><a href="hello-bookdown.html#theorems-and-proofs"><i class="fa fa-check"></i><b>17.7</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="17.8" data-path="hello-bookdown.html"><a href="hello-bookdown.html#callout-blocks"><i class="fa fa-check"></i><b>17.8</b> Callout blocks</a></li>
+<li class="chapter" data-level="17.9" data-path="hello-bookdown.html"><a href="hello-bookdown.html#publishing"><i class="fa fa-check"></i><b>17.9</b> Publishing</a></li>
+<li class="chapter" data-level="17.10" data-path="hello-bookdown.html"><a href="hello-bookdown.html#pages"><i class="fa fa-check"></i><b>17.10</b> 404 pages</a></li>
+<li class="chapter" data-level="17.11" data-path="hello-bookdown.html"><a href="hello-bookdown.html#metadata-for-sharing"><i class="fa fa-check"></i><b>17.11</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="hypothesis-testing" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Hypothesis Testing</h1>
+<p>Hypothesis testing is a form of statistical inference that uses data from a sample to draw conclusions about a population parameter or a population probability distribution. First, a tentative assumption is made about the parameter or distribution. This assumption is called the null hypothesis and is denoted by <span class="math inline">\(H_0\)</span>. An alternative hypothesis (denoted <span class="math inline">\(H_a\)</span>), which is the opposite of what is stated in the null hypothesis, is then defined. The hypothesis-testing procedure involves using sample data to determine whether or not <span class="math inline">\(H_0\)</span> can be rejected. If <span class="math inline">\(H_0\)</span> is rejected, the statistical conclusion is that the alternative hypothesis <span class="math inline">\(H_a\)</span> is true.</p>
+<div id="p-value" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> P-Value</h2>
+<p>We can think of a P-value as a conditional probability: given the null hypothesis is true, what’s the probability of obtaining a sample statistic as extreme or more than the one observed by random chance alone. In this type of test, we use the alternative hypothesis <span class="math inline">\(H_{\mathrm{a}}\)</span> to decide if the P-value comes from the probability above the test statistic, below the test statistic, or comes from a two-sided probability.</p>
+<p><img src="images/p-value.png" width="600" /></p>
+</div>
+<div id="z-test" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Z-Test</h2>
+<p><img src="images/Null-hypothesis-reigon-eng.png" /></p>
+<div id="conditions-for-proportion-inference" class="section level3" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Conditions for proportion inference</h3>
+</div>
+<div id="formula-z-test-statistic" class="section level3" number="12.2.2">
+<h3><span class="header-section-number">12.2.2</span> Formula: z test statistic</h3>
+<p>We can calculate the test statistic corresponding to the sample result:</p>
+<p><span class="math display">\[
+z=\frac{\text { statistic - parameter }}{\text { standard deviation of statistic }}
+\]</span></p>
+<p><span class="math display">\[
+=\frac{\hat{p}-p_{0}}{\sqrt{\frac{p_{0}\left(1-p_{0}\right)}{n}}}
+\]</span></p>
+<p>(where <span class="math inline">\(\hat{p}\)</span> is the sample proportion, <span class="math inline">\(p_{0}\)</span> is the proportion from the null hypothesis, and <span class="math inline">\(n\)</span> is the sample size).</p>
+</div>
+<div id="r-p-value-from-z-score" class="section level3" number="12.2.3">
+<h3><span class="header-section-number">12.2.3</span> R: P-value from z-score</h3>
+<p><strong>R Function</strong></p>
+<p>To find the p-value associated with a z-score in R, we can use the pnorm() function, which uses the following syntax:</p>
+<p><strong><code>pnorm(q, mean = 0, sd = 1, lower.tail = TRUE)</code></strong></p>
+<p>where:</p>
+<ul>
+<li><p><strong>q:</strong> The z-score</p></li>
+<li><p><strong>mean:</strong> The mean of the normal distribution. Default is 0.</p></li>
+<li><p><strong>sd:</strong> The standard deviation of the normal distribution. Default is 1.</p></li>
+<li><p><strong>lower.tail:</strong> If TRUE, the probability to the left of <strong>q</strong> in the normal distribution is returned. If FALSE, the probability to the right is returned. Default is TRUE.</p></li>
+</ul>
+<p><strong>Example 1: one-sided</strong></p>
+<p>In 2011, <span class="math inline">\(51 \%\)</span> of cell phone owners in a country reported that their cell phone was a smartphone. The following year, the researchers wanted to test <span class="math inline">\(H_{0}: p=0.51\)</span> versus <span class="math inline">\(H_{\mathrm{a}}: p&gt;0.51\)</span>, where <span class="math inline">\(p\)</span> is the proportion of cell phone owners in that country who have a smartphone.</p>
+<p>They surveyed a random sample of 934 cell phone owners in that country and found that 501 of them had a smartphone. The test statistic for these results was <span class="math inline">\(z \approx 1.61\)</span>.</p>
+<p>What is the P-Value?</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="hypothesis-testing.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.61</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.05369893</code></pre>
+<p>P-Value Answer: 0.054</p>
+<p><strong>Example 2: two-sided</strong></p>
+<p>Amanda read a report saying that <span class="math inline">\(49 \%\)</span> of teachers in the United States were members of a labor union. She wanted to test whether this was true in her state, so she took a random sample of 300 teachers from her state to test <span class="math inline">\(H_{0}: p=0.49\)</span> versus <span class="math inline">\(H_{\mathrm{a}}: p \neq 0.49\)</span>, where <span class="math inline">\(p\)</span> is the proportion of teachers in her state who are members of a labor union.</p>
+<p>The sample results showed 134 teachers were members of a labor union, and the corresponding test statistic was <span class="math inline">\(z \approx-1.50\)</span>.</p>
+<p>What is the P-Value?</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="hypothesis-testing.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">1.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1336144</code></pre>
+<p>P-Value Answer: 0.133</p>
+</div>
+</div>
+<div id="t-tests" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> t-Tests</h2>
+<div id="conditions-for-mean-inference" class="section level3" number="12.3.1">
+<h3><span class="header-section-number">12.3.1</span> Conditions for mean inference</h3>
+<p>When we want to carry out inference (build a confidence interval or do a significance test) on a mean, the accuracy of our methods depends on a few conditions. Before doing the actual computations of the interval or test, it’s important to check whether or not these conditions have been met. Otherwise the calculations and conclusions that follow may not be correct.</p>
+<p>The conditions we need for inference on a mean are:</p>
+<ul>
+<li><p><strong>Random</strong>: A random sample or randomized experiment should be used to obtain the data.</p></li>
+<li><p><strong>Normal</strong>: The sampling distribution of <span class="math inline">\(\overline{x}\)</span> (the sample mean) needs to be approximately normal. This is true if our parent population is normal or if our sample is reasonably large <span class="math inline">\((n\geq 30)\)</span>.</p></li>
+<li><p><strong>Independent</strong>: Individual observations need to be independent. If sampling without replacement, our sample size shouldn’t be more than <span class="math inline">\(10\%\)</span> of the population.</p></li>
+</ul>
+<p>Let’s look at each of these conditions a little more in-depth.</p>
+<p><strong>The random condition</strong></p>
+<p>Random samples give us unbiased data from a population. When we don’t use random selection, the resulting data usually has some form of bias, so using it to infer something about the population can be risky.</p>
+<blockquote>
+<p>For example, suppose a university wants to report the average starting salary of their graduates. How do they obtain the data? They can’t access the salaries of all graduates, and they can’t realistically get salaries from a random sample of graduates. The university could rely on graduates who are willing to share their salaries to calculate the average, but using voluntary response will likely lead to a biased estimate of the true average. Graduates with higher starting salaries will probably be more willing to report their salaries than graduates with low salaries (or graduates without salaries). Also, graduates who participate may claim their salary is higher than it really is, but they’d be unlikely to say it’s lower than it really is.</p>
+<p><em>The big idea is that data that came from a non-random sample may not be representative of its population.</em><br />
+</p>
+</blockquote>
+<p>More specifically, sample means are unbiased estimators of their population mean. For example, suppose we have a bag of ping pong balls individually numbered from 0 to 30, so the population mean of the bag is 15. We could take random samples of balls from the bag and calculate the mean from each sample. Some samples would have a mean higher than 15 and some would be lower. But on average, the mean of each sample will equal 15. We write this property as <span class="math inline">\(\mu_{\bar{x} } =\mu\)</span>, which holds true as long as we are taking random samples.</p>
+<p>This won’t necessarily happen if we use a non-random sample. Biased samples can lead to inaccurate results, so they shouldn’t be used to create confidence intervals or carry out significance tests.</p>
+<p><strong>The normal condition</strong></p>
+<p>The sampling distribution of <span class="math inline">\(\bar{x}\)</span> (a sample mean) is approximately normal in a few different cases. The shape of the sampling distribution of <span class="math inline">\(\bar{x}\)</span> mostly depends on the shape of the parent population and the sample size n.</p>
+<p><strong>Case 1: Parent population is normally distributed</strong></p>
+<p>If the parent population is normally distributed, then the sampling distribution of <span class="math inline">\(\bar{x}\)</span> is approximately normal regardless of sample size. So if we know that the parent population is normally distributed, we pass this condition even if the sample size is small. In practice, however, we usually don’t know if the parent population is normally distributed.</p>
+<p><strong>Case 2: Not normal or unknown parent population; sample size is large</strong> <span class="math inline">\((n \geq 30)\)</span></p>
+<p>The sampling distribution of <span class="math inline">\(\bar{x}\)</span> is approximately normal as long as the sample size is reasonably large. Because of the central limit theorem, when <span class="math inline">\(n \geq 30\)</span>, we can treat the sampling distribution of <span class="math inline">\(\bar{x}\)</span> as approximately normal regardless of the shape of the parent population.</p>
+<p>There are a few rare cases where the parent population has such an unusual shape that the sampling distribution of the sample mean <span class="math inline">\(\bar{x}\)</span> isn’t quite normal for sample sizes near 30. These cases are rare, so in practice, we are usually safe to assume approximately normality in the sampling distribution when <span class="math inline">\(n \geq 30\)</span>.</p>
+<p><strong>Case 3: Not normal or unknown parent population; sample size is small</strong> <span class="math inline">\(n&lt;30\)</span></p>
+<p>As long as the parent population doesn’t have outliers or strong skew, even smaller samples will produce a sampling distribution of <span class="math inline">\(\bar{x}\)</span> that is approximately normal. In practice, we can’t usually see the shape of the parent population, but we can try to infer shape based on the distribution of data in the sample. If the data in the sample shows skew or outliers, we should doubt that the parent is approximately normal, and so the sampling distribution of <span class="math inline">\(\bar{x}\)</span> may not be normal either. But if the sample data are roughly symmetric and don’t show outliers or strong skew, we can assume that the sampling distribution of <span class="math inline">\(\bar{x}\)</span> will be approximately normal.</p>
+<p><em>The big idea is that we need to graph our sample data when</em> <span class="math inline">\(n &lt; 30\)</span>, is less than, 30 and then make a decision about the normal condition based on the appearance of the sample data.</p>
+<p><strong>The independence condition</strong></p>
+<p>To use the formula for standard deviation of <span class="math inline">\(\bar{x}\)</span> we need individual observations to be independent. In an experiment, good design usually takes care of independence between subjects (control, different treatments, randomization).</p>
+<p>In an observational study that involves sampling without replacement, individual observations aren’t technically independent since removing each observation changes the population. However the 10% condition says that if we sample 10% or less of the population, we can treat individual observations as independent since removing each observation doesn’t change the population all that much as we sample. For instance, if our sample size is <span class="math inline">\(n=30\)</span> there should to be at least <span class="math inline">\(N = 300\)</span> members in the population for the sample to meet the independence condition.</p>
+<p>Assuming independence between observations allows us to use this formula for standard deviation of <span class="math inline">\(\bar{x}\)</span> when we’re making confidence intervals or doing significance tests:</p>
+<p><span class="math display">\[
+\sigma_{\bar{x}}=\frac{\sigma}{\sqrt{n}}
+\]</span></p>
+<p>We usually don’t know the population standard deviation <span class="math inline">\(\sigma\)</span>, so we substitute the sample standard deviation <span class="math inline">\(s_x\)</span> as an estimate for <span class="math inline">\(\sigma\)</span>. When we do this, we call it the <strong>standard error</strong> of <span class="math inline">\(\bar{x}\)</span> to distinguish it from the standard deviation.</p>
+<p>So our formula for standard error of <span class="math inline">\(\bar{x}\)</span> is:</p>
+<p><span class="math display">\[
+\sigma_{\bar{x}} \approx \frac{s_{x}}{\sqrt{n}}
+\]</span></p>
+<p><strong>Summary</strong></p>
+<p>If all three of these conditions are met, then we can we feel good about using <span class="math inline">\(t\)</span> distributions to make a confidence interval or do a significance test. Satisfying these conditions makes our calculations accurate and conclusions reliable.</p>
+<p>The random condition is perhaps the most important. If we break the random condition, there is probably bias in the data. The only reliable way to correct for a biased sample is to recollect the data in an unbiased way.</p>
+<p>The other two conditions are important, but if we don’t meet the normal or independence conditions, we may not need to start over. For example, there is a way to correct for the lack of independence when we sample more than 10% of a population, but it’s beyond the scope of what we’re learning right now.</p>
+<p>The main idea is that it’s important to verify certain conditions are met before we make these confidence intervals or do these significance tests.</p>
+</div>
+<div id="formula-t-test-statistic" class="section level3" number="12.3.2">
+<h3><span class="header-section-number">12.3.2</span> Formula: t test statistic</h3>
+<p>The test statistic gives us an idea of how far away our sample result is from our null hypothesis. For a one-sample t test for a mean, our test statistics is:</p>
+<p><span class="math display">\[
+\begin{aligned}t &amp;=\frac{\text { statistic }-\text { parameter }}{\text { standard error of statistic }} \\&amp;=\frac{\bar{x}-\mu_{0}}{\frac{s_{x}}{\sqrt{n}}}\end{aligned}
+\]</span></p>
+<p>The statistic <span class="math inline">\(\bar{x}\)</span> is the sample mean, and the parameter <span class="math inline">\(\mu_{0}\)</span> is the mean from the null hypothesis. The standard error of the sample mean is <span class="math inline">\(s_{x}\)</span> (the sample standard deviation) divided by the square root of <span class="math inline">\(n\)</span> (the sample size).</p>
+</div>
+<div id="r-p-value-from-t-statistic" class="section level3" number="12.3.3">
+<h3><span class="header-section-number">12.3.3</span> R: P-value from t statistic</h3>
+<p><strong>Degrees of freedom</strong></p>
+<p><span class="math inline">\(n - 1\)</span></p>
+<p><strong>The function in R:</strong> <code>pt()</code></p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="hypothesis-testing.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="at">q =</span> <span class="dv">2</span>, <span class="co"># the t-statistic</span></span>
+<span id="cb325-2"><a href="hypothesis-testing.html#cb325-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">df =</span> <span class="dv">5</span>, <span class="co"># the degrees of freedom</span></span>
+<span id="cb325-3"><a href="hypothesis-testing.html#cb325-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">lower.tail =</span> T <span class="co"># probabilities for lower or upper tail? Default is True.</span></span>
+<span id="cb325-4"><a href="hypothesis-testing.html#cb325-4" aria-hidden="true" tabindex="-1"></a>   )</span></code></pre></div>
+<pre><code>## [1] 0.9490303</code></pre>
+<p><strong>Example 1: one-sided</strong></p>
+<p>Daisy was testing <span class="math inline">\(H_{0}: \mu=33\)</span> versus <span class="math inline">\(H_{\mathrm{a}}: \mu&gt;33\)</span> with a sample of 11 observations. Her test statistic was <span class="math inline">\(t=1.368\)</span>. Assume that the conditions for inference were met.</p>
+<p>What is the P-value?</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="hypothesis-testing.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="at">q =</span> <span class="fl">1.368</span>, <span class="at">df =</span> <span class="dv">10</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.100632</code></pre>
+<p><strong>Example 2: two-sided</strong> Jasper was testing <span class="math inline">\(H_{0}: \mu=36\)</span> versus <span class="math inline">\(H_{\mathrm{a}}: \mu \neq 36\)</span> with a sample of 16 observations. His test statistic was <span class="math inline">\(t=2.4\)</span>. Assume that the conditions for inference were met.</p>
+<p>What is the P-value?</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="hypothesis-testing.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="at">q =</span> <span class="fl">2.4</span>, <span class="at">df =</span> <span class="dv">15</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.02982493</code></pre>
+</div>
+<div id="r-t-tests" class="section level3" number="12.3.4">
+<h3><span class="header-section-number">12.3.4</span> R: t-tests</h3>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="hypothesis-testing.html#cb331-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb331-2"><a href="hypothesis-testing.html#cb331-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb331-3"><a href="hypothesis-testing.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x,y)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  x and y
+## t = 0.027563, df = 17.872, p-value = 0.9783
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.137910  1.168149
+## sample estimates:
+##   mean of x   mean of y 
+## 0.021612146 0.006492631</code></pre>
+</div>
+</div>
+<div id="t-or-z-statistic" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> t or z Statistic?</h2>
+<p>z-tests are a statistical way of testing a hypothesis when either:</p>
+<ul>
+<li><p>We know the population variance, or</p></li>
+<li><p>We do not know the population variance but our sample size is large n ≥ 30</p></li>
+<li><p>If we have a sample size of less than 30 and do not know the population variance, then we must use a t-test.</p></li>
+<li><p>The t-test is kind of a weaker statistic, but which helps us if we have less information available.</p></li>
+</ul>
+<p><img src="images/Screenshot-from-2020-03-04-15-29-37.webp" /></p>
+<p><img src="images/Bildschirmfoto%202021-12-16%20um%2018.43.27.png" /></p>
+<p>Proportion significance tests don’t need t-tests, because we can calculate the z-score without the sampling distribution or population standard deviation.</p>
+<p><img src="images/Bildschirmfoto%202021-12-16%20um%2015.26.56.png" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="inferential-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="correlation-and-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

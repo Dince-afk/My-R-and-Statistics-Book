@@ -1,0 +1,237 @@
+# R Playgrounds
+
+```{r include=FALSE}
+library(tidyverse)
+library(dslabs)
+```
+
+
+
+## Expected Value and Standard Deviation
+
+Roulette table example with Red, Black and Green. Only Green wins. Whats the probability that you get Green?
+
+```{r}
+v = rep(c("Red", "Black", "Green"), c(18,18,2))
+prop.table(table(v))
+```
+
+This is the sampling model.
+
+```{r}
+x = sample(c(17,-1), prob = c(2/38,36/38))
+```
+
+The expected value is calculated by adding the possible value times their likelyhood together. Its formula is ap + b(1-p). The expected value for 1000 draws.
+
+```{r}
+EV = 1000 * (17*2/38 + (-1*36/38))
+```
+
+The standard error (standard deviation of random variables i.e., probability distributions). Its formula is a - b \* sqrt(p \* (1-p)). The standard error for 1000 draws.
+
+```{r}
+SE = sqrt(1000) * (-((-1)-17) * sqrt(2/38 * 36/38))
+```
+
+Random variable S storing the experimental values from sampling model.
+
+```{r}
+set.seed(1)
+S = sample(c(17,-1), size = 1000, replace = T, prob = c(2/38, 36/38))
+
+sum(S)
+```
+
+Create the experimental sampling distribution of the sample sum.
+
+```{r}
+roulette_winnings = function(){
+  S = sample(c(17,-1), size = 1000, replace = T, prob = c(2/38, 36/38))
+  sum(S)
+}
+
+set.seed(1)
+S = replicate(10000, roulette_winnings())
+hist(S)
+```
+
+The mean or expected value of X?
+
+```{r}
+mean(S)
+```
+
+The standard deviation or standard error of X?
+
+```{r}
+sd(S)
+```
+
+The probabilty that we win?
+
+```{r}
+mean(S > 0)
+n = 1000
+pbinom(500, size = 1000, prob = 1/19) # ??
+```
+
+## Theoretical and Experimental Standard Error
+
+The sample statistics: 0.45 "democrats and a sample size of 100.
+
+```{r}
+p = 0.45
+
+n = 100
+
+```
+
+The theoretical standard error for p = 0.45 and sample size n = 100.
+
+```{r}
+SE = sqrt(p * (1 - p)) / sqrt(n)
+SE
+```
+
+Now we can experimentally proof this expected standard error by running a Monte Carlo simulation. We basically create a sampling distribution of size 10000 of the sample proportions with p = 0.45 and n = 100. Only that we lastly subtract p to find out the actual error.
+
+```{r}
+test_errors = replicate(10000, mean(sample(c(1,0), replace = T, size = n, prob = c(p, (1 - p)))))
+
+# Distribituon of errors
+test_errors = test_errors - p
+
+# The standard deviation of the errors
+sd(test_errors)
+
+# Very close to the theoretical standard error
+SE
+```
+
+And the error distribution is approximatly normal.
+
+```{r}
+qqnorm(test_errors);qqline(test_errors)
+```
+
+## Sample Size Resulting in 0.01 SE
+
+The maximum SE in relation to proportions is with p = 0.5. Therefore we will take this worst case scenario case to calculate our goal, the required sample size to get a standard error arround 0.01. We can calculate a list of SE based on sample sizes 100 to 5000.
+
+```{r}
+p = 0.5
+n = 100:5000
+
+list_of_SEs = sqrt(p * (1 - p) / n)
+head(list_of_SEs, 20)
+```
+
+When plotting the list of standard errors we can see at what sample size we will reach a standard error of around 0.01: with a sample size of around 2.500.
+
+```{r}
+plot(list_of_SEs, type = "l")
+```
+
+## Bank and Loans
+
+```{r}
+# Number of loans
+n = 10000
+
+# Probability of default
+p = 0.03
+
+# Loss per single forclosure
+loss_per_forclosure = -200000
+
+# Interest_rate
+x = 0
+
+# Random variable S storing defaults = 1 and non defaults = 0
+S = sample(c(0,1), prob = c(1-p, p), size = n, replace = T)
+head(S, 100)
+
+# Expected value for 10000 loans 
+sum(S * loss_per_forclosure)
+
+# Monte-Carlo simulation amount 
+B = 10000
+
+# Simulation
+losses = replicate(B, { 
+  S = sample(c(0,1), prob = c(1-p, p), size = n, replace = T)
+  sum(S * loss_per_forclosure)
+})
+
+# Losses distribution from simulation
+hist(losses / 10^6)
+
+# Expected value of S
+EV = x*(1-p) + loss_per_forclosure*p
+EV
+
+# Standard error of S
+SE = abs(x - loss_per_forclosure) * sqrt(p * (1-p))
+SE
+
+# Loans of 180000
+x = 180000
+
+# loss_per_forclosure*p + x * (1-p) = 0
+# Find out x!
+x = - (loss_per_forclosure * p / (1 - p))
+x
+
+# Interest of 6185.57 dollars for each loan needed to get on average 0 in total back as the bank.
+EV = loss_per_forclosure * p + x * (1 - p) 
+EV # Correct!
+
+```
+
+## Real Polling Data
+
+```{r}
+# library(dslabs)
+data("polls_us_election_2016")
+
+# Exclude observations that are too old.  
+polls <- polls_us_election_2016 %>% 
+  filter(enddate >= "2016-10-31" & state == "U.S.") 
+
+head(polls, 5)
+```
+
+The first poll. Create a confidence interval.
+
+```{r}
+n = polls$samplesize[1]
+x_hat = polls$rawpoll_clinton[1]/100
+
+
+
+se_hat = sqrt(x_hat * (1 - x_hat) / n)
+
+cf = c(x_hat - 1.96 * se_hat, x_hat + 1.96 * se_hat)
+rm(x_hat, se_hat)
+```
+
+Create columns for x_hat, se_hat, lower and upper confidence bounds. Select only the relevant columns.
+
+```{r}
+polls = polls %>% 
+  mutate(x_hat = polls$rawpoll_clinton/100, 
+         se_hat = sqrt(x_hat * (1 - x_hat) / samplesize),
+         lower = x_hat - 1.96 * se_hat, 
+         upper = x_hat + 1.96 * se_hat) %>% 
+  select(pollster, enddate, x_hat, se_hat, lower, upper)
+```
+
+Create a `hit` column indicating whether our confidence intervals included our true parameter, the final vote count for Clinton 48.2.
+
+```{r}
+polls = polls %>% 
+  mutate(hit = ifelse(0.482 > lower & 0.482 < upper, TRUE, FALSE))
+
+mean(polls$hit)
+```

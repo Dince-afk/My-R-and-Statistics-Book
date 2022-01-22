@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Statistics | My R and Statistics Book</title>
+  <meta name="description" content="This is …" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Statistics | My R and Statistics Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is …" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Statistics | My R and Statistics Book" />
+  
+  <meta name="twitter:description" content="This is …" />
+  
+
+<meta name="author" content="Dino Curic" />
+
+
+<meta name="date" content="2022-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="visualizationggplot2.html"/>
+<link rel="next" href="probability-thoery.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>1</b> Glossary</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="glossary.html"><a href="glossary.html#shortcuts"><i class="fa fa-check"></i><b>1.1</b> Shortcuts</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="glossary.html"><a href="glossary.html#rstudio-environment"><i class="fa fa-check"></i><b>1.1.1</b> RStudio Environment</a></li>
+<li class="chapter" data-level="1.1.2" data-path="glossary.html"><a href="glossary.html#navigating-and-sections"><i class="fa fa-check"></i><b>1.1.2</b> Navigating and Sections</a></li>
+<li class="chapter" data-level="1.1.3" data-path="glossary.html"><a href="glossary.html#code-execution"><i class="fa fa-check"></i><b>1.1.3</b> Code Execution</a></li>
+<li class="chapter" data-level="1.1.4" data-path="glossary.html"><a href="glossary.html#special-characters"><i class="fa fa-check"></i><b>1.1.4</b> Special Characters</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="glossary.html"><a href="glossary.html#statistical-symbols"><i class="fa fa-check"></i><b>1.2</b> Statistical Symbols</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="glossary.html"><a href="glossary.html#special-symbols"><i class="fa fa-check"></i><b>1.2.1</b> Special Symbols</a></li>
+<li class="chapter" data-level="1.2.2" data-path="glossary.html"><a href="glossary.html#sample-and-population-symbols"><i class="fa fa-check"></i><b>1.2.2</b> Sample and Population Symbols</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-playgrounds.html"><a href="r-playgrounds.html"><i class="fa fa-check"></i><b>2</b> R Playgrounds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-playgrounds.html"><a href="r-playgrounds.html#expected-value-and-standard-deviation"><i class="fa fa-check"></i><b>2.1</b> Expected Value and Standard Deviation</a></li>
+<li class="chapter" data-level="2.2" data-path="r-playgrounds.html"><a href="r-playgrounds.html#theoretical-and-experimental-standard-error"><i class="fa fa-check"></i><b>2.2</b> Theoretical and Experimental Standard Error</a></li>
+<li class="chapter" data-level="2.3" data-path="r-playgrounds.html"><a href="r-playgrounds.html#sample-size-resulting-in-0.01-se"><i class="fa fa-check"></i><b>2.3</b> Sample Size Resulting in 0.01 SE</a></li>
+<li class="chapter" data-level="2.4" data-path="r-playgrounds.html"><a href="r-playgrounds.html#bank-and-loans"><i class="fa fa-check"></i><b>2.4</b> Bank and Loans</a></li>
+<li class="chapter" data-level="2.5" data-path="r-playgrounds.html"><a href="r-playgrounds.html#real-polling-data"><i class="fa fa-check"></i><b>2.5</b> Real Polling Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#read-and-write-data"><i class="fa fa-check"></i><b>3.1</b> Read and Write Data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basics.html"><a href="r-basics.html#csv-files"><i class="fa fa-check"></i><b>3.1.1</b> CSV Files</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basics.html"><a href="r-basics.html#dat-files"><i class="fa fa-check"></i><b>3.1.2</b> DAT Files</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-basics.html"><a href="r-basics.html#excel-files"><i class="fa fa-check"></i><b>3.1.3</b> Excel Files</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basics.html"><a href="r-basics.html#data-types"><i class="fa fa-check"></i><b>3.2</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basics.html"><a href="r-basics.html#convert-data-types"><i class="fa fa-check"></i><b>3.2.1</b> Convert data types</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basics.html"><a href="r-basics.html#numeric"><i class="fa fa-check"></i><b>3.2.2</b> Numeric</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basics.html"><a href="r-basics.html#logical"><i class="fa fa-check"></i><b>3.2.3</b> Logical</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basics.html"><a href="r-basics.html#characters"><i class="fa fa-check"></i><b>3.2.4</b> Characters</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basics.html"><a href="r-basics.html#nas"><i class="fa fa-check"></i><b>3.2.5</b> <code>NA</code>s</a></li>
+<li class="chapter" data-level="3.2.6" data-path="r-basics.html"><a href="r-basics.html#dates"><i class="fa fa-check"></i><b>3.2.6</b> Dates</a></li>
+<li class="chapter" data-level="3.2.7" data-path="r-basics.html"><a href="r-basics.html#posix-time"><i class="fa fa-check"></i><b>3.2.7</b> POSIX Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basics.html"><a href="r-basics.html#vectors"><i class="fa fa-check"></i><b>3.3</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-vectors"><i class="fa fa-check"></i><b>3.3.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basics.html"><a href="r-basics.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.2</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basics.html"><a href="r-basics.html#naming-vectors"><i class="fa fa-check"></i><b>3.3.3</b> Naming vectors</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basics.html"><a href="r-basics.html#filtering-vectors"><i class="fa fa-check"></i><b>3.3.4</b> Filtering vectors</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basics.html"><a href="r-basics.html#special-concepts"><i class="fa fa-check"></i><b>3.3.5</b> Special Concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basics.html"><a href="r-basics.html#factors"><i class="fa fa-check"></i><b>3.4</b> Factors</a></li>
+<li class="chapter" data-level="3.5" data-path="r-basics.html"><a href="r-basics.html#matrices-and-data-frames"><i class="fa fa-check"></i><b>3.5</b> Matrices and Data Frames</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="r-basics.html"><a href="r-basics.html#creating-matrices"><i class="fa fa-check"></i><b>3.5.1</b> Creating matrices</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-basics.html"><a href="r-basics.html#creating-data-frames"><i class="fa fa-check"></i><b>3.5.2</b> Creating data frames</a></li>
+<li class="chapter" data-level="3.5.3" data-path="r-basics.html"><a href="r-basics.html#adding-row-or-columns"><i class="fa fa-check"></i><b>3.5.3</b> Adding row or columns</a></li>
+<li class="chapter" data-level="3.5.4" data-path="r-basics.html"><a href="r-basics.html#naming-tables"><i class="fa fa-check"></i><b>3.5.4</b> Naming tables</a></li>
+<li class="chapter" data-level="3.5.5" data-path="r-basics.html"><a href="r-basics.html#deleting-rows-or-columns"><i class="fa fa-check"></i><b>3.5.5</b> Deleting rows or columns</a></li>
+<li class="chapter" data-level="3.5.6" data-path="r-basics.html"><a href="r-basics.html#rearranging-columns"><i class="fa fa-check"></i><b>3.5.6</b> Rearranging columns</a></li>
+<li class="chapter" data-level="3.5.7" data-path="r-basics.html"><a href="r-basics.html#merging-data-frames"><i class="fa fa-check"></i><b>3.5.7</b> Merging data frames</a></li>
+<li class="chapter" data-level="3.5.8" data-path="r-basics.html"><a href="r-basics.html#subsetting-matrices"><i class="fa fa-check"></i><b>3.5.8</b> Subsetting matrices</a></li>
+<li class="chapter" data-level="3.5.9" data-path="r-basics.html"><a href="r-basics.html#subsetting-data-frames"><i class="fa fa-check"></i><b>3.5.9</b> Subsetting data frames</a></li>
+<li class="chapter" data-level="3.5.10" data-path="r-basics.html"><a href="r-basics.html#data-frame-returns"><i class="fa fa-check"></i><b>3.5.10</b> Data frame returns</a></li>
+<li class="chapter" data-level="3.5.11" data-path="r-basics.html"><a href="r-basics.html#filtering-tables"><i class="fa fa-check"></i><b>3.5.11</b> Filtering tables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-basics.html"><a href="r-basics.html#lists"><i class="fa fa-check"></i><b>3.6</b> Lists</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="r-basics.html"><a href="r-basics.html#creating-lists"><i class="fa fa-check"></i><b>3.6.1</b> Creating lists</a></li>
+<li class="chapter" data-level="3.6.2" data-path="r-basics.html"><a href="r-basics.html#adding-components"><i class="fa fa-check"></i><b>3.6.2</b> Adding components</a></li>
+<li class="chapter" data-level="3.6.3" data-path="r-basics.html"><a href="r-basics.html#deleting-components"><i class="fa fa-check"></i><b>3.6.3</b> Deleting components</a></li>
+<li class="chapter" data-level="3.6.4" data-path="r-basics.html"><a href="r-basics.html#renaming-components"><i class="fa fa-check"></i><b>3.6.4</b> Renaming components</a></li>
+<li class="chapter" data-level="3.6.5" data-path="r-basics.html"><a href="r-basics.html#naming-inside-components"><i class="fa fa-check"></i><b>3.6.5</b> Naming inside components</a></li>
+<li class="chapter" data-level="3.6.6" data-path="r-basics.html"><a href="r-basics.html#subsetting-list-components"><i class="fa fa-check"></i><b>3.6.6</b> Subsetting list components</a></li>
+<li class="chapter" data-level="3.6.7" data-path="r-basics.html"><a href="r-basics.html#filtering-lists"><i class="fa fa-check"></i><b>3.6.7</b> Filtering lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#functionality"><i class="fa fa-check"></i><b>4.1</b> Functionality</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>4.1.1</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="packages.html"><a href="packages.html#gridextra"><i class="fa fa-check"></i><b>4.1.2</b> <code>gridExtra</code></a></li>
+<li class="chapter" data-level="4.1.3" data-path="packages.html"><a href="packages.html#kableextra-1"><i class="fa fa-check"></i><b>4.1.3</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.4" data-path="packages.html"><a href="packages.html#unpivotr"><i class="fa fa-check"></i><b>4.1.4</b> <code>unpivotr</code></a></li>
+<li class="chapter" data-level="4.1.5" data-path="packages.html"><a href="packages.html#tibble"><i class="fa fa-check"></i><b>4.1.5</b> <code>tibble</code></a></li>
+<li class="chapter" data-level="4.1.6" data-path="packages.html"><a href="packages.html#dslabs"><i class="fa fa-check"></i><b>4.1.6</b> <code>dslabs</code></a></li>
+<li class="chapter" data-level="4.1.7" data-path="packages.html"><a href="packages.html#knitr"><i class="fa fa-check"></i><b>4.1.7</b> <code>knitr</code></a></li>
+<li class="chapter" data-level="4.1.8" data-path="packages.html"><a href="packages.html#readr"><i class="fa fa-check"></i><b>4.1.8</b> <code>readr</code></a></li>
+<li class="chapter" data-level="4.1.9" data-path="packages.html"><a href="packages.html#readxl"><i class="fa fa-check"></i><b>4.1.9</b> <code>readxl</code></a></li>
+<li class="chapter" data-level="4.1.10" data-path="packages.html"><a href="packages.html#tidyxl"><i class="fa fa-check"></i><b>4.1.10</b> <code>tidyxl</code></a></li>
+<li class="chapter" data-level="4.1.11" data-path="packages.html"><a href="packages.html#corrgram"><i class="fa fa-check"></i><b>4.1.11</b> <code>corrgram</code></a></li>
+<li class="chapter" data-level="4.1.12" data-path="packages.html"><a href="packages.html#corrplot"><i class="fa fa-check"></i><b>4.1.12</b> <code>corrplot</code></a></li>
+<li class="chapter" data-level="4.1.13" data-path="packages.html"><a href="packages.html#rtweet"><i class="fa fa-check"></i><b>4.1.13</b> <code>rtweet</code></a></li>
+<li class="chapter" data-level="4.1.14" data-path="packages.html"><a href="packages.html#catools"><i class="fa fa-check"></i><b>4.1.14</b> <code>caTools</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="packages.html"><a href="packages.html#data"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="packages.html"><a href="packages.html#ggplot2movies"><i class="fa fa-check"></i><b>4.2.1</b> <code>ggplot2movies</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="packages.html"><a href="packages.html#wdi"><i class="fa fa-check"></i><b>4.2.2</b> <code>WDI</code></a></li>
+<li class="chapter" data-level="4.2.3" data-path="packages.html"><a href="packages.html#essurvey"><i class="fa fa-check"></i><b>4.2.3</b> <code>essurvey</code></a></li>
+<li class="chapter" data-level="4.2.4" data-path="packages.html"><a href="packages.html#wbstats"><i class="fa fa-check"></i><b>4.2.4</b> <code>wbstats</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="packages.html"><a href="packages.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="packages.html"><a href="packages.html#igraph"><i class="fa fa-check"></i><b>4.3.1</b> <code>igraph</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="packages.html"><a href="packages.html#ggthemes"><i class="fa fa-check"></i><b>4.3.2</b> <code>ggthemes</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="packages.html"><a href="packages.html#ggrepel"><i class="fa fa-check"></i><b>4.3.3</b> <code>ggrepel</code></a></li>
+<li class="chapter" data-level="4.3.4" data-path="packages.html"><a href="packages.html#ggridges"><i class="fa fa-check"></i><b>4.3.4</b> <code>ggridges</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="packages.html"><a href="packages.html#kableextra-2"><i class="fa fa-check"></i><b>4.3.5</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="packages.html"><a href="packages.html#gridextra-1"><i class="fa fa-check"></i><b>4.3.6</b> <code>?gridExtra</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>5</b> Rmarkdown</a></li>
+<li class="chapter" data-level="6" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>6</b> Tidyverse</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tidyverse.html"><a href="tidyverse.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>6.1.1</b> Pipe</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>6.1.2</b> Select</a></li>
+<li class="chapter" data-level="6.1.3" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>6.1.3</b> Rename</a></li>
+<li class="chapter" data-level="6.1.4" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>6.1.4</b> Filter</a></li>
+<li class="chapter" data-level="6.1.5" data-path="tidyverse.html"><a href="tidyverse.html#arrange"><i class="fa fa-check"></i><b>6.1.5</b> Arrange</a></li>
+<li class="chapter" data-level="6.1.6" data-path="tidyverse.html"><a href="tidyverse.html#slice"><i class="fa fa-check"></i><b>6.1.6</b> Slice</a></li>
+<li class="chapter" data-level="6.1.7" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>6.1.7</b> Mutate</a></li>
+<li class="chapter" data-level="6.1.8" data-path="tidyverse.html"><a href="tidyverse.html#relocate"><i class="fa fa-check"></i><b>6.1.8</b> Relocate</a></li>
+<li class="chapter" data-level="6.1.9" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>6.1.9</b> Summarise</a></li>
+<li class="chapter" data-level="6.1.10" data-path="tidyverse.html"><a href="tidyverse.html#pull"><i class="fa fa-check"></i><b>6.1.10</b> Pull</a></li>
+<li class="chapter" data-level="6.1.11" data-path="tidyverse.html"><a href="tidyverse.html#distinct-values"><i class="fa fa-check"></i><b>6.1.11</b> Distinct values</a></li>
+<li class="chapter" data-level="6.1.12" data-path="tidyverse.html"><a href="tidyverse.html#counts-and-proportions"><i class="fa fa-check"></i><b>6.1.12</b> Counts and proportions</a></li>
+<li class="chapter" data-level="6.1.13" data-path="tidyverse.html"><a href="tidyverse.html#case-when"><i class="fa fa-check"></i><b>6.1.13</b> Case when</a></li>
+<li class="chapter" data-level="6.1.14" data-path="tidyverse.html"><a href="tidyverse.html#between"><i class="fa fa-check"></i><b>6.1.14</b> Between</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="tidyverse.html"><a href="tidyverse.html#forcats"><i class="fa fa-check"></i><b>6.2</b> forcats</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyverse.html"><a href="tidyverse.html#count-factors"><i class="fa fa-check"></i><b>6.2.1</b> Count factors</a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyverse.html"><a href="tidyverse.html#reorder-levels"><i class="fa fa-check"></i><b>6.2.2</b> Reorder levels</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="tidyverse.html"><a href="tidyverse.html#purrr"><i class="fa fa-check"></i><b>6.3</b> purrr</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyverse.html"><a href="tidyverse.html#map"><i class="fa fa-check"></i><b>6.3.1</b> Map</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tidyverse.html"><a href="tidyverse.html#map-doubles"><i class="fa fa-check"></i><b>6.3.2</b> Map doubles</a></li>
+<li class="chapter" data-level="6.3.3" data-path="tidyverse.html"><a href="tidyverse.html#map-dataframes"><i class="fa fa-check"></i><b>6.3.3</b> Map dataframes</a></li>
+<li class="chapter" data-level="6.3.4" data-path="tidyverse.html"><a href="tidyverse.html#map-functionsclosures"><i class="fa fa-check"></i><b>6.3.4</b> Map functions/closures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html"><i class="fa fa-check"></i><b>7</b> Visualization/<code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#gg-object"><i class="fa fa-check"></i><b>7.1</b> gg object</a></li>
+<li class="chapter" data-level="7.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#aesthetics"><i class="fa fa-check"></i><b>7.2</b> Aesthetics</a></li>
+<li class="chapter" data-level="7.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#geometries"><i class="fa fa-check"></i><b>7.3</b> Geometries</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#points"><i class="fa fa-check"></i><b>7.3.1</b> Points</a></li>
+<li class="chapter" data-level="7.3.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#text"><i class="fa fa-check"></i><b>7.3.2</b> Text</a></li>
+<li class="chapter" data-level="7.3.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#bars"><i class="fa fa-check"></i><b>7.3.3</b> Bars</a></li>
+<li class="chapter" data-level="7.3.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#density"><i class="fa fa-check"></i><b>7.3.4</b> Density</a></li>
+<li class="chapter" data-level="7.3.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#boxplots"><i class="fa fa-check"></i><b>7.3.5</b> Boxplots</a></li>
+<li class="chapter" data-level="7.3.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#lines"><i class="fa fa-check"></i><b>7.3.6</b> Lines</a></li>
+<li class="chapter" data-level="7.3.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#vertical-lines"><i class="fa fa-check"></i><b>7.3.7</b> Vertical Lines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#coordinates"><i class="fa fa-check"></i><b>7.4</b> Coordinates</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#limits"><i class="fa fa-check"></i><b>7.4.1</b> Limits</a></li>
+<li class="chapter" data-level="7.4.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#flipping"><i class="fa fa-check"></i><b>7.4.2</b> Flipping</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#tiles"><i class="fa fa-check"></i><b>7.5</b> Tiles</a></li>
+<li class="chapter" data-level="7.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scales"><i class="fa fa-check"></i><b>7.6</b> Scales</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#logarithmic-scales"><i class="fa fa-check"></i><b>7.6.1</b> Logarithmic scales</a></li>
+<li class="chapter" data-level="7.6.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scale-label-format"><i class="fa fa-check"></i><b>7.6.2</b> Scale label format</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#labels"><i class="fa fa-check"></i><b>7.7</b> Labels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>8</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="statistics.html"><a href="statistics.html#about-statistics"><i class="fa fa-check"></i><b>8.1</b> About Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="statistics.html"><a href="statistics.html#centrality"><i class="fa fa-check"></i><b>8.2</b> Centrality</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="statistics.html"><a href="statistics.html#mean"><i class="fa fa-check"></i><b>8.2.1</b> Mean</a></li>
+<li class="chapter" data-level="8.2.2" data-path="statistics.html"><a href="statistics.html#reproduction-mean-and-standard-deviation-reproduction"><i class="fa fa-check"></i><b>8.2.2</b> Reproduction Mean and Standard Deviation Reproduction</a></li>
+<li class="chapter" data-level="8.2.3" data-path="statistics.html"><a href="statistics.html#median"><i class="fa fa-check"></i><b>8.2.3</b> Median</a></li>
+<li class="chapter" data-level="8.2.4" data-path="statistics.html"><a href="statistics.html#mode"><i class="fa fa-check"></i><b>8.2.4</b> Mode</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="statistics.html"><a href="statistics.html#variability"><i class="fa fa-check"></i><b>8.3</b> Variability</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="statistics.html"><a href="statistics.html#range"><i class="fa fa-check"></i><b>8.3.1</b> Range</a></li>
+<li class="chapter" data-level="8.3.2" data-path="statistics.html"><a href="statistics.html#range-iqr-and-sd"><i class="fa fa-check"></i><b>8.3.2</b> Range, IQR and SD</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="statistics.html"><a href="statistics.html#sampling"><i class="fa fa-check"></i><b>8.4</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="statistics.html"><a href="statistics.html#weights"><i class="fa fa-check"></i><b>8.4.1</b> Weights</a></li>
+<li class="chapter" data-level="8.4.2" data-path="statistics.html"><a href="statistics.html#population"><i class="fa fa-check"></i><b>8.4.2</b> Population</a></li>
+<li class="chapter" data-level="8.4.3" data-path="statistics.html"><a href="statistics.html#sampling-1"><i class="fa fa-check"></i><b>8.4.3</b> Sampling</a></li>
+<li class="chapter" data-level="8.4.4" data-path="statistics.html"><a href="statistics.html#non-probability-sampling"><i class="fa fa-check"></i><b>8.4.4</b> Non-probability Sampling</a></li>
+<li class="chapter" data-level="8.4.5" data-path="statistics.html"><a href="statistics.html#sampling-methods"><i class="fa fa-check"></i><b>8.4.5</b> Sampling Methods</a>
+<ul>
+<li class="chapter" data-level="8.4.5.1" data-path="statistics.html"><a href="statistics.html#simple-random-sampling"><i class="fa fa-check"></i><b>8.4.5.1</b> Simple random sampling</a></li>
+<li class="chapter" data-level="8.4.5.2" data-path="statistics.html"><a href="statistics.html#systematic-sampling"><i class="fa fa-check"></i><b>8.4.5.2</b> Systematic sampling</a></li>
+<li class="chapter" data-level="8.4.5.3" data-path="statistics.html"><a href="statistics.html#stratified-sampling"><i class="fa fa-check"></i><b>8.4.5.3</b> Stratified sampling</a></li>
+<li class="chapter" data-level="8.4.5.4" data-path="statistics.html"><a href="statistics.html#cluster-sampling"><i class="fa fa-check"></i><b>8.4.5.4</b> Cluster sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4.6" data-path="statistics.html"><a href="statistics.html#errors-and-biases"><i class="fa fa-check"></i><b>8.4.6</b> Errors and biases</a>
+<ul>
+<li class="chapter" data-level="8.4.6.1" data-path="statistics.html"><a href="statistics.html#sampling-errors-and-biases"><i class="fa fa-check"></i><b>8.4.6.1</b> Sampling errors and biases</a></li>
+<li class="chapter" data-level="8.4.6.2" data-path="statistics.html"><a href="statistics.html#non-sampling-error"><i class="fa fa-check"></i><b>8.4.6.2</b> Non-sampling error</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="probability-thoery.html"><a href="probability-thoery.html"><i class="fa fa-check"></i><b>9</b> Probability Thoery</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="probability-thoery.html"><a href="probability-thoery.html#conditional-probability"><i class="fa fa-check"></i><b>9.1</b> Conditional Probability</a></li>
+<li class="chapter" data-level="9.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations"><i class="fa fa-check"></i><b>9.2</b> Permutations</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-with-repetition"><i class="fa fa-check"></i><b>9.2.1</b> Permutations with repetition</a></li>
+<li class="chapter" data-level="9.2.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-without-repetition"><i class="fa fa-check"></i><b>9.2.2</b> Permutations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations"><i class="fa fa-check"></i><b>9.3</b> Combinations</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-with-repetitions"><i class="fa fa-check"></i><b>9.3.1</b> Combinations with repetitions</a></li>
+<li class="chapter" data-level="9.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-without-repetition"><i class="fa fa-check"></i><b>9.3.2</b> Combinations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="probability-thoery.html"><a href="probability-thoery.html#random-variables"><i class="fa fa-check"></i><b>9.4</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#discrete-random-variables"><i class="fa fa-check"></i><b>9.4.1</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="9.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#continuous-random-variables"><i class="fa fa-check"></i><b>9.4.2</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="9.4.3" data-path="probability-thoery.html"><a href="probability-thoery.html#transforming-random-variables-shift-or-scale"><i class="fa fa-check"></i><b>9.4.3</b> Transforming Random Variables (Shift or Scale)</a></li>
+<li class="chapter" data-level="9.4.4" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean"><i class="fa fa-check"></i><b>9.4.4</b> Expected Value (Mean)</a></li>
+<li class="chapter" data-level="9.4.5" data-path="probability-thoery.html"><a href="probability-thoery.html#standard-deviation"><i class="fa fa-check"></i><b>9.4.5</b> Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="probability-thoery.html"><a href="probability-thoery.html#normal-distribution"><i class="fa fa-check"></i><b>9.5</b> Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties"><i class="fa fa-check"></i><b>9.5.1</b> Properties</a></li>
+<li class="chapter" data-level="9.5.2" data-path="probability-thoery.html"><a href="probability-thoery.html#z-scores"><i class="fa fa-check"></i><b>9.5.2</b> Z-Scores</a></li>
+<li class="chapter" data-level="9.5.3" data-path="probability-thoery.html"><a href="probability-thoery.html#examples"><i class="fa fa-check"></i><b>9.5.3</b> Examples</a>
+<ul>
+<li class="chapter" data-level="9.5.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#finding-percentages"><i class="fa fa-check"></i><b>9.5.3.1</b> Finding Percentages</a></li>
+<li class="chapter" data-level="9.5.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value"><i class="fa fa-check"></i><b>9.5.3.2</b> Expected Value</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r"><i class="fa fa-check"></i><b>9.5.4</b> In R</a>
+<ul>
+<li class="chapter" data-level="9.5.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-probability-from-z-value"><i class="fa fa-check"></i><b>9.5.4.1</b> Calculate Probability From Z-Value</a></li>
+<li class="chapter" data-level="9.5.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-z-value-from-probability"><i class="fa fa-check"></i><b>9.5.4.2</b> Calculate Z-Value From Probability</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="probability-thoery.html"><a href="probability-thoery.html#binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Binomial Distribution</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean-and-variance"><i class="fa fa-check"></i><b>9.6.1</b> Expected Value (Mean) and Variance</a></li>
+<li class="chapter" data-level="9.6.2" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-1"><i class="fa fa-check"></i><b>9.6.2</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="probability-thoery.html"><a href="probability-thoery.html#bernoulli-distribution"><i class="fa fa-check"></i><b>9.7</b> Bernoulli Distribution</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties-1"><i class="fa fa-check"></i><b>9.7.1</b> Properties</a></li>
+<li class="chapter" data-level="9.7.2" data-path="probability-thoery.html"><a href="probability-thoery.html#mean-1"><i class="fa fa-check"></i><b>9.7.2</b> Mean</a></li>
+<li class="chapter" data-level="9.7.3" data-path="probability-thoery.html"><a href="probability-thoery.html#variance"><i class="fa fa-check"></i><b>9.7.3</b> Variance</a></li>
+<li class="chapter" data-level="9.7.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-2"><i class="fa fa-check"></i><b>9.7.4</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="probability-thoery.html"><a href="probability-thoery.html#geometric-distribution"><i class="fa fa-check"></i><b>9.8</b> Geometric Distribution</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-3"><i class="fa fa-check"></i><b>9.8.1</b> In R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>10</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#sampling-distributions"><i class="fa fa-check"></i><b>10.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="10.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>10.2</b> Central Limit Theorem</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#what-is-large-enough-for-the-ctl"><i class="fa fa-check"></i><b>10.2.1</b> What is Large Enough for the CTL?</a></li>
+<li class="chapter" data-level="10.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-of-central-limit-theorem"><i class="fa fa-check"></i><b>10.2.2</b> Proof of Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#confidence-intervals"><i class="fa fa-check"></i><b>10.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#why-confidence-intervals-work"><i class="fa fa-check"></i><b>10.3.1</b> Why Confidence Intervals Work</a></li>
+<li class="chapter" data-level="10.3.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-for-confidence-intervals"><i class="fa fa-check"></i><b>10.3.2</b> Proof for Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-proportion"><i class="fa fa-check"></i><b>10.3.2.1</b> CI for Population Proportion</a></li>
+<li class="chapter" data-level="10.3.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-mean"><i class="fa fa-check"></i><b>10.3.2.2</b> CI for Population Mean</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>10.4</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#p-value"><i class="fa fa-check"></i><b>10.4.1</b> P-Value</a></li>
+<li class="chapter" data-level="10.4.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#z-test"><i class="fa fa-check"></i><b>10.4.2</b> Z-Test</a></li>
+<li class="chapter" data-level="10.4.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-z-test-statistic"><i class="fa fa-check"></i><b>10.4.3</b> Formula: z test statistic</a></li>
+<li class="chapter" data-level="10.4.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-z-score"><i class="fa fa-check"></i><b>10.4.4</b> R: P-value from z-score</a></li>
+<li class="chapter" data-level="10.4.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conditions-for-mean-inference"><i class="fa fa-check"></i><b>10.4.5</b> Conditions for mean inference</a></li>
+<li class="chapter" data-level="10.4.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-t-test-statistic"><i class="fa fa-check"></i><b>10.4.6</b> Formula: t test statistic</a></li>
+<li class="chapter" data-level="10.4.7" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-t-statistic"><i class="fa fa-check"></i><b>10.4.7</b> R: P-value from t statistic</a></li>
+<li class="chapter" data-level="10.4.8" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-t-tests"><i class="fa fa-check"></i><b>10.4.8</b> R: t-tests</a></li>
+<li class="chapter" data-level="10.4.9" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-or-z-statistic"><i class="fa fa-check"></i><b>10.4.9</b> t or z Statistic?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation"><i class="fa fa-check"></i><b>10.5</b> Correlation</a></li>
+<li class="chapter" data-level="10.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#regression"><i class="fa fa-check"></i><b>10.6</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>11</b> Causal Inference</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="causal-inference.html"><a href="causal-inference.html#potential-outcome-framework"><i class="fa fa-check"></i><b>11.1</b> Potential outcome framework</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>12</b> Functions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="functions.html"><a href="functions.html#read-and-write"><i class="fa fa-check"></i><b>12.1</b> Read and Write</a></li>
+<li class="chapter" data-level="12.2" data-path="functions.html"><a href="functions.html#random"><i class="fa fa-check"></i><b>12.2</b> Random</a></li>
+<li class="chapter" data-level="12.3" data-path="functions.html"><a href="functions.html#order"><i class="fa fa-check"></i><b>12.3</b> Order</a></li>
+<li class="chapter" data-level="12.4" data-path="functions.html"><a href="functions.html#visualization-1"><i class="fa fa-check"></i><b>12.4</b> Visualization</a></li>
+<li class="chapter" data-level="12.5" data-path="functions.html"><a href="functions.html#conditionals"><i class="fa fa-check"></i><b>12.5</b> Conditionals</a></li>
+<li class="chapter" data-level="12.6" data-path="functions.html"><a href="functions.html#numbers"><i class="fa fa-check"></i><b>12.6</b> Numbers</a></li>
+<li class="chapter" data-level="12.7" data-path="functions.html"><a href="functions.html#apply-functions"><i class="fa fa-check"></i><b>12.7</b> Apply Functions</a></li>
+<li class="chapter" data-level="12.8" data-path="functions.html"><a href="functions.html#string-functions"><i class="fa fa-check"></i><b>12.8</b> String Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="frequent-problems.html"><a href="frequent-problems.html"><i class="fa fa-check"></i><b>13</b> Frequent Problems</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="frequent-problems.html"><a href="frequent-problems.html#first-exploration-of-new-dataset"><i class="fa fa-check"></i><b>13.1</b> First exploration of new dataset</a></li>
+<li class="chapter" data-level="13.2" data-path="frequent-problems.html"><a href="frequent-problems.html#a-count-and-prop-table"><i class="fa fa-check"></i><b>13.2</b> A Count and prop table</a></li>
+<li class="chapter" data-level="13.3" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-count-data"><i class="fa fa-check"></i><b>13.3</b> Bar graph with count data</a></li>
+<li class="chapter" data-level="13.4" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-percentage-labels"><i class="fa fa-check"></i><b>13.4</b> Bar graph with percentage labels</a></li>
+<li class="chapter" data-level="13.5" data-path="frequent-problems.html"><a href="frequent-problems.html#collapse-factors-to-other"><i class="fa fa-check"></i><b>13.5</b> Collapse factors to „Other”</a></li>
+<li class="chapter" data-level="13.6" data-path="frequent-problems.html"><a href="frequent-problems.html#filter-for-specific-values"><i class="fa fa-check"></i><b>13.6</b> Filter for specific values</a></li>
+<li class="chapter" data-level="13.7" data-path="frequent-problems.html"><a href="frequent-problems.html#change-bar-colors-in-barplot"><i class="fa fa-check"></i><b>13.7</b> Change bar colors in barplot</a></li>
+<li class="chapter" data-level="13.8" data-path="frequent-problems.html"><a href="frequent-problems.html#hide-aescolor-mapping-legend"><i class="fa fa-check"></i><b>13.8</b> Hide aes(color) mapping legend</a></li>
+<li class="chapter" data-level="13.9" data-path="frequent-problems.html"><a href="frequent-problems.html#re-code-values-of-categorical-variables"><i class="fa fa-check"></i><b>13.9</b> Re-code values of categorical variables</a></li>
+<li class="chapter" data-level="13.10" data-path="frequent-problems.html"><a href="frequent-problems.html#order-color-legend"><i class="fa fa-check"></i><b>13.10</b> Order color legend</a></li>
+<li class="chapter" data-level="13.11" data-path="frequent-problems.html"><a href="frequent-problems.html#show-unique-values"><i class="fa fa-check"></i><b>13.11</b> Show unique values</a></li>
+<li class="chapter" data-level="13.12" data-path="frequent-problems.html"><a href="frequent-problems.html#slice-rows-by-maximum-or-minimum-values"><i class="fa fa-check"></i><b>13.12</b> Slice rows by maximum or minimum values</a></li>
+<li class="chapter" data-level="13.13" data-path="frequent-problems.html"><a href="frequent-problems.html#show-number-of-nas"><i class="fa fa-check"></i><b>13.13</b> Show Number of <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.14" data-path="frequent-problems.html"><a href="frequent-problems.html#drop-rows-with-missing-values"><i class="fa fa-check"></i><b>13.14</b> Drop rows with missing values</a></li>
+<li class="chapter" data-level="13.15" data-path="frequent-problems.html"><a href="frequent-problems.html#replace-nas"><i class="fa fa-check"></i><b>13.15</b> Replace <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.16" data-path="frequent-problems.html"><a href="frequent-problems.html#the-factor-variable-trap"><i class="fa fa-check"></i><b>13.16</b> The factor variable trap</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">My R and Statistics Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistics" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Statistics</h1>
+<p>A <strong>descriptive statistic</strong> is a summary statistic that quantitatively describes or summarizes features from a collection of information, while <strong>descriptive statistics</strong> is the process of using and analyzing those statistics.</p>
+<p>Some measures that are commonly used to describe a data set are measures of <strong>central tendency</strong> and measures of <strong>variability</strong> or <strong>dispersion</strong>. Measures of central tendency include the mean, median and mode, while measures of variability include the standard deviation (or variance), the minimum and maximum values of the variables, kurtosis and skewness.</p>
+<p>The <strong>shape of the distribution</strong> may also be described via indices such as <strong>skewness</strong> and <strong>kurtosis</strong>. Characteristics of a variable’s distribution may also be depicted in graphical or tabular format, including histograms and stem-and-leaf display.</p>
+<div id="about-statistics" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> About Statistics</h2>
+<p>Statistics is the discipline that concerns the <strong>collection</strong>, <strong>organization</strong>, <strong>analysis</strong>, <strong>interpretation</strong>, and <strong>presentation</strong> of <strong>data</strong>. In applying statistics to a scientific, industrial, or social problem, it is conventional to begin with a statistical <strong>population</strong> or a <strong>statistical model</strong> to be studied. Populations can be diverse groups of people or objects such as “all people living in a country” or “every atom composing a crystal.” Statistics deals with every aspect of data, including the planning of <strong>data collection</strong> in terms of the design of surveys and experiments.</p>
+<p>Two main statistical methods are used in data analysis: <strong>descriptive statistics</strong>, which summarize data from a sample using indexes such as the mean or standard deviation, and <strong>inferential statistics</strong>, which draw conclusions from data that are subject to random variation (e.g., observational errors, sampling variation). Descriptive statistics are most often concerned with two sets of properties of a distribution (sample or population): <strong>central tendency</strong> (or location) seeks to characterize the distribution’s central or typical value, while <strong>dispersion</strong> (or variability) characterizes the extent to which members of the distribution depart from its center and each other. Inferences on mathematical statistics are made under the framework of probability theory, which deals with the analysis of random phenomena.</p>
+</div>
+<div id="centrality" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Centrality</h2>
+<p><img src="images/1*DQVXfbFEaDfp0-USljWQDw.png" title="Central tendency" /></p>
+<p><strong>Example</strong></p>
+<p>Here are two different distributions.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="statistics.html#cb223-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb223-2"><a href="statistics.html#cb223-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">22</span>)</span></code></pre></div>
+<p><code>x</code> is fairly normally distributed and <code>y</code> is highly skewed to the right:</p>
+<p><img src="_main_files/figure-html/figures-side-1.png" width="50%" /><img src="_main_files/figure-html/figures-side-2.png" width="50%" /></p>
+<div id="mean" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Mean</h3>
+<p>The mean is highly sensitive to skewed distributions. The single value of 22 in <code>y</code> instead of 6 in <code>x</code> changes the mean by 1.6. Therefore the median makes more sense as a measure centrality for <code>y</code>.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="statistics.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="statistics.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code></pre></div>
+<pre><code>## [1] 5.6</code></pre>
+</div>
+<div id="reproduction-mean-and-standard-deviation-reproduction" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Reproduction Mean and Standard Deviation Reproduction</h3>
+<p>Example vector.</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="statistics.html#cb228-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>)</span></code></pre></div>
+<p>Calculate mean without <code>mean()</code></p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="statistics.html#cb229-1" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">=</span> <span class="fu">sum</span>(vec) <span class="sc">/</span> <span class="fu">length</span>(vec)</span>
+<span id="cb229-2"><a href="statistics.html#cb229-2" aria-hidden="true" tabindex="-1"></a>mean</span></code></pre></div>
+<pre><code>## [1] 6.4</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="statistics.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(vec) <span class="co"># Correct</span></span></code></pre></div>
+<pre><code>## [1] 6.4</code></pre>
+<p>Calculate variance without <code>sd()</code></p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="statistics.html#cb233-1" aria-hidden="true" tabindex="-1"></a>variance <span class="ot">=</span> <span class="fu">sum</span>((vec <span class="sc">-</span> mean) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">length</span>(vec) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb233-2"><a href="statistics.html#cb233-2" aria-hidden="true" tabindex="-1"></a>variance</span></code></pre></div>
+<pre><code>## [1] 15.8</code></pre>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="statistics.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(vec) <span class="co"># Correct</span></span></code></pre></div>
+<pre><code>## [1] 15.8</code></pre>
+<p>Standard deviation without <code>sd()</code></p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="statistics.html#cb237-1" aria-hidden="true" tabindex="-1"></a>st_dv <span class="ot">=</span> <span class="fu">sqrt</span>(variance)</span>
+<span id="cb237-2"><a href="statistics.html#cb237-2" aria-hidden="true" tabindex="-1"></a>st_dv</span></code></pre></div>
+<pre><code>## [1] 3.974921</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="statistics.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(vec) <span class="co"># Correct</span></span></code></pre></div>
+<pre><code>## [1] 3.974921</code></pre>
+<p>Calculate table of vectors with <code>apply()</code> and own sd function.</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="statistics.html#cb241-1" aria-hidden="true" tabindex="-1"></a>my_sd_func <span class="ot">=</span> <span class="cf">function</span>(vector){</span>
+<span id="cb241-2"><a href="statistics.html#cb241-2" aria-hidden="true" tabindex="-1"></a>  mean <span class="ot">=</span> <span class="fu">mean</span>(vector)</span>
+<span id="cb241-3"><a href="statistics.html#cb241-3" aria-hidden="true" tabindex="-1"></a>  variance <span class="ot">=</span> <span class="fu">sum</span>((vector <span class="sc">-</span> mean) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">length</span>(vector) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb241-4"><a href="statistics.html#cb241-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(variance)</span>
+<span id="cb241-5"><a href="statistics.html#cb241-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb241-6"><a href="statistics.html#cb241-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb241-7"><a href="statistics.html#cb241-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test</span></span>
+<span id="cb241-8"><a href="statistics.html#cb241-8" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sd_func</span>(vec)</span></code></pre></div>
+<pre><code>## [1] 3.974921</code></pre>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="statistics.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test vectors</span></span>
+<span id="cb243-2"><a href="statistics.html#cb243-2" aria-hidden="true" tabindex="-1"></a>test_vectors <span class="ot">=</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">9</span>), <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>))</span></code></pre></div>
+<p>Apply own sd function on all test_vectors.</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="statistics.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(test_vectors, <span class="dv">1</span>, my_sd_func)</span></code></pre></div>
+<pre><code>## [1] 0.836660 1.000000 2.549510 3.974921</code></pre>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="statistics.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(test_vectors, <span class="dv">1</span>, sd)</span></code></pre></div>
+<pre><code>## [1] 0.836660 1.000000 2.549510 3.974921</code></pre>
+</div>
+<div id="median" class="section level3" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Median</h3>
+<p>The median is exactly the same for <code>x</code> and <code>y</code>. The median doesn’t take the value of 22 itself into account, but simply acknowledges the element position in an ordered array of y.</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="statistics.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="statistics.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(y)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div id="mode" class="section level3" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Mode</h3>
+<p>The mode is the same for both objects, because the value 4 appears most often. There doesn’t seem to be a <code>mode()</code> function, but this alternative works fine enough. <code>which.max(table(x))</code> returns 1.) the biggest value of the tabled arrays and 2.) the index/location in the tabled array.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="statistics.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">table</span>(x))</span></code></pre></div>
+<pre><code>## 4 
+## 3</code></pre>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="statistics.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">table</span>(y))</span></code></pre></div>
+<pre><code>## 4 
+## 3</code></pre>
+<p>With <code>x</code> and <code>y</code> its mode is both 4 and its position in the tabled array is 3.</p>
+</div>
+</div>
+<div id="variability" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Variability</h2>
+<div id="range" class="section level3" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Range</h3>
+<p>Show the length of a vector.</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="statistics.html#cb256-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb256-2"><a href="statistics.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p>Show the length of a matrix, i.e. the number of all cells.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="statistics.html#cb258-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>), <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>))</span>
+<span id="cb258-2"><a href="statistics.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<pre><code>## [1] 40</code></pre>
+<p>The length of a data frame via length() returns only the number of columns, not the number of all cells.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="statistics.html#cb260-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>), <span class="fu">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">10</span>))</span>
+<span id="cb260-2"><a href="statistics.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="range-iqr-and-sd" class="section level3" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Range, IQR and SD</h3>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="statistics.html#cb262-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">4</span>)</span>
+<span id="cb262-2"><a href="statistics.html#cb262-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">1</span>)</span>
+<span id="cb262-3"><a href="statistics.html#cb262-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">40</span>)</span></code></pre></div>
+<p>Quick overview with <code>summary()</code></p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="statistics.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    3.00    4.00    4.50    4.80    5.75    7.00</code></pre>
+<p><strong>Range</strong></p>
+<p><code>range()</code> shows the difference between the biggest and smallest value in a vector. To show the largest and smallest values:</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="statistics.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(x)</span></code></pre></div>
+<pre><code>## [1] 3 7</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="statistics.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(z)</span></code></pre></div>
+<pre><code>## [1]  1 40</code></pre>
+<p>You need to calculate the actual range with this operation.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="statistics.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="statistics.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(z) <span class="sc">-</span> <span class="fu">min</span>(z)</span></code></pre></div>
+<pre><code>## [1] 39</code></pre>
+<p><strong>Interquartile range</strong></p>
+<p>The IQR is less affected by outliers. It shows the difference between the upper quartile and the lower quartile, i.e. the interquartile range. The middle 50%, i.e. the values between 25% to 75%.</p>
+<p>The difference can be big even without big outliers:</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="statistics.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="statistics.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(x)</span></code></pre></div>
+<pre><code>## [1] 1.75</code></pre>
+<p><strong>Note</strong>: <code>IQR()</code> is the same as:</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="statistics.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(x, .<span class="dv">75</span>) <span class="sc">-</span> <span class="fu">quantile</span>(x, .<span class="dv">25</span>)</span></code></pre></div>
+<pre><code>##  75% 
+## 1.75</code></pre>
+<p>Wow, what a difference with only one single big outlier:</p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="statistics.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(z) <span class="sc">-</span> <span class="fu">min</span>(z)</span></code></pre></div>
+<pre><code>## [1] 39</code></pre>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="statistics.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(z)</span></code></pre></div>
+<pre><code>## [1] 3.5</code></pre>
+</div>
+</div>
+<div id="sampling" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Sampling</h2>
+<p>In statistics, quality assurance, and survey methodology, sampling is the <strong>selection of a subset</strong> (a statistical sample) of individuals from within a statistical <strong>population</strong> to estimate characteristics of the whole population. Statisticians attempt for the samples to represent the population in question. Two advantages of sampling are lower cost and faster data collection than measuring the entire population.</p>
+<p><img src="images/1*qGw-4UHSdnXgFnXBS4m4eg.png" /></p>
+<div id="weights" class="section level3" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Weights</h3>
+<p>Each observation measures one or more properties (such as weight, location, color) of observable bodies distinguished as independent objects or individuals. In <strong>survey sampling,</strong> <strong>weights</strong> can be applied to the data to adjust for the sample design, particularly in stratified sampling. Results from probability theory and statistical theory are employed to guide the practice. In business and medical research, sampling is widely used for gathering information about a population. </p>
+</div>
+<div id="population" class="section level3" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Population</h3>
+<p>Successful statistical practice is based on focused problem definition. In sampling, this includes defining the “population” from which our sample is drawn. A population can be defined as including all people or items with the characteristic one wishes to understand. Because there is very rarely enough time or money to gather information from everyone or everything in a population, the goal becomes finding a representative sample (or subset) of that population.</p>
+</div>
+<div id="sampling-1" class="section level3" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Sampling</h3>
+<p>In the most straightforward case, such as the sampling of a batch of material from production (acceptance sampling by lots), it would be most desirable to identify and measure every single item in the population and to include any one of them in our sample. However, in the more general case this is not usually possible or practical. There is no way to identify all rats in the set of all rats. Where voting is not compulsory, there is no way to identify which people will vote at a forthcoming election (in advance of the election). These imprecise populations are not amenable to sampling in any of the ways below and to which we could apply statistical theory.</p>
+<p>As a remedy, we seek a sampling frame which has the property that we can identify every single element and include any in our sample. The most straightforward type of frame is a list of elements of the population (preferably the entire population) with appropriate contact information. For example, in an opinion poll, possible sampling frames include an electoral register and a telephone directory.</p>
+<p>A probability sample is a sample in which every unit in the population has a chance (greater than zero) of being selected in the sample, and this probability can be accurately determined. The combination of these traits makes it possible to produce unbiased estimates of population totals, by weighting sampled units according to their probability of selection.</p>
+<blockquote>
+<p>Example: We want to estimate the total income of adults living in a given street. We visit each household in that street, identify all adults living there, and randomly select one adult from each household. (For example, we can allocate each person a random number, generated from a uniform distribution between 0 and 1, and select the person with the highest number in each household). We then interview the selected person and find their income.</p>
+<p>People living on their own are certain to be selected, so we simply add their income to our estimate of the total. But a person living in a household of two adults has only a one-in-two chance of selection. To reflect this, when we come to such a household, we would count the selected person’s income twice towards the total. (The person who is selected from that household can be loosely viewed as also representing the person who isn’t selected.)</p>
+</blockquote>
+<p>In the above example, not everybody has the same probability of selection; what makes it a probability sample is the fact that each person’s probability is known. When every element in the population does have the same probability of selection, this is known as an ‘equal probability of selection’ (EPS) design. Such designs are also referred to as ‘self-weighting’ because all sampled units are given the same weight.</p>
+<p>Probability sampling includes: Simple Random Sampling, Systematic Sampling, Stratified Sampling, Probability Proportional to Size Sampling, and Cluster or Multistage Sampling. These various ways of probability sampling have two things in common:</p>
+<ol style="list-style-type: decimal">
+<li><p>Every element has a known nonzero probability of being sampled and</p></li>
+<li><p>involves random selection at some point.</p></li>
+</ol>
+</div>
+<div id="non-probability-sampling" class="section level3" number="8.4.4">
+<h3><span class="header-section-number">8.4.4</span> Non-probability Sampling</h3>
+<p>Non-probability sampling is any sampling method where some elements of the population have no chance of selection (these are sometimes referred to as ‘out of coverage’/‘undercovered’), or where the probability of selection can’t be accurately determined. It involves the selection of elements based on assumptions regarding the population of interest, which forms the criteria for selection. Hence, because the selection of elements is nonrandom, non-probability sampling does not allow the estimation of sampling errors. These conditions give rise to exclusion bias, placing limits on how much information a sample can provide about the population. Information about the relationship between sample and population is limited, making it difficult to extrapolate from the sample to the population.</p>
+<blockquote>
+<p>Example: We visit every household in a given street, and interview the first person to answer the door. In any household with more than one occupant, this is a non-probability sample, because some people are more likely to answer the door (e.g. an unemployed person who spends most of their time at home is more likely to answer than an employed housemate who might be at work when the interviewer calls) and it’s not practical to calculate these probabilities.</p>
+</blockquote>
+<p>Non-probability sampling methods include convenience sampling, quota sampling and purposive sampling. In addition, nonresponse effects may turn any probability design into a non-probability design if the characteristics of nonresponse are not well understood, since nonresponse effectively modifies each element’s probability of being sampled.</p>
+</div>
+<div id="sampling-methods" class="section level3" number="8.4.5">
+<h3><span class="header-section-number">8.4.5</span> Sampling Methods</h3>
+<p>Within any of the types of frames identified above, a variety of sampling methods can be employed, individually or in combination. Factors commonly influencing the choice between these designs include:</p>
+<ul>
+<li><p>Nature and quality of the frame</p></li>
+<li><p>Availability of auxiliary information about units on the frame</p></li>
+<li><p>Accuracy requirements, and the need to measure accuracy</p></li>
+<li><p>Whether detailed analysis of the sample is expected</p></li>
+<li><p>Cost/operational concerns</p></li>
+</ul>
+<div id="simple-random-sampling" class="section level4" number="8.4.5.1">
+<h4><span class="header-section-number">8.4.5.1</span> Simple random sampling</h4>
+<p>In a simple random sample (SRS) of a given size, all subsets of a sampling frame have an equal probability of being selected. Each element of the frame thus has an equal probability of selection: the frame is not subdivided or partitioned. Furthermore, any given pair of elements has the same chance of selection as any other such pair (and similarly for triples, and so on). This minimizes bias and simplifies analysis of results. In particular, the variance between individual results within the sample is a good indicator of variance in the overall population, which makes it relatively easy to estimate the accuracy of results.</p>
+<p><img src="images/Simple_random_sampling.PNG" title="Simple random sampling" /></p>
+<p>Simple random sampling can be vulnerable to sampling error because the randomness of the selection may result in a sample that doesn’t reflect the makeup of the population. For instance, a simple random sample of ten people from a given country will on average produce five men and five women, but any given trial is likely to overrepresent one sex and underrepresent the other. Systematic and stratified techniques attempt to overcome this problem by “using information about the population” to choose a more “representative” sample.</p>
+<p>Also, simple random sampling can be cumbersome and tedious when sampling from a large target population. In some cases, investigators are interested in research questions specific to subgroups of the population. For example, researchers might be interested in examining whether cognitive ability as a predictor of job performance is equally applicable across racial groups. Simple random sampling cannot accommodate the needs of researchers in this situation, because it does not provide subsamples of the population, and other sampling strategies, such as stratified sampling, can be used instead.</p>
+</div>
+<div id="systematic-sampling" class="section level4" number="8.4.5.2">
+<h4><span class="header-section-number">8.4.5.2</span> Systematic sampling</h4>
+<p>Systematic sampling (also known as interval sampling) relies on arranging the study population according to some ordering scheme and then selecting elements at regular intervals through that ordered list. Systematic sampling involves a random start and then proceeds with the selection of every kth element from then onwards. In this case, k=(population size/sample size). It is important that the starting point is not automatically the first in the list, but is instead randomly chosen from within the first to the kth element in the list. A simple example would be to select every 10th name from the telephone directory (an ‘every 10th’ sample, also referred to as ‘sampling with a skip of 10’).</p>
+<div class="figure">
+<img src="images/Systematic_sampling.PNG" title="Systematic sampling" alt="" />
+<p class="caption">A visual representation of selecting a random sample using the systematic sampling technique</p>
+</div>
+<p>As long as the starting point is randomized, systematic sampling is a type of probability sampling. It is easy to implement and the stratification induced can make it efficient, if the variable by which the list is ordered is correlated with the variable of interest. ‘Every 10th’ sampling is especially useful for efficient sampling from databases.</p>
+<p>For example, suppose we wish to sample people from a long street that starts in a poor area (house No. 1) and ends in an expensive district (house No. 1000). A simple random selection of addresses from this street could easily end up with too many from the high end and too few from the low end (or vice versa), leading to an unrepresentative sample. Selecting (e.g.) every 10th street number along the street ensures that the sample is spread evenly along the length of the street, representing all of these districts. (Note that if we always start at house #1 and end at #991, the sample is slightly biased towards the low end; by randomly selecting the start between #1 and #10, this bias is eliminated.</p>
+<p>However, systematic sampling is especially vulnerable to periodicities in the list. If periodicity is present and the period is a multiple or factor of the interval used, the sample is especially likely to be unrepresentative of the overall population, making the scheme less accurate than simple random sampling.</p>
+<p>For example, consider a street where the odd-numbered houses are all on the north (expensive) side of the road, and the even-numbered houses are all on the south (cheap) side. Under the sampling scheme given above, it is impossible to get a representative sample; either the houses sampled will all be from the odd-numbered, expensive side, or they will all be from the even-numbered, cheap side, unless the researcher has previous knowledge of this bias and avoids it by a using a skip which ensures jumping between the two sides (any odd-numbered skip).</p>
+<p>Another drawback of systematic sampling is that even in scenarios where it is more accurate than SRS, its theoretical properties make it difficult to quantify that accuracy. (In the two examples of systematic sampling that are given above, much of the potential sampling error is due to variation between neighbouring houses – but because this method never selects two neighbouring houses, the sample will not give us any information on that variation.)</p>
+<p>As described above, systematic sampling is an EPS method, because all elements have the same probability of selection (in the example given, one in ten). It is not ‘simple random sampling’ because different subsets of the same size have different selection probabilities – e.g. the set {4,14,24,…,994} has a one-in-ten probability of selection, but the set {4,13,24,34,…} has zero probability of selection.</p>
+<p>Systematic sampling can also be adapted to a non-EPS approach; for an example, see discussion of PPS samples below.</p>
+</div>
+<div id="stratified-sampling" class="section level4" number="8.4.5.3">
+<h4><span class="header-section-number">8.4.5.3</span> Stratified sampling</h4>
+<p>When the population embraces a number of distinct categories, the frame can be organized by these categories into separate “strata.” Each stratum is then sampled as an independent sub-population, out of which individual elements can be randomly selected.The ratio of the size of this random selection (or sample) to the size of the population is called a sampling fraction. There are several potential benefits to stratified sampling.</p>
+<div class="figure">
+<img src="images/Stratified_sampling.PNG" title="Stratified sampling" alt="" />
+<p class="caption">A visual representation of selecting a random sample using the stratified sampling technique</p>
+</div>
+<p>First, dividing the population into distinct, independent strata can enable researchers to draw inferences about specific subgroups that may be lost in a more generalized random sample.</p>
+<p>Second, utilizing a stratified sampling method can lead to more efficient statistical estimates (provided that strata are selected based upon relevance to the criterion in question, instead of availability of the samples). Even if a stratified sampling approach does not lead to increased statistical efficiency, such a tactic will not result in less efficiency than would simple random sampling, provided that each stratum is proportional to the group’s size in the population.</p>
+<p>Third, it is sometimes the case that data are more readily available for individual, pre-existing strata within a population than for the overall population; in such cases, using a stratified sampling approach may be more convenient than aggregating data across groups (though this may potentially be at odds with the previously noted importance of utilizing criterion-relevant strata).</p>
+<p>Finally, since each stratum is treated as an independent population, different sampling approaches can be applied to different strata, potentially enabling researchers to use the approach best suited (or most cost-effective) for each identified subgroup within the population.</p>
+<p>There are, however, some potential drawbacks to using stratified sampling. First, identifying strata and implementing such an approach can increase the cost and complexity of sample selection, as well as leading to increased complexity of population estimates. Second, when examining multiple criteria, stratifying variables may be related to some, but not to others, further complicating the design, and potentially reducing the utility of the strata. Finally, in some cases (such as designs with a large number of strata, or those with a specified minimum sample size per group), stratified sampling can potentially require a larger sample than would other methods (although in most cases, the required sample size would be no larger than would be required for simple random sampling).</p>
+<p><strong>A stratified sampling approach is most effective when three conditions are met</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Variability within strata are minimized</p></li>
+<li><p>Variability between strata are maximized</p></li>
+<li><p>The variables upon which the population is stratified are strongly correlated with the desired dependent variable.</p></li>
+</ol>
+<p><strong>Advantages over other sampling methods</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Focuses on important subpopulations and ignores irrelevant ones.</p></li>
+<li><p>Allows use of different sampling techniques for different subpopulations.</p></li>
+<li><p>Improves the accuracy/efficiency of estimation.</p></li>
+<li><p>Permits greater balancing of statistical power of tests of differences between strata by sampling equal numbers from strata varying widely in size.</p></li>
+</ol>
+<p><strong>Disadvantages</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Requires selection of relevant stratification variables which can be difficult.</p></li>
+<li><p>Is not useful when there are no homogeneous subgroups.</p></li>
+<li><p>Can be expensive to implement.</p></li>
+</ol>
+<p><strong>Poststratification</strong></p>
+<p>Stratification is sometimes introduced after the sampling phase in a process called “poststratification.” This approach is typically implemented due to a lack of prior knowledge of an appropriate stratifying variable or when the experimenter lacks the necessary information to create a stratifying variable during the sampling phase. Although the method is susceptible to the pitfalls of post hoc approaches, it can provide several benefits in the right situation. Implementation usually follows a simple random sample. In addition to allowing for stratification on an ancillary variable, poststratification can be used to implement weighting, which can improve the precision of a sample’s estimates.</p>
+<p><strong>Oversampling</strong></p>
+<p>Choice-based sampling is one of the stratified sampling strategies. In choice-based sampling, the data are stratified on the target and a sample is taken from each stratum so that the rare target class will be more represented in the sample. The model is then built on this biased sample. The effects of the input variables on the target are often estimated with more precision with the choice-based sample even when a smaller overall sample size is taken, compared to a random sample. The results usually must be adjusted to correct for the oversampling.</p>
+</div>
+<div id="cluster-sampling" class="section level4" number="8.4.5.4">
+<h4><span class="header-section-number">8.4.5.4</span> Cluster sampling</h4>
+<p>Sometimes it is more cost-effective to select respondents in groups (‘clusters’). Sampling is often clustered by geography, or by time periods. (Nearly all samples are in some sense ‘clustered’ in time – although this is rarely taken into account in the analysis.) For instance, if surveying households within a city, we might choose to select 100 city blocks and then interview every household within the selected blocks.</p>
+<div class="figure">
+<img src="images/Cluster_sampling.PNG" title="Cluster sampling" alt="" />
+<p class="caption">A visual representation of selecting a random sample using the cluster sampling technique</p>
+</div>
+<p>Clustering can reduce travel and administrative costs. In the example above, an interviewer can make a single trip to visit several households in one block, rather than having to drive to a different block for each household.</p>
+<p>It also means that one does not need a sampling frame listing all elements in the target population. Instead, clusters can be chosen from a cluster-level frame, with an element-level frame created only for the selected clusters. In the example above, the sample only requires a block-level city map for initial selections, and then a household-level map of the 100 selected blocks, rather than a household-level map of the whole city.</p>
+<p>Cluster sampling (also known as clustered sampling) generally increases the variability of sample estimates above that of simple random sampling, depending on how the clusters differ between one another as compared to the within-cluster variation. For this reason, cluster sampling requires a larger sample than SRS to achieve the same level of accuracy – but cost savings from clustering might still make this a cheaper option.</p>
+<p>Cluster sampling is commonly implemented as multistage sampling. This is a complex form of cluster sampling in which two or more levels of units are embedded one in the other. The first stage consists of constructing the clusters that will be used to sample from. In the second stage, a sample of primary units is randomly selected from each cluster (rather than using all units contained in all selected clusters). In following stages, in each of those selected clusters, additional samples of units are selected, and so on. All ultimate units (individuals, for instance) selected at the last step of this procedure are then surveyed. This technique, thus, is essentially the process of taking random subsamples of preceding random samples.</p>
+<p>Multistage sampling can substantially reduce sampling costs, where the complete population list would need to be constructed (before other sampling methods could be applied). By eliminating the work involved in describing clusters that are not selected, multistage sampling can reduce the large costs associated with traditional cluster sampling.<span class="math display">\[8\]</span> However, each sample may not be a full representative of the whole population.</p>
+</div>
+</div>
+<div id="errors-and-biases" class="section level3" number="8.4.6">
+<h3><span class="header-section-number">8.4.6</span> Errors and biases</h3>
+<p>Survey results are typically subject to some error. Total errors can be classified into sampling errors and non-sampling errors. The term “error” here includes systematic biases as well as random errors.</p>
+<div id="sampling-errors-and-biases" class="section level4" number="8.4.6.1">
+<h4><span class="header-section-number">8.4.6.1</span> Sampling errors and biases</h4>
+<p>Sampling errors and biases are induced by the sample design. They include:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Selection bias</strong>: When the true selection probabilities differ from those assumed in calculating the results.</p></li>
+<li><p><strong>Random sampling error</strong>: Random variation in the results due to the elements in the sample being selected at random.</p></li>
+</ol>
+</div>
+<div id="non-sampling-error" class="section level4" number="8.4.6.2">
+<h4><span class="header-section-number">8.4.6.2</span> Non-sampling error</h4>
+<p>Non-sampling errors are other errors which can impact final survey estimates, caused by problems in data collection, processing, or sample design. Such errors may include:</p>
+<ol style="list-style-type: decimal">
+<li><p>Over-coverage: inclusion of data from outside of the population</p></li>
+<li><p>Under-coverage: sampling frame does not include elements in the population.</p></li>
+<li><p>Measurement error: e.g. when respondents misunderstand a question, or find it difficult to answer</p></li>
+<li><p>Processing error: mistakes in data coding</p></li>
+<li><p>Non-response or Participation bias: failure to obtain complete data from all selected individuals</p></li>
+</ol>
+<p>After sampling, a review should be held of the exact process followed in sampling, rather than that intended, in order to study any effects that any divergences might have on subsequent analysis.</p>
+<p>A particular problem involves non-response. Two major types of non-response exist:</p>
+<ul>
+<li><p>unit nonresponse (lack of completion of any part of the survey)</p></li>
+<li><p>item non-response (submission or participation in survey but failing to complete one or more components/questions of the survey)</p></li>
+</ul>
+<p>In survey sampling, many of the individuals identified as part of the sample may be unwilling to participate, not have the time to participate (opportunity cost), or survey administrators may not have been able to contact them. In this case, there is a risk of differences between respondents and nonrespondents, leading to biased estimates of population parameters. This is often addressed by improving survey design, offering incentives, and conducting follow-up studies which make a repeated attempt to contact the unresponsive and to characterize their similarities and differences with the rest of the frame. The effects can also be mitigated by weighting the data (when population benchmarks are available) or by imputing data based on answers to other questions. Nonresponse is particularly a problem in internet sampling. Reasons for this problem may include improperly designed surveys, over-surveying (or survey fatigue, and the fact that potential participants may have multiple e-mail addresses, which they don’t use anymore or don’t check regularly.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="visualizationggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probability-thoery.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

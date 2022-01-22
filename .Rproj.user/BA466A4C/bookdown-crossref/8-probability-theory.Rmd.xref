@@ -1,0 +1,34 @@
+h1:probability-thoery Probability Thoery
+h2:conditional-probability Conditional Probability
+h2:permutations Permutations
+h3:permutations-with-repetition Permutations with repetition
+h3:permutations-without-repetition Permutations without repetition
+h2:combinations Combinations
+h3:combinations-with-repetitions Combinations with repetitions
+h3:combinations-without-repetition Combinations without repetition
+h2:random-variables Random Variables
+h3:discrete-random-variables Discrete Random Variables
+h3:continuous-random-variables Continuous Random Variables
+h3:transforming-random-variables-shift-or-scale Transforming Random Variables (Shift or Scale)
+h3:expected-value-mean Expected Value (Mean)
+h3:standard-deviation Standard Deviation
+h2:normal-distribution Normal Distribution
+h3:properties Properties
+h3:z-scores Z-Scores
+h3:examples Examples
+h4:finding-percentages Finding Percentages
+h4:expected-value Expected Value
+h3:in-r In R
+h4:calculate-probability-from-z-value Calculate Probability From Z-Value
+h4:calculate-z-value-from-probability Calculate Z-Value From Probability
+h2:binomial-distribution Binomial Distribution
+h3:expected-value-mean-and-variance Expected Value (Mean) and Variance
+h3:in-r-1 In R
+h2:bernoulli-distribution Bernoulli Distribution
+h3:properties-1 Properties
+h3:mean Mean
+h3:variance Variance
+h3:in-r-2 In R
+h2:geometric-distribution Geometric Distribution
+h3:in-r-3 In R
+

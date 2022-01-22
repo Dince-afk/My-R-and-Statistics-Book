@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Probability Thoery | My R and Statistics Book</title>
+  <meta name="description" content="This is …" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Probability Thoery | My R and Statistics Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is …" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Probability Thoery | My R and Statistics Book" />
+  
+  <meta name="twitter:description" content="This is …" />
+  
+
+<meta name="author" content="Dino Curic" />
+
+
+<meta name="date" content="2022-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="statistics.html"/>
+<link rel="next" href="inferential-statistics.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>1</b> Glossary</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="glossary.html"><a href="glossary.html#shortcuts"><i class="fa fa-check"></i><b>1.1</b> Shortcuts</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="glossary.html"><a href="glossary.html#rstudio-environment"><i class="fa fa-check"></i><b>1.1.1</b> RStudio Environment</a></li>
+<li class="chapter" data-level="1.1.2" data-path="glossary.html"><a href="glossary.html#navigating-and-sections"><i class="fa fa-check"></i><b>1.1.2</b> Navigating and Sections</a></li>
+<li class="chapter" data-level="1.1.3" data-path="glossary.html"><a href="glossary.html#code-execution"><i class="fa fa-check"></i><b>1.1.3</b> Code Execution</a></li>
+<li class="chapter" data-level="1.1.4" data-path="glossary.html"><a href="glossary.html#special-characters"><i class="fa fa-check"></i><b>1.1.4</b> Special Characters</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="glossary.html"><a href="glossary.html#statistical-symbols"><i class="fa fa-check"></i><b>1.2</b> Statistical Symbols</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="glossary.html"><a href="glossary.html#special-symbols"><i class="fa fa-check"></i><b>1.2.1</b> Special Symbols</a></li>
+<li class="chapter" data-level="1.2.2" data-path="glossary.html"><a href="glossary.html#sample-and-population-symbols"><i class="fa fa-check"></i><b>1.2.2</b> Sample and Population Symbols</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-playgrounds.html"><a href="r-playgrounds.html"><i class="fa fa-check"></i><b>2</b> R Playgrounds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-playgrounds.html"><a href="r-playgrounds.html#expected-value-and-standard-deviation"><i class="fa fa-check"></i><b>2.1</b> Expected Value and Standard Deviation</a></li>
+<li class="chapter" data-level="2.2" data-path="r-playgrounds.html"><a href="r-playgrounds.html#theoretical-and-experimental-standard-error"><i class="fa fa-check"></i><b>2.2</b> Theoretical and Experimental Standard Error</a></li>
+<li class="chapter" data-level="2.3" data-path="r-playgrounds.html"><a href="r-playgrounds.html#sample-size-resulting-in-0.01-se"><i class="fa fa-check"></i><b>2.3</b> Sample Size Resulting in 0.01 SE</a></li>
+<li class="chapter" data-level="2.4" data-path="r-playgrounds.html"><a href="r-playgrounds.html#bank-and-loans"><i class="fa fa-check"></i><b>2.4</b> Bank and Loans</a></li>
+<li class="chapter" data-level="2.5" data-path="r-playgrounds.html"><a href="r-playgrounds.html#real-polling-data"><i class="fa fa-check"></i><b>2.5</b> Real Polling Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#read-and-write-data"><i class="fa fa-check"></i><b>3.1</b> Read and Write Data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basics.html"><a href="r-basics.html#csv-files"><i class="fa fa-check"></i><b>3.1.1</b> CSV Files</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basics.html"><a href="r-basics.html#dat-files"><i class="fa fa-check"></i><b>3.1.2</b> DAT Files</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-basics.html"><a href="r-basics.html#excel-files"><i class="fa fa-check"></i><b>3.1.3</b> Excel Files</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basics.html"><a href="r-basics.html#data-types"><i class="fa fa-check"></i><b>3.2</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basics.html"><a href="r-basics.html#convert-data-types"><i class="fa fa-check"></i><b>3.2.1</b> Convert data types</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basics.html"><a href="r-basics.html#numeric"><i class="fa fa-check"></i><b>3.2.2</b> Numeric</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basics.html"><a href="r-basics.html#logical"><i class="fa fa-check"></i><b>3.2.3</b> Logical</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basics.html"><a href="r-basics.html#characters"><i class="fa fa-check"></i><b>3.2.4</b> Characters</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basics.html"><a href="r-basics.html#nas"><i class="fa fa-check"></i><b>3.2.5</b> <code>NA</code>s</a></li>
+<li class="chapter" data-level="3.2.6" data-path="r-basics.html"><a href="r-basics.html#dates"><i class="fa fa-check"></i><b>3.2.6</b> Dates</a></li>
+<li class="chapter" data-level="3.2.7" data-path="r-basics.html"><a href="r-basics.html#posix-time"><i class="fa fa-check"></i><b>3.2.7</b> POSIX Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basics.html"><a href="r-basics.html#vectors"><i class="fa fa-check"></i><b>3.3</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-vectors"><i class="fa fa-check"></i><b>3.3.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basics.html"><a href="r-basics.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.2</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basics.html"><a href="r-basics.html#naming-vectors"><i class="fa fa-check"></i><b>3.3.3</b> Naming vectors</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basics.html"><a href="r-basics.html#filtering-vectors"><i class="fa fa-check"></i><b>3.3.4</b> Filtering vectors</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basics.html"><a href="r-basics.html#special-concepts"><i class="fa fa-check"></i><b>3.3.5</b> Special Concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basics.html"><a href="r-basics.html#factors"><i class="fa fa-check"></i><b>3.4</b> Factors</a></li>
+<li class="chapter" data-level="3.5" data-path="r-basics.html"><a href="r-basics.html#matrices-and-data-frames"><i class="fa fa-check"></i><b>3.5</b> Matrices and Data Frames</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="r-basics.html"><a href="r-basics.html#creating-matrices"><i class="fa fa-check"></i><b>3.5.1</b> Creating matrices</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-basics.html"><a href="r-basics.html#creating-data-frames"><i class="fa fa-check"></i><b>3.5.2</b> Creating data frames</a></li>
+<li class="chapter" data-level="3.5.3" data-path="r-basics.html"><a href="r-basics.html#adding-row-or-columns"><i class="fa fa-check"></i><b>3.5.3</b> Adding row or columns</a></li>
+<li class="chapter" data-level="3.5.4" data-path="r-basics.html"><a href="r-basics.html#naming-tables"><i class="fa fa-check"></i><b>3.5.4</b> Naming tables</a></li>
+<li class="chapter" data-level="3.5.5" data-path="r-basics.html"><a href="r-basics.html#deleting-rows-or-columns"><i class="fa fa-check"></i><b>3.5.5</b> Deleting rows or columns</a></li>
+<li class="chapter" data-level="3.5.6" data-path="r-basics.html"><a href="r-basics.html#rearranging-columns"><i class="fa fa-check"></i><b>3.5.6</b> Rearranging columns</a></li>
+<li class="chapter" data-level="3.5.7" data-path="r-basics.html"><a href="r-basics.html#merging-data-frames"><i class="fa fa-check"></i><b>3.5.7</b> Merging data frames</a></li>
+<li class="chapter" data-level="3.5.8" data-path="r-basics.html"><a href="r-basics.html#subsetting-matrices"><i class="fa fa-check"></i><b>3.5.8</b> Subsetting matrices</a></li>
+<li class="chapter" data-level="3.5.9" data-path="r-basics.html"><a href="r-basics.html#subsetting-data-frames"><i class="fa fa-check"></i><b>3.5.9</b> Subsetting data frames</a></li>
+<li class="chapter" data-level="3.5.10" data-path="r-basics.html"><a href="r-basics.html#data-frame-returns"><i class="fa fa-check"></i><b>3.5.10</b> Data frame returns</a></li>
+<li class="chapter" data-level="3.5.11" data-path="r-basics.html"><a href="r-basics.html#filtering-tables"><i class="fa fa-check"></i><b>3.5.11</b> Filtering tables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-basics.html"><a href="r-basics.html#lists"><i class="fa fa-check"></i><b>3.6</b> Lists</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="r-basics.html"><a href="r-basics.html#creating-lists"><i class="fa fa-check"></i><b>3.6.1</b> Creating lists</a></li>
+<li class="chapter" data-level="3.6.2" data-path="r-basics.html"><a href="r-basics.html#adding-components"><i class="fa fa-check"></i><b>3.6.2</b> Adding components</a></li>
+<li class="chapter" data-level="3.6.3" data-path="r-basics.html"><a href="r-basics.html#deleting-components"><i class="fa fa-check"></i><b>3.6.3</b> Deleting components</a></li>
+<li class="chapter" data-level="3.6.4" data-path="r-basics.html"><a href="r-basics.html#renaming-components"><i class="fa fa-check"></i><b>3.6.4</b> Renaming components</a></li>
+<li class="chapter" data-level="3.6.5" data-path="r-basics.html"><a href="r-basics.html#naming-inside-components"><i class="fa fa-check"></i><b>3.6.5</b> Naming inside components</a></li>
+<li class="chapter" data-level="3.6.6" data-path="r-basics.html"><a href="r-basics.html#subsetting-list-components"><i class="fa fa-check"></i><b>3.6.6</b> Subsetting list components</a></li>
+<li class="chapter" data-level="3.6.7" data-path="r-basics.html"><a href="r-basics.html#filtering-lists"><i class="fa fa-check"></i><b>3.6.7</b> Filtering lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#functionality"><i class="fa fa-check"></i><b>4.1</b> Functionality</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>4.1.1</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="packages.html"><a href="packages.html#gridextra"><i class="fa fa-check"></i><b>4.1.2</b> <code>gridExtra</code></a></li>
+<li class="chapter" data-level="4.1.3" data-path="packages.html"><a href="packages.html#kableextra-1"><i class="fa fa-check"></i><b>4.1.3</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.4" data-path="packages.html"><a href="packages.html#unpivotr"><i class="fa fa-check"></i><b>4.1.4</b> <code>unpivotr</code></a></li>
+<li class="chapter" data-level="4.1.5" data-path="packages.html"><a href="packages.html#tibble"><i class="fa fa-check"></i><b>4.1.5</b> <code>tibble</code></a></li>
+<li class="chapter" data-level="4.1.6" data-path="packages.html"><a href="packages.html#dslabs"><i class="fa fa-check"></i><b>4.1.6</b> <code>dslabs</code></a></li>
+<li class="chapter" data-level="4.1.7" data-path="packages.html"><a href="packages.html#knitr"><i class="fa fa-check"></i><b>4.1.7</b> <code>knitr</code></a></li>
+<li class="chapter" data-level="4.1.8" data-path="packages.html"><a href="packages.html#readr"><i class="fa fa-check"></i><b>4.1.8</b> <code>readr</code></a></li>
+<li class="chapter" data-level="4.1.9" data-path="packages.html"><a href="packages.html#readxl"><i class="fa fa-check"></i><b>4.1.9</b> <code>readxl</code></a></li>
+<li class="chapter" data-level="4.1.10" data-path="packages.html"><a href="packages.html#tidyxl"><i class="fa fa-check"></i><b>4.1.10</b> <code>tidyxl</code></a></li>
+<li class="chapter" data-level="4.1.11" data-path="packages.html"><a href="packages.html#corrgram"><i class="fa fa-check"></i><b>4.1.11</b> <code>corrgram</code></a></li>
+<li class="chapter" data-level="4.1.12" data-path="packages.html"><a href="packages.html#corrplot"><i class="fa fa-check"></i><b>4.1.12</b> <code>corrplot</code></a></li>
+<li class="chapter" data-level="4.1.13" data-path="packages.html"><a href="packages.html#rtweet"><i class="fa fa-check"></i><b>4.1.13</b> <code>rtweet</code></a></li>
+<li class="chapter" data-level="4.1.14" data-path="packages.html"><a href="packages.html#catools"><i class="fa fa-check"></i><b>4.1.14</b> <code>caTools</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="packages.html"><a href="packages.html#data"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="packages.html"><a href="packages.html#ggplot2movies"><i class="fa fa-check"></i><b>4.2.1</b> <code>ggplot2movies</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="packages.html"><a href="packages.html#wdi"><i class="fa fa-check"></i><b>4.2.2</b> <code>WDI</code></a></li>
+<li class="chapter" data-level="4.2.3" data-path="packages.html"><a href="packages.html#essurvey"><i class="fa fa-check"></i><b>4.2.3</b> <code>essurvey</code></a></li>
+<li class="chapter" data-level="4.2.4" data-path="packages.html"><a href="packages.html#wbstats"><i class="fa fa-check"></i><b>4.2.4</b> <code>wbstats</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="packages.html"><a href="packages.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="packages.html"><a href="packages.html#igraph"><i class="fa fa-check"></i><b>4.3.1</b> <code>igraph</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="packages.html"><a href="packages.html#ggthemes"><i class="fa fa-check"></i><b>4.3.2</b> <code>ggthemes</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="packages.html"><a href="packages.html#ggrepel"><i class="fa fa-check"></i><b>4.3.3</b> <code>ggrepel</code></a></li>
+<li class="chapter" data-level="4.3.4" data-path="packages.html"><a href="packages.html#ggridges"><i class="fa fa-check"></i><b>4.3.4</b> <code>ggridges</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="packages.html"><a href="packages.html#kableextra-2"><i class="fa fa-check"></i><b>4.3.5</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="packages.html"><a href="packages.html#gridextra-1"><i class="fa fa-check"></i><b>4.3.6</b> <code>?gridExtra</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>5</b> Rmarkdown</a></li>
+<li class="chapter" data-level="6" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>6</b> Tidyverse</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tidyverse.html"><a href="tidyverse.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>6.1.1</b> Pipe</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>6.1.2</b> Select</a></li>
+<li class="chapter" data-level="6.1.3" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>6.1.3</b> Rename</a></li>
+<li class="chapter" data-level="6.1.4" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>6.1.4</b> Filter</a></li>
+<li class="chapter" data-level="6.1.5" data-path="tidyverse.html"><a href="tidyverse.html#arrange"><i class="fa fa-check"></i><b>6.1.5</b> Arrange</a></li>
+<li class="chapter" data-level="6.1.6" data-path="tidyverse.html"><a href="tidyverse.html#slice"><i class="fa fa-check"></i><b>6.1.6</b> Slice</a></li>
+<li class="chapter" data-level="6.1.7" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>6.1.7</b> Mutate</a></li>
+<li class="chapter" data-level="6.1.8" data-path="tidyverse.html"><a href="tidyverse.html#relocate"><i class="fa fa-check"></i><b>6.1.8</b> Relocate</a></li>
+<li class="chapter" data-level="6.1.9" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>6.1.9</b> Summarise</a></li>
+<li class="chapter" data-level="6.1.10" data-path="tidyverse.html"><a href="tidyverse.html#pull"><i class="fa fa-check"></i><b>6.1.10</b> Pull</a></li>
+<li class="chapter" data-level="6.1.11" data-path="tidyverse.html"><a href="tidyverse.html#distinct-values"><i class="fa fa-check"></i><b>6.1.11</b> Distinct values</a></li>
+<li class="chapter" data-level="6.1.12" data-path="tidyverse.html"><a href="tidyverse.html#counts-and-proportions"><i class="fa fa-check"></i><b>6.1.12</b> Counts and proportions</a></li>
+<li class="chapter" data-level="6.1.13" data-path="tidyverse.html"><a href="tidyverse.html#case-when"><i class="fa fa-check"></i><b>6.1.13</b> Case when</a></li>
+<li class="chapter" data-level="6.1.14" data-path="tidyverse.html"><a href="tidyverse.html#between"><i class="fa fa-check"></i><b>6.1.14</b> Between</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="tidyverse.html"><a href="tidyverse.html#forcats"><i class="fa fa-check"></i><b>6.2</b> forcats</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyverse.html"><a href="tidyverse.html#count-factors"><i class="fa fa-check"></i><b>6.2.1</b> Count factors</a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyverse.html"><a href="tidyverse.html#reorder-levels"><i class="fa fa-check"></i><b>6.2.2</b> Reorder levels</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="tidyverse.html"><a href="tidyverse.html#purrr"><i class="fa fa-check"></i><b>6.3</b> purrr</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyverse.html"><a href="tidyverse.html#map"><i class="fa fa-check"></i><b>6.3.1</b> Map</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tidyverse.html"><a href="tidyverse.html#map-doubles"><i class="fa fa-check"></i><b>6.3.2</b> Map doubles</a></li>
+<li class="chapter" data-level="6.3.3" data-path="tidyverse.html"><a href="tidyverse.html#map-dataframes"><i class="fa fa-check"></i><b>6.3.3</b> Map dataframes</a></li>
+<li class="chapter" data-level="6.3.4" data-path="tidyverse.html"><a href="tidyverse.html#map-functionsclosures"><i class="fa fa-check"></i><b>6.3.4</b> Map functions/closures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html"><i class="fa fa-check"></i><b>7</b> Visualization/<code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#gg-object"><i class="fa fa-check"></i><b>7.1</b> gg object</a></li>
+<li class="chapter" data-level="7.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#aesthetics"><i class="fa fa-check"></i><b>7.2</b> Aesthetics</a></li>
+<li class="chapter" data-level="7.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#geometries"><i class="fa fa-check"></i><b>7.3</b> Geometries</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#points"><i class="fa fa-check"></i><b>7.3.1</b> Points</a></li>
+<li class="chapter" data-level="7.3.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#text"><i class="fa fa-check"></i><b>7.3.2</b> Text</a></li>
+<li class="chapter" data-level="7.3.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#bars"><i class="fa fa-check"></i><b>7.3.3</b> Bars</a></li>
+<li class="chapter" data-level="7.3.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#density"><i class="fa fa-check"></i><b>7.3.4</b> Density</a></li>
+<li class="chapter" data-level="7.3.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#boxplots"><i class="fa fa-check"></i><b>7.3.5</b> Boxplots</a></li>
+<li class="chapter" data-level="7.3.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#lines"><i class="fa fa-check"></i><b>7.3.6</b> Lines</a></li>
+<li class="chapter" data-level="7.3.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#vertical-lines"><i class="fa fa-check"></i><b>7.3.7</b> Vertical Lines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#coordinates"><i class="fa fa-check"></i><b>7.4</b> Coordinates</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#limits"><i class="fa fa-check"></i><b>7.4.1</b> Limits</a></li>
+<li class="chapter" data-level="7.4.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#flipping"><i class="fa fa-check"></i><b>7.4.2</b> Flipping</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#tiles"><i class="fa fa-check"></i><b>7.5</b> Tiles</a></li>
+<li class="chapter" data-level="7.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scales"><i class="fa fa-check"></i><b>7.6</b> Scales</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#logarithmic-scales"><i class="fa fa-check"></i><b>7.6.1</b> Logarithmic scales</a></li>
+<li class="chapter" data-level="7.6.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scale-label-format"><i class="fa fa-check"></i><b>7.6.2</b> Scale label format</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#labels"><i class="fa fa-check"></i><b>7.7</b> Labels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>8</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="statistics.html"><a href="statistics.html#about-statistics"><i class="fa fa-check"></i><b>8.1</b> About Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="statistics.html"><a href="statistics.html#centrality"><i class="fa fa-check"></i><b>8.2</b> Centrality</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="statistics.html"><a href="statistics.html#mean"><i class="fa fa-check"></i><b>8.2.1</b> Mean</a></li>
+<li class="chapter" data-level="8.2.2" data-path="statistics.html"><a href="statistics.html#reproduction-mean-and-standard-deviation-reproduction"><i class="fa fa-check"></i><b>8.2.2</b> Reproduction Mean and Standard Deviation Reproduction</a></li>
+<li class="chapter" data-level="8.2.3" data-path="statistics.html"><a href="statistics.html#median"><i class="fa fa-check"></i><b>8.2.3</b> Median</a></li>
+<li class="chapter" data-level="8.2.4" data-path="statistics.html"><a href="statistics.html#mode"><i class="fa fa-check"></i><b>8.2.4</b> Mode</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="statistics.html"><a href="statistics.html#variability"><i class="fa fa-check"></i><b>8.3</b> Variability</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="statistics.html"><a href="statistics.html#range"><i class="fa fa-check"></i><b>8.3.1</b> Range</a></li>
+<li class="chapter" data-level="8.3.2" data-path="statistics.html"><a href="statistics.html#range-iqr-and-sd"><i class="fa fa-check"></i><b>8.3.2</b> Range, IQR and SD</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="statistics.html"><a href="statistics.html#sampling"><i class="fa fa-check"></i><b>8.4</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="statistics.html"><a href="statistics.html#weights"><i class="fa fa-check"></i><b>8.4.1</b> Weights</a></li>
+<li class="chapter" data-level="8.4.2" data-path="statistics.html"><a href="statistics.html#population"><i class="fa fa-check"></i><b>8.4.2</b> Population</a></li>
+<li class="chapter" data-level="8.4.3" data-path="statistics.html"><a href="statistics.html#sampling-1"><i class="fa fa-check"></i><b>8.4.3</b> Sampling</a></li>
+<li class="chapter" data-level="8.4.4" data-path="statistics.html"><a href="statistics.html#non-probability-sampling"><i class="fa fa-check"></i><b>8.4.4</b> Non-probability Sampling</a></li>
+<li class="chapter" data-level="8.4.5" data-path="statistics.html"><a href="statistics.html#sampling-methods"><i class="fa fa-check"></i><b>8.4.5</b> Sampling Methods</a>
+<ul>
+<li class="chapter" data-level="8.4.5.1" data-path="statistics.html"><a href="statistics.html#simple-random-sampling"><i class="fa fa-check"></i><b>8.4.5.1</b> Simple random sampling</a></li>
+<li class="chapter" data-level="8.4.5.2" data-path="statistics.html"><a href="statistics.html#systematic-sampling"><i class="fa fa-check"></i><b>8.4.5.2</b> Systematic sampling</a></li>
+<li class="chapter" data-level="8.4.5.3" data-path="statistics.html"><a href="statistics.html#stratified-sampling"><i class="fa fa-check"></i><b>8.4.5.3</b> Stratified sampling</a></li>
+<li class="chapter" data-level="8.4.5.4" data-path="statistics.html"><a href="statistics.html#cluster-sampling"><i class="fa fa-check"></i><b>8.4.5.4</b> Cluster sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4.6" data-path="statistics.html"><a href="statistics.html#errors-and-biases"><i class="fa fa-check"></i><b>8.4.6</b> Errors and biases</a>
+<ul>
+<li class="chapter" data-level="8.4.6.1" data-path="statistics.html"><a href="statistics.html#sampling-errors-and-biases"><i class="fa fa-check"></i><b>8.4.6.1</b> Sampling errors and biases</a></li>
+<li class="chapter" data-level="8.4.6.2" data-path="statistics.html"><a href="statistics.html#non-sampling-error"><i class="fa fa-check"></i><b>8.4.6.2</b> Non-sampling error</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="probability-thoery.html"><a href="probability-thoery.html"><i class="fa fa-check"></i><b>9</b> Probability Thoery</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="probability-thoery.html"><a href="probability-thoery.html#conditional-probability"><i class="fa fa-check"></i><b>9.1</b> Conditional Probability</a></li>
+<li class="chapter" data-level="9.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations"><i class="fa fa-check"></i><b>9.2</b> Permutations</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-with-repetition"><i class="fa fa-check"></i><b>9.2.1</b> Permutations with repetition</a></li>
+<li class="chapter" data-level="9.2.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-without-repetition"><i class="fa fa-check"></i><b>9.2.2</b> Permutations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations"><i class="fa fa-check"></i><b>9.3</b> Combinations</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-with-repetitions"><i class="fa fa-check"></i><b>9.3.1</b> Combinations with repetitions</a></li>
+<li class="chapter" data-level="9.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-without-repetition"><i class="fa fa-check"></i><b>9.3.2</b> Combinations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="probability-thoery.html"><a href="probability-thoery.html#random-variables"><i class="fa fa-check"></i><b>9.4</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#discrete-random-variables"><i class="fa fa-check"></i><b>9.4.1</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="9.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#continuous-random-variables"><i class="fa fa-check"></i><b>9.4.2</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="9.4.3" data-path="probability-thoery.html"><a href="probability-thoery.html#transforming-random-variables-shift-or-scale"><i class="fa fa-check"></i><b>9.4.3</b> Transforming Random Variables (Shift or Scale)</a></li>
+<li class="chapter" data-level="9.4.4" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean"><i class="fa fa-check"></i><b>9.4.4</b> Expected Value (Mean)</a></li>
+<li class="chapter" data-level="9.4.5" data-path="probability-thoery.html"><a href="probability-thoery.html#standard-deviation"><i class="fa fa-check"></i><b>9.4.5</b> Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="probability-thoery.html"><a href="probability-thoery.html#normal-distribution"><i class="fa fa-check"></i><b>9.5</b> Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties"><i class="fa fa-check"></i><b>9.5.1</b> Properties</a></li>
+<li class="chapter" data-level="9.5.2" data-path="probability-thoery.html"><a href="probability-thoery.html#z-scores"><i class="fa fa-check"></i><b>9.5.2</b> Z-Scores</a></li>
+<li class="chapter" data-level="9.5.3" data-path="probability-thoery.html"><a href="probability-thoery.html#examples"><i class="fa fa-check"></i><b>9.5.3</b> Examples</a>
+<ul>
+<li class="chapter" data-level="9.5.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#finding-percentages"><i class="fa fa-check"></i><b>9.5.3.1</b> Finding Percentages</a></li>
+<li class="chapter" data-level="9.5.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value"><i class="fa fa-check"></i><b>9.5.3.2</b> Expected Value</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r"><i class="fa fa-check"></i><b>9.5.4</b> In R</a>
+<ul>
+<li class="chapter" data-level="9.5.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-probability-from-z-value"><i class="fa fa-check"></i><b>9.5.4.1</b> Calculate Probability From Z-Value</a></li>
+<li class="chapter" data-level="9.5.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-z-value-from-probability"><i class="fa fa-check"></i><b>9.5.4.2</b> Calculate Z-Value From Probability</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="probability-thoery.html"><a href="probability-thoery.html#binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Binomial Distribution</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean-and-variance"><i class="fa fa-check"></i><b>9.6.1</b> Expected Value (Mean) and Variance</a></li>
+<li class="chapter" data-level="9.6.2" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-1"><i class="fa fa-check"></i><b>9.6.2</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="probability-thoery.html"><a href="probability-thoery.html#bernoulli-distribution"><i class="fa fa-check"></i><b>9.7</b> Bernoulli Distribution</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties-1"><i class="fa fa-check"></i><b>9.7.1</b> Properties</a></li>
+<li class="chapter" data-level="9.7.2" data-path="probability-thoery.html"><a href="probability-thoery.html#mean-1"><i class="fa fa-check"></i><b>9.7.2</b> Mean</a></li>
+<li class="chapter" data-level="9.7.3" data-path="probability-thoery.html"><a href="probability-thoery.html#variance"><i class="fa fa-check"></i><b>9.7.3</b> Variance</a></li>
+<li class="chapter" data-level="9.7.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-2"><i class="fa fa-check"></i><b>9.7.4</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="probability-thoery.html"><a href="probability-thoery.html#geometric-distribution"><i class="fa fa-check"></i><b>9.8</b> Geometric Distribution</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-3"><i class="fa fa-check"></i><b>9.8.1</b> In R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>10</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#sampling-distributions"><i class="fa fa-check"></i><b>10.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="10.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>10.2</b> Central Limit Theorem</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#what-is-large-enough-for-the-ctl"><i class="fa fa-check"></i><b>10.2.1</b> What is Large Enough for the CTL?</a></li>
+<li class="chapter" data-level="10.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-of-central-limit-theorem"><i class="fa fa-check"></i><b>10.2.2</b> Proof of Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#confidence-intervals"><i class="fa fa-check"></i><b>10.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#why-confidence-intervals-work"><i class="fa fa-check"></i><b>10.3.1</b> Why Confidence Intervals Work</a></li>
+<li class="chapter" data-level="10.3.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-for-confidence-intervals"><i class="fa fa-check"></i><b>10.3.2</b> Proof for Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-proportion"><i class="fa fa-check"></i><b>10.3.2.1</b> CI for Population Proportion</a></li>
+<li class="chapter" data-level="10.3.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-mean"><i class="fa fa-check"></i><b>10.3.2.2</b> CI for Population Mean</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>10.4</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#p-value"><i class="fa fa-check"></i><b>10.4.1</b> P-Value</a></li>
+<li class="chapter" data-level="10.4.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#z-test"><i class="fa fa-check"></i><b>10.4.2</b> Z-Test</a></li>
+<li class="chapter" data-level="10.4.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-z-test-statistic"><i class="fa fa-check"></i><b>10.4.3</b> Formula: z test statistic</a></li>
+<li class="chapter" data-level="10.4.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-z-score"><i class="fa fa-check"></i><b>10.4.4</b> R: P-value from z-score</a></li>
+<li class="chapter" data-level="10.4.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conditions-for-mean-inference"><i class="fa fa-check"></i><b>10.4.5</b> Conditions for mean inference</a></li>
+<li class="chapter" data-level="10.4.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-t-test-statistic"><i class="fa fa-check"></i><b>10.4.6</b> Formula: t test statistic</a></li>
+<li class="chapter" data-level="10.4.7" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-t-statistic"><i class="fa fa-check"></i><b>10.4.7</b> R: P-value from t statistic</a></li>
+<li class="chapter" data-level="10.4.8" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-t-tests"><i class="fa fa-check"></i><b>10.4.8</b> R: t-tests</a></li>
+<li class="chapter" data-level="10.4.9" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-or-z-statistic"><i class="fa fa-check"></i><b>10.4.9</b> t or z Statistic?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation"><i class="fa fa-check"></i><b>10.5</b> Correlation</a></li>
+<li class="chapter" data-level="10.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#regression"><i class="fa fa-check"></i><b>10.6</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>11</b> Causal Inference</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="causal-inference.html"><a href="causal-inference.html#potential-outcome-framework"><i class="fa fa-check"></i><b>11.1</b> Potential outcome framework</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>12</b> Functions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="functions.html"><a href="functions.html#read-and-write"><i class="fa fa-check"></i><b>12.1</b> Read and Write</a></li>
+<li class="chapter" data-level="12.2" data-path="functions.html"><a href="functions.html#random"><i class="fa fa-check"></i><b>12.2</b> Random</a></li>
+<li class="chapter" data-level="12.3" data-path="functions.html"><a href="functions.html#order"><i class="fa fa-check"></i><b>12.3</b> Order</a></li>
+<li class="chapter" data-level="12.4" data-path="functions.html"><a href="functions.html#visualization-1"><i class="fa fa-check"></i><b>12.4</b> Visualization</a></li>
+<li class="chapter" data-level="12.5" data-path="functions.html"><a href="functions.html#conditionals"><i class="fa fa-check"></i><b>12.5</b> Conditionals</a></li>
+<li class="chapter" data-level="12.6" data-path="functions.html"><a href="functions.html#numbers"><i class="fa fa-check"></i><b>12.6</b> Numbers</a></li>
+<li class="chapter" data-level="12.7" data-path="functions.html"><a href="functions.html#apply-functions"><i class="fa fa-check"></i><b>12.7</b> Apply Functions</a></li>
+<li class="chapter" data-level="12.8" data-path="functions.html"><a href="functions.html#string-functions"><i class="fa fa-check"></i><b>12.8</b> String Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="frequent-problems.html"><a href="frequent-problems.html"><i class="fa fa-check"></i><b>13</b> Frequent Problems</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="frequent-problems.html"><a href="frequent-problems.html#first-exploration-of-new-dataset"><i class="fa fa-check"></i><b>13.1</b> First exploration of new dataset</a></li>
+<li class="chapter" data-level="13.2" data-path="frequent-problems.html"><a href="frequent-problems.html#a-count-and-prop-table"><i class="fa fa-check"></i><b>13.2</b> A Count and prop table</a></li>
+<li class="chapter" data-level="13.3" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-count-data"><i class="fa fa-check"></i><b>13.3</b> Bar graph with count data</a></li>
+<li class="chapter" data-level="13.4" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-percentage-labels"><i class="fa fa-check"></i><b>13.4</b> Bar graph with percentage labels</a></li>
+<li class="chapter" data-level="13.5" data-path="frequent-problems.html"><a href="frequent-problems.html#collapse-factors-to-other"><i class="fa fa-check"></i><b>13.5</b> Collapse factors to „Other”</a></li>
+<li class="chapter" data-level="13.6" data-path="frequent-problems.html"><a href="frequent-problems.html#filter-for-specific-values"><i class="fa fa-check"></i><b>13.6</b> Filter for specific values</a></li>
+<li class="chapter" data-level="13.7" data-path="frequent-problems.html"><a href="frequent-problems.html#change-bar-colors-in-barplot"><i class="fa fa-check"></i><b>13.7</b> Change bar colors in barplot</a></li>
+<li class="chapter" data-level="13.8" data-path="frequent-problems.html"><a href="frequent-problems.html#hide-aescolor-mapping-legend"><i class="fa fa-check"></i><b>13.8</b> Hide aes(color) mapping legend</a></li>
+<li class="chapter" data-level="13.9" data-path="frequent-problems.html"><a href="frequent-problems.html#re-code-values-of-categorical-variables"><i class="fa fa-check"></i><b>13.9</b> Re-code values of categorical variables</a></li>
+<li class="chapter" data-level="13.10" data-path="frequent-problems.html"><a href="frequent-problems.html#order-color-legend"><i class="fa fa-check"></i><b>13.10</b> Order color legend</a></li>
+<li class="chapter" data-level="13.11" data-path="frequent-problems.html"><a href="frequent-problems.html#show-unique-values"><i class="fa fa-check"></i><b>13.11</b> Show unique values</a></li>
+<li class="chapter" data-level="13.12" data-path="frequent-problems.html"><a href="frequent-problems.html#slice-rows-by-maximum-or-minimum-values"><i class="fa fa-check"></i><b>13.12</b> Slice rows by maximum or minimum values</a></li>
+<li class="chapter" data-level="13.13" data-path="frequent-problems.html"><a href="frequent-problems.html#show-number-of-nas"><i class="fa fa-check"></i><b>13.13</b> Show Number of <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.14" data-path="frequent-problems.html"><a href="frequent-problems.html#drop-rows-with-missing-values"><i class="fa fa-check"></i><b>13.14</b> Drop rows with missing values</a></li>
+<li class="chapter" data-level="13.15" data-path="frequent-problems.html"><a href="frequent-problems.html#replace-nas"><i class="fa fa-check"></i><b>13.15</b> Replace <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.16" data-path="frequent-problems.html"><a href="frequent-problems.html#the-factor-variable-trap"><i class="fa fa-check"></i><b>13.16</b> The factor variable trap</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">My R and Statistics Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="probability-thoery" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Probability Thoery</h1>
+<p>The reason we study statistics and probability together is because when we collect data as part of a statistical study, we want to be able to use what we know about probability to say how likely it is that our results are reliable.</p>
+<p>Probability is how likely it is that something will occur. You can write a probability as a fraction, decimal or percent, but all probabilities are numbers equal to or between 0 and 1.</p>
+<p>The formula:</p>
+<p><span class="math display">\[
+P(event) = \frac{\text{outcomes that meet our criteria}}{\text{all possible outcomes (also: sample space)}}
+\]</span></p>
+<p>Example:</p>
+<p>How likely is it to draw a queen from a deck of playing cards? First, how many outcomes or cards meet our criteria? Four. How many possible outcomes are there? A card deck has 52 cards.</p>
+<p><span class="math display">\[
+P(queen) = \frac{4}{52}=0.07692307692≈7.7 \%
+\]</span></p>
+<p>For example, let’s say we flip a coin four times in a row. As you know, it’s completely possible that, just by chance, we end up with four heads in a row. Based on that result, we might say that the probability of getting heads is</p>
+<p><span class="math display">\[
+P(heads) = \frac{4}{4}= 1 = 100 \%
+\]</span></p>
+<p>But how can this be true? Before we saw that the probability of getting heads on one flip was 50 % , but now we’re calculating the probability of getting heads four times in a row at 100 % . What’s going on?</p>
+<p>We’re looking at the difference between experimental and theoretical probability. Experimental probability (also called <strong>empirical probability</strong>) is the probability we find when we run experiments, basically the results of an experiment. If we flip the coin a fifth time and get tails this time, then the experimental probability of getting heads after 5 experiments is</p>
+<p><span class="math display">\[
+P(heads) = \frac{4}{5}= 80\%
+\]</span></p>
+<p>In other words, the experimental probability of an event will be constantly changing as we run more and more experiments over time. If the experiment is a good one, the idea is that over time the experimental probability will get very close to the theoretical probability.</p>
+<p>Theoretical probability (also called classical probability) is the probability that an event will occur if you could run an infinite number of experiments. Or, you can think about the theoretical probability as the one we get from the simple probability formula:</p>
+<p><span class="math display">\[
+P(event) = \frac{\text{outcomes that meet our criteria}}{\text{all possible outcomes}}
+\]</span></p>
+<p>We know from using this formula that the probability of getting heads when we flip a coin is 50 % . Therefore, the theoretical probability is 50 % , which means that the more experiments we run, the closer our experimental probability should get to 50 % .</p>
+<p>This is also called the <strong>law of large numbers</strong>. It says that, if we could run an infinite number of experiments, that our experimental probability would eventually equal our theoretical probability.</p>
+<div id="conditional-probability" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Conditional Probability</h2>
+<p>Bayes’ theorem or condtional probability <strong>describes the probability of an event, based on prior knowledge of conditions that might be related to the event.</strong> For example, if the risk of developing health problems is known to increase with age, Bayes’ theorem allows the risk to an individual of a known age to be assessed more accurately (by conditioning it on their age) than simply assuming that the individual is typical of the population as a whole.</p>
+<p>Bayes’ theorem is also called Bayes’ Rule or Bayes’ Law and is the foundation of the field of Bayesian statistics.</p>
+<p>Bayes’ theorem is stated mathematically as the following equation:</p>
+<p><span class="math display">\[
+P(A|B)=\frac{P(B|A)*P(A)}{P(B)}
+\]</span></p>
+<p>Which tells us:</p>
+<ul>
+<li>how often <span class="math inline">\(A\)</span> happens <em>given that</em> <span class="math inline">\(B\)</span> <em>happens</em>, written <span class="math inline">\(P(A|B)\)</span>.</li>
+</ul>
+<p>When we know:</p>
+<ul>
+<li><p>how often <span class="math inline">\(B\)</span> happens <em>given that</em> <span class="math inline">\(A\)</span> <em>happens,</em> written <span class="math inline">\(P(B|A)\)</span>.</p></li>
+<li><p>how likely <span class="math inline">\(A\)</span> is on its own, written <span class="math inline">\(P(A)\)</span>.</p></li>
+<li><p>how likely <span class="math inline">\(B\)</span> is on its own, written <span class="math inline">\(P(B)\)</span>.</p></li>
+</ul>
+<p><strong>Example</strong></p>
+<p>Let us say P(Fire) means how often there is fire, and P(Smoke) means how often we see smoke, then:</p>
+<ul>
+<li><p>P(Fire|Smoke) means how often there is fire when we can see smoke </p></li>
+<li><p>P(Smoke|Fire) means how often we can see smoke when there is fire</p></li>
+</ul>
+<p>So the formula kind of tells us “forwards” P(Fire|Smoke) when we know “backwards” P(Smoke|Fire)</p>
+<ul>
+<li><p>dangerous fires are rare (1%), <span class="math inline">\(P(Fire)\)</span>.</p></li>
+<li><p>but smoke is fairly common (10%) due to barbecues, <span class="math inline">\(P(Smoke)\)</span>.</p></li>
+<li><p>and 90% of dangerous fires make smoke, smoke given dangerous fire, <span class="math inline">\(P(Smoke|Fire)\)</span>.</p></li>
+</ul>
+<p>We can then discover the <strong>probability of dangerous Fire when there is (given) Smoke</strong>:</p>
+<p><span class="math display">\[
+P(Fire|Smoke) = \frac{P(Smoke|Fire)*P(Fire)}{P(Smoke)}=\frac{90\%*1\%}{10\%}= 9\%
+\]</span></p>
+<p>So it is still worth checking out any smoke to be sure.</p>
+</div>
+<div id="permutations" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Permutations</h2>
+<p>Permutations and Combinations are the <strong>number of ways</strong> you can <strong>arrange</strong> or <strong>combine</strong> a set of things. Permutations are used when the <strong>order does matter</strong>, meaning 123 is not the same as 213. In combinations the order does not matter. This is often used for questions like what’s the probability to get at least 5 coin flips with head in 10 total tosses. I.e., the order of the heads in when tossing is not important, the total amount is.</p>
+<p>There are two types of permutations (remember the <strong>order does matter</strong>).</p>
+<div id="permutations-with-repetition" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Permutations with repetition</h3>
+<p>Example: a digit lock (it could be 333). How many different ways are there to input a 3-digit lock with numbers from 0 to 9 are there?</p>
+<p>The formula:</p>
+<p><span class="math display">\[
+n^r
+\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the number of distinct things to choose from and we choose <span class="math inline">\(r\)</span> of them.</p>
+<p>The answer:</p>
+<p><span class="math display">\[
+n^r=10^3=1000
+\]</span></p>
+</div>
+<div id="permutations-without-repetition" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Permutations without repetition</h3>
+<p>Example 1): arrangement of 16 pool balls. You pick one ball and the next has one option less to choose from. How many different ways are there to arrange 16 distinct pool balls?</p>
+<p>The formula:</p>
+<p><span class="math display">\[
+P(n,r)=\frac{n!}{(n-r)!}
+\]</span></p>
+<blockquote>
+<p>Example 1) the answer:</p>
+</blockquote>
+<p><span class="math display">\[
+P(n,r)=\frac{n!}{(n-r)!} = P(16,16) = \frac{16!}{(16-16)!}=\frac{16!}{1}=20.922.789.888.000
+\]</span></p>
+<p>When we calculate <strong>Permutations without repetition</strong> each time we have to subtract one less option to choose from, because we’ve already used one distinct value. I.e. <span class="math inline">\(5*4*3\)</span> instead of <span class="math inline">\(5*5*5\)</span>. This process of decrementing a value by 1 repeatedly is mathematically notated by <span class="math inline">\(n! = (5-1)*(4-1)*(3-1)*(2-1)\)</span>. Because we only choose three (<span class="math inline">\(r\)</span>) numbers of the set of 5 numbers we have to divide them by the excess permutations.</p>
+<p>Example 2) How many different three letter “words” can be formed by the letters abcde?</p>
+<p>Example 2) the answer:</p>
+<p><span class="math display">\[
+P(5,3)=\frac{5!}{(5-3)!}=\frac{5!}{2!}= \frac{5*4*3*2*1}{2*1}= 5*4*3=60
+\]</span></p>
+<p>Same as:</p>
+<p>abc,abd,abe,acb,acd,ace,adb,adc,ade,aeb,aec,aed (12 with a first)</p>
+<p>bac,bad,bae,…. (so 12 times 5 = 60).</p>
+</div>
+</div>
+<div id="combinations" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Combinations</h2>
+<p>On the other hand, a <strong>Combination</strong> is the number of ways you can arrange a set of things, but the order doesn’t matter.</p>
+<p>There are also two types of combinations (remember the order does <strong>not</strong> matter now):</p>
+<div id="combinations-with-repetitions" class="section level3" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Combinations with repetitions</h3>
+<p>Example: coins in your pocket (5,5,5,10,10)</p>
+<p>This is actually the most complicated and I haven’t had the need to use it so far.</p>
+</div>
+<div id="combinations-without-repetition" class="section level3" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Combinations without repetition</h3>
+<p>Example: lottery numbers (2,14,15,27). How many combinations are there in choosing 5 lottery numbers from 1 to 10?</p>
+<p>The formula, also called the <strong>Binomial Coefficient</strong>:</p>
+<p><span class="math display">\[
+P(n,r)=\frac{n!}{r!(n-r)!}
+\]</span></p>
+<p>The answer:</p>
+<p><span class="math display">\[
+P(n,r)=\frac{n!}{r!(n-r)!}=\frac{10!}{5!(10-5)!}=\frac{10!}{5!*5!}=252
+\]</span></p>
+<p>Same as:</p>
+<p>1,2,3,4,5 (counted the same as 2,1,3,4,5 and 3,1,2,4,5 etc.) - 1,2,3,4,6 - …</p>
+</div>
+</div>
+<div id="random-variables" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> Random Variables</h2>
+<p>A variable can take at least two different values. For a random sample or randomized experiment, each possible outcome has a probability that it occurs. The variable itself is sometimes then referred to as a <strong>random variable</strong>. This terminology emphasizes that the outcome varies from observation to observation according to random variation that can be summarized by probabilities.</p>
+<p>Another way to think about the concept of random variables is as placeholders for otherwise long explanations of events. For example, the notation of the probability of getting two heads in an experiment of two coin flips could be written as <span class="math inline">\(P(\text{getting two heads in 2 flips})\)</span>. But if you use a variable X, usually written large, that increases by <span class="math inline">\(1\)</span> every time a flip shows a head you could write it as such: <span class="math inline">\(P(X=2)\)</span>. Much neater.</p>
+<div id="discrete-random-variables" class="section level3" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Discrete Random Variables</h3>
+<p>A variable is <strong>discrete</strong> if the possible outcomes are a set of separate values, such as a variable expressed as “the number of …” with possible values 0, 1, 2, …. If you can count them.</p>
+<p>Example: Let y denote the response to the question “What do you think is the ideal number of children for a family to have?” This is a discrete variable, taking the possible values 0, 1, 2, 3, and so forth. According to recent General Social Surveys, for a randomly chosen person in the United States the probability distribution of Y is approximately as the table shows. The table displays the recorded y-values and their probabilities. For instance, P(4), the probability that Y = 4 children is regarded as ideal, equals 0.12. Each probability in table is between 0 and 1, and the sum of the probabilities equals 1.</p>
+<p><img src="images/Bildschirmfoto%202021-04-20%20um%2018.23.01.png" title="Example Discrete Random Variable" width="358" /></p>
+<p>A histogram can portray the probability distribution. The rectangular bar over a possible value of the variable has height equal to the probability of that value. The bar over the value 4 has height 0.12, the probability of the outcome 4.</p>
+<p><img src="images/Bildschirmfoto%202021-04-20%20um%2018.23.07.png" title="Example Discrete Random Variable Histogram" width="412" /></p>
+</div>
+<div id="continuous-random-variables" class="section level3" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> Continuous Random Variables</h3>
+<p>It is <strong>continuous</strong> if the possible outcomes are an infinite continuum, such as all the real numbers between 0 and 1. If you can measure it. A probability distribution lists the possible outcomes and their probabilities.</p>
+<p>Example: Commuting Time to Work A recent U.S. Census Bureau study about commuting time for workers in the United States who commute to work 2 measured y = travel time, in minutes. The probability distribution of y provides probabilities such as P(y &lt; 15), the probability that travel time is less than 15 minutes, or P(30 &lt; y &lt; 60), the probability that travel time is between 30 and 60 minutes.</p>
+<p>This figure portrays the probability distribution of y. The shaded area in the figure refers to the region of values higher than 45. This area equals 15% of the total area under the curve, representing the probability of 0.15 that commuting time is more than 45 minutes. Those regions in which the curve has relatively high height have the values most likely to be observed.</p>
+<p><img src="images/Bildschirmfoto%202021-04-20%20um%2018.28.01.png" title="Example Continuous Random Variable" width="492" /></p>
+</div>
+<div id="transforming-random-variables-shift-or-scale" class="section level3" number="9.4.3">
+<h3><span class="header-section-number">9.4.3</span> Transforming Random Variables (Shift or Scale)</h3>
+<p>When transforming a random variable the corresponding metrics change depending on weather the variable is being shifted, by adding or subtracting (+k or -k) the data, or scaled, by multiplying or dividing (*k or / k).</p>
+<p><strong>Shifting</strong></p>
+<p>The measures of centrality <strong>change</strong> by + or - k.</p>
+<p>The measures of variability <strong>don’t change</strong>.</p>
+<p><strong>Scaling</strong></p>
+<p>The measures of centrality <strong>change</strong> by * or / k.</p>
+<p>The measures of variability <strong>change</strong> by * or / k.</p>
+<p><img src="images/Bildschirmfoto%202021-04-21%20um%2015.20.03.png" title="Shift vs. scale" /></p>
+</div>
+<div id="expected-value-mean" class="section level3" number="9.4.4">
+<h3><span class="header-section-number">9.4.4</span> Expected Value (Mean)</h3>
+<p>Like a population distribution, a probability distribution has parameters describing <strong>center</strong> and <strong>variability</strong>. The <strong>mean</strong> describes center and the <strong>standard deviation</strong> describes variability. The parameter values are the values these measures would assume, in the long run, if the randomized experiment or random sample repeatedly took observations on the variable y having that probability distribution.</p>
+<p>For example, suppose we take observations from the distribution in child number preferences. Over the long run, we expect y = 0 to occur 1% of the time, y = 1 to occur 3% of the time, and so forth. In 100 observations, for instance, we expect about:</p>
+<p>one 0, three 1 ′ s, sixty 2 ′ s, twenty-three 3 ′ s, twelve 4 ′ s, and one 5.</p>
+<p>In that case, since the mean equals the total of the observations divided by the sample size, the mean equals:</p>
+<p><span class="math display">\[
+\frac{0(1) + 1(3) + 2(60) + 3(23) + 4(12) + 5(1)}{100}=\frac{245}{100}=2.45
+\]</span></p>
+<p>The calculation has the form:</p>
+<p><span class="math display">\[
+0(0.01)+ 1(0.03) + 2(0.60) + 3(0.23) + 4(0.12) + 5(0.01)
+\]</span></p>
+<p>The mean of a probability distribution is also called the <strong>expected value</strong>. The terminology reflects that E(y) represents what we expect for the average value of y in a long series of observations.</p>
+</div>
+<div id="standard-deviation" class="section level3" number="9.4.5">
+<h3><span class="header-section-number">9.4.5</span> Standard Deviation</h3>
+<p>The standard deviation of a probability distribution, denoted by σ, measures its variability. The more spread out the distribution, the larger the value of σ. The Empirical Rule helps us to interpret σ. If a probability distribution is bell shaped, about 68% of the probability falls between μ−σ and μ + σ, about 95% falls between μ − 2σ and μ + 2σ, and all or nearly all falls between μ − 3σ and μ + 3σ.</p>
+<p>The standard deviation σ is the square root of the variance σ² of the probability distribution. The variance measures the average squared deviation of an observation from the mean. That is, it is the expected value of (y − μ)² . In the discrete case, the formula is</p>
+<p><span class="math display">\[
+σ^2= E(y-μ)^2= \sum(y-μ)^2*P(y)
+\]</span></p>
+</div>
+</div>
+<div id="normal-distribution" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> Normal Distribution</h2>
+<p><img src="images/2560px-Standard_Normal_Distribution.png" /></p>
+<p>Early statisticians noticed the same shape coming up over and over again in different distributions, so they named it the <strong>normal distribution</strong>. In probability theory, a normal (or Gaussian or Gauss or Laplace-Gauss) distribution is a type of continuous probability distribution for a real-valued random variable.</p>
+<p>The parameter μ is the mean or expectation of the distribution (and also its median and mode), while the parameter σ is its standard deviation. The variance of the distribution is σ². Their importance is partly due to the central limit theorem. It states that, under some conditions, the average of many samples (observations) of a random variable with finite mean and variance is itself a random variable - whose distribution converges to a normal distribution as the number of samples increases.</p>
+<div id="properties" class="section level3" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> Properties</h3>
+<p>Normal distributions have the following features: - symmetric bell shape - mean and median are equal, both located at the center of the distribution - ≈ 68% of the data falls within 1 standard deviation of the mean - ≈ 95% of the data falls within 2 standard deviation of the mean - ≈ 99.7% of the data falls within 3 standard deviation of the mean</p>
+<p><img src="images/Bildschirmfoto%202021-04-20%20um%2018.05.39.png" /></p>
+<p>For example, heights of adult females in North America have approximately a normal distribution with μ = 65.0 inches and σ = 3.5. The probability is nearly 1.0 that a randomly selected female has height between μ − 3σ = 65.0 − 3(3.5) = 54.5 inches and μ + 3σ = 65.0 + 3(3.5) = 75.5 inches. Adult male height has a normal distribution with μ = 70.0 and σ = 4.0 inches. So, the probability is nearly 1.0 that a randomly selected male has height between μ − 3σ = 70.0 − 3(4.0) = 58 inches and μ + 3σ = 70.0 + 3(4.0) = 82 inches.</p>
+<p><img src="images/Bildschirmfoto%202021-04-20%20um%2018.07.35.png" title="Example Height Normal Distribution" /></p>
+</div>
+<div id="z-scores" class="section level3" number="9.5.2">
+<h3><span class="header-section-number">9.5.2</span> Z-Scores</h3>
+<p>In statistics, the standard score is the number of standard deviations by which the value of a raw score (i.e., an observed value or data point) is above or below the mean value of what is being observed or measured. Raw scores above the mean have positive standard scores, while those below the mean have negative standard scores.</p>
+<p>It is calculated by subtracting the population mean from an individual raw score and then dividing the difference by the population standard deviation. This process of converting a raw score into a standard score is called standardizing or normalizing (however, “normalizing” can refer to many types of ratios; see normalization for more).</p>
+<p>Standard scores are most commonly called z-scores; the two terms may be used interchangeably, as they are in this article. Other terms include z-values, normal scores, and standardized variables.</p>
+<p>Computing a z-score requires knowing the mean and standard deviation of the complete population to which a data point belongs; if one only has a sample of observations from the population, then the analogous computation with sample mean and sample standard deviation yields the t-statistic.</p>
+<p>A z-score measures exactly how many standard deviations above or below the mean a data point is.</p>
+<p>Here is the formula:</p>
+<p><span class="math display">\[
+z = \frac{\text{data point - mean}}{\text{standard deviation}}
+\]</span></p>
+<p>Here is the same formula written with symbols:</p>
+<p><span class="math display">\[
+z = \frac{x-μ}{σ}
+\]</span></p>
+<p>Here are some important facts about z-scores:</p>
+<ol style="list-style-type: decimal">
+<li>A positive z-score says the data point is above average.</li>
+<li>A negative z-score says the data point is below average.</li>
+<li>A z-score close to 0 says the data point is close to average.</li>
+<li>A data point can be considered unusual if its z-score is above 3 or below − 3.</li>
+</ol>
+<p><strong>Example</strong></p>
+<p>The grades on a history midterm at Almond have a mean of<br />
+μ = 85 and a standard deviation of σ = 2.</p>
+<p>Michael scored 86 on the exam. Find the z-score for Micheal’s exam grade.</p>
+<p><span class="math display">\[
+z = \frac{\text{his grade - mean grade}}{\text{standard deviation}}
+\]</span></p>
+<p><span class="math display">\[
+z = \frac{86-85}{2}=\frac{1}{2}=0.5
+\]</span></p>
+<p>Micheal’s z-score is 0.5 point. His grade was half of a standard deviation above the mean.</p>
+</div>
+<div id="examples" class="section level3" number="9.5.3">
+<h3><span class="header-section-number">9.5.3</span> Examples</h3>
+<div id="finding-percentages" class="section level4" number="9.5.3.1">
+<h4><span class="header-section-number">9.5.3.1</span> Finding Percentages</h4>
+<p>Example: a certain variety of tree has a mean trunk diameter of μ = 150 cm and a standard deviation of σ = 30cm.</p>
+<p><strong>Approximately what percent of these trees have a diameter greater than 210 cm?</strong></p>
+<p><strong>Solution:</strong></p>
+<p><strong>Step 1:</strong> Sketch a normal distribution with a mean of μ = 150 cm and a standard deviation of σ = 30 cm.</p>
+<p><strong>Step 2:</strong> The diameter of 210 cm is two standard deviations above the mean. Shade above that point.</p>
+<p><strong>Step 3</strong>: Add the percentages in the shaded area:</p>
+<p><img src="Markdown%20Objects/normal%20distribtion%20pine%20trees%201.png" /></p>
+<p><span class="math display">\[
+2.35+0.15 = 2.5\text{%}
+\]</span></p>
+<p>About 2.5% of these trees have a diameter greater than 210 cm.</p>
+</div>
+<div id="expected-value" class="section level4" number="9.5.3.2">
+<h4><span class="header-section-number">9.5.3.2</span> Expected Value</h4>
+<p>Example: a certain variety of pine tree has a mean trunk diameter of μ = 150 cm and a standard deviation of σ = 30 cm. A certain section of a forest has 500 of these trees.</p>
+<p>Approximately how many of these trees have a diameter smaller than 120 cm?</p>
+<p><strong>Solution:</strong></p>
+<p><strong>Step 1:</strong> Sketch a normal distribution with a mean of <u>μ</u> = 150 cm and a deviation of σ = 30 cm.</p>
+<p><strong>Step 2:</strong> The diameter of 120 cm is one standard deviation below the mean. Shade below that point.</p>
+<p><strong>Step 3:</strong> Add the percentage in the shaded area:<br />
+<img src="Markdown%20Objects/normal%20distribution%20example.png" /><br />
+</p>
+<p><span class="math display">\[
+0.15+2.35+13.5=16\%
+\]</span></p>
+<p>About 16 % of these trees have a diameter smaller than 120 cm.</p>
+<p><strong>Step 4: Find how many trees in the forest that percent represents.</strong></p>
+<p>We need to find how many trees 16 % of 500 is.</p>
+<p><span class="math display">\[
+16\% \text{ of }500=0.16*500=80
+\]</span></p>
+<p>About 80 trees have a diameter smaller than 120 cm.</p>
+</div>
+</div>
+<div id="in-r" class="section level3" number="9.5.4">
+<h3><span class="header-section-number">9.5.4</span> In R</h3>
+<p>The <code>pnorm()</code> function in R accepts a z-value/standard deviation value and returns the cumulative probability below that value. The <code>qnorm()</code> function returns the z-value/standard deviation value from a probabilty.</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="probability-thoery.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(q, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>, <span class="at">log.p =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb283-2"><a href="probability-thoery.html#cb283-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(p, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>, <span class="at">log.p =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div id="calculate-probability-from-z-value" class="section level4" number="9.5.4.1">
+<h4><span class="header-section-number">9.5.4.1</span> Calculate Probability From Z-Value</h4>
+<p>If you have the standard deviation or z-value and want to find out the probability.</p>
+<p><strong>Example 1</strong><br />
+The height of middle school students is normally distributed with a mean of 150 cm and a standard deviation of 20 cm. What is the probability that randomly selected students have a height greater than 170 cm, denoted by the random variable X.</p>
+<p>In our example we need the cumulative probability above that value (the right side of the curve) and therefore need to subtract the function value from 1.</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="probability-thoery.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1586553</code></pre>
+<p>Or even more elaborate using all parameters in the <code>pnorm()</code> function.</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="probability-thoery.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">170</span>, <span class="at">mean =</span> <span class="dv">150</span>, <span class="at">sd =</span> <span class="dv">20</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.1586553</code></pre>
+<p>Answer: the probability of student randomly selected with a height above 170 cm, i.e. above one standard deviation from the mean, is 15.9 %.</p>
+<p><strong>Example 2</strong><br />
+A set of middle school student heights are normally distributed with a mean of 150 cm and a standard deviation of 20 centimeters. Let X = the height of a randomly selected student from this set.</p>
+<p>Find out: <span class="math inline">\(P(140 &lt; X &lt; 154)\)</span>.</p>
+<p>Step 1: Find out the left tail probability for X below 154 cm: 0.58.</p>
+<p>Step 2: Find out the left tail probability for X below 140 cm: 0.31.</p>
+<p>Step 3: To find out the probability for in between X &lt; 154 and X &gt; 140 subtract the first from the latter.</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="probability-thoery.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">154</span>, <span class="at">mean =</span> <span class="dv">150</span>, <span class="at">sd =</span> <span class="dv">20</span>, <span class="at">lower.tail =</span> T) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">140</span>, <span class="at">mean =</span> <span class="dv">150</span>, <span class="at">sd =</span> <span class="dv">20</span>, <span class="at">lower.tail =</span> T)</span></code></pre></div>
+<pre><code>## [1] 0.2707222</code></pre>
+<p>Answer: the probability for a randomly selected student to have a height between 140 and 154 cm is 31 %.</p>
+<p><strong>Find probabilities if you have a z-value</strong> For the left-tail/cumulative probabilities, i.e. mean - z x standard deviation, in a normal distribution. Calculate it by a specific z value.</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="probability-thoery.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>) <span class="co"># cumulative probability below mu + 2.0(sigma)</span></span></code></pre></div>
+<pre><code>## [1] 0.9772499</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="probability-thoery.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="co"># The P() of falling below the sd of -1.</span></span></code></pre></div>
+<pre><code>## [1] 0.1586553</code></pre>
+<p>To find the right-tail probabilities for a specific z value in a normal distribution subtract it from 1.</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="probability-thoery.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="dv">2</span>) <span class="co"># The P() of falling over the sd of 2.</span></span></code></pre></div>
+<pre><code>## [1] 0.02275013</code></pre>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="probability-thoery.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>)<span class="co"># The P() of falling over the sd of -1.</span></span></code></pre></div>
+<pre><code>## [1] 0.8413447</code></pre>
+<p>The probability of falling within 2 standard deviations of the mean:</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="probability-thoery.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9544997</code></pre>
+<p>Show that 90% of a normal probability distribution falls between mean - 1.64 and mean + 1.64.</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="probability-thoery.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">pnorm</span>(<span class="fl">1.64</span>))</span></code></pre></div>
+<pre><code>## [1] -0.8989948</code></pre>
+</div>
+<div id="calculate-z-value-from-probability" class="section level4" number="9.5.4.2">
+<h4><span class="header-section-number">9.5.4.2</span> Calculate Z-Value From Probability</h4>
+<p>If, one the other hand, you have the probability for an event and want to find out the z-value or standard deviation you can use the <code>qnorm()</code> function. <code>qnorm()</code> accepts a probability of a normal distribution and return the z-value associated with said probability. Notice that <code>qnorm()</code> also return the left side of the distribution. If you need the right side simply put a minus in front.</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="probability-thoery.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.1586</span>)</span></code></pre></div>
+<pre><code>## [1] -1.000228</code></pre>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="probability-thoery.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">qnorm</span>(<span class="fl">0.1586</span>)</span></code></pre></div>
+<pre><code>## [1] 1.000228</code></pre>
+<p><strong>Find z-value if you have a probability</strong><br />
+To the the z-values corresponding to specific probability values we can use this.</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="probability-thoery.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="co"># q denotes &quot;quantile&quot;; .975 quantile = 97.5 percentile</span></span></code></pre></div>
+<pre><code>## [1] 1.959964</code></pre>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="probability-thoery.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The z-value is 1.96, rounded to two decimals</span></span></code></pre></div>
+<p>More checks.</p>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="probability-thoery.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(.<span class="dv">05</span>)</span></code></pre></div>
+<pre><code>## [1] -1.644854</code></pre>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="probability-thoery.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.01</span>)</span></code></pre></div>
+<pre><code>## [1] -2.326348</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="probability-thoery.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To get the right-tail probability.</span></span>
+<span id="cb313-2"><a href="probability-thoery.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">qnorm</span>(<span class="fl">0.005</span>)</span></code></pre></div>
+<pre><code>## [1] 2.575829</code></pre>
+</div>
+</div>
+</div>
+<div id="binomial-distribution" class="section level2" number="9.6">
+<h2><span class="header-section-number">9.6</span> Binomial Distribution</h2>
+<p><img src="images/1200px-Binomial_distribution_pmf.svg.png" /></p>
+<p>In probability theory and statistics, the binomial distribution with parameters n and p is the discrete probability distribution of the number of successes in a sequence of n independent experiments, each asking a yes–no question, and each with its own Boolean-valued outcome: success (with probability p) or failure (with probability q = 1 − p). A single success/failure experiment is also called a Bernoulli trial or Bernoulli experiment, and a sequence of outcomes is called a Bernoulli process; for a single trial, i.e., n = 1, the binomial distribution is a Bernoulli distribution. The binomial distribution is the basis for the popular binomial test of statistical significance.</p>
+<p>The binomial distribution is frequently used to model the number of successes in a sample of size n drawn with replacement from a population of size N. If the sampling is carried out without replacement, the draws are not independent and so the resulting distribution is a hypergeometric distribution, not a binomial one. However, for N much larger than n, the binomial distribution remains a good approximation, and is widely used.</p>
+<div id="expected-value-mean-and-variance" class="section level3" number="9.6.1">
+<h3><span class="header-section-number">9.6.1</span> Expected Value (Mean) and Variance</h3>
+<p>If X ~ B(n, p), that is, X is a binomially distributed random variable, n being the total number of experiments and p the probability of each experiment yielding a successful result, then the expected value of X is:</p>
+<p><span class="math display">\[
+E(X)=np
+\]</span></p>
+<p>This follows from the linearity of the expected value along with fact that <em>X</em> is the sum of <em>n</em> identical Bernoulli random variables, each with expected value <em>p</em>. In other words, if <span class="math inline">\(X_1,...,X_n\)</span> are identical (and independent) Bernoulli random variables with parameter <em>p</em>, then <span class="math inline">\(X=X_1+…+X_n\)</span> and <span class="math inline">\(E(X)=E[X_1+...+X_n]=E(X_1)+...+E(X_n)=p+...p=np\)</span></p>
+<p>The variance is:</p>
+<p><span class="math display">\[
+Var(X)=np(1-p)
+\]</span></p>
+<p>This similarly follows from the fact that the variance of a sum of independent random variables is the sum of the variances.</p>
+</div>
+<div id="in-r-1" class="section level3" number="9.6.2">
+<h3><span class="header-section-number">9.6.2</span> In R</h3>
+<p><strong>Example</strong></p>
+<p>Suppose there are twelve multiple choice questions in an English class quiz. Each question has five possible answers, and only one of them is correct. Find the probability of having four or less correct answers if a student attempts to answer every question at random.</p>
+<p><strong>Answer</strong></p>
+<p>Since only one out of five possible answers is correct, the probability of answering a question correctly by random is 1/5=0.2. We can find the probability of having exactly 4 correct answers by random attempts as follows.</p>
+<p>We use the <code>dbinom()</code> function for a single successful outcome, e.g. <span class="math inline">\(r=4\)</span>, and <code>pbinom()</code> for cumulative successful outcomes, e.g. <span class="math inline">\(r&lt;=4\)</span>.</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="probability-thoery.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">prob =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1328756</code></pre>
+<p>The probability for 4 successful outcomes or less.</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="probability-thoery.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">4</span>, <span class="dv">12</span>, <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9274445</code></pre>
+</div>
+</div>
+<div id="bernoulli-distribution" class="section level2" number="9.7">
+<h2><span class="header-section-number">9.7</span> Bernoulli Distribution</h2>
+<p>The Bernoulli distribution is a <strong>special case of the binomial distribution</strong> where a <strong>single trial</strong> is conducted (so n would be 1 for such a binomial distribution). It is also a special case of the <strong>two-point distribution</strong>, for which the possible outcomes need not be 0 and 1.</p>
+<p>In probability theory and statistics, the <strong>Bernoulli distribution</strong> is the discrete probability distribution of a random variable which takes the value <span class="math inline">\(1\)</span> with probability <span class="math inline">\(p\)</span> and the value <span class="math inline">\(0\)</span> with probability <span class="math inline">\(q = 1 −p\)</span>. Less formally, it can be thought of as a model for the set of possible outcomes of any single experiment that asks a yes–no question. Such questions lead to outcomes that are <strong>boolean-valued</strong>: a single bit whose value is success/yes/true/one with probability p and failure/no/false/zero with probability <span class="math inline">\(q\)</span>. It can be used to represent a (possibly biased) coin toss where 1 and 0 would represent “heads” and “tails” (or vice versa), respectively, and p would be the probability of the coin landing on heads or tails, respectively. In particular, unfair coins would have <span class="math inline">\(p ≠ 1/2\)</span>.</p>
+<div id="properties-1" class="section level3" number="9.7.1">
+<h3><span class="header-section-number">9.7.1</span> Properties</h3>
+<p>If <span class="math inline">\(X\)</span> is a random variable with this distribution, then:</p>
+<p><span class="math display">\[
+Pr(X=1)=p=1-Pr(X=0)=1-q
+\]</span></p>
+<p><br />
+The Bernoulli distribution is a special case of the binomial distribution with <span class="math inline">\(n=1\)</span>.</p>
+</div>
+<div id="mean-1" class="section level3" number="9.7.2">
+<h3><span class="header-section-number">9.7.2</span> Mean</h3>
+<p>The expected value of a Bernoulli random variable X is</p>
+<p><span class="math display">\[
+E(X) = p
+\]</span></p>
+<p>This is due to the fact that for a Bernoulli distributed random variable <span class="math inline">\(X\)</span> with <span class="math inline">\(Pr(X=1)=p\)</span> and <span class="math inline">\(Pr(X=0)=q\)</span> we find</p>
+<p><span class="math display">\[
+E(X)=Pr(X=1)*1+Pr(X=0)*0=p*1+q*0=p
+\]</span></p>
+</div>
+<div id="variance" class="section level3" number="9.7.3">
+<h3><span class="header-section-number">9.7.3</span> Variance</h3>
+<p>The variance of a Bernoulli distributed X is</p>
+<p><span class="math display">\[
+Var(X)=pq=p(1-p)
+\]</span></p>
+<p>We first find</p>
+<p><span class="math display">\[
+E(X^2)=Pr(X=1)*1^2+Pr(X=0)*0^2=p*1^2+q*0^2=E(X)
+\]</span></p>
+<p>From this follows</p>
+<p><span class="math display">\[
+Var(X)=E(X^2)-E(X)^2=E(X)-E(X)^2=p-p^2=p(1-p)=pq
+\]</span></p>
+<p>With this result it is easy to prove that, for any Bernoulli distribution, its variance will have a value between <span class="math inline">\(0\)</span> and <span class="math inline">\(1/4\)</span>.</p>
+</div>
+<div id="in-r-2" class="section level3" number="9.7.4">
+<h3><span class="header-section-number">9.7.4</span> In R</h3>
+<p>The required package for Bernoulli operations in R is called <code>Rlab</code>.</p>
+<p>Density, distribution function, quantile function and random generation for the Bernoulli distribution with parameter <strong><code>prob</code></strong>.</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="probability-thoery.html#cb319-1" aria-hidden="true" tabindex="-1"></a>Rlab<span class="sc">::</span><span class="fu">dbern</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">prob =</span> .<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+</div>
+</div>
+<div id="geometric-distribution" class="section level2" number="9.8">
+<h2><span class="header-section-number">9.8</span> Geometric Distribution</h2>
+<p>In probability theory and statistics, the <strong>geometric distribution</strong> is either one of <strong>two discrete probability distributions</strong>:</p>
+<ul>
+<li>The probability distribution of the number X of Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, … }</li>
+<li>The probability distribution of the number Y = X − 1 of failures before the first success, supported on the set { 0, 1, 2, 3, … }</li>
+</ul>
+<p>Which of these one calls “the” geometric distribution is a matter of convention and convenience.</p>
+<p>These two different geometric distributions should not be confused with each other. Often, the name shifted geometric distribution is adopted for the former one (distribution of the number X); however, to avoid ambiguity, it is considered wise to indicate which is intended, by mentioning the support explicitly.</p>
+<p>The geometric distribution gives the probability that the first occurrence of success requires <em>k</em> independent trials, each with success probability <em>p</em>. If the probability of success on each trial is <em>p</em>, then the probability that the <em>k</em>th trial (out of <em>k</em> trials) is the first success is</p>
+<p><span class="math display">\[
+Pr(X=k)=(1-p)^{k-1}p
+\]</span></p>
+<p>for <em>k</em> = 1, 2, 3, ….</p>
+<p>The above form of the geometric distribution is used for modeling the number of trials up to and including the first success. By contrast, the following form of the geometric distribution is used for modeling the number of failures until the first success:</p>
+<p><span class="math display">\[
+Pr(Y=k)=Pr(X=k+1)=(1-p)^kp
+\]</span></p>
+<p>for <em>k</em> = 0,1,2,3, …</p>
+<p>In either case, the sequence of probabilities is a geometric sequence.</p>
+<p>For example, suppose an ordinary die is thrown repeatedly until the first time a “1” appears. The probability distribution of the number of times it is thrown is supported on the infinite set { 1, 2, 3, … } and is a geometric distribution with p = 1/6.</p>
+<p>The geometric distribution is denoted by Geo(p) where 0 &lt; p ≤ 1.</p>
+<p>Consider a sequence of trials, where each trial has only two possible outcomes (designated failure and success). The probability of success is assumed to be the same for each trial. In such a sequence of trials, the geometric distribution is useful to model the number of failures before the first success. The distribution gives the probability that there are zero failures before the first success, one failure before the first success, two failures before the first success, and so on.</p>
+<p><strong>When is the geometric distribution an appropriate model?</strong><br />
+The geometric distribution is an appropriate model if the following assumptions are true.</p>
+<ul>
+<li>The phenomenon being modeled is a sequence of independent trials.</li>
+<li>There are only two possible outcomes for each trial, often designated success or failure.</li>
+<li>The probability of success, p, is the same for every trial.</li>
+</ul>
+<p>If these conditions are true, then the geometric random variable Y is the count of the number of failures before the first success. The possible number of failures before the first success is 0, 1, 2, 3, and so on. In the graphs above, this formulation is shown on the right.</p>
+<p>An alternative formulation is that the geometric random variable X is the total number of trials up to and including the first success, and the number of failures is <em>X</em> − 1. In the graphs above, this formulation is shown on the left.<br />
+</p>
+<div id="in-r-3" class="section level3" number="9.8.1">
+<h3><span class="header-section-number">9.8.1</span> In R</h3>
+<p><strong>Not sure if those are all correct!</strong></p>
+<p>R function <code>dgeom()</code> calculates the probability of <code>x</code> failures prior to the first success.</p>
+<p>Example: I pick cards from a standard deck until I get a king (I replace the cards if they are not a king). What is the probability that I need to pick 5 cards, i.e. I pick 4 unsuccessful cards (x=4) and the fifth is a success.</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="probability-thoery.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dgeom</span>(<span class="at">x=</span> <span class="dv">4</span>,<span class="at">prob =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">13</span>)</span></code></pre></div>
+<pre><code>## [1] 0.05584808</code></pre>
+<p>The function <code>pgeom()</code> is the cumulative probability of less than or equal to q failures prior to success.</p>
+<p>Example 1: What is the probability that I pick less than 10 cards?</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="probability-thoery.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pgeom</span>(<span class="at">q =</span> <span class="dv">9</span>, <span class="at">prob =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">13</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.4491371</code></pre>
+<p>Example 2: What is the probability that I need to pick more than 12 cards?</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="probability-thoery.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pgeom</span>(<span class="at">q =</span> <span class="dv">13</span>, <span class="at">prob =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">13</span>, <span class="at">lower.tail =</span> F)</span></code></pre></div>
+<pre><code>## [1] 0.6739152</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="inferential-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

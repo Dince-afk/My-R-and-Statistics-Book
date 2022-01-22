@@ -1,0 +1,20 @@
+h1:visualizationggplot2 Visualization/
+h2:gg-object gg object
+h2:aesthetics Aesthetics
+h2:geometries Geometries
+h3:points Points
+h3:text Text
+h3:bars Bars
+h3:density Density
+h3:boxplots Boxplots
+h3:lines Lines
+h3:vertical-lines Vertical Lines
+h2:coordinates Coordinates
+h3:limits Limits
+h3:flipping Flipping
+h2:tiles Tiles
+h2:scales Scales
+h3:logarithmic-scales Logarithmic scales
+h3:scale-label-format Scale label format
+h2:labels Labels
+

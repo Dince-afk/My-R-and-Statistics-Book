@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Tidyverse | My R and Statistics Book</title>
+  <meta name="description" content="This is …" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Tidyverse | My R and Statistics Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is …" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Tidyverse | My R and Statistics Book" />
+  
+  <meta name="twitter:description" content="This is …" />
+  
+
+<meta name="author" content="Dino Curic" />
+
+
+<meta name="date" content="2022-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rmarkdown.html"/>
+<link rel="next" href="visualizationggplot2.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>1</b> Glossary</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="glossary.html"><a href="glossary.html#shortcuts"><i class="fa fa-check"></i><b>1.1</b> Shortcuts</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="glossary.html"><a href="glossary.html#rstudio-environment"><i class="fa fa-check"></i><b>1.1.1</b> RStudio Environment</a></li>
+<li class="chapter" data-level="1.1.2" data-path="glossary.html"><a href="glossary.html#navigating-and-sections"><i class="fa fa-check"></i><b>1.1.2</b> Navigating and Sections</a></li>
+<li class="chapter" data-level="1.1.3" data-path="glossary.html"><a href="glossary.html#code-execution"><i class="fa fa-check"></i><b>1.1.3</b> Code Execution</a></li>
+<li class="chapter" data-level="1.1.4" data-path="glossary.html"><a href="glossary.html#special-characters"><i class="fa fa-check"></i><b>1.1.4</b> Special Characters</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="glossary.html"><a href="glossary.html#statistical-symbols"><i class="fa fa-check"></i><b>1.2</b> Statistical Symbols</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="glossary.html"><a href="glossary.html#special-symbols"><i class="fa fa-check"></i><b>1.2.1</b> Special Symbols</a></li>
+<li class="chapter" data-level="1.2.2" data-path="glossary.html"><a href="glossary.html#sample-and-population-symbols"><i class="fa fa-check"></i><b>1.2.2</b> Sample and Population Symbols</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-playgrounds.html"><a href="r-playgrounds.html"><i class="fa fa-check"></i><b>2</b> R Playgrounds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r-playgrounds.html"><a href="r-playgrounds.html#expected-value-and-standard-deviation"><i class="fa fa-check"></i><b>2.1</b> Expected Value and Standard Deviation</a></li>
+<li class="chapter" data-level="2.2" data-path="r-playgrounds.html"><a href="r-playgrounds.html#theoretical-and-experimental-standard-error"><i class="fa fa-check"></i><b>2.2</b> Theoretical and Experimental Standard Error</a></li>
+<li class="chapter" data-level="2.3" data-path="r-playgrounds.html"><a href="r-playgrounds.html#sample-size-resulting-in-0.01-se"><i class="fa fa-check"></i><b>2.3</b> Sample Size Resulting in 0.01 SE</a></li>
+<li class="chapter" data-level="2.4" data-path="r-playgrounds.html"><a href="r-playgrounds.html#bank-and-loans"><i class="fa fa-check"></i><b>2.4</b> Bank and Loans</a></li>
+<li class="chapter" data-level="2.5" data-path="r-playgrounds.html"><a href="r-playgrounds.html#real-polling-data"><i class="fa fa-check"></i><b>2.5</b> Real Polling Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R Basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-basics.html"><a href="r-basics.html#read-and-write-data"><i class="fa fa-check"></i><b>3.1</b> Read and Write Data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="r-basics.html"><a href="r-basics.html#csv-files"><i class="fa fa-check"></i><b>3.1.1</b> CSV Files</a></li>
+<li class="chapter" data-level="3.1.2" data-path="r-basics.html"><a href="r-basics.html#dat-files"><i class="fa fa-check"></i><b>3.1.2</b> DAT Files</a></li>
+<li class="chapter" data-level="3.1.3" data-path="r-basics.html"><a href="r-basics.html#excel-files"><i class="fa fa-check"></i><b>3.1.3</b> Excel Files</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="r-basics.html"><a href="r-basics.html#data-types"><i class="fa fa-check"></i><b>3.2</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="r-basics.html"><a href="r-basics.html#convert-data-types"><i class="fa fa-check"></i><b>3.2.1</b> Convert data types</a></li>
+<li class="chapter" data-level="3.2.2" data-path="r-basics.html"><a href="r-basics.html#numeric"><i class="fa fa-check"></i><b>3.2.2</b> Numeric</a></li>
+<li class="chapter" data-level="3.2.3" data-path="r-basics.html"><a href="r-basics.html#logical"><i class="fa fa-check"></i><b>3.2.3</b> Logical</a></li>
+<li class="chapter" data-level="3.2.4" data-path="r-basics.html"><a href="r-basics.html#characters"><i class="fa fa-check"></i><b>3.2.4</b> Characters</a></li>
+<li class="chapter" data-level="3.2.5" data-path="r-basics.html"><a href="r-basics.html#nas"><i class="fa fa-check"></i><b>3.2.5</b> <code>NA</code>s</a></li>
+<li class="chapter" data-level="3.2.6" data-path="r-basics.html"><a href="r-basics.html#dates"><i class="fa fa-check"></i><b>3.2.6</b> Dates</a></li>
+<li class="chapter" data-level="3.2.7" data-path="r-basics.html"><a href="r-basics.html#posix-time"><i class="fa fa-check"></i><b>3.2.7</b> POSIX Time</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="r-basics.html"><a href="r-basics.html#vectors"><i class="fa fa-check"></i><b>3.3</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-vectors"><i class="fa fa-check"></i><b>3.3.1</b> Creating vectors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="r-basics.html"><a href="r-basics.html#subsetting-vectors"><i class="fa fa-check"></i><b>3.3.2</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="3.3.3" data-path="r-basics.html"><a href="r-basics.html#naming-vectors"><i class="fa fa-check"></i><b>3.3.3</b> Naming vectors</a></li>
+<li class="chapter" data-level="3.3.4" data-path="r-basics.html"><a href="r-basics.html#filtering-vectors"><i class="fa fa-check"></i><b>3.3.4</b> Filtering vectors</a></li>
+<li class="chapter" data-level="3.3.5" data-path="r-basics.html"><a href="r-basics.html#special-concepts"><i class="fa fa-check"></i><b>3.3.5</b> Special Concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="r-basics.html"><a href="r-basics.html#factors"><i class="fa fa-check"></i><b>3.4</b> Factors</a></li>
+<li class="chapter" data-level="3.5" data-path="r-basics.html"><a href="r-basics.html#matrices-and-data-frames"><i class="fa fa-check"></i><b>3.5</b> Matrices and Data Frames</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="r-basics.html"><a href="r-basics.html#creating-matrices"><i class="fa fa-check"></i><b>3.5.1</b> Creating matrices</a></li>
+<li class="chapter" data-level="3.5.2" data-path="r-basics.html"><a href="r-basics.html#creating-data-frames"><i class="fa fa-check"></i><b>3.5.2</b> Creating data frames</a></li>
+<li class="chapter" data-level="3.5.3" data-path="r-basics.html"><a href="r-basics.html#adding-row-or-columns"><i class="fa fa-check"></i><b>3.5.3</b> Adding row or columns</a></li>
+<li class="chapter" data-level="3.5.4" data-path="r-basics.html"><a href="r-basics.html#naming-tables"><i class="fa fa-check"></i><b>3.5.4</b> Naming tables</a></li>
+<li class="chapter" data-level="3.5.5" data-path="r-basics.html"><a href="r-basics.html#deleting-rows-or-columns"><i class="fa fa-check"></i><b>3.5.5</b> Deleting rows or columns</a></li>
+<li class="chapter" data-level="3.5.6" data-path="r-basics.html"><a href="r-basics.html#rearranging-columns"><i class="fa fa-check"></i><b>3.5.6</b> Rearranging columns</a></li>
+<li class="chapter" data-level="3.5.7" data-path="r-basics.html"><a href="r-basics.html#merging-data-frames"><i class="fa fa-check"></i><b>3.5.7</b> Merging data frames</a></li>
+<li class="chapter" data-level="3.5.8" data-path="r-basics.html"><a href="r-basics.html#subsetting-matrices"><i class="fa fa-check"></i><b>3.5.8</b> Subsetting matrices</a></li>
+<li class="chapter" data-level="3.5.9" data-path="r-basics.html"><a href="r-basics.html#subsetting-data-frames"><i class="fa fa-check"></i><b>3.5.9</b> Subsetting data frames</a></li>
+<li class="chapter" data-level="3.5.10" data-path="r-basics.html"><a href="r-basics.html#data-frame-returns"><i class="fa fa-check"></i><b>3.5.10</b> Data frame returns</a></li>
+<li class="chapter" data-level="3.5.11" data-path="r-basics.html"><a href="r-basics.html#filtering-tables"><i class="fa fa-check"></i><b>3.5.11</b> Filtering tables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="r-basics.html"><a href="r-basics.html#lists"><i class="fa fa-check"></i><b>3.6</b> Lists</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="r-basics.html"><a href="r-basics.html#creating-lists"><i class="fa fa-check"></i><b>3.6.1</b> Creating lists</a></li>
+<li class="chapter" data-level="3.6.2" data-path="r-basics.html"><a href="r-basics.html#adding-components"><i class="fa fa-check"></i><b>3.6.2</b> Adding components</a></li>
+<li class="chapter" data-level="3.6.3" data-path="r-basics.html"><a href="r-basics.html#deleting-components"><i class="fa fa-check"></i><b>3.6.3</b> Deleting components</a></li>
+<li class="chapter" data-level="3.6.4" data-path="r-basics.html"><a href="r-basics.html#renaming-components"><i class="fa fa-check"></i><b>3.6.4</b> Renaming components</a></li>
+<li class="chapter" data-level="3.6.5" data-path="r-basics.html"><a href="r-basics.html#naming-inside-components"><i class="fa fa-check"></i><b>3.6.5</b> Naming inside components</a></li>
+<li class="chapter" data-level="3.6.6" data-path="r-basics.html"><a href="r-basics.html#subsetting-list-components"><i class="fa fa-check"></i><b>3.6.6</b> Subsetting list components</a></li>
+<li class="chapter" data-level="3.6.7" data-path="r-basics.html"><a href="r-basics.html#filtering-lists"><i class="fa fa-check"></i><b>3.6.7</b> Filtering lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#functionality"><i class="fa fa-check"></i><b>4.1</b> Functionality</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>4.1.1</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="packages.html"><a href="packages.html#gridextra"><i class="fa fa-check"></i><b>4.1.2</b> <code>gridExtra</code></a></li>
+<li class="chapter" data-level="4.1.3" data-path="packages.html"><a href="packages.html#kableextra-1"><i class="fa fa-check"></i><b>4.1.3</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.1.4" data-path="packages.html"><a href="packages.html#unpivotr"><i class="fa fa-check"></i><b>4.1.4</b> <code>unpivotr</code></a></li>
+<li class="chapter" data-level="4.1.5" data-path="packages.html"><a href="packages.html#tibble"><i class="fa fa-check"></i><b>4.1.5</b> <code>tibble</code></a></li>
+<li class="chapter" data-level="4.1.6" data-path="packages.html"><a href="packages.html#dslabs"><i class="fa fa-check"></i><b>4.1.6</b> <code>dslabs</code></a></li>
+<li class="chapter" data-level="4.1.7" data-path="packages.html"><a href="packages.html#knitr"><i class="fa fa-check"></i><b>4.1.7</b> <code>knitr</code></a></li>
+<li class="chapter" data-level="4.1.8" data-path="packages.html"><a href="packages.html#readr"><i class="fa fa-check"></i><b>4.1.8</b> <code>readr</code></a></li>
+<li class="chapter" data-level="4.1.9" data-path="packages.html"><a href="packages.html#readxl"><i class="fa fa-check"></i><b>4.1.9</b> <code>readxl</code></a></li>
+<li class="chapter" data-level="4.1.10" data-path="packages.html"><a href="packages.html#tidyxl"><i class="fa fa-check"></i><b>4.1.10</b> <code>tidyxl</code></a></li>
+<li class="chapter" data-level="4.1.11" data-path="packages.html"><a href="packages.html#corrgram"><i class="fa fa-check"></i><b>4.1.11</b> <code>corrgram</code></a></li>
+<li class="chapter" data-level="4.1.12" data-path="packages.html"><a href="packages.html#corrplot"><i class="fa fa-check"></i><b>4.1.12</b> <code>corrplot</code></a></li>
+<li class="chapter" data-level="4.1.13" data-path="packages.html"><a href="packages.html#rtweet"><i class="fa fa-check"></i><b>4.1.13</b> <code>rtweet</code></a></li>
+<li class="chapter" data-level="4.1.14" data-path="packages.html"><a href="packages.html#catools"><i class="fa fa-check"></i><b>4.1.14</b> <code>caTools</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="packages.html"><a href="packages.html#data"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="packages.html"><a href="packages.html#ggplot2movies"><i class="fa fa-check"></i><b>4.2.1</b> <code>ggplot2movies</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="packages.html"><a href="packages.html#wdi"><i class="fa fa-check"></i><b>4.2.2</b> <code>WDI</code></a></li>
+<li class="chapter" data-level="4.2.3" data-path="packages.html"><a href="packages.html#essurvey"><i class="fa fa-check"></i><b>4.2.3</b> <code>essurvey</code></a></li>
+<li class="chapter" data-level="4.2.4" data-path="packages.html"><a href="packages.html#wbstats"><i class="fa fa-check"></i><b>4.2.4</b> <code>wbstats</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="packages.html"><a href="packages.html#visualization"><i class="fa fa-check"></i><b>4.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="packages.html"><a href="packages.html#igraph"><i class="fa fa-check"></i><b>4.3.1</b> <code>igraph</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="packages.html"><a href="packages.html#ggthemes"><i class="fa fa-check"></i><b>4.3.2</b> <code>ggthemes</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="packages.html"><a href="packages.html#ggrepel"><i class="fa fa-check"></i><b>4.3.3</b> <code>ggrepel</code></a></li>
+<li class="chapter" data-level="4.3.4" data-path="packages.html"><a href="packages.html#ggridges"><i class="fa fa-check"></i><b>4.3.4</b> <code>ggridges</code></a></li>
+<li class="chapter" data-level="4.3.5" data-path="packages.html"><a href="packages.html#kableextra-2"><i class="fa fa-check"></i><b>4.3.5</b> <code>kableExtra</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="packages.html"><a href="packages.html#gridextra-1"><i class="fa fa-check"></i><b>4.3.6</b> <code>?gridExtra</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>5</b> Rmarkdown</a></li>
+<li class="chapter" data-level="6" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>6</b> Tidyverse</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tidyverse.html"><a href="tidyverse.html#dplyr"><i class="fa fa-check"></i><b>6.1</b> dplyr</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="tidyverse.html"><a href="tidyverse.html#pipe"><i class="fa fa-check"></i><b>6.1.1</b> Pipe</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tidyverse.html"><a href="tidyverse.html#select"><i class="fa fa-check"></i><b>6.1.2</b> Select</a></li>
+<li class="chapter" data-level="6.1.3" data-path="tidyverse.html"><a href="tidyverse.html#rename"><i class="fa fa-check"></i><b>6.1.3</b> Rename</a></li>
+<li class="chapter" data-level="6.1.4" data-path="tidyverse.html"><a href="tidyverse.html#filter"><i class="fa fa-check"></i><b>6.1.4</b> Filter</a></li>
+<li class="chapter" data-level="6.1.5" data-path="tidyverse.html"><a href="tidyverse.html#arrange"><i class="fa fa-check"></i><b>6.1.5</b> Arrange</a></li>
+<li class="chapter" data-level="6.1.6" data-path="tidyverse.html"><a href="tidyverse.html#slice"><i class="fa fa-check"></i><b>6.1.6</b> Slice</a></li>
+<li class="chapter" data-level="6.1.7" data-path="tidyverse.html"><a href="tidyverse.html#mutate"><i class="fa fa-check"></i><b>6.1.7</b> Mutate</a></li>
+<li class="chapter" data-level="6.1.8" data-path="tidyverse.html"><a href="tidyverse.html#relocate"><i class="fa fa-check"></i><b>6.1.8</b> Relocate</a></li>
+<li class="chapter" data-level="6.1.9" data-path="tidyverse.html"><a href="tidyverse.html#summarise"><i class="fa fa-check"></i><b>6.1.9</b> Summarise</a></li>
+<li class="chapter" data-level="6.1.10" data-path="tidyverse.html"><a href="tidyverse.html#pull"><i class="fa fa-check"></i><b>6.1.10</b> Pull</a></li>
+<li class="chapter" data-level="6.1.11" data-path="tidyverse.html"><a href="tidyverse.html#distinct-values"><i class="fa fa-check"></i><b>6.1.11</b> Distinct values</a></li>
+<li class="chapter" data-level="6.1.12" data-path="tidyverse.html"><a href="tidyverse.html#counts-and-proportions"><i class="fa fa-check"></i><b>6.1.12</b> Counts and proportions</a></li>
+<li class="chapter" data-level="6.1.13" data-path="tidyverse.html"><a href="tidyverse.html#case-when"><i class="fa fa-check"></i><b>6.1.13</b> Case when</a></li>
+<li class="chapter" data-level="6.1.14" data-path="tidyverse.html"><a href="tidyverse.html#between"><i class="fa fa-check"></i><b>6.1.14</b> Between</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="tidyverse.html"><a href="tidyverse.html#forcats"><i class="fa fa-check"></i><b>6.2</b> forcats</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="tidyverse.html"><a href="tidyverse.html#count-factors"><i class="fa fa-check"></i><b>6.2.1</b> Count factors</a></li>
+<li class="chapter" data-level="6.2.2" data-path="tidyverse.html"><a href="tidyverse.html#reorder-levels"><i class="fa fa-check"></i><b>6.2.2</b> Reorder levels</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="tidyverse.html"><a href="tidyverse.html#purrr"><i class="fa fa-check"></i><b>6.3</b> purrr</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="tidyverse.html"><a href="tidyverse.html#map"><i class="fa fa-check"></i><b>6.3.1</b> Map</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tidyverse.html"><a href="tidyverse.html#map-doubles"><i class="fa fa-check"></i><b>6.3.2</b> Map doubles</a></li>
+<li class="chapter" data-level="6.3.3" data-path="tidyverse.html"><a href="tidyverse.html#map-dataframes"><i class="fa fa-check"></i><b>6.3.3</b> Map dataframes</a></li>
+<li class="chapter" data-level="6.3.4" data-path="tidyverse.html"><a href="tidyverse.html#map-functionsclosures"><i class="fa fa-check"></i><b>6.3.4</b> Map functions/closures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html"><i class="fa fa-check"></i><b>7</b> Visualization/<code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#gg-object"><i class="fa fa-check"></i><b>7.1</b> gg object</a></li>
+<li class="chapter" data-level="7.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#aesthetics"><i class="fa fa-check"></i><b>7.2</b> Aesthetics</a></li>
+<li class="chapter" data-level="7.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#geometries"><i class="fa fa-check"></i><b>7.3</b> Geometries</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#points"><i class="fa fa-check"></i><b>7.3.1</b> Points</a></li>
+<li class="chapter" data-level="7.3.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#text"><i class="fa fa-check"></i><b>7.3.2</b> Text</a></li>
+<li class="chapter" data-level="7.3.3" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#bars"><i class="fa fa-check"></i><b>7.3.3</b> Bars</a></li>
+<li class="chapter" data-level="7.3.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#density"><i class="fa fa-check"></i><b>7.3.4</b> Density</a></li>
+<li class="chapter" data-level="7.3.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#boxplots"><i class="fa fa-check"></i><b>7.3.5</b> Boxplots</a></li>
+<li class="chapter" data-level="7.3.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#lines"><i class="fa fa-check"></i><b>7.3.6</b> Lines</a></li>
+<li class="chapter" data-level="7.3.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#vertical-lines"><i class="fa fa-check"></i><b>7.3.7</b> Vertical Lines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#coordinates"><i class="fa fa-check"></i><b>7.4</b> Coordinates</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#limits"><i class="fa fa-check"></i><b>7.4.1</b> Limits</a></li>
+<li class="chapter" data-level="7.4.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#flipping"><i class="fa fa-check"></i><b>7.4.2</b> Flipping</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#tiles"><i class="fa fa-check"></i><b>7.5</b> Tiles</a></li>
+<li class="chapter" data-level="7.6" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scales"><i class="fa fa-check"></i><b>7.6</b> Scales</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#logarithmic-scales"><i class="fa fa-check"></i><b>7.6.1</b> Logarithmic scales</a></li>
+<li class="chapter" data-level="7.6.2" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#scale-label-format"><i class="fa fa-check"></i><b>7.6.2</b> Scale label format</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="visualizationggplot2.html"><a href="visualizationggplot2.html#labels"><i class="fa fa-check"></i><b>7.7</b> Labels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>8</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="statistics.html"><a href="statistics.html#about-statistics"><i class="fa fa-check"></i><b>8.1</b> About Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="statistics.html"><a href="statistics.html#centrality"><i class="fa fa-check"></i><b>8.2</b> Centrality</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="statistics.html"><a href="statistics.html#mean"><i class="fa fa-check"></i><b>8.2.1</b> Mean</a></li>
+<li class="chapter" data-level="8.2.2" data-path="statistics.html"><a href="statistics.html#reproduction-mean-and-standard-deviation-reproduction"><i class="fa fa-check"></i><b>8.2.2</b> Reproduction Mean and Standard Deviation Reproduction</a></li>
+<li class="chapter" data-level="8.2.3" data-path="statistics.html"><a href="statistics.html#median"><i class="fa fa-check"></i><b>8.2.3</b> Median</a></li>
+<li class="chapter" data-level="8.2.4" data-path="statistics.html"><a href="statistics.html#mode"><i class="fa fa-check"></i><b>8.2.4</b> Mode</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="statistics.html"><a href="statistics.html#variability"><i class="fa fa-check"></i><b>8.3</b> Variability</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="statistics.html"><a href="statistics.html#range"><i class="fa fa-check"></i><b>8.3.1</b> Range</a></li>
+<li class="chapter" data-level="8.3.2" data-path="statistics.html"><a href="statistics.html#range-iqr-and-sd"><i class="fa fa-check"></i><b>8.3.2</b> Range, IQR and SD</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="statistics.html"><a href="statistics.html#sampling"><i class="fa fa-check"></i><b>8.4</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="statistics.html"><a href="statistics.html#weights"><i class="fa fa-check"></i><b>8.4.1</b> Weights</a></li>
+<li class="chapter" data-level="8.4.2" data-path="statistics.html"><a href="statistics.html#population"><i class="fa fa-check"></i><b>8.4.2</b> Population</a></li>
+<li class="chapter" data-level="8.4.3" data-path="statistics.html"><a href="statistics.html#sampling-1"><i class="fa fa-check"></i><b>8.4.3</b> Sampling</a></li>
+<li class="chapter" data-level="8.4.4" data-path="statistics.html"><a href="statistics.html#non-probability-sampling"><i class="fa fa-check"></i><b>8.4.4</b> Non-probability Sampling</a></li>
+<li class="chapter" data-level="8.4.5" data-path="statistics.html"><a href="statistics.html#sampling-methods"><i class="fa fa-check"></i><b>8.4.5</b> Sampling Methods</a>
+<ul>
+<li class="chapter" data-level="8.4.5.1" data-path="statistics.html"><a href="statistics.html#simple-random-sampling"><i class="fa fa-check"></i><b>8.4.5.1</b> Simple random sampling</a></li>
+<li class="chapter" data-level="8.4.5.2" data-path="statistics.html"><a href="statistics.html#systematic-sampling"><i class="fa fa-check"></i><b>8.4.5.2</b> Systematic sampling</a></li>
+<li class="chapter" data-level="8.4.5.3" data-path="statistics.html"><a href="statistics.html#stratified-sampling"><i class="fa fa-check"></i><b>8.4.5.3</b> Stratified sampling</a></li>
+<li class="chapter" data-level="8.4.5.4" data-path="statistics.html"><a href="statistics.html#cluster-sampling"><i class="fa fa-check"></i><b>8.4.5.4</b> Cluster sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4.6" data-path="statistics.html"><a href="statistics.html#errors-and-biases"><i class="fa fa-check"></i><b>8.4.6</b> Errors and biases</a>
+<ul>
+<li class="chapter" data-level="8.4.6.1" data-path="statistics.html"><a href="statistics.html#sampling-errors-and-biases"><i class="fa fa-check"></i><b>8.4.6.1</b> Sampling errors and biases</a></li>
+<li class="chapter" data-level="8.4.6.2" data-path="statistics.html"><a href="statistics.html#non-sampling-error"><i class="fa fa-check"></i><b>8.4.6.2</b> Non-sampling error</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="probability-thoery.html"><a href="probability-thoery.html"><i class="fa fa-check"></i><b>9</b> Probability Thoery</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="probability-thoery.html"><a href="probability-thoery.html#conditional-probability"><i class="fa fa-check"></i><b>9.1</b> Conditional Probability</a></li>
+<li class="chapter" data-level="9.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations"><i class="fa fa-check"></i><b>9.2</b> Permutations</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-with-repetition"><i class="fa fa-check"></i><b>9.2.1</b> Permutations with repetition</a></li>
+<li class="chapter" data-level="9.2.2" data-path="probability-thoery.html"><a href="probability-thoery.html#permutations-without-repetition"><i class="fa fa-check"></i><b>9.2.2</b> Permutations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations"><i class="fa fa-check"></i><b>9.3</b> Combinations</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-with-repetitions"><i class="fa fa-check"></i><b>9.3.1</b> Combinations with repetitions</a></li>
+<li class="chapter" data-level="9.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#combinations-without-repetition"><i class="fa fa-check"></i><b>9.3.2</b> Combinations without repetition</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="probability-thoery.html"><a href="probability-thoery.html#random-variables"><i class="fa fa-check"></i><b>9.4</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#discrete-random-variables"><i class="fa fa-check"></i><b>9.4.1</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="9.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#continuous-random-variables"><i class="fa fa-check"></i><b>9.4.2</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="9.4.3" data-path="probability-thoery.html"><a href="probability-thoery.html#transforming-random-variables-shift-or-scale"><i class="fa fa-check"></i><b>9.4.3</b> Transforming Random Variables (Shift or Scale)</a></li>
+<li class="chapter" data-level="9.4.4" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean"><i class="fa fa-check"></i><b>9.4.4</b> Expected Value (Mean)</a></li>
+<li class="chapter" data-level="9.4.5" data-path="probability-thoery.html"><a href="probability-thoery.html#standard-deviation"><i class="fa fa-check"></i><b>9.4.5</b> Standard Deviation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="probability-thoery.html"><a href="probability-thoery.html#normal-distribution"><i class="fa fa-check"></i><b>9.5</b> Normal Distribution</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties"><i class="fa fa-check"></i><b>9.5.1</b> Properties</a></li>
+<li class="chapter" data-level="9.5.2" data-path="probability-thoery.html"><a href="probability-thoery.html#z-scores"><i class="fa fa-check"></i><b>9.5.2</b> Z-Scores</a></li>
+<li class="chapter" data-level="9.5.3" data-path="probability-thoery.html"><a href="probability-thoery.html#examples"><i class="fa fa-check"></i><b>9.5.3</b> Examples</a>
+<ul>
+<li class="chapter" data-level="9.5.3.1" data-path="probability-thoery.html"><a href="probability-thoery.html#finding-percentages"><i class="fa fa-check"></i><b>9.5.3.1</b> Finding Percentages</a></li>
+<li class="chapter" data-level="9.5.3.2" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value"><i class="fa fa-check"></i><b>9.5.3.2</b> Expected Value</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r"><i class="fa fa-check"></i><b>9.5.4</b> In R</a>
+<ul>
+<li class="chapter" data-level="9.5.4.1" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-probability-from-z-value"><i class="fa fa-check"></i><b>9.5.4.1</b> Calculate Probability From Z-Value</a></li>
+<li class="chapter" data-level="9.5.4.2" data-path="probability-thoery.html"><a href="probability-thoery.html#calculate-z-value-from-probability"><i class="fa fa-check"></i><b>9.5.4.2</b> Calculate Z-Value From Probability</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="probability-thoery.html"><a href="probability-thoery.html#binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Binomial Distribution</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="probability-thoery.html"><a href="probability-thoery.html#expected-value-mean-and-variance"><i class="fa fa-check"></i><b>9.6.1</b> Expected Value (Mean) and Variance</a></li>
+<li class="chapter" data-level="9.6.2" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-1"><i class="fa fa-check"></i><b>9.6.2</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="probability-thoery.html"><a href="probability-thoery.html#bernoulli-distribution"><i class="fa fa-check"></i><b>9.7</b> Bernoulli Distribution</a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="probability-thoery.html"><a href="probability-thoery.html#properties-1"><i class="fa fa-check"></i><b>9.7.1</b> Properties</a></li>
+<li class="chapter" data-level="9.7.2" data-path="probability-thoery.html"><a href="probability-thoery.html#mean-1"><i class="fa fa-check"></i><b>9.7.2</b> Mean</a></li>
+<li class="chapter" data-level="9.7.3" data-path="probability-thoery.html"><a href="probability-thoery.html#variance"><i class="fa fa-check"></i><b>9.7.3</b> Variance</a></li>
+<li class="chapter" data-level="9.7.4" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-2"><i class="fa fa-check"></i><b>9.7.4</b> In R</a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="probability-thoery.html"><a href="probability-thoery.html#geometric-distribution"><i class="fa fa-check"></i><b>9.8</b> Geometric Distribution</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="probability-thoery.html"><a href="probability-thoery.html#in-r-3"><i class="fa fa-check"></i><b>9.8.1</b> In R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="inferential-statistics.html"><a href="inferential-statistics.html"><i class="fa fa-check"></i><b>10</b> Inferential Statistics</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#sampling-distributions"><i class="fa fa-check"></i><b>10.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="10.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#central-limit-theorem"><i class="fa fa-check"></i><b>10.2</b> Central Limit Theorem</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#what-is-large-enough-for-the-ctl"><i class="fa fa-check"></i><b>10.2.1</b> What is Large Enough for the CTL?</a></li>
+<li class="chapter" data-level="10.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-of-central-limit-theorem"><i class="fa fa-check"></i><b>10.2.2</b> Proof of Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#confidence-intervals"><i class="fa fa-check"></i><b>10.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#why-confidence-intervals-work"><i class="fa fa-check"></i><b>10.3.1</b> Why Confidence Intervals Work</a></li>
+<li class="chapter" data-level="10.3.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#proof-for-confidence-intervals"><i class="fa fa-check"></i><b>10.3.2</b> Proof for Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="10.3.2.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-proportion"><i class="fa fa-check"></i><b>10.3.2.1</b> CI for Population Proportion</a></li>
+<li class="chapter" data-level="10.3.2.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#ci-for-population-mean"><i class="fa fa-check"></i><b>10.3.2.2</b> CI for Population Mean</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#hypothesis-testing"><i class="fa fa-check"></i><b>10.4</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="inferential-statistics.html"><a href="inferential-statistics.html#p-value"><i class="fa fa-check"></i><b>10.4.1</b> P-Value</a></li>
+<li class="chapter" data-level="10.4.2" data-path="inferential-statistics.html"><a href="inferential-statistics.html#z-test"><i class="fa fa-check"></i><b>10.4.2</b> Z-Test</a></li>
+<li class="chapter" data-level="10.4.3" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-z-test-statistic"><i class="fa fa-check"></i><b>10.4.3</b> Formula: z test statistic</a></li>
+<li class="chapter" data-level="10.4.4" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-z-score"><i class="fa fa-check"></i><b>10.4.4</b> R: P-value from z-score</a></li>
+<li class="chapter" data-level="10.4.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#conditions-for-mean-inference"><i class="fa fa-check"></i><b>10.4.5</b> Conditions for mean inference</a></li>
+<li class="chapter" data-level="10.4.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#formula-t-test-statistic"><i class="fa fa-check"></i><b>10.4.6</b> Formula: t test statistic</a></li>
+<li class="chapter" data-level="10.4.7" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-p-value-from-t-statistic"><i class="fa fa-check"></i><b>10.4.7</b> R: P-value from t statistic</a></li>
+<li class="chapter" data-level="10.4.8" data-path="inferential-statistics.html"><a href="inferential-statistics.html#r-t-tests"><i class="fa fa-check"></i><b>10.4.8</b> R: t-tests</a></li>
+<li class="chapter" data-level="10.4.9" data-path="inferential-statistics.html"><a href="inferential-statistics.html#t-or-z-statistic"><i class="fa fa-check"></i><b>10.4.9</b> t or z Statistic?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="inferential-statistics.html"><a href="inferential-statistics.html#correlation"><i class="fa fa-check"></i><b>10.5</b> Correlation</a></li>
+<li class="chapter" data-level="10.6" data-path="inferential-statistics.html"><a href="inferential-statistics.html#regression"><i class="fa fa-check"></i><b>10.6</b> Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="causal-inference.html"><a href="causal-inference.html"><i class="fa fa-check"></i><b>11</b> Causal Inference</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="causal-inference.html"><a href="causal-inference.html#potential-outcome-framework"><i class="fa fa-check"></i><b>11.1</b> Potential outcome framework</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>12</b> Functions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="functions.html"><a href="functions.html#read-and-write"><i class="fa fa-check"></i><b>12.1</b> Read and Write</a></li>
+<li class="chapter" data-level="12.2" data-path="functions.html"><a href="functions.html#random"><i class="fa fa-check"></i><b>12.2</b> Random</a></li>
+<li class="chapter" data-level="12.3" data-path="functions.html"><a href="functions.html#order"><i class="fa fa-check"></i><b>12.3</b> Order</a></li>
+<li class="chapter" data-level="12.4" data-path="functions.html"><a href="functions.html#visualization-1"><i class="fa fa-check"></i><b>12.4</b> Visualization</a></li>
+<li class="chapter" data-level="12.5" data-path="functions.html"><a href="functions.html#conditionals"><i class="fa fa-check"></i><b>12.5</b> Conditionals</a></li>
+<li class="chapter" data-level="12.6" data-path="functions.html"><a href="functions.html#numbers"><i class="fa fa-check"></i><b>12.6</b> Numbers</a></li>
+<li class="chapter" data-level="12.7" data-path="functions.html"><a href="functions.html#apply-functions"><i class="fa fa-check"></i><b>12.7</b> Apply Functions</a></li>
+<li class="chapter" data-level="12.8" data-path="functions.html"><a href="functions.html#string-functions"><i class="fa fa-check"></i><b>12.8</b> String Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="frequent-problems.html"><a href="frequent-problems.html"><i class="fa fa-check"></i><b>13</b> Frequent Problems</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="frequent-problems.html"><a href="frequent-problems.html#first-exploration-of-new-dataset"><i class="fa fa-check"></i><b>13.1</b> First exploration of new dataset</a></li>
+<li class="chapter" data-level="13.2" data-path="frequent-problems.html"><a href="frequent-problems.html#a-count-and-prop-table"><i class="fa fa-check"></i><b>13.2</b> A Count and prop table</a></li>
+<li class="chapter" data-level="13.3" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-count-data"><i class="fa fa-check"></i><b>13.3</b> Bar graph with count data</a></li>
+<li class="chapter" data-level="13.4" data-path="frequent-problems.html"><a href="frequent-problems.html#bar-graph-with-percentage-labels"><i class="fa fa-check"></i><b>13.4</b> Bar graph with percentage labels</a></li>
+<li class="chapter" data-level="13.5" data-path="frequent-problems.html"><a href="frequent-problems.html#collapse-factors-to-other"><i class="fa fa-check"></i><b>13.5</b> Collapse factors to „Other”</a></li>
+<li class="chapter" data-level="13.6" data-path="frequent-problems.html"><a href="frequent-problems.html#filter-for-specific-values"><i class="fa fa-check"></i><b>13.6</b> Filter for specific values</a></li>
+<li class="chapter" data-level="13.7" data-path="frequent-problems.html"><a href="frequent-problems.html#change-bar-colors-in-barplot"><i class="fa fa-check"></i><b>13.7</b> Change bar colors in barplot</a></li>
+<li class="chapter" data-level="13.8" data-path="frequent-problems.html"><a href="frequent-problems.html#hide-aescolor-mapping-legend"><i class="fa fa-check"></i><b>13.8</b> Hide aes(color) mapping legend</a></li>
+<li class="chapter" data-level="13.9" data-path="frequent-problems.html"><a href="frequent-problems.html#re-code-values-of-categorical-variables"><i class="fa fa-check"></i><b>13.9</b> Re-code values of categorical variables</a></li>
+<li class="chapter" data-level="13.10" data-path="frequent-problems.html"><a href="frequent-problems.html#order-color-legend"><i class="fa fa-check"></i><b>13.10</b> Order color legend</a></li>
+<li class="chapter" data-level="13.11" data-path="frequent-problems.html"><a href="frequent-problems.html#show-unique-values"><i class="fa fa-check"></i><b>13.11</b> Show unique values</a></li>
+<li class="chapter" data-level="13.12" data-path="frequent-problems.html"><a href="frequent-problems.html#slice-rows-by-maximum-or-minimum-values"><i class="fa fa-check"></i><b>13.12</b> Slice rows by maximum or minimum values</a></li>
+<li class="chapter" data-level="13.13" data-path="frequent-problems.html"><a href="frequent-problems.html#show-number-of-nas"><i class="fa fa-check"></i><b>13.13</b> Show Number of <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.14" data-path="frequent-problems.html"><a href="frequent-problems.html#drop-rows-with-missing-values"><i class="fa fa-check"></i><b>13.14</b> Drop rows with missing values</a></li>
+<li class="chapter" data-level="13.15" data-path="frequent-problems.html"><a href="frequent-problems.html#replace-nas"><i class="fa fa-check"></i><b>13.15</b> Replace <code>NA</code>s</a></li>
+<li class="chapter" data-level="13.16" data-path="frequent-problems.html"><a href="frequent-problems.html#the-factor-variable-trap"><i class="fa fa-check"></i><b>13.16</b> The factor variable trap</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">My R and Statistics Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tidyverse" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Tidyverse</h1>
+<div id="dplyr" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> dplyr</h2>
+<p><code>dplyr</code> is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:</p>
+<ul>
+<li><code>select()</code> picks variables based on their names.</li>
+<li><code>rename()</code> renames variables names.</li>
+<li><code>filter()</code> picks cases based on their values.</li>
+<li><code>arrange()</code> changes the ordering of the rows.<br />
+</li>
+<li><code>slice()</code> picks cases based on their indices.</li>
+<li><code>mutate()</code> adds new variables that are functions of existing variables.</li>
+<li><code>relocate()</code> changes variable positions.<br />
+</li>
+<li><code>summarise()</code> reduces multiple values down to a single summary.</li>
+<li><code>group_by()</code> groups tibble in order to calculate grouped statistics with <code>summarise()</code>.</li>
+<li><code>pull()</code> pulls the vector value from a summarize tibble.</li>
+</ul>
+<div id="pipe" class="section level3" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Pipe</h3>
+<p>With dplyr we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: <code>%&gt;%</code>. In dplyr we can write code that looks more like a description of what we want to do without intermediate objects.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="tidyverse.html#cb144-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span>  <span class="co"># Pass on starwars dataset...</span></span>
+<span id="cb144-2"><a href="tidyverse.html#cb144-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(name, height, mass) <span class="sc">%&gt;%</span> <span class="co"># ... select name, height, mass variables and pass on...</span></span>
+<span id="cb144-3"><a href="tidyverse.html#cb144-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">kilograms =</span> mass) <span class="sc">%&gt;%</span> <span class="co"># ... rename mass to kilograms and pass on...</span></span>
+<span id="cb144-4"><a href="tidyverse.html#cb144-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(kilograms <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="co"># filter cases bigger than 50 kilograms.</span></span></code></pre></div>
+<p>In general, the pipe sends the result of the left side of the pipe to be the first argument of the function on the right side of the pipe. Here is a very simple example:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="tidyverse.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">%&gt;%</span> <span class="fu">sqrt</span>()</span>
+<span id="cb145-2"><a href="tidyverse.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4</span></span></code></pre></div>
+<p>We can continue to pipe values along:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="tidyverse.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">%&gt;%</span> <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> <span class="fu">log2</span>()</span>
+<span id="cb146-2"><a href="tidyverse.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+<p>The above statement is equivalent to <code>log2(sqrt(16))</code>.</p>
+<p>Remember that the pipe sends values to the first argument, so we can define other arguments as if the first argument is already defined:</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="tidyverse.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">%&gt;%</span> <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> <span class="fu">log</span>(<span class="at">base =</span> <span class="dv">2</span>)</span>
+<span id="cb147-2"><a href="tidyverse.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+<p>Therefore, when using the pipe with data frames and dplyr, we no longer need to specify the required first argument since the dplyr functions we have described all take the data as the first argument.</p>
+</div>
+<div id="select" class="section level3" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Select</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/select.html" class="uri">https://dplyr.tidyverse.org/reference/select.html</a></p>
+<p>Often you work with large datasets with many columns but only a few are actually of interest to you. select() allows you to rapidly zoom in on a useful subset.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="tidyverse.html#cb148-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, birth_year, homeworld)</span>
+<span id="cb148-2"><a href="tidyverse.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 3 x 3</span></span>
+<span id="cb148-3"><a href="tidyverse.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   name           birth_year homeworld</span></span>
+<span id="cb148-4"><a href="tidyverse.html#cb148-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;    </span></span>
+<span id="cb148-5"><a href="tidyverse.html#cb148-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Luke Skywalker       19   Tatooine </span></span>
+<span id="cb148-6"><a href="tidyverse.html#cb148-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 C-3PO               112   Tatooine </span></span>
+<span id="cb148-7"><a href="tidyverse.html#cb148-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 R2-D2                33   Naboo    </span></span></code></pre></div>
+<p>Equivalent to:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="tidyverse.html#cb149-1" aria-hidden="true" tabindex="-1"></a>starwars[,<span class="fu">c</span>(<span class="st">&quot;name&quot;</span>,<span class="st">&quot;birth_year&quot;</span>,<span class="st">&quot;homeworld&quot;</span>)]</span></code></pre></div>
+</div>
+<div id="rename" class="section level3" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Rename</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/rename.html" class="uri">https://dplyr.tidyverse.org/reference/rename.html</a></p>
+<p>You could also rename variables in <code>select()</code>, but because it drops all the variables not explicitly mentioned, it’s not that useful. Instead, use <code>rename()</code>:</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="tidyverse.html#cb150-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">planet =</span> homeworld) <span class="co"># new_name = variable_name</span></span>
+<span id="cb150-2"><a href="tidyverse.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 3 x 3</span></span>
+<span id="cb150-3"><a href="tidyverse.html#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   name               birth_year planet  </span></span>
+<span id="cb150-4"><a href="tidyverse.html#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;   </span></span>
+<span id="cb150-5"><a href="tidyverse.html#cb150-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Luke Skywalker           19   Tatooine</span></span>
+<span id="cb150-6"><a href="tidyverse.html#cb150-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 C-3PO                   112   Tatooine</span></span>
+<span id="cb150-7"><a href="tidyverse.html#cb150-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 R2-D2                    33   Naboo   </span></span></code></pre></div>
+<p>Equivalent to:</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="tidyverse.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(starwars)[<span class="dv">10</span>] <span class="ot">=</span> <span class="st">&quot;planet&quot;</span> <span class="co"># You&#39;d have to find out the column number.</span></span></code></pre></div>
+</div>
+<div id="filter" class="section level3" number="6.1.4">
+<h3><span class="header-section-number">6.1.4</span> Filter</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/filter.html" class="uri">https://dplyr.tidyverse.org/reference/filter.html</a></p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="tidyverse.html#cb152-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(eye_color <span class="sc">==</span> <span class="st">&quot;blue&quot;</span>, mass <span class="sc">&lt;</span> <span class="dv">77</span>)</span>
+<span id="cb152-2"><a href="tidyverse.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 3 x 3</span></span>
+<span id="cb152-3"><a href="tidyverse.html#cb152-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  name      height  mass hair_color skin_color eye_color</span></span>
+<span id="cb152-4"><a href="tidyverse.html#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;     </span></span>
+<span id="cb152-5"><a href="tidyverse.html#cb152-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Beru Whi…    165  75   brown      light      blue</span></span>
+<span id="cb152-6"><a href="tidyverse.html#cb152-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 Adi Gall…    184  50   none       dark       blue</span></span>
+<span id="cb152-7"><a href="tidyverse.html#cb152-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 Luminara…    170  56.2 black      yellow     blue</span></span></code></pre></div>
+<p>Roughly the equivalent to:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="tidyverse.html#cb153-1" aria-hidden="true" tabindex="-1"></a>starwars[starwars<span class="sc">$</span>eye_color <span class="sc">==</span> <span class="st">&quot;blue&quot;</span> <span class="sc">&amp;</span> starwars<span class="sc">$</span>mass <span class="sc">&lt;</span> <span class="dv">77</span>, ]</span></code></pre></div>
+</div>
+<div id="arrange" class="section level3" number="6.1.5">
+<h3><span class="header-section-number">6.1.5</span> Arrange</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="uri">https://dplyr.tidyverse.org/reference/arrange.html</a></p>
+<p>This function arranges tables by variables. It takes a data frame, and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="tidyverse.html#cb154-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(mass)</span>
+<span id="cb154-2"><a href="tidyverse.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 3 x 3</span></span>
+<span id="cb154-3"><a href="tidyverse.html#cb154-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   name   height  mass </span></span>
+<span id="cb154-4"><a href="tidyverse.html#cb154-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; </span></span>
+<span id="cb154-5"><a href="tidyverse.html#cb154-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Ratts…     79    15 </span></span>
+<span id="cb154-6"><a href="tidyverse.html#cb154-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 Yoda       66    17</span></span>
+<span id="cb154-7"><a href="tidyverse.html#cb154-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 Wicke…     88    20</span></span></code></pre></div>
+<p>Use <code>desc()</code>to order a column in descending order:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="tidyverse.html#cb155-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(mass))</span>
+<span id="cb155-2"><a href="tidyverse.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 3 x 3</span></span>
+<span id="cb155-3"><a href="tidyverse.html#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   name   height  mass</span></span>
+<span id="cb155-4"><a href="tidyverse.html#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
+<span id="cb155-5"><a href="tidyverse.html#cb155-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Jabba…    175  1358</span></span>
+<span id="cb155-6"><a href="tidyverse.html#cb155-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 Griev…    216   159</span></span>
+<span id="cb155-7"><a href="tidyverse.html#cb155-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 IG-88     200   140</span></span></code></pre></div>
+</div>
+<div id="slice" class="section level3" number="6.1.6">
+<h3><span class="header-section-number">6.1.6</span> Slice</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/slice.html" class="uri">https://dplyr.tidyverse.org/reference/slice.html</a></p>
+<p><code>slice()</code> lets you index rows by their (integer) locations. It allows you to select, remove, and duplicate rows.</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="tidyverse.html#cb156-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb156-2"><a href="tidyverse.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 3 x 5</span></span>
+<span id="cb156-3"><a href="tidyverse.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  name   height  mass hair_color skin_color  </span></span>
+<span id="cb156-4"><a href="tidyverse.html#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       </span></span>
+<span id="cb156-5"><a href="tidyverse.html#cb156-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Luke …    172    77 blond      fair        </span></span>
+<span id="cb156-6"><a href="tidyverse.html#cb156-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 C-3PO     167    75 NA         gold        </span></span>
+<span id="cb156-7"><a href="tidyverse.html#cb156-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 R2-D2      96    32 NA         white, blue</span></span></code></pre></div>
+<p><strong>Other Slices</strong><br />
+Slice is accompanied by a number of helpers for common use cases: * slice_head() and slice_tail() select the first or last rows. * slice_sample() randomly selects rows. * slice_min() and slice_max() select rows with highest or lowest values of a variable.</p>
+<p>If .data is a grouped_df, the operation will be performed on each group, so that (e.g.) slice_head(df, n = 5) will select the first five rows in each group.<br />
+Examples: <a href="https://dplyr.tidyverse.org/reference/slice.html" title="Examples"> https://dplyr.tidyverse.org/reference/slice.html </a></p>
+</div>
+<div id="mutate" class="section level3" number="6.1.7">
+<h3><span class="header-section-number">6.1.7</span> Mutate</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="uri">https://dplyr.tidyverse.org/reference/mutate.html</a></p>
+<p>Besides selecting sets of existing columns, it’s often useful to add new columns that are functions of existing columns.</p>
+<p>This creates a new column with height in meters instead of centimeters:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="tidyverse.html#cb157-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb157-2"><a href="tidyverse.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height_m =</span> height <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb157-3"><a href="tidyverse.html#cb157-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(height_m, <span class="at">.before =</span> height) <span class="co"># Move it before variable height, to the beginning.</span></span>
+<span id="cb157-4"><a href="tidyverse.html#cb157-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb157-5"><a href="tidyverse.html#cb157-5" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 87 x 15</span></span>
+<span id="cb157-6"><a href="tidyverse.html#cb157-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   name      height_m height</span></span>
+<span id="cb157-7"><a href="tidyverse.html#cb157-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;chr&gt;        &lt;dbl&gt;  &lt;int&gt;</span></span>
+<span id="cb157-8"><a href="tidyverse.html#cb157-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Luke Sky…     1.72    172</span></span>
+<span id="cb157-9"><a href="tidyverse.html#cb157-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 C-3PO         1.67    167</span></span>
+<span id="cb157-10"><a href="tidyverse.html#cb157-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 R2-D2         0.96     96</span></span></code></pre></div>
+<p>If you only want to keep the new variables, use <code>transmute()</code>.</p>
+</div>
+<div id="relocate" class="section level3" number="6.1.8">
+<h3><span class="header-section-number">6.1.8</span> Relocate</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="uri">https://dplyr.tidyverse.org/reference/relocate.html</a></p>
+<p>Use a similar syntax as <code>select()</code> to move blocks of columns at once.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="tidyverse.html#cb158-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(sex<span class="sc">:</span>gender, <span class="at">.before =</span> height) <span class="co"># Move all variables between sex and gender before variable height.</span></span>
+<span id="cb158-2"><a href="tidyverse.html#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 3 x 4</span></span>
+<span id="cb158-3"><a href="tidyverse.html#cb158-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   name   sex   gender height</span></span>
+<span id="cb158-4"><a href="tidyverse.html#cb158-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;</span></span>
+<span id="cb158-5"><a href="tidyverse.html#cb158-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 Luke … male  mascu…    172</span></span>
+<span id="cb158-6"><a href="tidyverse.html#cb158-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 C-3PO  none  mascu…    167</span></span>
+<span id="cb158-7"><a href="tidyverse.html#cb158-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 R2-D2  none  mascu…     96</span></span></code></pre></div>
+<p>Another syntax that relocates the new variable up front would be:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="tidyverse.html#cb159-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb159-2"><a href="tidyverse.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height_m =</span> height <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb159-3"><a href="tidyverse.html#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height_m, <span class="fu">everything</span>()) <span class="co"># everything() return all other variables.</span></span></code></pre></div>
+</div>
+<div id="summarise" class="section level3" number="6.1.9">
+<h3><span class="header-section-number">6.1.9</span> Summarise</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="uri">https://dplyr.tidyverse.org/reference/summarise.html</a></p>
+<p>It collapses a data frame to a single row. It’s not that useful until we learn the group_by() verb below. This summarise syntax returns the mean and standard deviation for all cases, across species, genders, sex etc. :</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="tidyverse.html#cb160-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb160-2"><a href="tidyverse.html#cb160-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarise</span>(<span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> T),</span>
+<span id="cb160-3"><a href="tidyverse.html#cb160-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> T))</span>
+<span id="cb160-4"><a href="tidyverse.html#cb160-4" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb160-5"><a href="tidyverse.html#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 x 2</span></span>
+<span id="cb160-6"><a href="tidyverse.html#cb160-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  mean_height mean_mass</span></span>
+<span id="cb160-7"><a href="tidyverse.html#cb160-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb160-8"><a href="tidyverse.html#cb160-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1        174.      97.3</span></span></code></pre></div>
+<p><strong>Summarize with group by</strong><br />
+Most data operations are done on groups defined by variables. <code>group_by()</code> takes an existing tbl and converts it into a grouped tbl where operations are performed “by group.” <code>ungroup()</code> removes grouping.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="tidyverse.html#cb161-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb161-2"><a href="tidyverse.html#cb161-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> <span class="co"># Creates a tibble with a group: sex [5] - 5 levels</span></span>
+<span id="cb161-3"><a href="tidyverse.html#cb161-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>( <span class="co"># Create summary statistics for height and mass, grouped by sex variable.</span></span>
+<span id="cb161-4"><a href="tidyverse.html#cb161-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb161-5"><a href="tidyverse.html#cb161-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb161-6"><a href="tidyverse.html#cb161-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-7"><a href="tidyverse.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 5 x 3</span></span>
+<span id="cb161-8"><a href="tidyverse.html#cb161-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  sex            height   mass</span></span>
+<span id="cb161-9"><a href="tidyverse.html#cb161-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb161-10"><a href="tidyverse.html#cb161-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 female           169.   54.7</span></span>
+<span id="cb161-11"><a href="tidyverse.html#cb161-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 hermaphroditic   175  1358  </span></span>
+<span id="cb161-12"><a href="tidyverse.html#cb161-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 male             179.   81.0</span></span>
+<span id="cb161-13"><a href="tidyverse.html#cb161-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 none             131.   69.8</span></span>
+<span id="cb161-14"><a href="tidyverse.html#cb161-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 NA               181.   48  </span></span></code></pre></div>
+<p>More examples of grouped summary statistics:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="tidyverse.html#cb162-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb162-2"><a href="tidyverse.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb162-3"><a href="tidyverse.html#cb162-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb162-4"><a href="tidyverse.html#cb162-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb162-5"><a href="tidyverse.html#cb162-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_mass =</span> <span class="fu">min</span>(mass, <span class="at">na.rm =</span> T),</span>
+<span id="cb162-6"><a href="tidyverse.html#cb162-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> T),</span>
+<span id="cb162-7"><a href="tidyverse.html#cb162-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_mass =</span> <span class="fu">sd</span>(mass, <span class="at">na.rm =</span> T),</span>
+<span id="cb162-8"><a href="tidyverse.html#cb162-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_mass =</span> <span class="fu">max</span>(mass, <span class="at">na.rm =</span> T)</span>
+<span id="cb162-9"><a href="tidyverse.html#cb162-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb162-10"><a href="tidyverse.html#cb162-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb162-11"><a href="tidyverse.html#cb162-11" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 5 x 6</span></span>
+<span id="cb162-12"><a href="tidyverse.html#cb162-12" aria-hidden="true" tabindex="-1"></a><span class="co">#  sex                n min_mass mean_mass sd_mass max_mass</span></span>
+<span id="cb162-13"><a href="tidyverse.html#cb162-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    &lt;chr&gt;          &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb162-14"><a href="tidyverse.html#cb162-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 male              60       15      81.0   28.2       159</span></span>
+<span id="cb162-15"><a href="tidyverse.html#cb162-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 female            16       45      54.7    8.59       75</span></span>
+<span id="cb162-16"><a href="tidyverse.html#cb162-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 none               6       32      69.8   51.0       140</span></span>
+<span id="cb162-17"><a href="tidyverse.html#cb162-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 NA                 4       48      48     NA          48</span></span>
+<span id="cb162-18"><a href="tidyverse.html#cb162-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 hermaphroditic     1     1358    1358     NA        1358 </span></span></code></pre></div>
+</div>
+<div id="pull" class="section level3" number="6.1.10">
+<h3><span class="header-section-number">6.1.10</span> Pull</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/pull.html" class="uri">https://dplyr.tidyverse.org/reference/pull.html</a></p>
+<p>A useful trick for accessing values stored in data when using pipes: when a data object is piped that object and its columns can be accessed using the pull function.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="tidyverse.html#cb163-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb163-2"><a href="tidyverse.html#cb163-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb163-3"><a href="tidyverse.html#cb163-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb163-4"><a href="tidyverse.html#cb163-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(height)</span>
+<span id="cb163-5"><a href="tidyverse.html#cb163-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb163-6"><a href="tidyverse.html#cb163-6" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 169.2667 175.0000 179.1053 131.2000 181.3333</span></span></code></pre></div>
+</div>
+<div id="distinct-values" class="section level3" number="6.1.11">
+<h3><span class="header-section-number">6.1.11</span> Distinct values</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="uri">https://dplyr.tidyverse.org/reference/n_distinct.html</a></p>
+<p>Function returns the number of distinct values in a column. Similar to levels in factors.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="tidyverse.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">n_distinct</span>(starwars<span class="sc">$</span>sex)</span>
+<span id="cb164-2"><a href="tidyverse.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="co">#[1] 5</span></span></code></pre></div>
+</div>
+<div id="counts-and-proportions" class="section level3" number="6.1.12">
+<h3><span class="header-section-number">6.1.12</span> Counts and proportions</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/count.html" class="uri">https://dplyr.tidyverse.org/reference/count.html</a></p>
+<p>Function lets you quickly count the unique values of one or more variables.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="tidyverse.html#cb165-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb165-2"><a href="tidyverse.html#cb165-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(eye_color, <span class="at">sort =</span> T)</span>
+<span id="cb165-3"><a href="tidyverse.html#cb165-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb165-4"><a href="tidyverse.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 15 × 2</span></span>
+<span id="cb165-5"><a href="tidyverse.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   eye_color         n</span></span>
+<span id="cb165-6"><a href="tidyverse.html#cb165-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;chr&gt;         &lt;int&gt;</span></span>
+<span id="cb165-7"><a href="tidyverse.html#cb165-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 brown            21</span></span>
+<span id="cb165-8"><a href="tidyverse.html#cb165-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 blue             19</span></span>
+<span id="cb165-9"><a href="tidyverse.html#cb165-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 yellow           11</span></span>
+<span id="cb165-10"><a href="tidyverse.html#cb165-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 black            10</span></span>
+<span id="cb165-11"><a href="tidyverse.html#cb165-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 orange            8</span></span></code></pre></div>
+<p>With two variables, <code>count</code> returns the number of times each combination of possible values has happened.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="tidyverse.html#cb166-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb166-2"><a href="tidyverse.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(eye_color, hair_color, <span class="at">sort =</span> T, <span class="at">name =</span> <span class="st">&quot;count&quot;</span>)</span>
+<span id="cb166-3"><a href="tidyverse.html#cb166-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb166-4"><a href="tidyverse.html#cb166-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 35 × 3</span></span>
+<span id="cb166-5"><a href="tidyverse.html#cb166-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   eye_color hair_color count</span></span>
+<span id="cb166-6"><a href="tidyverse.html#cb166-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;chr&gt;     &lt;chr&gt;      &lt;int&gt;</span></span>
+<span id="cb166-7"><a href="tidyverse.html#cb166-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 black     none           9</span></span>
+<span id="cb166-8"><a href="tidyverse.html#cb166-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 brown     black          9</span></span>
+<span id="cb166-9"><a href="tidyverse.html#cb166-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 brown     brown          9</span></span>
+<span id="cb166-10"><a href="tidyverse.html#cb166-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 blue      brown          7</span></span>
+<span id="cb166-11"><a href="tidyverse.html#cb166-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 orange    none           7</span></span>
+<span id="cb166-12"><a href="tidyverse.html#cb166-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 6 yellow    none           6</span></span>
+<span id="cb166-13"><a href="tidyverse.html#cb166-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 7 blue      blond          3</span></span>
+<span id="cb166-14"><a href="tidyverse.html#cb166-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 8 blue      none           3</span></span>
+<span id="cb166-15"><a href="tidyverse.html#cb166-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 9 red       none           3</span></span>
+<span id="cb166-16"><a href="tidyverse.html#cb166-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 blue      black          2</span></span>
+<span id="cb166-17"><a href="tidyverse.html#cb166-17" aria-hidden="true" tabindex="-1"></a><span class="co"># … with 25 more rows</span></span></code></pre></div>
+<p><strong>Count and Prop Tables</strong><br />
+Simply mutate a frequency and percentage column on a counted table.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="tidyverse.html#cb167-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb167-2"><a href="tidyverse.html#cb167-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">count</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb167-3"><a href="tidyverse.html#cb167-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb167-4"><a href="tidyverse.html#cb167-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc =</span> freq <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb167-5"><a href="tidyverse.html#cb167-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb167-6"><a href="tidyverse.html#cb167-6" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 5 × 4</span></span>
+<span id="cb167-7"><a href="tidyverse.html#cb167-7" aria-hidden="true" tabindex="-1"></a><span class="co">#  sex                n   freq  perc</span></span>
+<span id="cb167-8"><a href="tidyverse.html#cb167-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb167-9"><a href="tidyverse.html#cb167-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 female            16 0.184  18.4 </span></span>
+<span id="cb167-10"><a href="tidyverse.html#cb167-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 hermaphroditic     1 0.0115  1.15</span></span>
+<span id="cb167-11"><a href="tidyverse.html#cb167-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 male              60 0.690  69.0 </span></span>
+<span id="cb167-12"><a href="tidyverse.html#cb167-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 none               6 0.0690  6.90</span></span>
+<span id="cb167-13"><a href="tidyverse.html#cb167-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 NA                 4 0.0460  4.60</span></span></code></pre></div>
+</div>
+<div id="case-when" class="section level3" number="6.1.13">
+<h3><span class="header-section-number">6.1.13</span> Case when</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="uri">https://dplyr.tidyverse.org/reference/case_when.html</a></p>
+<p>The <code>case_when</code> function is useful for vectorizing conditional statements. It is similar to <code>ifelse</code> but can output any number of values, as opposed to just <code>TRUE</code> or <code>FALSE</code>. Here is an example splitting numbers into negative, positive, and 0:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="tidyverse.html#cb168-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb168-2"><a href="tidyverse.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">case_when</span>(x <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Negative&quot;</span>, </span>
+<span id="cb168-3"><a href="tidyverse.html#cb168-3" aria-hidden="true" tabindex="-1"></a>          x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Positive&quot;</span>, </span>
+<span id="cb168-4"><a href="tidyverse.html#cb168-4" aria-hidden="true" tabindex="-1"></a>          <span class="cn">TRUE</span>  <span class="sc">~</span> <span class="st">&quot;Zero&quot;</span>)</span>
+<span id="cb168-5"><a href="tidyverse.html#cb168-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Negative&quot; &quot;Negative&quot; &quot;Zero&quot;     &quot;Positive&quot; &quot;Positive&quot;</span></span></code></pre></div>
+<p>A common use for this function is to define categorical variables based on existing variables. For example, suppose we want to compare the murder rates in four groups of states: New England, West Coast, South, and other. For each state, we need to ask if it is in New England, if it is not we ask if it is in the West Coast, if not we ask if it is in the South, and if not we assign other. Here is how we use case_when to do this:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="tidyverse.html#cb169-1" aria-hidden="true" tabindex="-1"></a>murders <span class="sc">%&gt;%</span> </span>
+<span id="cb169-2"><a href="tidyverse.html#cb169-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb169-3"><a href="tidyverse.html#cb169-3" aria-hidden="true" tabindex="-1"></a>    abb <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;ME&quot;</span>, <span class="st">&quot;NH&quot;</span>, <span class="st">&quot;VT&quot;</span>, <span class="st">&quot;MA&quot;</span>, <span class="st">&quot;RI&quot;</span>, <span class="st">&quot;CT&quot;</span>) <span class="sc">~</span> <span class="st">&quot;New England&quot;</span>,</span>
+<span id="cb169-4"><a href="tidyverse.html#cb169-4" aria-hidden="true" tabindex="-1"></a>    abb <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;WA&quot;</span>, <span class="st">&quot;OR&quot;</span>, <span class="st">&quot;CA&quot;</span>) <span class="sc">~</span> <span class="st">&quot;West Coast&quot;</span>,</span>
+<span id="cb169-5"><a href="tidyverse.html#cb169-5" aria-hidden="true" tabindex="-1"></a>    region <span class="sc">==</span> <span class="st">&quot;South&quot;</span> <span class="sc">~</span> <span class="st">&quot;South&quot;</span>,</span>
+<span id="cb169-6"><a href="tidyverse.html#cb169-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Other&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb169-7"><a href="tidyverse.html#cb169-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb169-8"><a href="tidyverse.html#cb169-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">rate =</span> <span class="fu">sum</span>(total) <span class="sc">/</span> <span class="fu">sum</span>(population) <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span>) </span>
+<span id="cb169-9"><a href="tidyverse.html#cb169-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 x 2</span></span>
+<span id="cb169-10"><a href="tidyverse.html#cb169-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   group        rate</span></span>
+<span id="cb169-11"><a href="tidyverse.html#cb169-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;dbl&gt;</span></span>
+<span id="cb169-12"><a href="tidyverse.html#cb169-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 New England  1.72</span></span>
+<span id="cb169-13"><a href="tidyverse.html#cb169-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Other        2.71</span></span>
+<span id="cb169-14"><a href="tidyverse.html#cb169-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 South        3.63</span></span>
+<span id="cb169-15"><a href="tidyverse.html#cb169-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 West Coast   2.90</span></span></code></pre></div>
+</div>
+<div id="between" class="section level3" number="6.1.14">
+<h3><span class="header-section-number">6.1.14</span> Between</h3>
+<p><a href="https://dplyr.tidyverse.org/reference/between.html" class="uri">https://dplyr.tidyverse.org/reference/between.html</a></p>
+<p>A common operation in data analysis is to determine if a value falls inside an interval. We can check this using conditionals. For example, to check if the elements of a vector x are between a and b we can type</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="tidyverse.html#cb170-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;=</span> a <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> b</span></code></pre></div>
+<p>However, this can become cumbersome, especially within the tidyverse approach. The between function performs the same operation.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="tidyverse.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">between</span>(x, a, b)</span></code></pre></div>
+<p>Or on a tibble using filter.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="tidyverse.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(starwars, <span class="fu">between</span>(height, <span class="dv">100</span>, <span class="dv">150</span>))</span>
+<span id="cb172-2"><a href="tidyverse.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 x 14</span></span>
+<span id="cb172-3"><a href="tidyverse.html#cb172-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   name     height  mass hair_color skin_color eye_color birth_year sex   gender </span></span>
+<span id="cb172-4"><a href="tidyverse.html#cb172-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  </span></span>
+<span id="cb172-5"><a href="tidyverse.html#cb172-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Leia Or…    150    49 brown      light      brown             19 fema… femini…</span></span>
+<span id="cb172-6"><a href="tidyverse.html#cb172-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Mon Mot…    150    NA auburn     fair       blue              48 fema… femini…</span></span>
+<span id="cb172-7"><a href="tidyverse.html#cb172-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Watto       137    NA black      blue, grey yellow            NA male  mascul…</span></span>
+<span id="cb172-8"><a href="tidyverse.html#cb172-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Sebulba     112    40 none       grey, red  orange            NA male  mascul…</span></span>
+<span id="cb172-9"><a href="tidyverse.html#cb172-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Gasgano     122    NA none       white, bl… black             NA male  mascul…</span></span>
+<span id="cb172-10"><a href="tidyverse.html#cb172-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,</span></span>
+<span id="cb172-11"><a href="tidyverse.html#cb172-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   vehicles &lt;list&gt;, starships &lt;list&gt;</span></span></code></pre></div>
+</div>
+</div>
+<div id="forcats" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> forcats</h2>
+<p><a href="https://forcats.tidyverse.org" class="uri">https://forcats.tidyverse.org</a></p>
+<p>The goal of the forcats package is to provide a suite of useful tools that solve common problems with factors. Factors are useful when you have categorical data, variables that have a fixed and known set of values, and when you want to display character vectors in non-alphabetical order.</p>
+<div id="count-factors" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Count factors</h3>
+<p><code>fct_count()</code> <a href="https://forcats.tidyverse.org/reference/fct_count.html" class="uri">https://forcats.tidyverse.org/reference/fct_count.html</a><br />
+Calculates a count and prop table.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="tidyverse.html#cb173-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">$</span>sex <span class="sc">%&gt;%</span> </span>
+<span id="cb173-2"><a href="tidyverse.html#cb173-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">factor</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb173-3"><a href="tidyverse.html#cb173-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fct_count</span>(<span class="at">sort =</span> T, <span class="at">prop =</span> T)</span>
+<span id="cb173-4"><a href="tidyverse.html#cb173-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-5"><a href="tidyverse.html#cb173-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  A tibble: 5 × 3</span></span>
+<span id="cb173-6"><a href="tidyverse.html#cb173-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  f                  n      p</span></span>
+<span id="cb173-7"><a href="tidyverse.html#cb173-7" aria-hidden="true" tabindex="-1"></a><span class="co">#  &lt;fct&gt;          &lt;int&gt;  &lt;dbl&gt;</span></span>
+<span id="cb173-8"><a href="tidyverse.html#cb173-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 male              60 0.690 </span></span>
+<span id="cb173-9"><a href="tidyverse.html#cb173-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 female            16 0.184 </span></span>
+<span id="cb173-10"><a href="tidyverse.html#cb173-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 none               6 0.0690</span></span>
+<span id="cb173-11"><a href="tidyverse.html#cb173-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 NA                 4 0.0460</span></span>
+<span id="cb173-12"><a href="tidyverse.html#cb173-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 hermaphroditic     1 0.0115</span></span></code></pre></div>
+<p><code>fct_match()</code> <a href="https://forcats.tidyverse.org/reference/fct_match.html" class="uri">https://forcats.tidyverse.org/reference/fct_match.html</a></p>
+<p>Test for presence of levels in a factor. Do any of lvls occur in f?</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="tidyverse.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">fct_match</span>(gss_cat<span class="sc">$</span>marital, <span class="fu">c</span>(<span class="st">&quot;Married&quot;</span>, <span class="st">&quot;Divorced&quot;</span>))) <span class="co"># Do those levels exist in marital column? Return cases where it&#39;s TRUE and where it&#39;s FALSE.</span></span></code></pre></div>
+<p>FALSE TRUE 7983 13500</p>
+</div>
+<div id="reorder-levels" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Reorder levels</h3>
+<p><strong><code>fct_inorder()</code></strong><br />
+When using <code>factor()</code>, by default, it returns levels in ascending order.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="tidyverse.html#cb175-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb175-2"><a href="tidyverse.html#cb175-2" aria-hidden="true" tabindex="-1"></a>f</span></code></pre></div>
+<p><span class="math display">\[1\]</span> b b a c c c Levels: a b c Explicitly order levels in the order the <strong>observations appear</strong>.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="tidyverse.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_inorder</span>(f)</span>
+<span id="cb176-2"><a href="tidyverse.html#cb176-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb176-3"><a href="tidyverse.html#cb176-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] b b a c c c</span></span>
+<span id="cb176-4"><a href="tidyverse.html#cb176-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: b a c</span></span></code></pre></div>
+<p><strong><code>fct_infreq()</code></strong><br />
+Order the levels by their <strong>number</strong> of observations.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="tidyverse.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_infreq</span>(f)</span>
+<span id="cb177-2"><a href="tidyverse.html#cb177-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-3"><a href="tidyverse.html#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] b b a c c c</span></span>
+<span id="cb177-4"><a href="tidyverse.html#cb177-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: c b a</span></span></code></pre></div>
+<p><strong><code>fct_inseq()</code></strong><br />
+Changes the levels to be in <strong>order</strong>, meaning in ascending sequence. Useful if you have a factor with unordered levels.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="tidyverse.html#cb178-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">=</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb178-2"><a href="tidyverse.html#cb178-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-3"><a href="tidyverse.html#cb178-3" aria-hidden="true" tabindex="-1"></a>f</span>
+<span id="cb178-4"><a href="tidyverse.html#cb178-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 1 2 3</span></span>
+<span id="cb178-5"><a href="tidyverse.html#cb178-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Levels: 3 2 1</span></span>
+<span id="cb178-6"><a href="tidyverse.html#cb178-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb178-7"><a href="tidyverse.html#cb178-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_inseq</span>(f)</span>
+<span id="cb178-8"><a href="tidyverse.html#cb178-8" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 1 2 3</span></span>
+<span id="cb178-9"><a href="tidyverse.html#cb178-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Levels: 1 2 3</span></span></code></pre></div>
+<p><strong><code>fct_relevel()</code></strong><br />
+<a href="https://forcats.tidyverse.org/reference/fct_relevel.html" class="uri">https://forcats.tidyverse.org/reference/fct_relevel.html</a><br />
+<strong>Move</strong> any number of levels to any location. In its simplest form, it pushes each consecutive level entered to the front.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="tidyverse.html#cb179-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;a&quot;</span>))</span>
+<span id="cb179-2"><a href="tidyverse.html#cb179-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-3"><a href="tidyverse.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(f, <span class="st">&quot;a&quot;</span>) <span class="co"># Push &quot;a&quot; to the first place</span></span>
+<span id="cb179-4"><a href="tidyverse.html#cb179-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-5"><a href="tidyverse.html#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] a b c d</span></span></code></pre></div>
+<p>Move level to a specific position.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="tidyverse.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(f, <span class="st">&quot;a&quot;</span>, <span class="at">after =</span> <span class="dv">2</span>)</span>
+<span id="cb180-2"><a href="tidyverse.html#cb180-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-3"><a href="tidyverse.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] a b c d</span></span>
+<span id="cb180-4"><a href="tidyverse.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: b c a d</span></span></code></pre></div>
+<p>Move level to the end.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="tidyverse.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(f, <span class="st">&quot;a&quot;</span>, <span class="at">after =</span> <span class="cn">Inf</span>)</span>
+<span id="cb181-2"><a href="tidyverse.html#cb181-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-3"><a href="tidyverse.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] a b c d</span></span>
+<span id="cb181-4"><a href="tidyverse.html#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: b c d a</span></span></code></pre></div>
+<p><strong><code>fct_rev()</code></strong><br />
+<a href="https://forcats.tidyverse.org/reference/fct_rev.html" class="uri">https://forcats.tidyverse.org/reference/fct_rev.html</a><br />
+<strong>Reverse</strong> order of levels. Often useful when plotting.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="tidyverse.html#cb182-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb182-2"><a href="tidyverse.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_rev</span>(f)</span>
+<span id="cb182-3"><a href="tidyverse.html#cb182-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-4"><a href="tidyverse.html#cb182-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] a b c</span></span>
+<span id="cb182-5"><a href="tidyverse.html#cb182-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: c b a</span></span></code></pre></div>
+<p><strong><code>fct_shift()</code></strong><br />
+<strong>Shift</strong> factor levels to left or right, wrapping around at end.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="tidyverse.html#cb183-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb183-2"><a href="tidyverse.html#cb183-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">c</span>(<span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>),</span>
+<span id="cb183-3"><a href="tidyverse.html#cb183-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Sun&quot;</span>, <span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>))</span>
+<span id="cb183-4"><a href="tidyverse.html#cb183-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-5"><a href="tidyverse.html#cb183-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_shift</span>(x,<span class="dv">1</span>) <span class="co"># Shift levels 1 to the left, i.e. Sun is at last position.</span></span>
+<span id="cb183-6"><a href="tidyverse.html#cb183-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-7"><a href="tidyverse.html#cb183-7" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] Mon Tue Wed</span></span>
+<span id="cb183-8"><a href="tidyverse.html#cb183-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Levels: Mon Tue Wed Thu Fri Sat Sun</span></span>
+<span id="cb183-9"><a href="tidyverse.html#cb183-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-10"><a href="tidyverse.html#cb183-10" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_shift</span>(x,<span class="sc">-</span><span class="dv">2</span>) <span class="co"># Shift levels 2 to the right, i.e. Fri comes out at first position.</span></span>
+<span id="cb183-11"><a href="tidyverse.html#cb183-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-12"><a href="tidyverse.html#cb183-12" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] Mon Tue Wed</span></span>
+<span id="cb183-13"><a href="tidyverse.html#cb183-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Levels: Fri Sat Sun Mon Tue Wed Thu</span></span></code></pre></div>
+<p><strong><code>fct_shuffle()</code></strong><br />
+Randomly <strong>shuffle</strong> order of levels.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="tidyverse.html#cb184-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb184-2"><a href="tidyverse.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_shuffle</span>(f)</span>
+<span id="cb184-3"><a href="tidyverse.html#cb184-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-4"><a href="tidyverse.html#cb184-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] a b c</span></span>
+<span id="cb184-5"><a href="tidyverse.html#cb184-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: b c a</span></span></code></pre></div>
+<p><strong><code>fct_reorder</code></strong><br />
+<a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="uri">https://forcats.tidyverse.org/reference/fct_reorder.html</a><br />
+Reorder factor levels by sorting along another variable.</p>
+<pre><code>df &lt;- tibble::tribble(
+ ~color,     ~a, ~b,
+  &quot;blue&quot;,      1,  2,
+  &quot;green&quot;,     6,  2,
+  &quot;purple&quot;,    3,  3,
+  &quot;red&quot;,       2,  3,
+  &quot;yellow&quot;,    5,  1
+)</code></pre>
+<p>Reorders the first by the second argument.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="tidyverse.html#cb186-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>color) <span class="co"># color is our example factor</span></span>
+<span id="cb186-2"><a href="tidyverse.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_reorder</span>(df<span class="sc">$</span>color, df<span class="sc">$</span>a, min)</span></code></pre></div>
+<p><span class="math display">\[1\]</span> blue green purple red yellow Levels: blue red purple yellow green</p>
+<p><code>fct_reorder2()</code> Reorders the factor by the y values associated with the largest x values. This makes the plot easier to read because the line colours line up with the legend.</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="tidyverse.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_reorder2</span>(df<span class="sc">$</span>color, df<span class="sc">$</span>a, df<span class="sc">$</span>b)</span>
+<span id="cb187-2"><a href="tidyverse.html#cb187-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb187-3"><a href="tidyverse.html#cb187-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] blue   green  purple red    yellow</span></span>
+<span id="cb187-4"><a href="tidyverse.html#cb187-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Levels: purple red blue green yellow</span></span></code></pre></div>
+<p>This is very useful when plotting.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="tidyverse.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Width <span class="sc">~</span> <span class="fu">fct_reorder</span>(Species, Sepal.Width), <span class="at">data =</span> iris)</span>
+<span id="cb188-2"><a href="tidyverse.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Descending order:</span></span>
+<span id="cb188-3"><a href="tidyverse.html#cb188-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Width <span class="sc">~</span> <span class="fu">fct_reorder</span>(Species, Sepal.Width, <span class="at">.desc =</span> <span class="cn">TRUE</span>), <span class="at">data =</span> iris)</span></code></pre></div>
+</div>
+</div>
+<div id="purrr" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> purrr</h2>
+<p><a href="https://purrr.tidyverse.org" class="uri">https://purrr.tidyverse.org</a><br />
+Applying the same function or procedure to elements of an object, is quite common in data analysis. The purrr package includes functions similar to sapply but that better interact with other tidyverse functions.</p>
+<div id="map" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Map</h3>
+<p><a href="https://purrr.tidyverse.org/reference/map.html" class="uri">https://purrr.tidyverse.org/reference/map.html</a><br />
+The first purrr function we will learn is map, which works very similar to sapply but always, without exception, returns a list:</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="tidyverse.html#cb189-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb189-2"><a href="tidyverse.html#cb189-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-3"><a href="tidyverse.html#cb189-3" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">=</span> <span class="cf">function</span>(value) {</span>
+<span id="cb189-4"><a href="tidyverse.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  value <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb189-5"><a href="tidyverse.html#cb189-5" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb189-6"><a href="tidyverse.html#cb189-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-7"><a href="tidyverse.html#cb189-7" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(x, add_one)</span>
+<span id="cb189-8"><a href="tidyverse.html#cb189-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-9"><a href="tidyverse.html#cb189-9" aria-hidden="true" tabindex="-1"></a><span class="co"># [[1]]</span></span>
+<span id="cb189-10"><a href="tidyverse.html#cb189-10" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 2</span></span>
+<span id="cb189-11"><a href="tidyverse.html#cb189-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-12"><a href="tidyverse.html#cb189-12" aria-hidden="true" tabindex="-1"></a><span class="co"># [[2]]</span></span>
+<span id="cb189-13"><a href="tidyverse.html#cb189-13" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 3</span></span>
+<span id="cb189-14"><a href="tidyverse.html#cb189-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-15"><a href="tidyverse.html#cb189-15" aria-hidden="true" tabindex="-1"></a><span class="co"># [[3]]</span></span>
+<span id="cb189-16"><a href="tidyverse.html#cb189-16" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 4</span></span>
+<span id="cb189-17"><a href="tidyverse.html#cb189-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-18"><a href="tidyverse.html#cb189-18" aria-hidden="true" tabindex="-1"></a><span class="co"># [[4]] </span></span>
+<span id="cb189-19"><a href="tidyverse.html#cb189-19" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 5</span></span>
+<span id="cb189-20"><a href="tidyverse.html#cb189-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-21"><a href="tidyverse.html#cb189-21" aria-hidden="true" tabindex="-1"></a><span class="co"># [[5]]</span></span>
+<span id="cb189-22"><a href="tidyverse.html#cb189-22" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 6</span></span></code></pre></div>
+</div>
+<div id="map-doubles" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Map doubles</h3>
+<p>If we want a numeric vector, we can instead use <code>map_dbl</code> which always returns a vector of numeric values.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="tidyverse.html#cb190-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb190-2"><a href="tidyverse.html#cb190-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-3"><a href="tidyverse.html#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(x, add_one)</span>
+<span id="cb190-4"><a href="tidyverse.html#cb190-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-5"><a href="tidyverse.html#cb190-5" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 2 3 4 5 6</span></span></code></pre></div>
+</div>
+<div id="map-dataframes" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Map dataframes</h3>
+</div>
+<div id="map-functionsclosures" class="section level3" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Map functions/closures</h3>
+<p>Instead of creating and storing a separate function which we’ll apply via <code>map</code>in the next step like this:</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="tidyverse.html#cb191-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb191-2"><a href="tidyverse.html#cb191-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-3"><a href="tidyverse.html#cb191-3" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">=</span> <span class="cf">function</span>(value) {</span>
+<span id="cb191-4"><a href="tidyverse.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  value <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb191-5"><a href="tidyverse.html#cb191-5" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb191-6"><a href="tidyverse.html#cb191-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-7"><a href="tidyverse.html#cb191-7" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(x, add_one)</span>
+<span id="cb191-8"><a href="tidyverse.html#cb191-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-9"><a href="tidyverse.html#cb191-9" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 2 3 4 5 6</span></span>
+<span id="cb191-10"><a href="tidyverse.html#cb191-10" aria-hidden="true" tabindex="-1"></a><span class="st">`</span></span>
+<span id="cb191-11"><a href="tidyverse.html#cb191-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-12"><a href="tidyverse.html#cb191-12" aria-hidden="true" tabindex="-1"></a><span class="at">We can simply create an &quot;anonymous function&quot; inside the </span><span class="st">`</span>map<span class="st">`</span><span class="at"> function.</span></span>
+<span id="cb191-13"><a href="tidyverse.html#cb191-13" aria-hidden="true" tabindex="-1"></a><span class="st">`</span>r</span>
+<span id="cb191-14"><a href="tidyverse.html#cb191-14" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(x, <span class="cf">function</span>(x) x <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb191-15"><a href="tidyverse.html#cb191-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-16"><a href="tidyverse.html#cb191-16" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 2 3 4 5 6</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rmarkdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualizationggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

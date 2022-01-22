@@ -1,0 +1,768 @@
+# R Basics
+
+## Read and Write Data
+
+**RStudio UI** 1. From Text (base): Standard text based data import **(.csv, .txt)** 2. From Text (readr): tidyverse version **(.csv, .txt)** 3. From Excel: tidyxl package used for excel files **(.xlsx, etc.)** 4. From SPSS: haven package for SPSS files **(.sav)**\
+5. From SAS: also haven package for SAS files **(.sas)** 6. From Stata: also haven package for Stata files **(.dta)**
+
+`load()` To load or list the available data sets in your system or working directory just write: `data()`.\
+To then load a dataset, add its name inside: `data(data_name)`.\
+Or you can also load them directly with these functions: `as.data.frame()` or `as.matrix()`
+
+`file.choose()` You can also use this function to manually pick out the file from your OS.
+
+``` r
+data = read.csv(file.choose())
+```
+
+`help()` How to show information for a specific library dataset.
+
+### CSV Files
+
+A CSV is a simple text based file which has information, line by line: \* The first line often contains a `header`, i.e. names for each column. \* Every value is separated by some sort of symbol, like a `,`, a `;` or "blank spaces" `""`. \* Each line represents one row/case in the table afterwards.
+
+Suppose you have the following CSV file:
+
+    mydata.csv
+
+    name,age,job,city
+    Bob,25,Manager,Seattle
+    Sam,30,Developer,New York
+
+`read.csv()` You can open a file and read its contents by using the `read.csv()` function specifying its name. It reads the data into a data frame.
+
+``` r
+# Read entire CSV file into a data frame
+mydata <- read.csv("mydata.csv")
+mydata
+```
+
+name age job city 1 Bob 25 Manager Seattle 2 Sam 30 Developer New York
+
+**File Path** When you specify the filename only, it is assumed that the file is located in the current folder. If it is somewhere else, you can specify the exact path that the file is located at.
+
+``` r
+# Specify absolute path like this
+mydata <- read.csv("Users/user/data/mydata.csv")
+
+# 
+```
+
+**Web** If you want to read CSV Data from the Web, substitute a URL for a file name. The `read.csv()` functions will read directly from the remote server.
+
+``` r
+mydata <- read.csv("http://www.example.com/download/mydata.csv")
+```
+
+The read.csv() function automatically coerces non-numeric data into a factor (categorical variable).
+
+### DAT Files
+
+A file with the .dat file extension is a generic data file that stores specific information relating to the program that created the file. You can open them in R with the `read.table()` function.
+
+### Excel Files
+
+Reading excel files in R is done with the `readxl` package and these functions. Note that excel files often have different sheets. This can be addressed via the `sheet` parameter in `read_excel()`.
+
+## Data Types
+
+### Convert data types
+
+Convert to a specific data type.
+
+``` r
+as.character(object)
+as.numeric(object)
+as.integer(object)
+as.logical(object)
+```
+
+### Numeric
+
+**Doubles** Decimal (floating point values) are part of the numeric class in R.
+
+``` r
+n <- 2.2
+class(n)
+typeof(n)
+is.numeric(n)
+is.double(n)
+```
+
+**Integers** Natural (whole) numbers are known as integers and are also part of the numeric class. Add an L at the end of each integer.
+
+``` r
+i <- 5L
+class(i)
+typeof(i)
+is.numeric(i)
+is.integer(i)
+```
+
+### Logical
+
+Boolean values (True and False) are part of the logical class. In R these are written in All Caps.
+
+``` r
+t <- TRUE
+class(t)
+typeof(t)
+is.logical(t)
+```
+
+### Characters
+
+Text/string values are known as characters in R. You use quotation marks to create a text character string:
+
+``` r
+char <- "Hello World!"
+class(char)
+typeof(char)
+is.character(char)
+```
+
+### `NA`s
+
+The most important note on `NA`s is that if you compare anything to them, the result is `NA`. Here is an example.
+
+``` r
+TRUE == FALSE # TRUE is not equal to FALSE
+5 > 1 # 5 is bigger than 1
+# But note here: comparing TRUE to NA doesn't result in FALSE, but in NA
+TRUE == NA
+```
+
+So what does that mean when dealing with `NA` values? What happens if we use a filter in a column that contains `NA` values ?
+
+``` r
+rev_exp[rev_exp$Expenses == 1130700,]
+```
+
+We get our filtered value - but also a whole line of `NA`s. This happened because, as we have noted, when R checked with the filter the cell containing the `NA` value, it resulted in an `NA.` Basically R doesn't know what to do - does the row pass the filter, or not? R than tells you about it by supplying these `NA` filled rows. But why doesn't R just show the whole row and keeps the checked as `NA`? Because this would imply that the row passed the test, and might be easily mistaken.
+
+**Note**: Blank cells in a row are being processed as complete/filled ("")! When reading/opening the data be sure to set the `na.string` parameter to "". Then they are `NA`s and processed as incomplete, as they in fact are.
+
+To show only missing values, we cannot use this solution, because comparing a value to `NA` only returns `NA`s and not `TRUE` or `FALSE`.
+
+``` r
+rev_exp[rev_exp$Expenses == NA,]
+```
+
+**Solution** You cannot compare anything to `NA`. So what is the other way? There are two ways - either with `!complete.cases()` or `is.na()`. The results are exactly the same. `is.na()` is just like any other is.() function, such as `is.numeric()`, it ask what elements in a vector are `NA`.
+
+So either this way with **complete.cases()**.
+
+``` r
+rev_exp[!complete.cases(rev_exp),] # Shows all rows, regardless of columns, that have NAs
+
+rev_exp[!complete.cases(rev_exp$Revenue),] # Shows only rows, in which the Revenue column contain NAs
+```
+
+Or this way with **is.na()**.
+
+``` r
+rev_exp[is.na(rev_exp$Revenue),] # Shows only rows, in which the Revenue column contain NAs
+
+rev_exp[!is.na(rev_exp$Revenue),] # Shows only rows, in which the Revenue column contain NAs
+```
+
+But this way on the other hand doesn't work. Not sure why, though...
+
+``` r
+rev_exp[is.na(rev_exp),] 
+```
+
+### Dates
+
+There is a date format in R which can be useful when receiving unformatted date values.
+
+``` r
+today <- Sys.Date() # Function for getting today's date. 
+class(today)
+```
+
+When receiving character type dates we can format them by using the as.Date() function and its format parameter.
+
+``` r
+date <- "13.10.86"
+date <- as.Date(date, format = "%d.%m.%y")
+date
+class(date)
+typeof(date) # Interesting.
+```
+
+### POSIX Time
+
+POSIX is an international and inter operating system time and date format which is very useful in R. The format parameter works like this: in front of every element (day, month etc.) put a %. Then simply write the "time formula" as it is. d = day, m = month, Y = year with four digits, y = year with two digits, H = hour, M = minute.
+
+``` r
+times <- c("17.09.1991 03:30", "13.10.1986 05:05", "16.05.1960 06:06", "7.07.1961 07:07")
+
+POSIX.Times <- as.POSIXct(times, format = "%d.%m.%Y %H:%M")
+POSIX.Times
+```
+
+To get help with the format coding.
+
+``` r
+help("strptime")
+```
+
+## Vectors
+
+Vectors are the basic unit in R. Elements in a vector always have the same data type (just like matrices).
+
+### Creating vectors
+
+Create a vector (array) from a certain number to another number.
+
+``` r
+1:10
+```
+
+Even a single element in R is processed as a vector.
+
+``` r
+a <- 1
+is.vector(a) # TRUE
+```
+
+### Subsetting vectors
+
+Indexing works by using brackets and passing the index position of the element as a number. Keep in mind index starts at 1 (in some other programming languages indexing starts at 0). Example of a vector:
+
+``` r
+vector <- 1:5
+```
+
+Access **one specific** element.
+
+``` r
+vector[3]
+```
+
+Access **all but one specific** element.
+
+``` r
+vector[-3]
+```
+
+Access **all values but this coherent slice**.
+
+``` r
+vector[-(1:4)]
+```
+
+Access **one coherent slice**.
+
+``` r
+vector[2:4]
+```
+
+Access **specific non-coherent** elements.
+
+``` r
+vector[c(1,3,5)]
+```
+
+Access elements **by name**.
+
+``` r
+names(vector) <- "One"
+vector["One"] # returns first value.
+```
+
+### Naming vectors
+
+In R every vector has an accompanying "name vector" which stores the names for each values. To access the name vector you have to use the `name()` function. By default the names vector is filled with NULL. Then it takes the default 1:n indexing principle.
+
+``` r
+vector <- 1:5
+names(vector)
+```
+
+To add custom names to the vector (which will then additionally serve a indices), you just have to "fill" the names vector up with your custom name vector.
+
+``` r
+names(vector) <- c("One", "Two", "Three", "Four", "Five")
+vector
+```
+
+To delete/default the names vector simply set it to NULL.
+
+``` r
+names(vector) <- NULL
+vector
+```
+
+### Filtering vectors
+
+Access elements **greater or smaller** than a specific value. Another way this might be called, is using a filter.
+
+``` r
+vector[vector > 2]
+```
+
+**Note:** It is important to wrap your head around this concept. The filter we add into the indexing brackets consists of the to be filtered vector and an operation with a value. Inside the square brackets a boolean vector is being created. Another way to illustrate goes like this.
+
+``` r
+filter <- vector > 2
+filter # a vector with boolean values.
+```
+
+Once this boolean vector (i.e. our filter) gets put into the indexing brackets R, it only returns the elements in the "vector" which are TRUE. It is like the boolean filter consists of a vector which has the specific numbers, for example c(3,4,5), to access the to be filtered vector.
+
+``` r
+vector[filter]
+```
+
+Another important concept in filtering vectors in R is that you can add several operations.
+
+``` r
+vector[vector > 2 & vector < 4] # Get me all the elements which are bigger than two AND smaller than 4, i.e. 3.
+```
+
+### Special Concepts
+
+**Operations on uneven long vector** You can easily calculate vectors with another. This is unlike other languages, where you need loops.
+
+``` r
+vector_one <- 1:10
+vector_two <- 1:8
+```
+
+**Note:** With uneven vectors the smaller one gets refilled. Here element 9 of the first vector gets multiplied by the first element of the second vector.
+
+``` r
+vector_one * vector_two # ... 9 x 1, 10 x 2. 
+```
+
+## Factors
+
+[Further Information](https://r4ds.had.co.nz/factors.html "Factors") In R, factors are used to work with categorical variables, variables that have a fixed and known set of possible values. They are also useful when you want to display character vectors in a non-alphabetical order.
+
+Historically, factors were much easier to work with than characters. As a result, many of the functions in base R automatically convert characters to factors. This means that factors often crop up in places where they're not actually helpful.
+
+Imagine that you have a variable that records month:
+
+``` r
+x1 = c("Dec", "Apr", "Jan", "Mar")
+```
+
+Firstly, there are only twelve possible months, and there's nothing saving you from typos:
+
+``` r
+x2 <- c("Dec", "Apr", "Jam", "Mar")
+```
+
+Secondly, it doesn't sort in a useful way:
+
+``` r
+sort(x1)
+
+#> [1] "Apr" "Dec" "Jan" "Mar"
+```
+
+You can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid levels:
+
+``` r
+month_levels <- c(
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+)
+```
+
+Now you can create a factor:
+
+``` r
+y1 <- factor(x1, levels = month_levels)
+y1
+
+#> [1] Dec Apr Jan Mar
+#> Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+
+sort(y1)
+
+#> [1] Jan Mar Apr Dec
+#> Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+```
+
+And any values not in the set will be silently converted to NA:
+
+``` r
+y2 <- factor(x2, levels = month_levels)
+y2
+
+#> [1] Dec  Apr  <NA> Mar 
+#> Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+```
+
+If you want a warning, you can use `readr::parse_factor()`:
+
+``` r
+y2 <- parse_factor(x2, levels = month_levels)
+
+#> Warning: 1 parsing failure.
+#> row col           expected actual
+#>   3  -- value in level set    Jam
+```
+
+If you omit the levels, they'll be taken from the data in alphabetical order:
+
+``` r
+factor(x1)
+
+#> [1] Dec Apr Jan Mar
+#> Levels: Apr Dec Jan Mar
+```
+
+Sometimes you'd prefer that the order of the levels match the order of the first appearance in the data. You can do that when creating the factor by setting levels to `unique(x)`, or after the fact, with `fct_inorder()`:
+
+``` r
+f1 <- factor(x1, levels = unique(x1))
+f1
+
+#> [1] Dec Apr Jan Mar
+#> Levels: Dec Apr Jan Mar
+
+f2 <- x1 %>% factor() %>% fct_inorder()
+f2
+
+#> [1] Dec Apr Jan Mar
+#> Levels: Dec Apr Jan Mar
+```
+
+If you ever need to access the set of valid levels directly, you can do so with levels():
+
+``` r
+levels(f2)
+
+#> [1] "Dec" "Apr" "Jan" "Mar"
+```
+
+## Matrices and Data Frames
+
+A *matrix* is basically a table with only one data type stored in it (instead of several as in with *data frames*). Data frames are tables with different data types, unlike matrices with only one data type.
+
+### Creating matrices
+
+**(1) Create with `matrix()`** Adjust the number of rows/columns. Decide if it should be filled up by rows (`FALSE` by default, i.e. fills it up by columns). Add names (`NULL` by default, i.e. none).
+
+``` r
+matrix_object <- matrix(data = 1:10, nrow = 5, ncol = 2, byrow = FALSE, dimnames = NULL )
+matrix_object
+```
+
+**(2) Bind by rows**\\ Create a matrix by binding vectors together, row by row.
+
+``` r
+matrix_object <- rbind(c(1:5), c(2:6), c(3:7))
+matrix_object
+```
+
+**(3) Bind by columns**\\ Create a matrix by binding vectors together, column by column.
+
+``` r
+matrix_object <- cbind(c(1:5), c(2:6), c(3:7))
+matrix_object
+```
+
+**Note** Shorter vectors in `cbind()` and `rbind()` fill up according to the longest other vector by restarting from the beginning. E.g., a smaller vector (1:3) starts after 3 at 1 again.
+
+### Creating data frames
+
+**Constructing data frames with `data.frame()`**
+
+``` r
+col_one <- c("Aruba", "Afghanistan", "Angola", "Albania", "United Arab Emirates", "Argentina")
+col_two <- (c("South America", "Asia", "Africa", "Europe", "Middle East", "South America"))
+col_three <- c(10.244, 35.253, 45.958, 12.877, 7.044, 17.716)
+
+countries <- data.frame(country = col_one, region = col_two, birth.rate = col_three)
+countries
+```
+
+### Adding row or columns
+
+**Adding a new row**\\ This isn't as usual in practice, but it works like this.
+
+``` r
+countries <- rbind(countries, c(1,2,3,4))
+countries
+```
+
+**Adding a new column**\\ Add a new column by just writing as if it already exists and than filling it up with a vector.
+
+``` r
+countries$new.column <- c(5,5,5,5,5,5,5)
+countries
+```
+
+**Note**: Adding a vector which is shorter than the other columns results in replicating the vector until it fills up. But (!), it has to be able to fill it up completely. Otherwise you get an error.
+
+### Naming tables
+
+Renaming tables works in principle exactly the same as with vectors - by breaking tables down in vectors. There are two name vectors: the row name vector and the column name vector.
+
+``` r
+table <- cbind(c(1:10),c(10:1))
+table
+rownames(table) <- rep("One", 10)
+colnames(table) <- c("Var1", "Var2")
+```
+
+Change a specific column name.
+
+``` r
+colnames(starwars)[10] = "planet" # You'd have to find out the column number. 
+```
+
+It is also possible to name tables columns or rows in rbind(), cbind() and data.frame().
+
+``` r
+vector_one <- 1:5
+vector_two <- 5:1
+data_frame <- rbind(v1 = vector_one, v2 = vector_two)
+data_frame
+
+data_frame <- data.frame(country = vector_one, continent = vector_two) # Bind together by columns.  
+data_frame
+```
+
+### Deleting rows or columns
+
+**Delete a column**\\ Fill the column up with `NULL`.
+
+``` r
+countries$new.column <- NULL
+countries
+```
+
+### Rearranging columns
+
+**Rearrange columns** Simple way to rearrange columns in a table. Just overwrite/create a new object by subsetting the columns in a different order by passing in a numerical vector.
+
+``` r
+head(Crime)
+
+Crime.Rearranged <- Crime[,c(1,3,2)]
+head(Crime.Rearranged)
+```
+
+### Merging data frames
+
+**Merging data frames**
+
+``` r
+countriesNew <- merge(countries, countries)
+countriesNew
+```
+
+### Subsetting matrices
+
+Because tables are two dimensional, they have rows and columns, you have to specify two indices.The first index in the square brackets relates to which row should be targeted. The second index relates to the column.
+
+**Note**: A very important concept in subsetting tables in R is that, if you leave the row or the column index empty, you access the whole row or the whole column.
+
+Access **several columns** in a matrix.
+
+``` r
+matrix_object[ , ] # Shows the whole matrix.
+matrix_object # Same as above.
+matrix_object[,1:2] # Shows all rows and only the first and second column.
+matrix_object[1:10,] # Shows rows 1 to 10 and all columns.
+matrix_object[,c(1,3)] # Shows all rows and only the first and third column.
+```
+
+### Subsetting data frames
+
+Data frames can be accessed just like their "cousins" the matrices. They only have one addition: `$`.
+
+Because of the focus on the column names, data frames have a special key symbol to access them: the `$` sign. This is how you access it.
+
+``` r
+countries
+countries$country
+```
+
+It is pretty much the same as this, regular, subsetting:
+
+``` r
+countries[,"country"]
+```
+
+It just saves time and improves readability.
+
+The last thing to understand, when subsetting data frames with `$`, is if you want to access a **certain row** you just write the index/name into square brackets by themselves.
+
+``` r
+countries$country[2]
+```
+
+The syntax in English therefore would read: "access the country_data_frame object, access its country column, show only the row with the index 2".
+
+### Data frame returns
+
+When subsetting rows in a data frame it returns, as might be expected, a data frame. But (**!**) when subsetting a column, it returns a vector.
+
+``` r
+countries[1,]
+countries[,1]
+```
+
+If you actually to want a data frame returned when subsetting a whole column change the `drop` property to `FALSE`.
+
+``` r
+countries[,1, drop = FALSE]
+```
+
+### Filtering tables
+
+Advanced filtering in data frames can become a bit challenging to read. It is important to keep in mind, that a filter, e.g. this `[vector > 1]`, is basically a boolean vector which picks out all `TRUE` elements.
+
+**The no-filters-for-columns logic**\
+In data frames you have an additional dimension, therefore, just as in basic subsetting, you must address both the row and column index `[row_index, column_index]`.\\ **Important**: filters are only used on rows indices! Using a filter on which columns to select doesn't make sense, because columns have often mixed data types/structures and represent logically different concepts, which cannot be filtered by one singular mathematical operation.
+
+This experiment helps to explain the problem.
+
+``` r
+head(countries, n = 3)
+```
+
+``` r
+countries[1,] # Show me the first row and all columns, i.e. all of Aruba's column. 
+countries[1,] > 5 # Show me the first row and only the columns which are higher than 5.
+```
+
+You can see that it checks the cells of row one, column by column, and returns logical values. It only makes sense in the numeric value of birth.rate. If we use this filter to access certain values will get an error.
+
+**To filter for rows on the other hand works logically and practically fine**\\ Filter for rows which have a higher birth rate value than 20 in their Birth.Rate column.
+
+``` r
+countries[countries$birth.rate > 20,]
+```
+
+The syntax in English therefore would read: "access the country_data_frame object, filter the rows by those which have a higher value than 20 in their Birth.Rate column, show all columns".\\ This is the same filter as those two. Just written differently.
+
+``` r
+countries[countries[,"birth.rate"] > 20,]
+countries[countries[,3] > 20,] 
+```
+
+Access rows which have a specific column factor.
+
+``` r
+countries[countries$region == "South America",]
+# Plain English: show me the rows and all their columns, which have "South America" in their Region column.
+```
+
+Access rows with several specific column factors.
+
+``` r
+countries[countries$region == "South America" | countries$region == "Africa",] # Plain English: show me the rows and all their columns, which have "South America" OR "Africa" in their Region column.
+```
+
+## Lists
+
+List are kind of like a storage box in which you can put all types of object inside. Data frames columns and rows are much more limited that way, because vectors are sensitive to the overall length of the data frame and are only limited to vectors. In lists you can put several different data frames inside, a vector with a single element and even plots (and even other lists). This makes it a nice way to organize your data and pass on many different aspects.
+
+### Creating lists
+
+``` r
+my_list = list(
+    Letters = c("a","b","c","d"),
+    RandomNumbers = sample(1:100, 20), 
+    TodaysDate = Sys.Date()) # Today's date.
+```
+
+### Adding components
+
+``` r
+my_list$Prices = sample(1:5, 10)
+```
+
+### Deleting components
+
+``` r
+my_list$Prices <- NULL
+```
+
+**Note**: In list the numeration gets automatically updated and changed if you delete objects in between two components. They react when changing components.
+
+### Renaming components
+
+Names can be given while constructing a list with `list()`. But also via `names()`.
+
+``` r
+names(my_list)[2] = "NonRandomNumbers" # instead of "RandomNumbers".
+my_list$NonRandomNumbers # works!
+
+# Not these: 
+names(my_list$RandomNumbers) = "NonRandomNumbers" # changes the components values names.
+names(Example_list[2]) <- "States" # Same.
+```
+
+### Naming inside components
+
+``` r
+names(my_list$TodaysDate) = "Date"
+
+# Date
+# "2021-07-30"
+```
+
+### Subsetting list components
+
+There are three ways to extract components.
+
+**First by \[ \]**\
+Returns the component, but as part of a seperate list. Similar to data frames, when using `dataFrame(,1)`, which also returns a data frame, instead of a vector.
+
+``` r
+my_list[2]
+typeof(my_list[2]) # list
+
+# > $NonRandomNumbers
+# [1] "a" "b" "c" "d"
+```
+
+**Second by \[ \[ \] \]**\
+Returns the object in the component, e.g. the vector, data frame, plot etc.
+
+``` r
+my_list[[2]]
+typeof(my_list[[2]]) # Integer vector of NonRandomNumbers.
+
+# > my_list[[2]]
+# [1] 44 88 68 69 30 16 83  2 62 38 15 79  4 52 70 39 98  9 74 86
+```
+
+**Third by \$**\
+This is exactly the same as the second version, but prettier.
+
+``` r
+my_list$NonRandomNumbers
+
+my_list$NonRandomNumbers
+[1] 67 88  4 15 70 27 92 29 66 91 22 68 13 40 52 24  1 37 64 54
+```
+
+**Extracting values in a component**\
+Accessing the second element in the first component ("States").
+
+``` r
+Example_list[[1]][2]
+# Or even like this. 
+Example_list$States[2]
+```
+
+### Filtering lists
+
+Once you've accessed a component's object by `$` or `[ [ ] ]` it's the same as without lists. For example, "Return all values inside NonRandomNumbers that are bigger than 50":
+
+``` r
+my_list$NonRandomNumbers[my_list$NonRandomNumbers > 50]
+
+# > my_list$NonRandomNumbers[my_list$NonRandomNumbers > 50]
+# [1] 67 88 70 92 66 91 68 52 64 54
+```

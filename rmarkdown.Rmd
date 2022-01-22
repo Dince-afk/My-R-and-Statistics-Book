@@ -1,0 +1,5 @@
+# Rmarkdown
+
+## Cache Chunks with Big Computations
+
+chache=TRUE

@@ -1,0 +1,24 @@
+h1:statistics Statistics
+h2:about-statistics About Statistics
+h2:centrality Centrality
+h3:mean Mean
+h3:reproduction-mean-and-standard-deviation-reproduction Reproduction Mean and Standard Deviation Reproduction
+h3:median Median
+h3:mode Mode
+h2:variability Variability
+h3:range Range
+h3:range-iqr-and-sd Range, IQR and SD
+h2:sampling Sampling
+h3:weights Weights
+h3:population Population
+h3:sampling-1 Sampling
+h3:non-probability-sampling Non-probability Sampling
+h3:sampling-methods Sampling Methods
+h4:simple-random-sampling Simple random sampling
+h4:systematic-sampling Systematic sampling
+h4:stratified-sampling Stratified sampling
+h4:cluster-sampling Cluster sampling
+h3:errors-and-biases Errors and biases
+h4:sampling-errors-and-biases Sampling errors and biases
+h4:non-sampling-error Non-sampling error
+

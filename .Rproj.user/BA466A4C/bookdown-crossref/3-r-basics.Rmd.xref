@@ -1,0 +1,41 @@
+h1:r-basics R Basics
+h2:read-and-write-data Read and Write Data
+h3:csv-files CSV Files
+h3:dat-files DAT Files
+h3:excel-files Excel Files
+h2:data-types Data Types
+h3:convert-data-types Convert data types
+h3:numeric Numeric
+h3:logical Logical
+h3:characters Characters
+h3:nas s
+h3:dates Dates
+h3:posix-time POSIX Time
+h2:vectors Vectors
+h3:creating-vectors Creating vectors
+h3:subsetting-vectors Subsetting vectors
+h3:naming-vectors Naming vectors
+h3:filtering-vectors Filtering vectors
+h3:special-concepts Special Concepts
+h2:factors Factors
+h2:matrices-and-data-frames Matrices and Data Frames
+h3:creating-matrices Creating matrices
+h3:creating-data-frames Creating data frames
+h3:adding-row-or-columns Adding row or columns
+h3:naming-tables Naming tables
+h3:deleting-rows-or-columns Deleting rows or columns
+h3:rearranging-columns Rearranging columns
+h3:merging-data-frames Merging data frames
+h3:subsetting-matrices Subsetting matrices
+h3:subsetting-data-frames Subsetting data frames
+h3:data-frame-returns Data frame returns
+h3:filtering-tables Filtering tables
+h2:lists Lists
+h3:creating-lists Creating lists
+h3:adding-components Adding components
+h3:deleting-components Deleting components
+h3:renaming-components Renaming components
+h3:naming-inside-components Naming inside components
+h3:subsetting-list-components Subsetting list components
+h3:filtering-lists Filtering lists
+

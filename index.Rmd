@@ -1,0 +1,26 @@
+---
+title: "My R and Statistics Book"
+author: "Dino Curic"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is ...
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+```{r include=FALSE}
+options(scipen=999)
+library(tidyverse)
+library(dslabs)
+library(wbstats)
+library(kableExtra)
+library(gridExtra)
+library(skimr)
+```
+
+# Preface {-}

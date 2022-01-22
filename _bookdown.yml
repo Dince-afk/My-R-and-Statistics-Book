@@ -1,0 +1,19 @@
+rmd_files: [
+  "index.Rmd", 
+  "1-glossary.Rmd", 
+  "2-playgrounds.Rmd", 
+  "3-r-basics.Rmd",
+  "6-packages.Rmd",
+  "rmarkdown.Rmd",
+  "4-tidyverse.Rmd", 
+  "5-visualizations-ggplo2.Rmd", 
+  "7-statistics.Rmd", 
+  "8-probability-theory.Rmd", 
+  "9-inferential-statistics.Rmd", 
+  "10-causal-inference.Rmd", 
+  "11-functions.Rmd", 
+  "12-frequent-problems.Rmd"]
+delete_merged_file: true
+language:
+  # ui:
+    # chapter_name: "Chapter "

@@ -1,0 +1,698 @@
+
+# Functions
+
+## Read and Write
+
+`read.table()` Reads csv files.
+
+``` r
+read.table(file, 
+    header = FALSE, # Is the first line filled with names?
+    sep = "", # Can be "," or ";" or "\tab" or " ".
+    quote = "\"'",
+    dec = ".", 
+    numerals = c("allow.loss", "warn.loss", "no.loss"),
+    row.names, col.names, as.is = !stringsAsFactors,
+    na.strings = "NA", 
+    colClasses = NA, # Here you can add 
+    nrows = -1, # -1 means use all rows from the first, 0, to the last, -1.
+    skip = 0, # Skip n number of lines.
+    check.names = TRUE, 
+    fill = !blank.lines.skip,
+    strip.white = FALSE, 
+    blank.lines.skip = TRUE,
+    comment.char = "#",
+    allowEscapes = FALSE, flush = FALSE,
+    stringsAsFactors = FALSE,
+    fileEncoding = "", 
+    encoding = "unknown", 
+    text, skipNul = FALSE)
+```
+
+## Random
+
+`setwd()` Setting the working directory via relative path.
+
+``` r
+setwd("~/Documents/R/Working Directory")
+```
+
+And via absolute path.
+
+``` r
+setwd("/Users/dinocuric/Documents/R/Working Directory")
+```
+
+`ls()` Lists all object in environment.
+
+``` r
+ls()
+# [1] "table1"   "my_list"    "table2"
+```
+
+`::` What if we want to use the stats filter instead of the dplyr filter but dplyr appears first in the search list? You can force the use of a specific namespace by using double colons (::) like this:
+
+``` r
+stats::filter
+```
+
+`install.packages()` Install new packages
+
+``` r
+install.packages("package_name")`
+```
+
+**Note:** package name needs to be in quotes.
+
+`library()` Enable installed packages:
+
+``` r
+library(package_name)
+```
+
+Or mostly interchangeable:
+
+``` r
+require(package_name)
+```
+
+**Note**: No "" are needed when enabling a package in your library.
+
+`rm()` Remove objects from the environment.
+
+``` r
+rm(object)
+```
+
+`sample()` Create random integer numbers by selecting a sample from a population. First argument is the pool, the second is the sample size.
+
+``` r
+sample(1:100,5)
+# [1] 87 31 69  1 85
+```
+
+`c()` Combine values into a vector.
+
+``` r
+c(1,15,6,1,6,72,3,7,3)
+# [1]  1 15  6  1  6 72  3  7  3
+```
+
+`rep()` Replicate values a specific number of times.
+
+``` r
+rep(10, 5)
+# [1] 10 10 10 10 10
+```
+
+``` r
+rep(1:5, 3)
+# [1] 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5
+```
+
+`max(), which.max()`
+
+`with()` For a quick plot that avoids accessing variables twice, we can use the `with` function. The function `with` lets us use the murders column names in the plot function. It also works with any data frames and any function.
+
+``` r
+with(murders, plot(population, total))
+```
+
+`max()` Return the highest value in a numeric vector.
+
+``` r
+max(murders$total)
+# [1] 1257
+```
+
+Use `min()`for opposite.
+
+`which()` Suppose we want to look up California's row. For this type of operation, it is convenient to convert vectors of logicals into indexes instead of keeping long vectors of logicals. The function which tells us which entries of a logical vector are TRUE. So we can type:
+
+``` r
+ind <- which(murders$state == "California")
+
+ind
+# 5
+
+murders[ind,]
+#       state abb region population total rank
+# 5 California  CA   West   37253956  1257   51
+```
+
+`match()` If instead of just one state we want to get the rows for several states, say New York, Florida, and Texas, we can use the function `match()`. This function tells us which indexes of a second vector match each of the entries of a first vector:
+
+``` r
+ind <- match(c("New York", "Florida", "Texas"), murders$state)
+
+ind
+# [1] 33 10 44
+
+murders[ind,]
+#       state abb    region population total rank
+# 33 New York  NY Northeast   19378102   517   48
+# 10  Florida  FL     South   19687653   669   49
+# 44    Texas  TX     South   25145561   805   50
+```
+
+`%in%` If rather than an index we want a logical that tells us whether or not each element of a first vector is in a second, we can use the function %in%. Let's imagine you are not sure if Boston, Dakota, and Washington are states. You can find out like this:
+
+``` r
+c("Boston", "Dakota", "Washington") %in% murders$state
+#> [1] FALSE FALSE  TRUE
+```
+
+**Advanced**: There is a connection between `match` and `%in%` through `which`. To see this, notice that the following two lines produce the same index (although in different order):
+
+``` r
+match(c("New York", "Florida", "Texas"), murders$state)
+#> [1] 33 10 44
+
+which(murders$state%in%c("New York", "Florida", "Texas"))
+#> [1] 10 33 44
+```
+
+`attach()` To use variables in an object **without needing the \$ sign**. Do not forget the detach function to end it.
+
+``` r
+# Begin
+attach(mtcars)
+
+cyl # Otherwise mtcars$cyl
+hp
+names(mtcars)
+
+# At the end
+detach(mtcars)
+```
+
+`head()` Show the first or last 6 rows in a data set.
+
+``` r
+head(women) # First 6 rows.
+tail(women, 2) # Last two rows.
+```
+
+`colnames() and rownames()` Access column and row names.
+
+``` r
+colnames(starwars)
+# "name"       "height"     "mass"       "hair_color" "skin_color" "eye_color"  "birth_year"
+
+rownames(starwars)
+# "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14" "15" "16" "17" "18" "19"
+```
+
+`factor()` Creates a factor. Custom levels and, or labels are optional.
+
+``` r
+gender = c("female","male","male","non-binary","non-binary")
+
+gender = factor(gender,
+                levels = c("female","male","non-binary"))
+
+gender
+# [1] female     male       male       non-binary non-binary
+# Levels: female male non-binary
+```
+
+You could also use character labels together with numeric levels to use certain mathematical operations.
+
+``` r
+gender = c(0,1,1,2,2)
+
+gender = factor(gender, 
+                levels = c(0,1,2),
+                labels = c("Female", "Male", "Non-Binary"))
+
+gender
+# [1] Female     Male       Male       Non-Binary Non-Binary
+# Levels: Female Male Non-Binary
+```
+
+`levels()` This function is used to explicitly access the `level` part of a factor.
+
+``` r
+levels(gender)
+# [1] "Female"     "Male"       "Non-Binary"
+```
+
+And it let's us change its values.
+
+``` r
+levels(gender) = c("female","male","non-binary")
+
+gender
+# [1] female     male       male       non-binary non-binary
+# Levels: female male non-binary
+```
+
+## Order
+
+`sort()` Sorts a vector by increasing or decreasing.
+
+``` r
+x = c(31,4,15,92,65)
+
+sort(x)
+# [1]  4 15 31 65 92
+```
+
+Use `decreasing` parameter to change order.
+
+`order()` Creates the sorting vector which can be used to order other variables or data frames as a whole.
+
+``` r
+order(murders$total) 
+# [1] 46 35 30 51 12 42 20 13 27 40  2 16 45 49 28 38  8 24 17  6 32 29  4 48
+# [25]  7 50  9 37 18 22 25  1 15 41 43  3 31 47 34 21 36 26 19 14 11 23 39 33
+# [49] 10 44  5
+
+murders[order(murders$total),]
+
+#                  state abb        region population total
+# 46              Vermont  VT     Northeast     625741     2
+# 35         North Dakota  ND North Central     672591     4
+# 30        New Hampshire  NH     Northeast    1316470     5
+# 51              Wyoming  WY          West     563626     5
+# ...
+```
+
+Use `decreasing` parameter to change filtering order.
+
+`rank()` Although not as frequently used as order and sort, the function rank is also related to order and can be useful. For any given vector it returns a vector with the rank of the first entry, second entry, etc., of the input vector. Here is a simple example:
+
+``` r
+x <- c(31, 4, 15, 92, 65)
+
+rank(x)
+#> [1] 3 1 2 5 4
+```
+
+We could use \`rank()\` to create a new variable storing the rank of each observation in relation to some value.
+
+``` r
+murders$rank = rank(murders$total)
+murders$rank
+
+# [1] 32.0 11.0 36.0 23.5 51.0 20.0 25.5 17.0 27.0 49.0 45.0  5.0  8.5 44.0
+# [15] 33.0 12.0 19.0 29.0 43.0  7.0 40.0 30.0 46.0 18.0 31.0 42.0  8.5 15.0
+# [29] 22.0  3.5 37.0 21.0 48.0 39.0  2.0 41.0 28.0 16.0 47.0 10.0 34.0  6.0
+# [43] 35.0 50.0 13.0  1.0 38.0 23.5 14.0 25.5  3.5
+```
+
+To summarize, let's look at the results of the three functions we have introduced:
+
+``` r
+original    sort    order   rank
+31          4       2       3
+4           15      3       1
+15          31      1       2  
+92          65      5       5
+65          92      4       4
+```
+
+`reorder()` This function reorders the **levels** of a **factor**. This is different from `order()` and `sort()`, where it sorts each individual observation. Factors and their order are central for visualization.
+
+The "default" method treats its first argument as a categorical variable, and reorders its levels based on the values of a second variable, usually numeric.
+
+``` r
+data %>% 
+ ggplot(aes(year,population, color = reorder(country, desc(population)))) + # "Reorder countries by descending order of population"
+  geom_line() 
+```
+
+    `
+    Another way to use `reorder()` is to (re)mutate the factor variable before`ggplot`.
+    ```r
+    murders %>% 
+       mutate(state = reorder(state, murder_rate)) %>% # Reorder state factor levels by ascending order of murder_rate
+       ggplot(aes(state, murder_rate)) +
+       geom_bar(stat="identity")
+
+`which.max()` Determines the location, i.e., index of the minimum or maximum value of a numeric vector. Is basically a filter for one value.
+
+``` r
+which.max(murders$rate)
+# [1] 5
+```
+
+In a data frame used to index the specific row.
+
+``` r
+murders[which.max(murders$total),]
+#        state abb region population total
+# 5 California  CA   West   37253956  1257
+```
+
+Use `which.min()`for the opposite.
+
+## Visualization
+
+`plot()`
+
+``` r
+plot(
+data = data, # Dataset
+    x = gdp, # X variable 
+    y = population, # Y variable
+    main = "Maximum Temperatures in a Week", # Title
+    xlab = "Degree Celsius", # X axis label
+    ylab = "Day", # Y axis label
+    type = "l" # Use "l" to plot a linear regression line istead of points
+)
+```
+
+**Normal Distribution and linear graph** Create x and y variables which represent a normal distribution.
+
+``` r
+# Create a sequence of numbers between -10 and 10 incrementing by 0.1.
+
+x <- seq(-10, 10, by = .1)
+
+# Choose the mean as 2.5 and standard deviation as 0.5.
+y <- dnorm(x, mean = 2.5, sd = 0.5)
+```
+
+Scatterplot it.
+
+``` r
+plot(x,y)
+```
+
+`boxplot()`
+
+``` r
+boxplot(
+data$variable, # Numeric countinous variable
+    main = "Maximum Temperatures in a Week", # Title
+    xlab = "Degree Celsius", # X axis label
+    ylab = "Day", # Y axis label
+    horizontal = T # Y instead of x axis, i.e. horizontal
+    outline = # Hide outliers
+)
+```
+
+`abline()` GDP and internet usage.
+
+``` r
+plot(x = UN$GDP, y = UN$Internet) # Pretty strong positive correlation.
+
+abline(lm(Internet ~ GDP, UN))
+```
+
+GDP and fertility rates.
+
+``` r
+plot(UN$GDP, UN$Fertil) # Not so strong negative correlation.
+
+abline(lm(data = UN, Fertil ~ GDP))
+```
+
+GDP and GII (female inequality index).
+
+``` r
+plot(UN$GDP, UN$GII) # Pretty strong negative correlation.
+
+abline(lm(data = UN, GII ~ GDP))
+```
+
+`barplot()`
+
+``` r
+barplot(
+data$variable, # Variable with max 6 distinct values/categories
+    main = "Maximum Temperatures in a Week", # Title
+    xlab = "Degree Celsius", # X axis label
+    ylab = "Day", # Y axis label
+    names.arg = c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"), # Levels labels
+    col = "darkred", # Column colors (fill)
+    border="red", # Column border colors (color)
+    horiz = TRUE, # Y axis instead of x axis, as by default
+    
+)
+```
+
+`hist()`
+
+    hist(
+    data$variable, # ?
+        main = "Maximum Temperatures in a Week", # Title
+        xlab = "Degree Celsius", # X axis label
+        ylab = "Day", # Y axis label
+        breaks = 10 # Change the number of intervals
+        # breaks = c(55,60,70,75,80,100) # Or this way to map exactly where each break should be
+        xlim = c(50,100), # Limit x axis scale
+        col = "darkmagenta", # Change column color 
+        border = "red", # Column border colors (color)
+        freq = FALSE # 
+
+    )
+
+`pie()`
+
+``` r
+pie(table(cat$race))
+```
+
+`stem()` This figure, called a stem-and-leaf plot, represents each observation by its leading digit(s) (the stem) and by its final digit (the leaf). Each stem is a number to the left of the vertical bar and a leaf is a number to the right of it. For instance, on the first line, the stem of 1 and the leaves of 2 and 3 represent the violent crime rates 12 and 13. The plot arranges the leaves in order on each line, from smallest to largest. Stem-and-leaf plots are useful for quick portrayals of small data sets.
+
+``` r
+stem(cat$income)
+```
+
+## Conditionals
+
+`ifelse()` This function takes three arguments: a logical and two possible answers. If the logical is TRUE, the value in the second argument is returned and if FALSE, the value in the third argument is returned. Here is an example:
+
+``` r
+a <- 0
+
+ifelse(a > 0, 1/a, NA)
+#> [1] NA
+```
+
+The function is particularly useful because it works on vectors. It examines each entry of the logical vector and returns elements from the vector provided in the second argument, if the entry is TRUE, or elements from the vector provided in the third argument, if the entry is FALSE.
+
+``` r
+a <- c(0, 1, 2, -4, 5)
+ifelse(a > 0, 1/a, NA)
+```
+
+This table helps us see what happened:
+
+``` r
+# a is_a_positive   answer1 answer2 result
+# 0 FALSE           Inf     NA      NA
+# 1 TRUE            1.00    NA      1.0
+# 2 TRUE            0.50    NA      0.5
+#-4 FALSE           -0.25   NA      NA
+# 5 TRUE            0.20    NA      0.2
+```
+
+Here is an example of how this function can be readily used to replace all the missing values in a vector with zeros:
+
+``` r
+data(na_example)
+no_nas <- ifelse(is.na(na_example), 0, na_example) 
+sum(is.na(no_nas))
+#> [1] 0
+```
+
+`any()` The any function takes a vector of logicals and returns TRUE if any of the entries is TRUE.
+
+``` r
+z <- c(TRUE, TRUE, FALSE)
+
+any(z)
+#> [1] TRUE
+```
+
+`all()` The all function takes a vector of logicals and returns TRUE if all of the entries are TRUE.
+
+``` r
+z <- c(TRUE, TRUE, FALSE)
+
+all(z)
+#> [1] FALSE
+```
+
+`is.na()` Takes a vector and returns a vector of logicals with TRUE if an element is NA and FALSE if it's not NA.
+
+``` r
+is.na(na_example)
+# [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+# [12]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+# [23] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+# ...
+```
+
+`identical()`
+
+``` r
+identical(1,2)
+# [1] FALSE
+
+identical(1,1)
+# [1] TRUE
+```
+
+## Numbers
+
+`summary()` Produces summary statistics for a variable.
+
+``` r
+summary(women$height)
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#   58.0    61.5    65.0    65.0    68.5    72.0 
+```
+
+Or for a whole dataframe.
+
+``` r
+summary(dat)
+#    iso2c             country          EN.ATM.CO2E.KT         year     
+# Length:212         Length:212         Min.   :  63116   Min.   :1960  
+# Class :character   Class :character   1st Qu.: 329931   1st Qu.:1973  
+# Mode  :character   Mode  :character   Median : 483860   Median :1986  
+#                                       Mean   :1676369   Mean   :1986  
+#                                       3rd Qu.:3662251   3rd Qu.:1999  
+#                                       Max.   :5776410   Max.   :2012  
+#                                       NA's   :30    
+```
+
+`round()`\
+Round values in a vector to specific digits.
+
+``` r
+round(1.12345, digits = 2)
+# 1.12
+```
+
+`sum()` Sum of the elements in an object.
+
+``` r
+sum(vector)
+```
+
+`rnorm()` Create random **numbers around a specific mean and** standard deviation.
+
+``` r
+rnorm(n = 10, mean = 5, sd = 3)
+# [1]  8.142960  5.711236  7.952512  4.343039  5.587903 10.592649  1.129671  8.597915  7.836368 2.016112
+```
+
+`runif()` Create random numbers from a minimum to a maximum value.
+
+``` r
+runif(n = 10, min = 1, max = 10)
+# [1] 7.848954 8.616900 2.975886 9.056828 1.892161 5.684384 3.630172 5.797314 1.330543 7.122972
+```
+
+`seq()` Create sequence of numbers by specific steps.
+
+``` r
+seq(from = 1, to = 10, by = 3)
+# [1]  1  4  7 10
+```
+
+## Apply Functions
+
+Function from the apply family (`apply()`, `sapply()`, `lapply()`) are a special functionality in R. They in large replace complex for loops. apply() **Example data**
+
+``` r
+Chicago.weather
+```
+
+Return a vector by applying a function (like mean) on all rows or columns of a matrix. 1 means applying it on all rows, 2 on all columns.
+
+``` r
+apply(Chicago.weather, 1, mean)
+apply(Chicago.weather, 2, mean) # Doesn't make sense.
+```
+
+[ ](#) and lapply()
+
+Here is a list with weather data for four cities/components.
+
+``` r
+Weather.list
+```
+
+We can use the brackets in sapply() and lapply() to return specific rows and columns in all components in a list.
+
+``` r
+sapply(Weather.list, "[", 1,) # Returns the first row and all columns
+
+Weather.list$Chicago[1,] # Check.
+
+lapply(Weather.list, "[", 1:3,4) # Return rows 1 to 3 and their fourth column in each component.
+```
+
+Anonymous/Nested Functions Example data for a vector:
+
+``` r
+v <- 1:5
+```
+
+Also possible with a vector in which every element, like in a for loop, needs to changed. sapply() returns a vector or table when using a vector or a list. lapply() returns a list when using a vector, table, or list.
+
+``` r
+v
+sapply(v, function(element_in_v) element_in_v +1)
+lapply(v, function(element_in_v) element_in_v +1)
+```
+
+## String Functions
+
+`nchar()` Returns the number of characters in a vector.
+
+``` r
+nchar("Dino Curic")
+# 10
+```
+
+`grepl()` grepl() returns a logical indicating if the pattern was found 2. grep() returns a vector of index locations of matching pattern instances.
+
+``` r
+text <- "Hi there, do you know who you are voting for?"
+grepl('voting',text)
+grepl('Sammy',text)
+v <- c('a','b','c','d')
+grep("d", v)
+```
+
+`paste()` Paste converts its arguments (via as.character) to character strings, and concatenates them (separating them by the string given by sep). Basically the combine function with character type features.
+
+``` r
+greeting <- "Hello"
+name <- "Frank"
+paste(greeting, name, sep = ", ")
+```
+
+`sub()` + `gsub()` To remove and replace characters we can use the functions `sub()`, to remove the first instance of it, or `gsub()`, to remove every instance. The first arguement aks for the character which should be removed. The second aks with what? And the third for where to look for. If the second argument is `""` then the function it's basically a remove function.
+
+``` r
+# Remove dollar sign. Note: [ ] brackets needed for special characters like $. 
+rev_exp$Revenue <- gsub("[$]", "", rev_exp$Revenue)
+```
+
+Remove commas
+
+``` r
+rev_exp$Revenue <- gsub(",", "", rev_exp$Revenue)
+```
+
+Remove " Dollars"
+
+``` r
+rev_exp$Expenses <- gsub(" Dollars", "", rev_exp$Expenses)
+```
+
+And lastly, convert the two variables to numeric.
+
+``` r
+rev_exp$Revenue <- as.numeric(rev_exp$Revenue)
+rev_exp$Expenses <- as.numeric(rev_exp$Expenses)
+rev_exp
+```

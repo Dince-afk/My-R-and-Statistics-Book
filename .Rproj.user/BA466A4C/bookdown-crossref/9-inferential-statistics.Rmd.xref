@@ -1,0 +1,23 @@
+h1:inferential-statistics Inferential Statistics
+h2:sampling-distributions Sampling Distributions
+h2:central-limit-theorem Central Limit Theorem
+h3:what-is-large-enough-for-the-ctl What is Large Enough for the CTL?
+h3:proof-of-central-limit-theorem Proof of Central Limit Theorem
+h2:confidence-intervals Confidence Intervals
+h3:why-confidence-intervals-work Why Confidence Intervals Work
+h3:proof-for-confidence-intervals Proof for Confidence Intervals
+h4:ci-for-population-proportion CI for Population Proportion
+h4:ci-for-population-mean CI for Population Mean
+h2:hypothesis-testing Hypothesis Testing
+h3:p-value P-Value
+h3:z-test Z-Test
+h3:formula-z-test-statistic Formula: z test statistic
+h3:r-p-value-from-z-score R: P-value from z-score
+h3:conditions-for-mean-inference Conditions for mean inference
+h3:formula-t-test-statistic Formula: t test statistic
+h3:r-p-value-from-t-statistic R: P-value from t statistic
+h3:r-t-tests R: t-tests
+h3:t-or-z-statistic t or z Statistic?
+h2:correlation Correlation
+h2:regression Regression
+
